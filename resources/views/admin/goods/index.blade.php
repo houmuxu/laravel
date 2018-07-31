@@ -74,9 +74,9 @@
 
             <td><img src="{{$v->goodspics[0]->gpic}}"></td>
 
-            <td>{{$v->price}}.00</td>
+            <td>{{$v->price}}</td>
             <td>{{$v->stock}}</td>
-            <td>{{$v->cates->cname}}</td>
+            <td>{{$v->cates['cname']}}</td>
             <td style="width:100px;overflow:hidden;white-space:nowrap;word-break:keep-all;">{{$v->desc}}</td>
             <td>{{date('Y-m-d',$v->uptime)}}</td>
 
@@ -96,7 +96,7 @@
               <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
                 <i class="layui-icon">&#xe601;</i>
               </a>
-              <a title="编辑"  onclick="x_admin_show('编辑','admin-edit.html')" href="javascript:;">
+              <a title="编辑" href="/admin/goods/{{$v->gid}}/edit">
                 <i class="layui-icon">&#xe642;</i>
               </a>
               <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">

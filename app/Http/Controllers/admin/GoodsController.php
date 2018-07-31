@@ -74,7 +74,9 @@ class GoodsController extends Controller
      */
     public function edit($id)
     {
-
+        $cates = DB::select('select cid,cname,concat(path,cid) cpath from cate order by cpath');
+        $data = Goods::find($id);
+        return view('admin/goods/edit',['data'=>$data,'gid'=>$id,'cates'=>$cates]);
     }
 
     /**

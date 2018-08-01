@@ -13,7 +13,7 @@ class GoodsController extends Controller
 {
 	public function index()
 	{
-        $data = Goods::all();
+        $data = Goods::orderBy('gid', 'asc')->paginate(10);
 		return view('admin/goods/index',['data'=>$data]);
 	}
 
@@ -88,6 +88,33 @@ class GoodsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $res = $request->except('_method','gpic','_token');
+        $res['uptime'] = time();
+
+        try{
+            $data = Goods::where('gid',$id)->update($res);
+            // $id = $data->gid;
+            $goods = Goods::find($id);
+            if($request->hasFile('gpic')){
+                foreach($request->file('gpic') as $k => $v){
+                    //名字
+                    $name =  date('Ymd',time()).str_random(6);
+                    //后缀
+                    $suffix = $v->getClientOriginalExtension();
+                    //移动
+                    $v->move(Config::get('webconfig.uploadgoods'),$name.'.'.$suffix);
+                    //一对多添加到商品关联图片
+                    $goods->goodspics()->createMany([
+                        ['gpic' => '/uploads/goods/'.$name.'.'.$suffix]
+                    ]);
+                }
+             }
+            if($data){
+                return redirect('/admin/goods');
+            }
+        }catch(\Exception $e){
+            return back();
+        }
 
     }
 
@@ -99,6 +126,10 @@ class GoodsController extends Controller
      */
     public function destroy($id)
     {
- 		
+ 		$res = Goods::destroy($id);
+        if($res){
+            return redirect('/admin/goods');
+        }
+           return back(); 
     }
 }

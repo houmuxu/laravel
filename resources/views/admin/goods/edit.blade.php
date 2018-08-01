@@ -18,13 +18,18 @@
       <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
       <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"integrity="sha384-Tc5  IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+    </script>
   </head>
   
   <body>
     <div class="x-body">
         <form class="layui-form" action="/admin/goods/{{$gid}}" enctype ="multipart/form-data" method="post">
           {{csrf_field()}}
-
+          {{method_field('PUT')}}
           <div class="layui-form-item">
               <label for="username" class="layui-form-label">
                   <span class="x-red">*</span>商品类别
@@ -67,7 +72,7 @@
                   <span class="x-red">*</span>商品单价
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="phone" name="price" required="" 
+                  <input type="text" id="price" name="price" required="" 
                   autocomplete="off" class="layui-input" value="{{$data->price}}">
               </div>
           </div>
@@ -76,13 +81,25 @@
               <label for="phone" class="layui-form-label">
                   <span class="x-red">*</span>商品图片
               </label>
-              <div class="layui-input-inline">
+              <!-- <div class="layui-input-inline"> -->
+                @php
+                  $n=0;
+                @endphp
               	@foreach($data->goodspics as $k=>$v)
-              		
-              	<img src="{{$v->gpic}}" style="width: 150px">	
+              		<!-- <div class="row"> -->
+                    <div class="col-xs-6 col-md-3">
+                      <a class="thumbnail">
+                        <button type="button" class="close" aria-label="Close" style="width: 10px"><span aria-hidden="true" name="{{$v->gpid}}" id='pan{{$n++}}' style="font-size:20px">&times;</span></button>
+                        <img src="{{$v->gpic}}" style="width: 200px" > 
+                      </a>
+                    </div>
+                  <!-- </div> -->
               	@endforeach
-                  <input type="file" id="phone" multiple="multiple" name="gpic[]" required="" autocomplete="off" >
-              </div>
+             
+              <!-- </div> -->
+          </div>
+          <div class="layui-input-inline">
+                  <input type="file" id="phone" multiple="multiple" name="gpic[]" autocomplete="off" >
           </div>
 
            <div class="layui-form-item">
@@ -107,14 +124,31 @@
               <label for="L_repass" class="layui-form-label">
               </label>
               <button  class="layui-btn" lay-filter="add" lay-submit="">
-                  添加
+                  修改
               </button>
           </div>
       </form>
     </div>
-    <script>
-        
-    </script>
+  <script>
+                    
+              $('#pan0').click(function(){
+                alert($(this).attr('name'));
+            });
+              $('#pan1').click(function(){
+                alert('22');
+            });
+              $('#pan2').click(function(){
+                alert('33');
+            });
+              $('#pan3').click(function(){
+                alert('44');
+            });
+              $('#pan4').click(function(){
+                alert('55');
+            });
+ 
+                        
+  </script>
   </body>
 
 </html>

@@ -19,6 +19,9 @@ Route::group([],function(){
 	//商品管理
 	Route::resource('/admin/goods','admin\GoodsController');
 
+	// 类别管理  zhang
+	Route::resource('/admin/cate', 'admin\CateController');
+
 
 });
 

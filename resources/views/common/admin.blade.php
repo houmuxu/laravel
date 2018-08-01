@@ -121,6 +121,30 @@
                     </li >
                 </ul>
             </li>
+        <!-- 类别管理 -->  
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>类别管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="/admin/cate/create">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>添加类别</cite>
+                        </a>
+                    </li >
+                </ul>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="/admin/cate/">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>浏览类别</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
 
         <!-- 商品管理 -->
             <li>

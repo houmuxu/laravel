@@ -19,10 +19,12 @@
       <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"crossorigin="anonymous">
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"integrity="sha384-Tc5  IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
     </script>
+
   </head>
   
   <body>
@@ -86,6 +88,7 @@
                   $n=0;
                 @endphp
               	@foreach($data->goodspics as $k=>$v)
+
               		<!-- <div class="row"> -->
                     <div class="col-xs-6 col-md-3">
                       <a class="thumbnail">
@@ -94,6 +97,17 @@
                       </a>
                     </div>
                   <!-- </div> -->
+
+              	<div class="row">
+				  <div class="col-xs-6 col-md-3">
+				    <a href="#" class="thumbnail">
+				      <img src="{{$v->gpic}}" style="width: 150px">
+				    </a>
+				  </div>
+				  ...
+				</div>
+              		
+
               	@endforeach
              
               <!-- </div> -->

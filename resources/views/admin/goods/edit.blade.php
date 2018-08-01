@@ -18,6 +18,8 @@
       <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
       <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+
   </head>
   
   <body>
@@ -78,8 +80,15 @@
               </label>
               <div class="layui-input-inline">
               	@foreach($data->goodspics as $k=>$v)
+              	<div class="row">
+				  <div class="col-xs-6 col-md-3">
+				    <a href="#" class="thumbnail">
+				      <img src="{{$v->gpic}}" style="width: 150px">
+				    </a>
+				  </div>
+				  ...
+				</div>
               		
-              	<img src="{{$v->gpic}}" style="width: 150px">	
               	@endforeach
                   <input type="file" id="phone" multiple="multiple" name="gpic[]" required="" autocomplete="off" >
               </div>

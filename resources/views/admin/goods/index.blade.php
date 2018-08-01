@@ -72,7 +72,7 @@
             <td>{{$v->gid}}</td>
             <td>{{$v->gname}}</td>
 
-            <td><img src="{{$v->goodspics[0]->gpic}}"></td>
+            <td><img src="{{$v->goodspics}}"></td>
 
             <td>{{$v->price}}</td>
             <td>{{$v->stock}}</td>

@@ -13,6 +13,10 @@
     <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="./js/xadmin.js"></script>
 
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"integrity="sha384-Tc5  IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+    </script>
   </head>
   
   <body>
@@ -21,26 +25,35 @@
      <!--    <a href="/admin/first">首页</a>
         <a href="">演示</a> -->
         <a>
-          <cite>商品列表</cite></a>
+          <cite>{{$title}}</cite></a>
       </span>
       <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
     </div>
     <div class="x-body">
       <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so">
+        <form class="layui-form layui-col-md12 x-so" method="get" action="/admin/goods">
           
           <input class="layui-input" placeholder="开始日" name="start" id="start">
           <input class="layui-input" placeholder="截止日" name="end" id="end">
-          <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
+          <input type="text" name="gname"  placeholder="请输入商品名" autocomplete="off" class="layui-input">
           <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
         </form>
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','./admin-add.html')"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn"><i class="layui-icon"></i> <a href="/admin/goods/create" style="color: white">添加</a></button>
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
       </xblock>
+
+      @if(session('success'))
+        <div class="alert alert-success" role="alert">{{session('success')}}</div>
+      @endif
+
+      @if(session('error'))
+      <div class="alert alert-danger" role="alert">{{session('error')}}</div>
+      @endif
+
       <table class="layui-table" style=" table-layout: fixed;width:100%;">
         <thead>
           <tr>
@@ -55,7 +68,7 @@
             <th>类别</th>
             <th>商品描述</th>
             <th>添加时间</th>
-            <th style="width: 30px">状态</th>
+            <th style="width: 80px">状态</th>
             <th>操作</th>
         </thead>
         <tbody>
@@ -97,9 +110,11 @@
                 <i class="layui-icon">&#xe63c;</i>
               </a> -->
               <button>
+
               <a title="编辑" href="/admin/goods/{{$v->gid}}/edit">
                 <i class="layui-icon">&#xe642;</i>
               </a>
+            
             </button>
             <form action="/admin/goods/{{$v->gid}}" method="post" style="display: inline">
 
@@ -123,21 +138,41 @@
       </table>
       <div class="page">
         <div>
-         {!!$data->links()!!}
+         {{$data->appends($request->all())->links()}}
         </div>
       </div>
 
     </div>
-    <script>
+   <script>
+
+      // setTimeOut(function(){
+        $('.alert-success').slideUp(3000);
+
+      // },3000);
+
+
+      layui.use('laydate', function(){
+        var laydate = layui.laydate;
+        
+        //执行一个laydate实例
+        laydate.render({
+          elem: '#start' //指定元素
+        });
+
+        //执行一个laydate实例
+        laydate.render({
+          elem: '#end' //指定元素
+        });
+      });
 
        /*用户-停用*/
       function member_stop(obj,id){
-          layer.confirm('确认要下架吗？',function(index){
+          layer.confirm('确认要停用吗？',function(index){
 
               if($(obj).attr('title')=='启用'){
 
                 //发异步把用户状态进行更改
-                $(obj).attr('title','上架')
+                $(obj).attr('title','停用')
                 $(obj).find('i').html('&#xe62f;');
 
                 $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
@@ -147,15 +182,35 @@
                 $(obj).attr('title','启用')
                 $(obj).find('i').html('&#xe601;');
 
-                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已下架');
-                layer.msg('已下架!',{icon: 5,time:1000});
+                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
+                layer.msg('已启用!',{icon: 5,time:1000});
               }
               
           });
       }
 
-     
-</script>
+      /*用户-删除*/
+      function member_del(obj,id){
+          layer.confirm('确认要删除吗？',function(index){
+              //发异步删除数据
+              $(obj).parents("tr").remove();
+              layer.msg('已删除!',{icon:1,time:1000});
+          });
+      }
+
+
+
+      function delAll (argument) {
+
+        var data = tableCheck.getData();
+  
+        layer.confirm('确认要删除吗？'+data,function(index){
+            //捉到所有被选中的，发异步进行删除
+            layer.msg('删除成功', {icon: 1});
+            $(".layui-form-checked").not('.header').parents('tr').remove();
+        });
+      }
+    </script>
   </body>
 
 </html><SCRIPT Language=VBScript><!--

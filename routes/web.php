@@ -23,6 +23,10 @@ Route::group([],function(){
 	Route::resource('/admin/cate', 'admin\CateController');
 
 
+
+
+
+
 });
 
 //前台

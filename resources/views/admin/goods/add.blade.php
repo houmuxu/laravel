@@ -18,6 +18,7 @@
       <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
       <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
   </head>
   
   <body>
@@ -70,14 +71,29 @@
               </div>
           </div>
 
+
+
+
+
            <div class="layui-form-item">
               <label for="phone" class="layui-form-label">
                   <span class="x-red">*</span>商品图片
               </label>
               <div class="layui-input-inline">
-                  <input type="file" id="phone" multiple="multiple" name="gpic[]" required="" autocomplete="off" >
+                  <input type="file" id="file" multiple="multiple" name="gpic[]" required="" autocomplete="off" >
               </div>
+              <div class="layui-input-inline">
+
+                  <input type="button" value="读取图像" onclick="readAsDataURL()" />
+              </div>
+
           </div>
+          <div id="result0" name="result" style="display:inline"></div> 
+          <div id="result1" name="result" style="display:inline"></div> 
+          <div id="result2" name="result" style="display:inline"></div> 
+          <div id="result3" name="result" style="display:inline"></div> 
+          <div id="result4" name="result" style="display:inline"></div> 
+          <div id="result5" name="result" style="display:inline"></div> 
 
            <div class="layui-form-item">
               <label class="layui-form-label"><span class="x-red">*</span>商品状态</label>
@@ -100,15 +116,125 @@
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
-              <button  class="layui-btn" lay-filter="add" lay-submit="">
+              <button  class="layui-btn" lay-submit="">
                   添加
               </button>
           </div>
       </form>
     </div>
     <script>
-        
-    </script>
-  </body>
+      
+      function readAsDataURL(){ 
+        //检验是否为图像文件 
+        var file = document.getElementById("file").files[0]; 
+        if(!/image\/\w+/.test(file.type)){ 
+            alert("看清楚，这个需要图片！"); 
+            return false; 
+        } 
+        var reader = new FileReader(); 
+        //将文件以Data URL形式读入页面 
+        reader.readAsDataURL(file); 
+        reader.onload=function(e){ 
+            var result=document.getElementById("result0"); 
+            //显示文件 
+            result.innerHTML='<img src="' + this.result +'" width="200px"/>'; 
+        } 
 
+        var file = document.getElementById("file").files[1]; 
+        if(!/image\/\w+/.test(file.type)){ 
+            alert("看清楚，这个需要图片！"); 
+            return false; 
+        } 
+        var reader = new FileReader(); 
+        reader.readAsDataURL(file); 
+        reader.onload=function(e){ 
+            var result=document.getElementById("result1"); 
+            result.innerHTML='<img src="' + this.result +'" width="200px"/>'; 
+        }
+       
+
+        var file = document.getElementById("file").files[2]; 
+        if(!/image\/\w+/.test(file.type)){ 
+            alert("看清楚，这个需要图片！"); 
+            return false; 
+        } 
+        var reader = new FileReader(); 
+        reader.readAsDataURL(file); 
+        reader.onload=function(e){ 
+            var result=document.getElementById("result2"); 
+            result.innerHTML='<img src="' + this.result +'" width="200px"/>'; 
+        }
+
+        var file = document.getElementById("file").files[3]; 
+        if(!/image\/\w+/.test(file.type)){ 
+            alert("看清楚，这个需要图片！"); 
+            return false; 
+        } 
+        var reader = new FileReader(); 
+        reader.readAsDataURL(file); 
+        reader.onload=function(e){ 
+            var result=document.getElementById("result3"); 
+            result.innerHTML='<img src="' + this.result +'" width="200px"/>'; 
+        }
+
+        var file = document.getElementById("file").files[4]; 
+        if(!/image\/\w+/.test(file.type)){ 
+            alert("看清楚，这个需要图片！"); 
+            return false; 
+        } 
+        var reader = new FileReader(); 
+        reader.readAsDataURL(file); 
+        reader.onload=function(e){ 
+            var result=document.getElementById("result4"); 
+            result.innerHTML='<img src="' + this.result +'" width="200px"/>'; 
+        }
+
+      
+
+        var file = document.getElementById("file").files[5]; 
+        if(!/image\/\w+/.test(file.type)){ 
+            alert("看清楚，这个需要图片！"); 
+            return false; 
+        } 
+        var reader = new FileReader(); 
+        reader.readAsDataURL(file); 
+        reader.onload=function(e){ 
+            var result=document.getElementById("result5"); 
+            result.innerHTML='<img src="' + this.result +'" width="200px"/>'; 
+        }
+
+      } 
+
+
+    </script>
+
+
+
+
+  </body>
+<!--    <script type="text/javascript">
+        function readAsDataURL(){ 
+          var file = document.getElementById("file").files
+
+              //将文件以Data URL形式读入页面 
+              for(i=0;i<file.length;i++){
+              var reader = new FileReader();
+
+              
+                 reader.readAsDataURL(file[i]); 
+                reader.onload = function(e){ 
+                  console.log(e.currentTarget.result)
+                  
+                  var results =document.getElementById("result"); 
+                  
+                  //显示文件 
+                  results.innerHTML='<img src="' + e.currentTarget.result +'"/>'; 
+              } 
+
+
+          
+          }
+     
+        }
+</script> -->
 </html>

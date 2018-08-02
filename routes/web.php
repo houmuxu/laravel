@@ -25,8 +25,15 @@ Route::group([],function(){
 
 });
 
+
+
 //前台
+//  首页
 Route::any('/', 'home\FirstController@index');
+
+//  注册页面
+// Route::any('/login', 'home\HomeController@login');
+
 Route::group([],function(){
 
 });

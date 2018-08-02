@@ -11,10 +11,11 @@ use DB;
 
 class GoodsController extends Controller
 {
-	public function index()
-	{
-        $data = Goods::orderBy('gid', 'asc')->paginate(10);
-		return view('admin/goods/index',['data'=>$data]);
+	public function index(Request $request)
+	{  
+        $gname = $request->input('gname');
+        $data = Goods::where('gname','like','%'.$gname.'%')->orderBy('gid', 'asc')->paginate(10);
+		return view('admin/goods/index',['title'=>'商品列表','data'=>$data,'request'=>$request]);
 	}
 
     public function create()
@@ -47,11 +48,12 @@ class GoodsController extends Controller
 	    	 	}
 	    	 }
     		if($data){
-    			// return redirect('/admin/goods');
-                return back();
+                return redirect('/admin/goods')->with('success','商品添加成功!');
+                
     		}
     	}catch(\Exception $e){
-    		return back();
+            return back()->with('error','商品添加失败! 返回首页请点击');
+    		
     	}
     }
 
@@ -110,10 +112,11 @@ class GoodsController extends Controller
                 }
              }
             if($data){
-                return redirect('/admin/goods');
+                return redirect('/admin/goods')->with('success','商品修改成功!');
+
             }
         }catch(\Exception $e){
-            return back();
+            return back()->with('error','商品修改失败! 返回首页请点击');
         }
 
     }
@@ -128,8 +131,15 @@ class GoodsController extends Controller
     {
  		$res = Goods::destroy($id);
         if($res){
-            return redirect('/admin/goods');
+                return redirect('/admin/goods')->with('success','商品删除成功!');
+            
         }
-           return back(); 
+            return back()->with('error','商品删除失败!');
+           
+    }
+
+    public function error()
+    {
+        return view('admin/goods/error');
     }
 }

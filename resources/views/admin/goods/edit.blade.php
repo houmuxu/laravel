@@ -25,9 +25,19 @@
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"integrity="sha384-Tc5  IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
     </script>
 
+
+
   </head>
   
   <body>
+     @if(session('error'))
+
+      <div class="alert alert-danger" role="alert">
+        <a href="/admin/goods" class="alert-link">{{session('error')}}</a>
+      </div>
+        
+      @endif
+
     <div class="x-body">
         <form class="layui-form" action="/admin/goods/{{$gid}}" enctype ="multipart/form-data" method="post">
           {{csrf_field()}}
@@ -88,33 +98,31 @@
                   $n=0;
                 @endphp
               	@foreach($data->goodspics as $k=>$v)
-
-              		<!-- <div class="row"> -->
+            	
                     <div class="col-xs-6 col-md-3">
                       <a class="thumbnail">
                         <button type="button" class="close" aria-label="Close" style="width: 10px"><span aria-hidden="true" name="{{$v->gpid}}" id='pan{{$n++}}' style="font-size:20px">&times;</span></button>
                         <img src="{{$v->gpic}}" style="width: 200px" > 
                       </a>
                     </div>
-                  <!-- </div> -->
-
-              	<div class="row">
-				  <div class="col-xs-6 col-md-3">
-				    <a href="#" class="thumbnail">
-				      <img src="{{$v->gpic}}" style="width: 150px">
-				    </a>
-				  </div>
-				  ...
-				</div>
-              		
 
               	@endforeach
              
               <!-- </div> -->
           </div>
           <div class="layui-input-inline">
-                  <input type="file" id="phone" multiple="multiple" name="gpic[]" autocomplete="off" >
+                  <input type="file" id="file" multiple="multiple" name="gpic[]" autocomplete="off" >
           </div>
+          <div class="layui-input-inline">
+
+                  <input type="button" value="读取图像" onclick="readAsDataURL()" />
+          </div>
+          <div id="result0" name="result" style="display:inline"></div> 
+          <div id="result1" name="result" style="display:inline"></div> 
+          <div id="result2" name="result" style="display:inline"></div> 
+          <div id="result3" name="result" style="display:inline"></div> 
+          <div id="result4" name="result" style="display:inline"></div> 
+          <div id="result5" name="result" style="display:inline"></div> 
 
            <div class="layui-form-item">
               <label class="layui-form-label"><span class="x-red">*</span>商品状态</label>
@@ -160,9 +168,98 @@
               $('#pan4').click(function(){
                 alert('55');
             });
- 
+      
+
+
                         
   </script>
+
+  <!-- 显示图片 -->
+<script>
+      
+      function readAsDataURL(){ 
+        //检验是否为图像文件 
+        var file = document.getElementById("file").files[0]; 
+        if(!/image\/\w+/.test(file.type)){ 
+            alert("看清楚，这个需要图片！"); 
+            return false; 
+        } 
+        var reader = new FileReader(); 
+        //将文件以Data URL形式读入页面 
+        reader.readAsDataURL(file); 
+        reader.onload=function(e){ 
+            var result=document.getElementById("result0"); 
+            //显示文件 
+            result.innerHTML='<img src="' + this.result +'" width="200px"/>'; 
+        } 
+
+        var file = document.getElementById("file").files[1]; 
+        if(!/image\/\w+/.test(file.type)){ 
+            alert("看清楚，这个需要图片！"); 
+            return false; 
+        } 
+        var reader = new FileReader(); 
+        reader.readAsDataURL(file); 
+        reader.onload=function(e){ 
+            var result=document.getElementById("result1"); 
+            result.innerHTML='<img src="' + this.result +'" width="200px"/>'; 
+        }
+       
+
+        var file = document.getElementById("file").files[2]; 
+        if(!/image\/\w+/.test(file.type)){ 
+            alert("看清楚，这个需要图片！"); 
+            return false; 
+        } 
+        var reader = new FileReader(); 
+        reader.readAsDataURL(file); 
+        reader.onload=function(e){ 
+            var result=document.getElementById("result2"); 
+            result.innerHTML='<img src="' + this.result +'" width="200px"/>'; 
+        }
+
+        var file = document.getElementById("file").files[3]; 
+        if(!/image\/\w+/.test(file.type)){ 
+            alert("看清楚，这个需要图片！"); 
+            return false; 
+        } 
+        var reader = new FileReader(); 
+        reader.readAsDataURL(file); 
+        reader.onload=function(e){ 
+            var result=document.getElementById("result3"); 
+            result.innerHTML='<img src="' + this.result +'" width="200px"/>'; 
+        }
+
+        var file = document.getElementById("file").files[4]; 
+        if(!/image\/\w+/.test(file.type)){ 
+            alert("看清楚，这个需要图片！"); 
+            return false; 
+        } 
+        var reader = new FileReader(); 
+        reader.readAsDataURL(file); 
+        reader.onload=function(e){ 
+            var result=document.getElementById("result4"); 
+            result.innerHTML='<img src="' + this.result +'" width="200px"/>'; 
+        }
+
+      
+
+        var file = document.getElementById("file").files[5]; 
+        if(!/image\/\w+/.test(file.type)){ 
+            alert("看清楚，这个需要图片！"); 
+            return false; 
+        } 
+        var reader = new FileReader(); 
+        reader.readAsDataURL(file); 
+        reader.onload=function(e){ 
+            var result=document.getElementById("result5"); 
+            result.innerHTML='<img src="' + this.result +'" width="200px"/>'; 
+        }
+
+      } 
+
+
+    </script>
   </body>
 
 </html>

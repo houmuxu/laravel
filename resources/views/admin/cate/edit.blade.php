@@ -29,12 +29,12 @@
                   <span class="x-red">*</span>顶级类别
               </label>
               <div class="layui-input-inline">
-                   <select id="shipping" name="pid" class="valid">
+                   <select id="shipping" name="pid" disabled class="valid">
                 @foreach($cates as $k=>$v)
                   @php
                     $n = substr_count($v->npath,',')-1;
                   @endphp
-                    <option value="{{$v->cid}}">{{str_repeat('&nbsp;',$n*8)}}|----{{$v->cname}}</option>
+                    <option value="{{$v->cid}}" @if($res->pid == $v->cid) selected @endif >{{str_repeat('&nbsp;',$n*8)}}|----{{$v->cname}}</option>
                 @endforeach
                 </select>
               </div>

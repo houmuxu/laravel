@@ -23,7 +23,7 @@ class CateController extends Controller
             ->orderBy('npath','asc')
             ->paginate(10);
 
-         //  遍历判断path路径中逗号出现的次数
+        //  遍历判断path路径中逗号出现的次数
         foreach($cates as $k=>$v){
              //  获取path路径中逗号出现的次数
             $len = substr_count($v->npath,',')-1;
@@ -85,11 +85,11 @@ class CateController extends Controller
 
             if($data){
 
-                return redirect('/admin/cate');
+                return redirect('/admin/cate')->with('success','添加成功');
             }
         }catch(\Exception $e){
 
-            return redirect('/admin/cate/create');
+            return redirect('/admin/cate/create')->with('error','添加失败');
 
         }
     }
@@ -149,9 +149,9 @@ class CateController extends Controller
         $res = DB::table('cate')->where('cid','=',$id)->update($data);
 
         if($res){
-            return redirect('/admin/cate');
+            return redirect('/admin/cate')->with('success','修改成功');
         } else {
-            return back();
+            return back()->with('error','修改失败');
         }
     }
 
@@ -163,13 +163,25 @@ class CateController extends Controller
      */
     public function destroy($id)
     {
-        //  接收信息
-        $res = DB::table('cate')->where('cid',$id)->delete();
+        //  根据id 查找下面有没有其他的类别
+        $res = Cate::where('cid',$id)->first();
+         // dd($res->cid);
 
-        if($res){
-            return redirect('/admin/cate');
-        } else {
-            return back();
+        $path = $res->path.$res->cid.',';  //  0,1,3,
+        // dd($path);
+
+        //  如果找到有其他的类别  删除
+        $data = Cate::where('path','like','%'.$path.'%')->delete();
+
+        try{
+            //  还要根据id删除自己
+            $rs = Cate::where('cid',$id)->delete();
+            // dd($rs);
+            if($rs){
+                return redirect('/admin/cate')->with('success','删除成功');
+            }
+        }catch(\Exception $e){
+            return back()->with('error','删除失败');
         }
     }
 

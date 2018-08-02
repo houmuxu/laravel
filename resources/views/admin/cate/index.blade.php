@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html>
  <head>
@@ -18,6 +15,22 @@
 
  </head>
  
+@if(session('success'))
+  
+  <div class="haha" style="height:40px;background:orange;font-size: 20px;color:blue;line-height:40px;text-align:center;">
+    {{session('success')}}
+  </div>
+
+@endif
+
+@if(session('error'))
+  
+  <div class="xixi">
+    {{session('error')}}
+  </div>
+
+@endif
+
  <body>
    <div class="x-nav">
      <span class="layui-breadcrumb">
@@ -49,8 +62,8 @@
            </th>
            <th>ID</th>
            <th>类别名称</th>
-           <th>pid</th>
-           <th>path</th>
+           <th>父类名称</th>
+           <th>path路径</th>
            <th>操作</th>
        </thead>
        <tbody>
@@ -61,7 +74,9 @@
            </td>
            <td>{{$v->cid}}</td>
            <td>{{$v->cname}}</td>
-           <td>{{$v->pid}}</td>
+           <td>
+           {{getName($v->pid)}}
+           </td>
            <td>{{$v->path}}</td>
             <td class="td-manage">
 
@@ -71,7 +86,7 @@
               {{csrf_field()}}
               {{method_field('DELETE')}}
 
-              <button class="btu btu-danger"><i class="layui-icon">&#xe640;</i></button>
+              <button class="shan"><i class="layui-icon">&#xe640;</i></button>
              </form>
             
            </td>
@@ -149,6 +164,13 @@
            $(".layui-form-checked").not('.header').parents('tr').remove();
        });
      }
+
+     $('.shan').click(function(){
+        return confirm('确定要删除吗？');
+     })
+
+     $('.haha').delay(3000).slideUp(1000);
+
    </script>
    <script>var _hmt = _hmt || []; (function() {
        var hm = document.createElement("script");

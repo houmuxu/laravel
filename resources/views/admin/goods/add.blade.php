@@ -18,7 +18,9 @@
       <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
       <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    <script type="text/javascript" charset="utf-8" src="/admin/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/admin/ueditor/ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="/admin/ueditor/lang/zh-cn/zh-cn.js"></script>
   </head>
   
   <body>
@@ -98,21 +100,20 @@
            <div class="layui-form-item">
               <label class="layui-form-label"><span class="x-red">*</span>商品状态</label>
               <div class="layui-input-block">
-                <input type="radio" name="state" lay-skin="primary" value="1" title="新品" checked="">
-                <input type="radio" name="state" lay-skin="primary" value="2" title="上架">
-                <input type="radio" name="state" lay-skin="primary" value="3" title="下架">
+                <input type="radio" name="state" lay-skin="primary" value="1" title="上架" checked="">
+                <input type="radio" name="state" lay-skin="primary" value="2" title="下架">
               </div>
           </div>
 
 
           <div class="layui-form-item layui-form-text">
               <label for="desc" class="layui-form-label">
-                  商品描述
+                  商品详情
               </label>
-              <div class="layui-input-block">
-                  <textarea placeholder="请输入内容" id="desc" name="desc" class="layui-textarea"></textarea>
-              </div>
+             
+              
           </div>
+           <script id="editor" type="text/plain" name="desc" style="width:1024px;height:500px;"></script>
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
@@ -123,6 +124,7 @@
       </form>
     </div>
     <script>
+    var ue = UE.getEditor('editor');
       
       function readAsDataURL(){ 
         //检验是否为图像文件 

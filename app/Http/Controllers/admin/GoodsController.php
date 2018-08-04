@@ -8,13 +8,27 @@ use Config;
 use App\Model\Admin\Goods;
 use App\Model\Admin\Cate;
 use DB;
+use App\Model\Admin\Goodspic;
 
 class GoodsController extends Controller
 {
 	public function index(Request $request)
 	{  
         $gname = $request->input('gname');
-        $data = Goods::where('gname','like','%'.$gname.'%')->orderBy('gid', 'asc')->paginate(10);
+        $data = Goods::orderBy('gid','asc')->where(function($query) use($request){
+            $gname = $request->input('gname');
+            $min = $request->input('min');
+            $max = $request->input('max');
+            if(!empty($gname)){
+                $query->where('gname','like','%'.$gname.'%');
+            }
+            if(!empty($min)){
+                 $query->where('price','>=',$min);
+            }
+            if(!empty($max)){
+                 $query->where('price','<=',$max);
+            }
+        })->paginate(10);
 		return view('admin/goods/index',['title'=>'商品列表','data'=>$data,'request'=>$request]);
 	}
 
@@ -65,7 +79,8 @@ class GoodsController extends Controller
      */
     public function show($id)
     {
-        //
+        $res = Goodspic::destroy($id);
+        echo $res;
     }
 
     /**
@@ -94,11 +109,12 @@ class GoodsController extends Controller
         $res['uptime'] = time();
 
         try{
-            $data = Goods::where('gid',$id)->update($res);
-            // $id = $data->gid;
+            
             $goods = Goods::find($id);
             if($request->hasFile('gpic')){
+                
                 foreach($request->file('gpic') as $k => $v){
+                  
                     //名字
                     $name =  date('Ymd',time()).str_random(6);
                     //后缀
@@ -110,7 +126,11 @@ class GoodsController extends Controller
                         ['gpic' => '/uploads/goods/'.$name.'.'.$suffix]
                     ]);
                 }
+
              }
+            
+            $data = Goods::where('gid',$id)->update($res);
+
             if($data){
                 return redirect('/admin/goods')->with('success','商品修改成功!');
 
@@ -129,8 +149,28 @@ class GoodsController extends Controller
      */
     public function destroy($id)
     {
- 		$res = Goods::destroy($id);
-        if($res){
+
+        //删除服务器上照片
+        $res = Goodspic::where('gid',$id)->get();
+        foreach ($res as $k => $v) {
+            $rs = unlink('.'.$v->gpic);
+        }
+
+        if($rs){
+            //删除图片关联表
+            $gs = Goods::find($id);
+
+            $data = $gs->goodspics()->delete();
+
+        }
+
+        if($data){
+            //删除主表
+            $re = Goods::destroy($id);
+
+        }
+
+        if($re){
                 return redirect('/admin/goods')->with('success','商品删除成功!');
             
         }

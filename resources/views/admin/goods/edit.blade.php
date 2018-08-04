@@ -18,7 +18,9 @@
       <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
       <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    <script type="text/javascript" charset="utf-8" src="/admin/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/admin/ueditor/ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="/admin/ueditor/lang/zh-cn/zh-cn.js"></script>
 
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"crossorigin="anonymous">
@@ -43,7 +45,7 @@
           {{csrf_field()}}
           {{method_field('PUT')}}
           <div class="layui-form-item">
-              <label for="username" class="layui-form-label">
+              <label for="username" class="layui-form-label" style="width:100px">
                   <span class="x-red">*</span>商品类别
               </label>
               <div class="layui-input-inline" style="width:250px">
@@ -60,7 +62,7 @@
               </div>
           </div>
           <div class="layui-form-item">
-              <label for="username" class="layui-form-label">
+              <label for="username" class="layui-form-label" style="width:100px">
                   <span class="x-red">*</span>商品名称
               </label>
               <div class="layui-input-inline">
@@ -70,7 +72,7 @@
           </div>
 
           <div class="layui-form-item">
-              <label for="username" class="layui-form-label">
+              <label for="username" class="layui-form-label" style="width:100px">
                   <span class="x-red">*</span>商品库存
               </label>
               <div class="layui-input-inline">
@@ -80,7 +82,7 @@
           </div>
 
           <div class="layui-form-item">
-              <label for="phone" class="layui-form-label">
+              <label for="phone" class="layui-form-label" style="width:100px">
                   <span class="x-red">*</span>商品单价
               </label>
               <div class="layui-input-inline">
@@ -88,21 +90,19 @@
                   autocomplete="off" class="layui-input" value="{{$data->price}}">
               </div>
           </div>
-
-           <div class="layui-form-item">
-              <label for="phone" class="layui-form-label">
+          <label for="phone" class="layui-form-label" style="width:100px">
                   <span class="x-red">*</span>商品图片
               </label>
-              <!-- <div class="layui-input-inline"> -->
-                @php
-                  $n=0;
-                @endphp
+           <div class="layui-form-item">
+             
               	@foreach($data->goodspics as $k=>$v)
             	
-                    <div class="col-xs-6 col-md-3">
-                      <a class="thumbnail">
-                        <button type="button" class="close" aria-label="Close" style="width: 10px"><span aria-hidden="true" name="{{$v->gpid}}" id='pan{{$n++}}' style="font-size:20px">&times;</span></button>
-                        <img src="{{$v->gpic}}" style="width: 200px" > 
+                    <div class="col-xs-6 col-md-3" id='re'>
+                      <a class="thumbnail" style="display: block">
+                        <button type="button" class="close" aria-label="Close" style="width: 10px">
+                          <span aria-hidden="true" class='pan' style="font-size:20px">&times;</span>
+                        </button>
+                        <img src="{{$v->gpic}}" style="width: 200px" class='gpic' gpid="{{$v->gpid}}">
                       </a>
                     </div>
 
@@ -110,13 +110,22 @@
              
               <!-- </div> -->
           </div>
-          <div class="layui-input-inline">
-                  <input type="file" id="file" multiple="multiple" name="gpic[]" autocomplete="off" >
-          </div>
-          <div class="layui-input-inline">
+          <div class="layui-form-item">
+              <label for="phone" class="layui-form-label" style="width:100px">
 
-                  <input type="button" value="读取图像" onclick="readAsDataURL()" />
+            <div class="layui-input-inline">
+                    <input type="file" id="file" multiple="multiple" name="gpic[]" autocomplete="off" >
+            </div>
+              </label>
           </div>
+          <div class="layui-form-item">
+              <label for="phone" class="layui-form-label" style="width:100px">
+        
+                
+                  <input type="button" value="读取图像" onclick="readAsDataURL()" />
+          
+            </label>
+
           <div id="result0" name="result" style="display:inline"></div> 
           <div id="result1" name="result" style="display:inline"></div> 
           <div id="result2" name="result" style="display:inline"></div> 
@@ -124,25 +133,25 @@
           <div id="result4" name="result" style="display:inline"></div> 
           <div id="result5" name="result" style="display:inline"></div> 
 
+          </div>
+
            <div class="layui-form-item">
-              <label class="layui-form-label"><span class="x-red">*</span>商品状态</label>
+              <label class="layui-form-label" style="width:100px"><span class="x-red">*</span>商品状态</label>
               <div class="layui-input-block">
-                <input type="radio" name="state" lay-skin="primary" value="1" title="新品" checked="">
-                <input type="radio" name="state" lay-skin="primary" value="2" title="上架">
-                <input type="radio" name="state" lay-skin="primary" value="3" title="下架">
+
+                <input type="radio" name="state" lay-skin="primary" value="1" title="上架" checked="">
+                <input type="radio" name="state" lay-skin="primary" value="2" title="下架">
               </div>
           </div>
 
 
           <div class="layui-form-item layui-form-text">
-              <label for="desc" class="layui-form-label">
+              <label for="desc" class="layui-form-label" style="width:100px">
                   商品描述
               </label>
-              <div class="layui-input-block">
-                  <textarea placeholder="请输入内容" id="desc" name="desc" class="layui-textarea">{{$data->desc}}</textarea>
-              </div>
           </div>
-          <div class="layui-form-item">
+          <script id="editor" type="text/plain" name="desc" style="width:1024px;height:500px;">{!!$data->desc!!}</script>
+          <div class="layui-form-item" style="margin-top: 30px">
               <label for="L_repass" class="layui-form-label">
               </label>
               <button  class="layui-btn" lay-filter="add" lay-submit="">
@@ -152,23 +161,21 @@
       </form>
     </div>
   <script>
+    var ue = UE.getEditor('editor');
+
                     
-              $('#pan0').click(function(){
-                alert($(this).attr('name'));
+              $('.pan').click(function(){
+              var gpid = $(this).parent().siblings().attr('gpid');
+              var re = $(this);
+
+              $.get('/admin/goods/'+gpid,{},function(data){
+                if(data == 1){
+                  re.parents('#re').remove();
+                  return false;
+                }
+              });
             });
-              $('#pan1').click(function(){
-                alert('22');
-            });
-              $('#pan2').click(function(){
-                alert('33');
-            });
-              $('#pan3').click(function(){
-                alert('44');
-            });
-              $('#pan4').click(function(){
-                alert('55');
-            });
-      
+          
 
 
                         

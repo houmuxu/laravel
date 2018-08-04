@@ -34,15 +34,15 @@
       <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so" method="get" action="/admin/goods">
           
-          <input class="layui-input" placeholder="开始日" name="start" id="start">
-          <input class="layui-input" placeholder="截止日" name="end" id="end">
-          <input type="text" name="gname"  placeholder="请输入商品名" autocomplete="off" class="layui-input">
+          <input class="layui-input" placeholder="最低价格" name="min" id="start" value="{{$request->input('min')}}">
+          <input class="layui-input" placeholder="最高价格" name="max" id="end" value="{{$request->input('max')}}">
+          <input type="text" name="gname" value="{{$request->input('gname')}}" placeholder="请输入商品名" autocomplete="off" class="layui-input">
           <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
         </form>
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn"><i class="layui-icon"></i> <a href="/admin/goods/create" style="color: white">添加</a></button>
+        <button class="layui-btn"><i class="layui-icon"></i> <a href="/admin/goods/create" style="color: white;">添加</a></button>
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
       </xblock>
 
@@ -62,7 +62,7 @@
             </th>
             <th>ID</th>
             <th>商品名称</th>
-            <th style="width: 100px">商品图片</th>
+            <th style="width: 150px">商品图片</th>
             <th>单价</th>
             <th>库存</th>
             <th>类别</th>
@@ -80,7 +80,7 @@
             <td>{{$v->gid}}</td>
             <td>{{$v->gname}}</td>
 
-            <td><img src="{{$v->goodspics[0]->gpic}}"></td>
+            <td><img src="{{$v->goodspics[0]->gpic}}" width="130px"></td>
 
             <td>{{$v->price}}</td>
             <td>{{$v->stock}}</td>
@@ -91,10 +91,8 @@
             <td class="td-status">
               <span class="layui-btn layui-btn-normal layui-btn-mini">
               @if($v->state == 1)
-                  新品
-              @elseif($v->state == 2)
                   上架
-              @else
+              @elseif($v->state == 2)
                   下架
               @endif
               </span>
@@ -145,49 +143,9 @@
     </div>
    <script>
 
-      // setTimeOut(function(){
+      
         $('.alert-success').slideUp(3000);
 
-      // },3000);
-
-
-      layui.use('laydate', function(){
-        var laydate = layui.laydate;
-        
-        //执行一个laydate实例
-        laydate.render({
-          elem: '#start' //指定元素
-        });
-
-        //执行一个laydate实例
-        laydate.render({
-          elem: '#end' //指定元素
-        });
-      });
-
-       /*用户-停用*/
-      function member_stop(obj,id){
-          layer.confirm('确认要停用吗？',function(index){
-
-              if($(obj).attr('title')=='启用'){
-
-                //发异步把用户状态进行更改
-                $(obj).attr('title','停用')
-                $(obj).find('i').html('&#xe62f;');
-
-                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-                layer.msg('已停用!',{icon: 5,time:1000});
-
-              }else{
-                $(obj).attr('title','启用')
-                $(obj).find('i').html('&#xe601;');
-
-                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                layer.msg('已启用!',{icon: 5,time:1000});
-              }
-              
-          });
-      }
 
       /*用户-删除*/
       function member_del(obj,id){

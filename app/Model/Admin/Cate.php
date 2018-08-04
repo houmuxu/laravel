@@ -23,4 +23,24 @@ class Cate extends Model
      * @var array
      */
     protected $fillable = ['cname','pid','path'];
+
+        public static function getTreeCates($pid=0)
+    {
+
+        $cate = Cate::where('pid',$pid)->get();
+        
+        $arr = [];
+
+        foreach($cate as $k=>$v){
+
+            if($v->pid==$pid){
+
+                $v->sub=self::getTreeCates($v->cid);
+
+                $arr[]=$v;
+            }
+        }  
+        return $arr;
+    }
+
 }

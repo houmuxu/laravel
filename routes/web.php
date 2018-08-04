@@ -13,8 +13,18 @@
 
 //后台
 Route::group([],function(){
-	//后台首页
-	Route::any('/admin/first','admin\UserController@first');
+	//后台首页zhao
+	Route::any('/admin/first','admin\FistUserController@first');
+	//管理员 
+	Route::resource('/admin/admin','admin\AdminController');
+	Route::any('/admin/adminall','admin\AdminController@del');
+	Route::any('/admin/adminsta/{id}','admin\AdminController@start');
+	Route::any('/admin/adminclo/{id}','admin\AdminController@close');
+	//用户
+	Route::resource('/admin/user','admin\UserController');
+	
+	
+	
 
 	//商品管理
 	Route::resource('/admin/goods','admin\GoodsController');

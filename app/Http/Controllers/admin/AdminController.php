@@ -5,34 +5,38 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Admin\Admin;
-use App\Model\Admin\User;
+use Hash;
 use DB;
 
-class UserController extends Controller
+
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    //首页
     public function index(Request $request)
-    {   
+    {
         //共有多有条数据
-        $set=DB::table('users')->pluck('uid');
+        $set=DB::table('admin')->pluck('aid');
         $numm=count($set);
         // 条件查询
-        $res = DB::table('users')->orderBy('uid','asc')
+        $res = DB::table('admin')->orderBy('aid','asc')
             ->where(function($query) use($request){
             //检测关键字
-            $uname = $request->input('uname');
+            $aname = $request->input('aname');
             //如果用户名不为空
-            if(isset($uname)) {
-                $query->where('uname','like','%'.$uname.'%');
+            if(!empty($aname)) {
+                $query->where('aname','like','%'.$aname.'%');
             }
          })
         ->paginate($request->input('num', 5));
 
-        return view('admin.admin.user-list',[
+
+
+        return view('admin.admin.admin-list',[
             'res'=>$res,
             'request'=>$request,
             'numm'=>$numm
@@ -47,7 +51,8 @@ class UserController extends Controller
      */
     public function create()
     {
-         return view('admin/user-add');
+        return view('admin.admin.admin-add');
+
     }
 
     /**
@@ -58,28 +63,40 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-         
-        $res = $request->except('_token','_method','reupwd');
-        $res['utime']= time();
 
-        $uname=$res['uname'];
-        $rname=DB::select('select uname from users where uname = ?',[$uname]);
+
+
+        
+        $res = $request->except('_token','_method','repass');
+         $res['atime']= time();
+        // $aname=$res['aname'];
+        // $obj =DB::table('admin')->pluck('aname')->toArray();
+        // if(in_array($aname,$obj)){
+
+        // }else{
+
+        // }
+
+        $aname=$res['aname'];
+        $rname=DB::select('select aname from admin where aname = ?',[$aname]);
         if($rname){
             $data = [
                 'info' => 'error',
                 'message' => '用户名已存在',
-                'url' => '/admin/user/create',
+                'url' => '/admin/admin/create',
 
             ];
             return view('errors.message',["data"=>$data]);
         }
 
-             $data =  DB::table("users")->insert($res);
+
+
+             $data = Admin::insert($res);
              if($data){
                 $data = [
                 'info' => 'success',
                 'message' => '添加成功',
-                'url' => '/admin/user',
+                'url' => '/admin/admin',
 
                 ];
                 return view('errors.message',["data"=>$data]);
@@ -90,7 +107,21 @@ class UserController extends Controller
 
                 ];
                 return view('errors.message',["data"=>$data]);
+           
         }
+
+
+
+
+
+
+
+
+    }
+
+    public function add(Request $request)
+    {
+
     }
 
     /**
@@ -112,9 +143,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $res = User::find($id);
+        $res = Admin::find($id);
 
-        return view('admin.admin.user-edit',['res'=>$res]);
+        return view('admin.admin.admin-edit',['res'=>$res]);
     }
 
     /**
@@ -126,24 +157,16 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $res = $request->except('_token','_method','profile','reupwd');
-
-        $uname=$res['uname'];
-        $rname=DB::select('select uname from users where uname = ?',[$uname]);
-        if($rname){
-            $data = [
-                'info' => 'error',
-                'message' => '用户名已存在',
-                'url' => '/admin/user',
-            ];
-            return view('errors.message',["data"=>$data]);
-        }
-        $data = DB::table("users")->where('uid', $id)->update($res);
+        
+        $res = $request->except('_token','_method','profile','repass');
+ 
+        $data = DB::table("admin")->where('aid', $id)->update($res);
         if($res){
+
             $data = [
             'info' => 'success',
             'message' => '修改成功',
-            'url' => '/admin/user',
+            'url' => '/admin/admin',
             ];
             return view('errors.dell',["data"=>$data]);
 
@@ -151,10 +174,11 @@ class UserController extends Controller
             $data = [
             'info' => 'error',
             'message' => '修改失败',
-            'url' => '/admin/user',
+            'url' => '/admin/admin',
             ];
             return view('errors.dell',["data"=>$data]);
         }
+
     }
 
     /**
@@ -165,24 +189,58 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $res = User::destroy($id);
+        
+        $res = Admin::destroy($id);
 
         if($res){
+
             $data = [
             'info' => 'success',
-            'message' => '删除成功',
-            'url' => '/admin/user',
+            'message' => '成功',
+            'url' => '/admin/admin',
             ];
             return view('errors.dell',["data"=>$data]);
-
 
         }else{
             $data = [
             'info' => 'error',
-            'message' => '删除失败',
-            'url' => '/admin/user',
+            'message' => '失败',
+            'url' => '/admin/admin',
             ];
             return view('errors.dell',["data"=>$data]);
+        }
+
     }
-}
+
+    public function del(Request $request)
+    {
+
+
+
+        $res = $request->except('_token','_method')->toArray();
+
+
+        $id = $res['id'];
+        for ($i=0; $i < count($id); $i++) { 
+           Admin::destroy($id[$i]);
+        }
+        echo "true";
+    }
+
+
+
+    //管理员开启状态
+    public function start($id,$status=1)
+    {
+        $res['astatus'] = $status;            
+        $data = DB::table('admin')->where('aid',$id)->update($res);
+        return redirect('/admin/admin');
+    }
+
+    public function close($id,$status=2)
+    {
+        $res['astatus'] = $status;            
+        $data = DB::table('admin')->where('aid',$id)->update($res);
+        return redirect('/admin/admin');
+    }
 }

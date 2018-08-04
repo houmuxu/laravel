@@ -33,4 +33,18 @@ Route::group([],function(){
 Route::any('/', 'home\FirstController@index');
 Route::group([],function(){
 
+
+
+
+
+
+	//商品管理
+	Route::any('/home/goodslist/{id}','home\GoodsController@index');//商品列表页
+	Route::any('/home/goodsshow/{id}','home\GoodsController@show');//商品详情页
+
+
+
+
+
+
 });

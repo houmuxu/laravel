@@ -49,7 +49,7 @@
 				<div class="nav white">
 					<div class="logo"><img src="/home/images/logo.png" /></div>
 					<div class="logoBig">
-						<li><img src="/home/images/logobig.png" /></li>
+						<img src="/home/images/logobig.png"/>
 					</div>
 
 					<div class="search-bar pr">

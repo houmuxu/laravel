@@ -26,7 +26,7 @@ Route::group([],function(){
 	
 	
 
-	//商品管理
+	//商品管理 hou
 	Route::resource('/admin/goods','admin\GoodsController');
 
 	// 类别管理  zhang
@@ -48,10 +48,11 @@ Route::group([],function(){
 
 
 
-	//商品管理
+	//商品管理 hou
 	Route::any('/home/goodslist/{id}','home\GoodsController@index');//商品列表页
 	Route::any('/home/goodsshow/{id}','home\GoodsController@show');//商品详情页
-
+	//购物车 hou
+	Route::any('/home/cartc','home\CartController@store');
 
 
 

@@ -43,4 +43,9 @@ class Cate extends Model
         return $arr;
     }
 
+    public function goodss()
+    {
+        return $this->hasMany('App\Model\Admin\Goods','cid');
+    }
+
 }

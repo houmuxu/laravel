@@ -47,7 +47,7 @@ class UserController extends Controller
      */
     public function create()
     {
-         return view('admin/user-add');
+         return view('admin.admin.user-add');
     }
 
     /**
@@ -115,6 +115,7 @@ class UserController extends Controller
         $res = User::find($id);
 
         return view('admin.admin.user-edit',['res'=>$res]);
+
     }
 
     /**

@@ -42,6 +42,8 @@ Route::group([],function(){
 //前台
 Route::any('/', 'home\FirstController@index');
 Route::group([],function(){
+	//用户手机注册
+	Route::resource('/user/zhuce','home\UserController');
 
 
 

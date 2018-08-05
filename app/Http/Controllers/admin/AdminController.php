@@ -22,13 +22,13 @@ class AdminController extends Controller
         //共有多有条数据
         $set=DB::table('admin')->pluck('aid');
         $numm=count($set);
-        // 条件查询
+     // 条件查询
         $res = DB::table('admin')->orderBy('aid','asc')
             ->where(function($query) use($request){
             //检测关键字
             $aname = $request->input('aname');
             //如果用户名不为空
-            if(!empty($aname)) {
+            if(isset($aname)) {
                 $query->where('aname','like','%'.$aname.'%');
             }
          })
@@ -36,7 +36,7 @@ class AdminController extends Controller
 
 
 
-        return view('admin.admin.admin-list',[
+        return view('admin/admin/admin-list',[
             'res'=>$res,
             'request'=>$request,
             'numm'=>$numm
@@ -143,6 +143,7 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
+
         $res = Admin::find($id);
 
         return view('admin.admin.admin-edit',['res'=>$res]);

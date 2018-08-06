@@ -44,26 +44,27 @@
             <th>操作</th>
         </tr></thead>
         <tbody>
-           @foreach ($res as $res)
+          
+           @foreach($res as $k => $v)
           <tr>
             <td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id="{{$res->aid}}"><i class="layui-icon"></i></div>
+              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id="{{$v->aid}}"><i class="layui-icon"></i></div>
             </td>
-            <td>{{$res->aid}}</td>
-            <td>{{$res->aname}}</td>
-            <td>{{$res->atel}}</td>
-            <td>{{$res->aemail}}</td>
+            <!-- <td>{{$v->aid}}</td> -->
+            <td>{{$v->aname}}</td>
+            <td>{{$v->atel}}</td>
+            <td>{{$v->aemail}}</td>
             <td>
-              @if($res->auth==1)
+              @if($v->auth==1)
               管理员
-              @elseif($res->auth==2)
+              @elseif($v->auth==2)
               超级管理员
               @endif
             </td>
-            <td>{{ date('Y-m-d',$res->atime)}}</td>
+            <td>{{ date('Y-m-d',$v->atime)}}</td>
             <td class="td-status">
               <div>
-                @if($res->astatus == '1')
+                @if($v->astatus == '1')
                 启用
                 @else
                 未启用
@@ -71,25 +72,25 @@
               </div>
             </td>
             <td class="td-manage">
-            @if ($res->astatus!=1)
-            <form action="/admin/adminsta/{{$res->aid}}" method='get' style='display:inline'>
+            @if ($v->astatus!=1)
+            <form action="/admin/adminsta/{{$v->aid}}" method='get' style='display:inline'>
                 {{csrf_field()}}
                 <button class='btn btn-default'><i class="layui-icon"></i></button>
               </form>
 
             @else
-              <form action="/admin/adminclo/{{$res->aid}}" method='get' style='display:inline'>
+              <form action="/admin/adminclo/{{$v->aid}}" method='get' style='display:inline'>
                 {{csrf_field()}}
                 <button class='btn btn-success'><i class="layui-icon"></i></button>
               </form>
             @endif
 
-              <form action="/admin/admin/{{$res->aid}}/edit" method='get' style='display:inline'>
+              <form action="/admin/admin/{{$v->aid}}/edit" method='get' style='display:inline'>
                 
                 <button class='btn btn-info'><i class="layui-icon"></i></button>
                
               </form>
-              <form action="/admin/admin/{{$res->aid}}" method='post' style='display:inline'>
+              <form action="/admin/admin/{{$v->aid}}" method='post' style='display:inline'>
                   {{csrf_field()}}
                   {{method_field('DELETE')}}
                   <button class='btn btn-danger'><i class="layui-icon"></i></button>
@@ -143,7 +144,11 @@
 </script>
 
 
- 
+       <div class="page">
+        <div>
+     {{$res->appends($request->all())->links()}}
+        </div>
+      </div>
 
 
 

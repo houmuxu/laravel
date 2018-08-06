@@ -1,9 +1,9 @@
 <?php
-
 namespace App\Http\Controllers\home;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Ucpaas;
+
 
 class UserController extends Controller
 {
@@ -82,4 +82,53 @@ class UserController extends Controller
     {
         //
     }
+
+
+
+    public function sendcode(Request $request)
+    {
+
+        //初始化必填
+        $options['accountsid']='fd24829d8bfcbd80834aca0aef04a05e';
+        $options['token']='316b7e37616ca8dff338b0d262d0ad00';
+
+        //初始化 $options必填
+        $ucpass = new Ucpaas($options);
+
+        //开发者账号信息查询默认为json或xml
+        $ucpass->getDevinfo('xml');
+         $code = rand(1111,9999);
+
+        $toNumber = $request->post('number');
+
+        session('code',$code);
+
+        $appId = "9776d6202bb14ce49d26885fb13a84ac";
+        $templateId = "349335";
+        $param=$code;
+
+       echo  $ucpass->templateSMS($appId,$toNumber,$templateId,$param);
+
+
+
+    }
+
+
+    public function checkuser(Request $request)
+    {
+        $users = $request->get('username');
+
+        $res = Db::table('user')->where('username',$users)->find();
+
+        // dump($res);
+        if($res){
+
+            echo 1;
+        } else {
+
+            echo 0;
+        }
+
+
+
 }

@@ -9,6 +9,7 @@
 		<meta name="format-detection" content="telephone=no">
 		<meta name="renderer" content="webkit">
 		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta name="csrf-token" content="{{ csrf_token() }}">
 
 		<link rel="stylesheet" href="/home/AmazeUI-2.4.2/assets/css/amazeui.min.css" />
 		<link href="/home/css/dlstyle.css" rel="stylesheet" type="text/css">
@@ -72,9 +73,9 @@
                  </div>																			
 										<div class="verification">
 											<label for="code"><i class="am-icon-code-fork"></i></label>
-											<input type="tel" name="" id="code" placeholder="请输入验证码">
-											<a class="btn" href="javascript:void(0);" onclick="sendMobileCode();" id="sendMobileCode">
-												<span id="dyMobileButton">获取</span></a>
+											<input type="tel" name="code" id="code" placeholder="请输入验证码">
+											{{csrf_field()}}
+											<button id='but'>获取</button>
 										</div>
                  <div class="user-pass">
 								    <label for="password"><i class="am-icon-lock"></i></label>
@@ -98,6 +99,65 @@
 								</div>
 
 								<script>
+									$.ajaxSetup({
+									    headers: {
+									        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+									    }
+									});
+
+
+
+								//点击发送验证码
+								$('#but').click(function(){
+
+									//获取手机号
+									var utel = $('input[name=utel]').val();
+
+
+
+									$.post('/sendcode',{number:utel},function(data){
+
+										console.log(data);
+									});
+										return false;
+
+
+								})
+								var CV = true;
+								//检测验证码
+								$('input[name=code]').focus(function(){
+									$(this).css('border','solid 2px purple');
+								})
+
+								$('input[name=code]').blur(function(){
+
+									var cv = $(this).val();
+
+									var cds = $(this);
+
+									$.get('/checkcode',{code:cv},function(data){
+
+										// console.log(data);
+										if(data == '0'){
+
+											cds.next().text(' *验证码不正确').css('color','red');
+
+											cds.css('border','solid 2px red');
+
+											CV = false;
+										} else {
+
+											cds.next().text(' √').css('color','green');
+
+											cds.css('border','solid 2px green');
+
+											CV = true;
+										}
+									})
+								})
+
+
+									//切换控制
 									$(function() {
 									    $('#doc-my-tabs').tabs();
 									  })

@@ -34,6 +34,17 @@ Route::group([],function(){
 	Route::resource('/admin/cate', 'admin\CateController');
 
 
+	//后台订单---资源路由---(yang)
+	Route::resource('/admin/orders','admin\OrdersController');
+	//发货ajax
+	Route::any('/send','admin\OrdersajaxController@send');
+	//订单详情
+	Route::any('/admin/details/index/{oid}','admin\DetailsController@show');
+	//订单详情修改页
+	Route::any('/admin/details/edit/{id}','admin\DetailsController@edit');
+	Route::any('/admin/details/update/{id}','admin\DetailsController@update');
+
+
 
 
 

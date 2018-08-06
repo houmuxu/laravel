@@ -22,6 +22,7 @@ Route::group([],function(){
 	Route::any('/admin/adminclo/{id}','admin\AdminController@close');
 	//用户
 	Route::resource('/admin/user','admin\UserController');
+
 	
 	
 	
@@ -44,6 +45,10 @@ Route::any('/', 'home\FirstController@index');
 Route::group([],function(){
 	//用户手机注册
 	Route::resource('/user/zhuce','home\UserController');
+		//发送验证码
+	Route::any('/sendcode','home\UserController@sendcode');
+		//检验验证码
+	Route::any('/checkcode','home\UserController@checkcode');
 
 
 

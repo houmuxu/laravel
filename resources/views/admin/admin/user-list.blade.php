@@ -44,29 +44,29 @@
             <th>操作</th></tr>
         </thead>
         <tbody>
-          @foreach($res as $res)
+          @foreach($res as $k => $v)
           <tr>
             <td>
               <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id="2"><i class="layui-icon"></i></div>
             </td>
-            <td>{{$res->uid}}</td>
-            <td>{{$res->uname}}</td>
+            <td>{{$v->uid}}</td>
+            <td>{{$v->uname}}</td>
             <td>
-               @if($res->usex=="w")
+               @if($v->usex=="w")
               女
-              @elseif($res->usex=="m")
+              @elseif($v->usex=="m")
               男
               @endif
             </td>
-            <td>{{$res->utel}}</td>
-            <td>{{$res->uemail}}</td>
-            <td>{{$res->uaddr}}</td>
-            <td>{{ date('Y-m-d',$res->utime)}}</td>
+            <td>{{$v->utel}}</td>
+            <td>{{$v->uemail}}</td>
+            <td>{{$v->uaddr}}</td>
+            <td>{{ date('Y-m-d',$v->utime)}}</td>
             <td class="td-manage">
-              <form action="/admin/user/{{$res->uid}}/edit" method='get' style='display:inline'>
+              <form action="/admin/user/{{$v->uid}}/edit" method='get' style='display:inline'>
                 <button class='btn btn-info'><i class="layui-icon"></i></button>
               </form>
-              <form action="/admin/user/{{$res->uid}}" method='post' style='display:inline'>
+              <form action="/admin/user/{{$v->uid}}" method='post' style='display:inline'>
                   {{csrf_field()}}
                   {{method_field('DELETE')}}
                   <button class='btn btn-danger'><i class="layui-icon"></i></button>
@@ -78,12 +78,7 @@
       </table>
       <div class="page">
         <div>
-          <a class="prev" href="">&lt;&lt;</a>
-          <a class="num" href="">1</a>
-          <span class="current">2</span>
-          <a class="num" href="">3</a>
-          <a class="num" href="">489</a>
-          <a class="next" href="">&gt;&gt;</a>
+         {{$res->appends($request->all())->links()}}
         </div>
       </div>
 

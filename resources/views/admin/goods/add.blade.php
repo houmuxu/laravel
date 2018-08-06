@@ -24,6 +24,13 @@
   </head>
   
   <body>
+    @if(session('error'))
+
+      <div class="alert alert-danger" role="alert">
+        <a href="/admin/goods" class="alert-link">{{session('error')}}</a>
+      </div>
+        
+      @endif
     <div class="x-body">
         <form class="layui-form" action="/admin/goods" enctype ="multipart/form-data" method="post">
           {{csrf_field()}}

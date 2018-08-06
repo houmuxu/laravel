@@ -113,7 +113,7 @@
                 </div>
                 <div class="topMessage mini-cart">
                     <div class="menu-hd">
-                        <a id="mc-menu-hd" href="#" target="_top">
+                        <a id="mc-menu-hd" href="/home/cart" target="_top">
                             <i class="am-icon-shopping-cart  am-icon-fw">
                             </i>
                             <span>
@@ -1518,7 +1518,7 @@
                             </div>
                         </div>
                         <div id="shopCart" class="item">
-                            <a href="#" id='ceshi'>
+                            <a href="/home/cart" id='ceshi'>
                                 <span class="message">
                                 </span>
                             </a>

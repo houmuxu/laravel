@@ -53,6 +53,11 @@ Route::group([],function(){
 	Route::any('/home/goodsshow/{id}','home\GoodsController@show');//商品详情页
 	//购物车 hou
 	Route::any('/home/cartc','home\CartController@store');
+	Route::any('/home/cart','home\CartController@index');
+	Route::any('/home/cart/del','home\CartController@del');
+
+
+
 
 
 

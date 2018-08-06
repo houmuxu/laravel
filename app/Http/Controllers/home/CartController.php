@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Admin\Goods;
 use App\Model\home\Cart;
+use App\Model\Admin\Goodspic;
 use DB;
 
 class CartController extends Controller
@@ -28,28 +29,56 @@ class CartController extends Controller
     public function index()
     {
         //  获取数据
-        $data = DB::table('cart')->get();
-        // echo"<pre>";
-        // var_dump($data->['gname']);
+        $data = DB::table('cart')->where('uid',1)->get();
+       
          //  求总数量,总金额
         $cnt = 0;
         $sum = 0;
+        $gpic = [];
         foreach($data as $k=>$v){
             $cnt += $v->num;
             $sum += $v->price * $v->num;
 
+            $id = $v->gid;
+            $gid = Goodspic::where('gid',$id)->first();
+            $gpic = $gid->gpic;
 
         }
 
-        //  
+        //  通过gid找到商品的图片
 
-
-        return view('home.cart.index',['data'=>$data,'cnt'=>$cnt,'sum'=>$sum]);
+        return view('home.cart.index',['data'=>$data,'cnt'=>$cnt,'sum'=>$sum,'gpic'=>$gpic]);
     }
 
     //  购物车删除商品
-    public function del()
+    public function del(Request $request)
     {
-        echo 123;
+        
+        //  获取id
+        $id = $request->input('res');
+
+        $data = DB::table('cart')->where('id',$id)->delete();
+
+        echo $data;
     }
+
+
+    //  商品加1
+   /* public function incre($id)
+    {
+         
+        $data = 
+
+        $id = $data->num;
+        dd($id++);
+        
+        return redirect('/home/cart');
+
+    }*/
+
+
+
+    //  商品减1
+
+
 }

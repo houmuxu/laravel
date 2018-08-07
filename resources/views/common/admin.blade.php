@@ -176,6 +176,33 @@
                     </li >
                 </ul>
             </li>
+
+            <!-- 友情链接管理 -->
+             <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>链接管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="/admin/friendlink">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>链接列表</cite>
+                        </a>
+                    </li >
+                </ul>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="/admin/friendlink/create">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>添加链接</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
+            <!-- 友情链接管理结束 -->
+
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe6ce;</i>

@@ -34,6 +34,7 @@ Route::group([],function(){
 	Route::resource('/admin/cate', 'admin\CateController');
 
 
+
 	//后台订单---资源路由---(yang)
 	Route::resource('/admin/orders','admin\OrdersController');
 	//发货ajax
@@ -44,6 +45,10 @@ Route::group([],function(){
 	Route::any('/admin/details/edit/{id}','admin\DetailsController@edit');
 	Route::any('/admin/details/update/{id}','admin\DetailsController@update');
 
+
+
+	//  友情链接   zhang
+	Route::resource('/admin/friendlink', 'admin\FriendlinkController');
 
 
 
@@ -85,6 +90,9 @@ Route::group([],function(){
 	Route::any('/home/cart/incre','home\CartController@incre');//商品数量加1
 	Route::any('/home/cart/decre','home\CartController@decre');//商品数量减1
 
+
+	//  个人中心页面
+	Route::any('/home/self','home\SelfController@index');   //  个人中心页面
 
 
 

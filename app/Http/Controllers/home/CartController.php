@@ -63,22 +63,6 @@ class CartController extends Controller
     }
 
 
-    //  商品加1
-   /* public function incre($id)
-    {
-         
-        $data = 
-
-        $id = $data->num;
-        dd($id++);
-        
-        return redirect('/home/cart');
-
-    }*/
-
-
-
-    //  商品减1
-
+   
 
 }

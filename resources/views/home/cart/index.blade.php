@@ -14,6 +14,46 @@
 
 		<script type="text/javascript" src="/home/js/jquery.js"></script>
 
+		<style type="text/css">
+			
+			.ds{
+				display:none;
+			}
+
+			.cart-empty{
+			height: 98px;
+		    padding: 80px 0 120px;
+		    color: #333;
+			}
+
+			.cart-empty .message{
+				height: 98px;
+			    padding-left: 341px;
+			    background: url(/uploads/no-login-icon.png) 250px 22px no-repeat;
+			}
+
+			.cart-empty .message .txt {
+			    font-size: 14px;
+			}
+			.cart-empty .message li {
+			    line-height: 38px;
+			}
+
+			ol, ul {
+			    list-style: outside none none;
+			}
+
+			.ftx-05, .ftx05 {
+				color: #005ea7;
+			}
+			
+			a {
+			    color: #666;
+			    text-decoration: none;
+			    
+			    font-size:12px;
+			   }
+		</style>
 	</head>
 
 	<body>
@@ -63,7 +103,7 @@
 			<div class="clear"></div>
 
 			<!--购物车 -->
-			<div class="concent">
+			<div class="concent" id="gs">
 				<div id="cartTable">
 					<div class="cart-table-th">
 						<div class="wp">
@@ -102,7 +142,7 @@
 								<ul class="item-content clearfix">
 									<li class="td td-chk">
 										<div class="cart-checkbox ">
-											<input class="check" id="J_CheckBox_170769542747" name="items[]" value="170769542747" type="checkbox">
+											<input class="check" id="J_CheckBox_170769542747" name="items[]" value="170769542747" type="checkbox" gid="{{$v->id}}">
 											<label for="J_CheckBox_170769542747"></label>
 										</div>
 									</li>
@@ -243,68 +283,21 @@
 
 			</div>
 
-			<!--操作页面-->
-
-			<div class="theme-popover-mask"></div>
-
-			<div class="theme-popover">
-				<div class="theme-span"></div>
-				<div class="theme-poptit h-title">
-					<a href="javascript:;" title="关闭" class="close">×</a>
-				</div>
-				<div class="theme-popbod dform">
-					<form class="theme-signin" name="loginform" action="" method="post">
-
-						<div class="theme-signin-left">
-
-							<li class="theme-options">
-								<div class="cart-title">颜色：</div>
-								<ul>
-									<li class="sku-line selected">12#川南玛瑙<i></i></li>
-									<li class="sku-line">10#蜜橘色+17#樱花粉<i></i></li>
-								</ul>
-							</li>
-							<li class="theme-options">
-								<div class="cart-title">包装：</div>
-								<ul>
-									<li class="sku-line selected">包装：裸装<i></i></li>
-									<li class="sku-line">两支手袋装（送彩带）<i></i></li>
-								</ul>
-							</li>
-							<div class="theme-options">
-								<div class="cart-title number">数量</div>
-								<dd>
-									<input class="min am-btn am-btn-default" name="" type="button" value="-" />
-									<input class="text_box" name="" type="text" value="1" style="width:30px;" />
-									<input class="add am-btn am-btn-default" name="" type="button" value="+" />
-									<span  class="tb-hidden">库存<span class="stock">1000</span>件</span>
-								</dd>
-
-							</div>
-							<div class="clear"></div>
-							<div class="btn-op">
-								<div class="btn am-btn am-btn-warning">确认</div>
-								<div class="btn close am-btn am-btn-warning">取消</div>
-							</div>
-
-						</div>
-						<div class="theme-signin-right">
-							<div class="img-info">
-								<img src="/home/images/kouhong.jpg_80x80.jpg" />
-							</div>
-							<div class="text-info">
-								<span class="J_Price price-now">¥39.00</span>
-								<span id="Stock" class="tb-hidden">库存<span class="stock">1000</span>件</span>
-							</div>
-						</div>
-
-					</form>
-				</div>
-			</div>
-		<!--引导 -->
-		
-
-		
+		<div class='cart-empty ds'>
+			<div class="message">
+			    <ul>
+			        <li class="txt">
+			            购物车空空的哦~，去看看心仪的商品吧~
+			        </li>
+			        <li class="mt10">
+			            <a href="/" class="ftx-05">
+			                去购物&gt;
+			            </a>
+			        </li>
+			            
+			    </ul>
+	    	</div>
+		</div>
 
 	</body>
 	<script type="text/javascript">
@@ -320,9 +313,15 @@
 						if(data){
 							del.parents('ul').remove();
 							sum();
-							return false;
+
+							var gid = $('.check').attr('gid');
+							// alert(gid);
+							if(gid == undefined){
+								$('.ds').show();
+								$('#gs').hide();
+							}
 						}
-				},'json');
+				});
 				return false;
 			});
 
@@ -330,6 +329,7 @@
 			//  全选
 			var swith_All=true;
 			$('#J_SelectAllCbx2').click(function(){
+
 				if(swith_All){
 					$('input[name="items[]"]').attr('checked',true);
 				}else{
@@ -337,6 +337,7 @@
 				}
 				swith_All=!swith_All;
 
+				
 				sum();
 				
 				

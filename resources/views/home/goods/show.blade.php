@@ -430,55 +430,29 @@
     				<input type="hidden" name="gid" id="gid" value="{{$data->gid}}">
 
                                                 <div class="theme-signin-left">
+                                                    @if(!$data->goodsattr == NULL)
                                                     <div class="theme-options">
                                                         <div class="cart-title">
                                                             口味
                                                         </div>
                                                         <ul>
-                                                            <li class="sku-line selected">
-                                                                原味
+                                                            @php
+                                                            $goodsattr = explode(",",$data->goodsattr);
+                                                            @endphp
+                                                            @foreach($goodsattr as $k=>$v)
+                                                            <li class="sku-line 
+                                                            @if($k == 0)
+                                                            selected
+                                                            @endif
+                                                            ">
+                                                                {{$v}}
                                                                 <i>
                                                                 </i>
                                                             </li>
-                                                            <li class="sku-line">
-                                                                奶油
-                                                                <i>
-                                                                </i>
-                                                            </li>
-                                                            <li class="sku-line">
-                                                                炭烧
-                                                                <i>
-                                                                </i>
-                                                            </li>
-                                                            <li class="sku-line">
-                                                                咸香
-                                                                <i>
-                                                                </i>
-                                                            </li>
+                                                            @endforeach
                                                         </ul>
                                                     </div>
-                                                    <div class="theme-options">
-                                                        <div class="cart-title">
-                                                            包装
-                                                        </div>
-                                                        <ul>
-                                                            <li class="sku-line selected">
-                                                                手袋单人份
-                                                                <i>
-                                                                </i>
-                                                            </li>
-                                                            <li class="sku-line">
-                                                                礼盒双人份
-                                                                <i>
-                                                                </i>
-                                                            </li>
-                                                            <li class="sku-line">
-                                                                全家福礼包
-                                                                <i>
-                                                                </i>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                                                    @endif
                                                     <div class="theme-options">
                                                         <div class="cart-title number">
                                                             数量

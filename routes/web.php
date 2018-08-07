@@ -51,8 +51,15 @@ Route::group([],function(){
 
 });
 
+
+
 //前台
+//  首页
 Route::any('/', 'home\FirstController@index');
+
+//  注册页面
+// Route::any('/login', 'home\HomeController@login');
+
 Route::group([],function(){
 	//用户手机注册
 	Route::resource('/user/zhuce','home\UserController');
@@ -71,8 +78,12 @@ Route::group([],function(){
 	Route::any('/home/goodsshow/{id}','home\GoodsController@show');//商品详情页
 	//购物车 hou
 	Route::any('/home/cartc','home\CartController@store');
-	Route::any('/home/cart','home\CartController@index');
-	Route::any('/home/cart/del','home\CartController@del');
+
+	//  购物车页面  zhang
+	Route::any('/home/cart','home\CartController@index');    // 购物车页面
+	Route::any('/home/cart/del','home\CartController@del');//购物车商品删除
+	Route::any('/home/cart/incre/{id}','home\CartController@incre');//商品数量加1
+	Route::any('/home/cart/decre/{id}','home\CartController@decre');//商品数量减1
 
 
 

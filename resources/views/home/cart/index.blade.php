@@ -30,7 +30,7 @@
 			</ul>
 			<ul class="message-r">
 				<div class="topMessage home">
-					<div class="menu-hd"><a href="#" target="_top" class="h">商城首页</a></div>
+					<div class="menu-hd"><a href="/" target="_top" class="h">商城首页</a></div>
 				</div>
 				<div class="topMessage my-shangcheng">
 					<div class="menu-hd MyShangcheng"><a href="#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
@@ -95,15 +95,7 @@
 
 					<tr class="item-list">
 						<div class="bundle  bundle-last ">
-							<div class="bundle-hd">
-								<div class="bd-promos">
-									<div class="bd-has-promo">已享优惠:<span class="bd-has-promo-content">省￥19.50</span>&nbsp;&nbsp;</div>
-									<div class="act-promo">
-										<a href="#" target="_blank">第二支半价，第三支免费<span class="gt">&gt;&gt;</span></a>
-									</div>
-									<span class="list-change theme-login">编辑</span>
-								</div>
-							</div>
+						
 							<div class="clear"></div>
 							<div class="bundle-main">
 							@foreach ($data as $k=>$v)
@@ -116,12 +108,21 @@
 									</li>
 									<li class="td td-item">
 										<div class="item-pic">
+
 											<a href="#" target="_blank" data-title="美康粉黛醉美东方唇膏口红正品 持久保湿滋润防水不掉色护唇彩妆" class="J_MakePoint" data-point="tbcart.8.12">
-												<img src="/home/images/kouhong.jpg_80x80.jpg" class="itempic J_ItemImg"></a>
+												<img src="
+												@php
+												$gid = App\Model\Admin\Goodspic::where('gid',$v->gid)->first();
+            									echo $gpic = $gid->gpic;
+
+												@endphp
+												" class="itempic J_ItemImg" width="78px"></a>
 										</div>
 										<div class="item-info">
 											<div class="item-basic-info">
-												<a href="#" target="_blank" title="美康粉黛醉美唇膏 持久保湿滋润防水不掉色" class="item-title J_MakePoint" data-point="tbcart.8.11">{{$v->gname}}</a>
+												<a href="#" target="_blank" title="美康粉黛醉美唇膏 持久保湿滋润防水不掉色" class="item-title J_MakePoint" data-point="tbcart.8.11">{{$v->gname}}
+
+												</a>
 											</div>
 										</div>
 									</li>
@@ -151,7 +152,7 @@
 												<div class="sl">
 													<input class="min am-btn" name="" type="button" value="-" />
 													<input class="text_box" name="" type="text" value="{{$v->num}}" style="width:30px;" />
-													<input class="add am-btn" name="" type="button" value="+" />
+													<input class="add am-btn" name="incre" type="button" value="+" />
 												</div>
 											</div>
 										</div>
@@ -165,10 +166,12 @@
 										<div class="td-inner">
 											<a title="移入收藏夹" class="btn-fav" href="#">
 							
-                  移入收藏夹</a>
+                 						 移入收藏夹</a>
+                  						<input type="hidden" name="delete" value="{{$v->id}}">
+										<a href="" data-point-url="#" class="delete">
+
+                  						删除</a>
                   
-											<a href="/home/cart/{{$v->gid}}" data-point-url="#" class="delete">
-                  删除</a>
                
 										</div>
 									</li>
@@ -191,7 +194,7 @@
 						<span>全选</span>
 					</div>
 					<div class="operations">
-						<a href="#" hidefocus="true" class="deleteAll">删除</a>
+						<a href="" hidefocus="true" class="deleteAll">删除</a>
 						<a href="#" hidefocus="true" class="J_BatchFav">移入收藏夹</a>
 					</div>
 					<div class="float-bar-right">
@@ -305,6 +308,56 @@
 			<li class="active"><a href="shopcart.html"><i class="am-icon-shopping-basket"></i>购物车</a></li>	
 			<li><a href="/home/person/index.html"><i class="am-icon-user"></i>我的</a></li>					
 		</div>
-	</body>
 
+		
+
+	</body>
+	<script type="text/javascript">
+
+			//  删除
+			$('.delete').click(function(){
+				var id = $(this).siblings(':hidden').val();
+				var del = $(this);
+				$.get('/home/cart/del',{res:id},function(data){
+						if(data){
+							del.parents('ul').remove();
+							return false;
+						}
+				},'json');
+				return false;
+			});
+
+
+			//  全选
+			var swith_All=true;
+			$('#J_SelectAll2').click(function(){
+				if(swith_All){
+					$('input[name="items[]"]').attr('checked',true);
+				}else{
+					$('input[name="items[]"]').attr('checked',false);
+				}
+				swith_All=!swith_All;
+			});
+
+			//  加1
+			/*$('input[name="incre"]').click(function(){
+				
+				var num1 = $(this).prev().val();
+				var num1 = Number(num1)+1;
+
+				$num = num1;
+				
+				$.get('/home/cart/incre/{id}',{res:$num},function(data){
+					console.log(data);
+				},'json');
+				return false;
+
+			})
+*/
+
+			
+
+
+			
+		</script>
 </html>

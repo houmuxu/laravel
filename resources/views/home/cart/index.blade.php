@@ -128,8 +128,8 @@
 									</li>
 									<li class="td td-info">
 										<div class="item-props item-props-can">
-											<span class="sku-line">颜色：10#蜜橘色</span>
-											<span class="sku-line">包装：两支手袋装（送彩带）</span>
+											<span class="sku-line">{{$v->goodsattr}}</span>
+											
 											<span tabindex="0" class="btn-edit-sku theme-login">修改</span>
 											<i class="theme-login am-icon-sort-desc"></i>
 										</div>
@@ -141,7 +141,7 @@
 													<em class="price-original">78.00</em>
 												</div>
 												<div class="price-line">
-													<em class="J_Price price-now" tabindex="0">{{$v->price}}</em>
+													<span class="J_Price price-now" tabindex="0">{{$v->price}}</span>
 												</div>
 											</div>
 										</div>
@@ -150,8 +150,8 @@
 										<div class="amount-wrapper ">
 											<div class="item-amount ">
 												<div class="sl">
-													<input class="min am-btn" name="" type="button" value="-" />
-													<input class="text_box" name="" type="text" value="{{$v->num}}" style="width:30px;" />
+													<input class="min am-btn" name="decre" type="button" value="-" />
+													<input class="text_box" name="" id=num type="text" value="{{$v->num}}" style="width:20px;line-height:18px;text-align:center" />
 													<input class="add am-btn" name="incre" type="button" value="+" />
 												</div>
 											</div>
@@ -200,7 +200,7 @@
 					<div class="float-bar-right">
 						<div class="amount-sum">
 							<span class="txt">已选商品</span>
-							<em id="J_SelectedItemsCount">{{$cnt}}</em><span class="txt">件</span>
+							<em id="J_SelectedItemsCount">0</em><span class="txt">件</span>
 							<div class="arrow-box">
 								<span class="selected-items-arrow"></span>
 								<span class="arrow"></span>
@@ -208,7 +208,7 @@
 						</div>
 						<div class="price-sum">
 							<span class="txt">合计:</span>
-							<strong class="price">¥<em id="J_Total">{{$sum}}</em></strong>
+							<strong class="price">¥<em id="J_Total">0.0</em></strong>
 						</div>
 						<div class="btn-area">
 							<a href="pay.html" id="J_Go" class="submit-btn submit-btn-disabled" aria-label="请注意如果没有选择宝贝，将无法结算">
@@ -302,12 +302,7 @@
 				</div>
 			</div>
 		<!--引导 -->
-		<div class="navCir">
-			<li><a href="home.html"><i class="am-icon-home "></i>首页</a></li>
-			<li><a href="sort.html"><i class="am-icon-list"></i>分类</a></li>
-			<li class="active"><a href="shopcart.html"><i class="am-icon-shopping-basket"></i>购物车</a></li>	
-			<li><a href="/home/person/index.html"><i class="am-icon-user"></i>我的</a></li>					
-		</div>
+		
 
 		
 
@@ -316,11 +311,15 @@
 
 			//  删除
 			$('.delete').click(function(){
+				var cons = confirm('你确定要删除吗？');
+				if(!cons) return;
+
 				var id = $(this).siblings(':hidden').val();
 				var del = $(this);
 				$.get('/home/cart/del',{res:id},function(data){
 						if(data){
 							del.parents('ul').remove();
+							sum();
 							return false;
 						}
 				},'json');
@@ -330,34 +329,114 @@
 
 			//  全选
 			var swith_All=true;
-			$('#J_SelectAll2').click(function(){
+			$('#J_SelectAllCbx2').click(function(){
 				if(swith_All){
 					$('input[name="items[]"]').attr('checked',true);
 				}else{
 					$('input[name="items[]"]').attr('checked',false);
 				}
 				swith_All=!swith_All;
+
+				sum();
+				
+				
 			});
 
+
 			//  加1
-			/*$('input[name="incre"]').click(function(){
+			$('input[name="incre"]').click(function(){
 				
-				var num1 = $(this).prev().val();
-				var num1 = Number(num1)+1;
+				//  获取数量
+				var num = Number($(this).prev().val())+1;
 
-				$num = num1;
+				//  获取价格
+				var pr = $(this).parents('ul').find('.price-now').text();
+
+				function accMul(arg1, arg2) {
+
+			        var m = 0, s1 = arg1.toString(), s2 = arg2.toString();
+
+			        try { m += s1.split(".")[1].length } catch (e) { }
+
+			        try { m += s2.split(".")[1].length } catch (e) { }
+
+			        return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m)
+
+				}
 				
-				$.get('/home/cart/incre/{id}',{res:$num},function(data){
-					console.log(data);
-				},'json');
-				return false;
-
+				//  金额发生改变  
+				$(this).parents('ul').find('.number').text(accMul(num,pr));
+				sum();
 			})
-*/
+
+
+			//  减1 
+			$('input[name="decre"]').click(function(){
+				
+				//  获取数量
+				var num = Number($(this).next().val())-1;
+
+				if(num < 1){
+					num = 0;
+				}
+				
+
+				//  获取价格
+				var pr = $(this).parents('ul').find('.price-now').text();
+
+				function accMul(arg1, arg2) {
+
+			        var m = 0, s1 = arg1.toString(), s2 = arg2.toString();
+
+			        try { m += s1.split(".")[1].length } catch (e) { }
+
+			        try { m += s2.split(".")[1].length } catch (e) { }
+
+			        return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m)
+
+				}
+				
+				//  金额发生改变  
+				$(this).parents('ul').find('.number').text(accMul(num,pr));
+				sum();
+				
+			})  
+
+
+			//  让总价发生改变
+			$('.check').click(function(){
+				sum();
+			})
 
 			
 
+			//  封装总价的函数
+			function sum()
+			{
+				var sum = 0;
+				var cnt = 0;
+				//  判断多选框有没有被选中
+				$(':checkbox:checked').each(function(){
+					//  获取金额
+					var prs = $(this).parents('ul').find('.number').text();
+					//  获取数量
+					var num = $(this).parents('ul').find('#num').val();
 
-			
+					// console.log(prs);
+
+					function accAdd(arg1,arg2){  
+					    var r1,r2,m;  
+					    try{r1=arg1.toString().split(".")[1].length}catch(e){r1=0}  
+					    try{r2=arg2.toString().split(".")[1].length}catch(e){r2=0}  
+					    m=Math.pow(10,Math.max(r1,r2))  
+					    return (arg1*m+arg2*m)/m  
+						}
+						sum = accAdd(sum,prs);
+						cnt = accAdd(cnt,num);
+					})
+					$('.price').text(sum);
+					$('#J_SelectedItemsCount').text(cnt);
+			}
+	
 		</script>
 </html>

@@ -82,8 +82,8 @@ Route::group([],function(){
 	//  购物车页面  zhang
 	Route::any('/home/cart','home\CartController@index');    // 购物车页面
 	Route::any('/home/cart/del','home\CartController@del');//购物车商品删除
-	Route::any('/home/cart/incre/{id}','home\CartController@incre');//商品数量加1
-	Route::any('/home/cart/decre/{id}','home\CartController@decre');//商品数量减1
+	Route::any('/home/cart/incre','home\CartController@incre');//商品数量加1
+	Route::any('/home/cart/decre','home\CartController@decre');//商品数量减1
 
 
 

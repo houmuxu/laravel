@@ -17,10 +17,11 @@ class CartController extends Controller
     	$arr = $_GET['res'];
     	$gid = $arr[0];
     	$num = $arr[1];
+        $goodsattr = $arr[2];
     	$goods = Goods::where('gid',$gid)->get();
     	$gname = $goods[0]->gname;
     	$price = $goods[0]->price;
-    	$data = array('uid'=>$uid,'gid'=>$gid,'gname'=>$gname,'num'=>$num,'price'=>$price);
+    	$data = array('uid'=>$uid,'gid'=>$gid,'gname'=>$gname,'num'=>$num,'price'=>$price,'goodsattr'=>$goodsattr);
     	$res = Cart::create($data);
     	echo $res;
     }

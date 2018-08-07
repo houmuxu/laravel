@@ -42,7 +42,7 @@
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn"><i class="layui-icon"></i> <a href="/admin/goods/create" style="color: white;">添加</a></button>
+         <a href="/admin/goods/create" style="color: white;margin-left:10px "><button class="layui-btn"><i class="layui-icon"></i>添加</button></a>
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
       </xblock>
 
@@ -57,16 +57,17 @@
       <table class="layui-table" style=" table-layout: fixed;width:100%;">
         <thead>
           <tr>
-            <th  style="width: 20px" >
+            <th  style="width: 48px" >
               <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
-            <th>ID</th>
-            <th>商品名称</th>
+            <th style="width: 60px">ID</th>
+            <th style="width: 130px">商品名称</th>
             <th style="width: 150px">商品图片</th>
             <th>单价</th>
+            <th>口味</th>
             <th>库存</th>
             <th>类别</th>
-            <th>商品描述</th>
+            <!-- <th>商品描述</th> -->
             <th>添加时间</th>
             <th style="width: 80px">状态</th>
             <th>操作</th>
@@ -80,12 +81,13 @@
             <td>{{$v->gid}}</td>
             <td>{{$v->gname}}</td>
 
-            <td><img src="{{$v->goodspics[0]->gpic}}" width="130px"></td>
+            <td><img src="{{$v->goodspics[0]->gpic}}" style="width: 150px;"></td>
 
             <td>{{$v->price}}</td>
+            <td>{{$v->goodsattr}}</td>
             <td>{{$v->stock}}</td>
             <td>{{$v->cates['cname']}}</td>
-            <td style="width:100px;overflow:hidden;white-space:nowrap;word-break:keep-all;">{{$v->desc}}</td>
+           <!--  <td style="width:100px;overflow:hidden;white-space:nowrap;word-break:keep-all;">{{$v->desc}}</td> -->
             <td>{{date('Y-m-d',$v->uptime)}}</td>
 
             <td class="td-status">

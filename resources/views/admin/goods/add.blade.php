@@ -84,7 +84,7 @@
                   <span class="x-red"></span>商品口味
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="username" name="goodsattr" required="" 
+                  <input type="text" id="username" name="goodsattr" 
                   autocomplete="off" class="layui-input">
               </div>
           </div>

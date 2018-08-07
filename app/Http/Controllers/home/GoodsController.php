@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Admin\Cate;
 use App\Model\Admin\Goods;
+use App\Model\Admin\User;
+use Mail;
 
 class GoodsController extends Controller
 {
     public function index($id)
     {
-        $goods = [];
+        
         if($id){
             $arr_cid = Cate::where('path','like',"%,$id,%")->pluck('cid');
 
@@ -19,9 +21,10 @@ class GoodsController extends Controller
         	// 为了避免没有子分类 把自己加里面
         	$arr_cid[] = $id;
 
-        	foreach($arr_cid as $k => $v) {
-        		$goods[] = Goods::where('cid',$v)->get();
-        	}
+        	
+        		$goods = Goods::whereIn('cid',$arr_cid)->paginate(8);
+        	
+
 
         // if($gname=$request->only('gname')){
         //     $condition[] = ['gname','like',"%$gname%"];
@@ -37,4 +40,28 @@ class GoodsController extends Controller
        $data = Goods::where('gid',$id)->first();
        return view('home/goods/show',['data'=>$data]);
     }
+    public function email()
+    {
+        return view('home/goods/email');
+    }
+
+    public function useremail(Request $request)
+    {
+        
+         Mail::send('home/goods/emailcode', ['uid' => '1','email'=>$request->input('emails')], function ($m) use ($request) {
+            $m->from(env('MAIL_USERNAME'), '三只松鼠旗舰店');
+
+            $m->to($request->input('emails'), '侯牧序')->subject('更换邮箱验证');
+        });
+
+    }
+
+    public function emailjihuo(Request $request)
+    {
+        $uid = $request->input('id');
+        $email = $request->input('email');
+        //等待uodate
+
+    }
+
 }

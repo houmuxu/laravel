@@ -58,7 +58,12 @@ Route::group([],function(){
 	//商品管理 hou
 	Route::any('/home/goodslist/{id}','home\GoodsController@index');//商品列表页
 	Route::any('/home/goodsshow/{id}','home\GoodsController@show');//商品详情页
-	//购物车 hou
+	//个人中心邮箱验证hou
+	Route::any('/home/goods/email','home\GoodsController@email');//换绑email页面
+	Route::any('/home/goods/useremail','home\GoodsController@useremail');//验证email
+	Route::any('/home/goods/emailjihuo','home\GoodsController@emailjihuo');//激活新的email
+
+	//购物车 
 	Route::any('/home/cartc','home\CartController@store');
 	Route::any('/home/cart','home\CartController@index');
 	Route::any('/home/cart/del','home\CartController@del');

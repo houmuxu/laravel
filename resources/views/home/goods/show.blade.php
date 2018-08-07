@@ -440,16 +440,22 @@
                                                             $goodsattr = explode(",",$data->goodsattr);
                                                             @endphp
                                                             @foreach($goodsattr as $k=>$v)
-                                                            <li class="sku-line 
-                                                            @if($k == 0)
-                                                            selected
-                                                            @endif
-                                                            ">
-                                                                {{$v}}
+                                                            <li class="sku-line @if($k == 0)selected @endif" attr="{{$v}}">{{$v}}<i></i>
+                                                            </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                    @else
+                                                     <div class="theme-options">
+                                                        <div class="cart-title">
+                                                            口味
+                                                        </div>
+                                                    <ul>
+                                                     <li class="sku-line selected" attr='默认'>
+                                                                默认
                                                                 <i>
                                                                 </i>
                                                             </li>
-                                                            @endforeach
                                                         </ul>
                                                     </div>
                                                     @endif
@@ -577,25 +583,33 @@
                                 </div>
 
                                 <script type="text/javascript">
+
+                                      var goodsattr = $('.sku-line,.selected').attr('attr')
+                                       $('.sku-line,.selected').click(function(){
+                                             goodsattr = $(this).attr('attr');
+                                           
+                                        })
                                 	$('#LikBasket').click(function(){
                                 		var gid = $('#gid').val();
                                 		var num = $('#text_box').val();
                                 		var arr = [];
+                                       alert(goodsattr)
                                 		arr[0] = gid;
                                 		arr[1] = num;
+                                        arr[2] = goodsattr;
                                 		$.get('/home/cartc',{res:arr},function(data){
                                 			if(data){
-                                				$(function(){
-												   $('#LikBasket').shoping({
-														endElement:"#ceshi",
-														iconImg:"/home/images/cart.png",
-														endFunction:function(element){
-															$(".cart_num").html(parseInt($(".cart_num").html())+1);
-															console.log(element);
-															return false;
-														}
-													})
-												});
+            //                     				$(function(){
+												//    $('#LikBasket').shoping({
+												// 		endElement:"#ceshi",
+												// 		iconImg:"/home/images/cart.png",
+												// 		endFunction:function(element){
+												// 			$(".cart_num").html(parseInt($(".cart_num").html())+1);
+												// 			console.log(element);
+												// 			return false;
+												// 		}
+												// 	})
+												// });
                                 			}
                                 		});
 

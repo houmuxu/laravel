@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use DB;
 
 class FriendlinkController extends Controller
 {
@@ -14,7 +15,9 @@ class FriendlinkController extends Controller
      */
     public function index()
     {
-        return view('admin.friendlink.index');
+        $data = DB::table('friendlink')->paginate(5);
+        
+        return view('admin.friendlink.index',['data'=>$data]);
     }
 
     /**
@@ -24,7 +27,6 @@ class FriendlinkController extends Controller
      */
     public function create()
     {
-
         return view('admin.friendlink.add');
     }
 
@@ -36,7 +38,17 @@ class FriendlinkController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //  接受数据
+        $res = $request->except('_token');
+
+        try{
+            $data = DB::table('friendlink')->insert($res);
+            if($data){
+                echo "<script>alert('添加成功');window.location.href='/admin/friendlink'</script>";
+            }
+        }catch(\Exception $e){
+            echo "<script>alert('添加失败');window.location.href='{$_SERVER['HTTP_REFERER']}'</script>";
+        }
     }
 
     /**
@@ -58,7 +70,9 @@ class FriendlinkController extends Controller
      */
     public function edit($id)
     {
-        //
+        $res = DB::table('friendlink')->where('fid',$id)->get();
+        // dd($res);
+        return view('admin.friendlink.edit',['res'=>$res]);
     }
 
     /**
@@ -70,7 +84,16 @@ class FriendlinkController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $res = $request->except('_token','_method');
+
+        try{
+            $data = DB::table('friendlink')->where('fid',$id)->update($res);
+            if($data){
+                echo "<script>alert('修改成功');window.location.href='/admin/friendlink'</script>";
+            }
+        }catch(\Exception $e){
+            echo "<script>alert('修改失败');window.location.href='{$_SERVER['HTTP_REFERER']}'</script>";
+        }
     }
 
     /**
@@ -81,6 +104,14 @@ class FriendlinkController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $res = DB::table('friendlink')->where('fid',$id)->delete();
+
+            if($res){
+                echo "<script>alert('删除成功');window.location.href='/admin/friendlink'</script>";
+            }
+        }catch(\Exception $e){
+            echo "<script>alert('删除失败');window.location.href='{$_SERVER['HTTP_REFERER']}'</script>";
+        }
     }
 }

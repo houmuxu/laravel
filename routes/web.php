@@ -29,6 +29,8 @@ Route::group([],function(){
 
 	//商品管理 hou
 	Route::resource('/admin/goods','admin\GoodsController');
+	//轮播图管理 hou
+	Route::resource('/admin/lunbo','admin\LunboController');
 
 	// 类别管理  zhang
 	Route::resource('/admin/cate', 'admin\CateController');

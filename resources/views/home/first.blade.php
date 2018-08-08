@@ -152,7 +152,7 @@
 																	<dl class="dl-sort">
 																		<dt><span title="{{$vv->cname}}"><a href="/home/goodslist/{{$vv->cid}}">{{$vv->cname}}</a></span></dt>
 																		@foreach($vv->sub as $kkk=>$vvv)
-																		<dd><a title="{{$vvv->cname}}" href="/home/goodsshow/"><span>{{$vvv->goodss}}</span></a></dd>
+																		<dd><a title="{{$vvv->cname}}" href="/home/goodsshow/{{$vvv->goodss[0]->gid}}"><span>{{$vvv->cname}}</span></a></dd>
 																		@endforeach
 																		
 																	</dl>
@@ -228,7 +228,7 @@
 
 					<!--走马灯 -->
 
-					<!-- <div class="marqueen">
+					<div class="marqueen">
 						<span class="marqueen-title">商城头条</span>
 						<div class="demo">
 
@@ -274,7 +274,7 @@
                         <div class="advTip"><img src="/home/images/advTip.jpg"/></div>
 						</div>
 					</div>
-					<div class="clear"></div> -->
+					<div class="clear"></div>
 				</div>
 				<script type="text/javascript">
 					if ($(window).width() < 640) {
@@ -403,20 +403,22 @@
 							<div class="floor-subtitle"><h3>每一个{{$v->cname}}都有一个故事</h3></div>
 							<div class="today-brands " style="right:0px ;top:13px;">
 								|@foreach($v->sub as $kk=>$vv)
-								<a href="# ">{{$vv->cname}}</a>|
+								<a href="/home/goodslist/{{$vv->cid}}">{{$vv->cname}}</a>|
 								@endforeach
 
 							</div>
 
 						</div>
 					</div>
-
+				<!-- //首页商品列表 -->
 					<div class="am-g am-g-fixed floodSix ">				
 						<div class="am-u-sm-5 am-u-md-3 text-one list">
 							<div class="word">
 							<img src="/home/first/slogo.png" style=" position: relative;left: -11px;top: -135px;width: 200px">
 							</div>							
-							<a href="# ">
+							<a href="/home/goodsshow/<?php
+											echo $v->sub[0]->sub[0]->goodss[0]->gid
+										?>">
 								<img src="<?php
 											echo $v->sub[0]->sub[0]->goodss[0]->goodspics[0]->gpic;
 										?>" />
@@ -442,14 +444,23 @@
 							
 								<div class="outer-con ">
 									<div class="title ">
-										雪之恋和风大福
+										<?php
+											echo $v->sub[0]->sub[1]->cname;
+										?>
 									</div>
 									<div class="sub-title ">
-										¥13.8
+										<?php
+											echo $v->sub[0]->sub[1]->goodss[0]->price
+										?>
 									</div>
 									
 								</div>
-								<a href="# "><img src="/home/images/act1.png" /></a>						
+								<a href="/home/goodsshow/<?php
+											echo $v->sub[0]->sub[1]->goodss[0]->gid
+										?> ">
+										<img src="<?php
+											echo $v->sub[0]->sub[1]->goodss[0]->goodspics[0]->gpic;
+										?>" /></a>						
 						</div>
 
 						<li>
@@ -457,14 +468,20 @@
 							<div class="boxLi"></div>
 							<div class="outer-con ">
 								<div class="title ">
-									小优布丁
+									<?php
+											echo $v->sub[0]->sub[2]->cname;
+									?>
 								</div>								
 								<div class="sub-title ">
-									¥4.8
+									<?php
+											echo $v->sub[0]->sub[2]->goodss[0]->price
+									?>
 								</div>
 								
 							</div>
-							<a href="# "><img src="/home/images/1.jpg " /></a>
+							<a href="/home/goodsshow/<?php echo $v->sub[0]->sub[2]->goodss[0]->gid?>">
+							<img src="<?php echo $v->sub[0]->sub[2]->goodss[0]->goodspics[0]->gpic;?> "/>
+							</a>
 						</div>
 						</li>
 						<li>
@@ -472,14 +489,20 @@
 							<div class="boxLi"></div>
 							<div class="outer-con ">
 								<div class="title ">
-									小优布丁
+									<?php
+											echo $v->sub[0]->sub[3]->cname;
+									?>
 								</div>
 								<div class="sub-title ">
-									¥4.8
+									<?php
+											echo $v->sub[0]->sub[3]->goodss[0]->price
+									?>
 								</div>
 								
 							</div>
-							<a href="# "><img src="/home/images/2.jpg " /></a>
+							<a href="/home/goodsshow/<?php echo $v->sub[0]->sub[3]->goodss[0]->gid?>">
+								<img src="<?php echo $v->sub[0]->sub[3]->goodss[0]->goodspics[0]->gpic;?> "/>
+							</a>
 						</div>
 						</li>
 						<li>
@@ -487,14 +510,20 @@
 							<div class="boxLi"></div>
 							<div class="outer-con ">
 								<div class="title ">
-									小优布丁
+									<?php
+											echo $v->sub[0]->sub[4]->cname;
+									?>
 								</div>								
 								<div class="sub-title ">
-									¥4.8
+									<?php
+											echo $v->sub[0]->sub[4]->goodss[0]->price
+									?>
 								</div>
 								
 							</div>
-							<a href="# "><img src="/home/images/5.jpg" /></a>
+							<a href="/home/goodsshow/<?php echo $v->sub[0]->sub[4]->goodss[0]->gid?>">
+								<img src="<?php echo $v->sub[0]->sub[4]->goodss[0]->goodspics[0]->gpic;?> "/>
+							</a>
 						</div>	
 						</li>
 						<li>
@@ -502,14 +531,20 @@
 							<div class="boxLi"></div>
 							<div class="outer-con ">
 								<div class="title ">
-									小优布丁
+									<?php
+											echo $v->sub[0]->sub[5]->cname;
+									?>
 								</div>
 								<div class="sub-title ">
-									¥4.8
+									<?php
+											echo $v->sub[0]->sub[5]->goodss[0]->price
+									?>
 								</div>
 								
 							</div>
-							<a href="# "><img src="/home/images/3.jpg" /></a>
+							<a href="/home/goodsshow/<?php echo $v->sub[0]->sub[5]->goodss[0]->gid?>">
+								<img src="<?php echo $v->sub[0]->sub[5]->goodss[0]->goodspics[0]->gpic;?> " />
+							</a>
 						</div>	
 						</li>
 						<li>
@@ -517,14 +552,18 @@
 							<div class="boxLi"></div>
 							<div class="outer-con ">
 								<div class="title ">
-									小优布丁
+									<?php
+											echo $v->sub[0]->sub[6]->cname;
+									?>
 								</div>
 								<div class="sub-title ">
-									¥4.8
+									<?php
+											echo $v->sub[0]->sub[6]->goodss[0]->price
+									?>
 								</div>
 								
 							</div>
-							<a href="# "><img src="/home/images/4.jpg" /></a>
+							<a href="/home/goodsshow/<?php echo $v->sub[0]->sub[6]->goodss[0]->gid?>"><img src="<?php echo $v->sub[0]->sub[6]->goodss[0]->goodspics[0]->gpic;?> " /></a>
 						</div>	
 						</li>						
 					</div>

@@ -42,9 +42,6 @@
               <div class="layui-input-inline">
                   <img src="{{$res->det_goodspic[0]->gpic}}">
               </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>不可更改
-              </div>
           </div>
 
           <div class="layui-form-item">

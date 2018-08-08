@@ -120,18 +120,23 @@
               <button  class="layui-btn" onclick="conf()" lay-filter="add" lay-submit="">
                   确认修改
               </button>
+              <a href="/admin/orders" class="layui-btn" lay-filter="add" lay-submit="">
+                  返回
+              </a>
           </div>  
       </form>
     </div>
 
     <script type="text/javascript">
-      function conf() { 
-        var msg = "您确定要修改吗？\r\n请确认！"; 
-        if (confirm(msg)==true){ 
-          return true; 
-        }else{ 
-          return false; 
-        } 
+      function conf() 
+      { 
+        var str = confirm('确定修改么？')
+        if(str){
+          $('button').removeAttr('type','button');
+        } else {
+          $('button').attr('type','button');
+        }
+        
       } 
     </script>
    

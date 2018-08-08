@@ -2545,7 +2545,7 @@ fieldset[disabled] .am-form input[type="search"],
 fieldset[disabled] .am-form input[type="tel"],
 fieldset[disabled] .am-form input[type="color"],
 fieldset[disabled] .am-form-field {
-  cursor: not-allowed;
+  cursor:pointer;
   background-color: #eeeeee;
 }
 .am-form select.am-radius,

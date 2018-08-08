@@ -99,6 +99,18 @@ Route::group([],function(){
 	//  个人中心页面
 	Route::any('/home/self','home\SelfController@index');   //  个人中心页面
 
+	//结算页
+	Route::any('/home/balance','home\BalanceController@index');
+	//添加收货地址
+	Route::any('/home/balances','home\BalanceController@create');
+	Route::any('/home/balance_store','home\BalanceController@store');
+	Route::any('/home/balance_edit/{id}','home\BalanceController@edit');
+	Route::any('/home/balance_update/{id}','home\BalanceController@update');
+	Route::any('/home/balance_del','home\BalanceController@delete');
+
+
+
+
 
 
 

@@ -14,7 +14,7 @@
 		<link href="/home/css/hmstyle.css" rel="stylesheet" type="text/css" />
 		<script src="/home/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
 		<script src="/home/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
-		
+
 
 	</head>
 

@@ -19,13 +19,13 @@
   
   <body>
     <div class="x-body">
-        <form class="layui-form" action="/admin/friendlink" method="post">
+        <form class="layui-form" action="/admin/friendlink/{{$res[0]->fid}}" method="post">
           <div class="layui-form-item">
               <label for="username" class="layui-form-label">
                   <span class="x-red">*</span>链接名
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="username" name="fname" required="" lay-verify="required"
+                  <input type="text" id="username" name="fname" value="{{$res[0]->fname}}" required="" lay-verify="required"
                   autocomplete="off" class="layui-input">
               </div>
               <div class="layui-form-mid layui-word-aux">
@@ -37,7 +37,7 @@
                   <span class="x-red">*</span>链接地址
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="username" name="furl" required="" lay-verify="required"
+                  <input type="text" id="username" name="furl" value="{{$res[0]->furl}}" required="" lay-verify="required"
                   autocomplete="off" class="layui-input">
               </div>
               <div class="layui-form-mid layui-word-aux">
@@ -48,8 +48,9 @@
               <label for="L_repass" class="layui-form-label">
               </label>
               {{csrf_field()}}
+              {{method_field('PUT')}}
               <button  class="layui-btn" lay-filter="add" lay-submit="">
-                  增加
+                修改
               </button>
           </div>
       </form>

@@ -1,7 +1,9 @@
 @extends('common.home')
 @section('title', $title)
 @section('content')
-			<!-- </div> -->
+			
+
+
 			<div class="banner">
                       <!--轮播 -->
 						<div class="am-slider am-slider-default scoll" data-am-flexslider id="demo-slider-0">
@@ -506,4 +508,6 @@
 					<div class="clear "></div>
             </div>
         @endforeach
+
            		@endsection
+

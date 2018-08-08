@@ -75,6 +75,18 @@ Route::group([],function(){
 	Route::any('/home/cart/del','home\CartController@del');
 
 
+	//结算页
+	Route::any('/home/balance','home\BalanceController@index');
+	//添加收货地址
+	Route::any('/home/balances','home\BalanceController@create');
+	Route::any('/home/balance_store','home\BalanceController@store');
+	Route::any('/home/balance_edit/{id}','home\BalanceController@edit');
+	Route::any('/home/balance_update/{id}','home\BalanceController@update');
+	Route::any('/home/balance_del','home\BalanceController@delete');
+
+
+
+
 
 
 

@@ -422,9 +422,7 @@
 										零食大礼包开抢啦
 									</div>
 									<div class="sub-title ">
-										<?php
-											echo $v->sub[0]->sub[0]->cname;
-										?>
+										
 									</div>
 								</div>
 							</a>

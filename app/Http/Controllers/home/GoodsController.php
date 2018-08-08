@@ -8,6 +8,7 @@ use App\Model\Admin\Cate;
 use App\Model\Admin\Goods;
 use App\Model\Admin\User;
 use Mail;
+use Cache;
 
 class GoodsController extends Controller
 {
@@ -23,8 +24,8 @@ class GoodsController extends Controller
 
         	
         		$goods = Goods::whereIn('cid',$arr_cid)->paginate(8);
-        	
-
+        	   // Cache::('goods',$goods,100);
+               Cache::forever('goods',$goods);
 
         // if($gname=$request->only('gname')){
         //     $condition[] = ['gname','like',"%$gname%"];
@@ -32,7 +33,7 @@ class GoodsController extends Controller
         	// var_dump($goods);
       
 
-       return view('home/goods/list',['goods'=>$goods]);
+       return view('home/goods/list',['title'=>'商品列表','goods'=>$goods]);
     }
 
     public function show($id)

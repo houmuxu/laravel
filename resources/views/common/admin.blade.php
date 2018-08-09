@@ -19,7 +19,7 @@
 <body>
     <!-- 顶部开始 -->
     <div class="container">
-        <div class="logo"><a href="/admin/first">四只松鼠后台管理</a></div>
+        <div class="logo"><a href="/admin/first">三只松鼠后台管理</a></div>
         <div class="left_open">
             <i title="展开左侧栏" class="iconfont">&#xe699;</i>
         </div>
@@ -84,7 +84,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="order-list.html">
+                        <a _href="/admin/orders">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>订单列表</cite>
                         </a>
@@ -202,6 +202,33 @@
                 </ul>
             </li>
             <!-- 友情链接管理结束 -->
+
+            <!-- 轮播图管理开始 -->
+             <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>轮播图管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="/admin/lunbo">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>轮播图列表</cite>
+                        </a>
+                    </li >
+                </ul>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="/admin/lunbo/create">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>添加轮播图</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
+
+            <!-- 轮播图管理结束 -->
 
             <li>
                 <a href="javascript:;">

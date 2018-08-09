@@ -29,12 +29,29 @@ Route::group([],function(){
 
 	//商品管理 hou
 	Route::resource('/admin/goods','admin\GoodsController');
+	//轮播图管理 hou
+	Route::resource('/admin/lunbo','admin\LunboController');
 
 	// 类别管理  zhang
 	Route::resource('/admin/cate', 'admin\CateController');
 
+
+
+	//后台订单---资源路由---(yang)
+	Route::resource('/admin/orders','admin\OrdersController');
+	//发货ajax
+	Route::any('/send','admin\OrdersajaxController@send');
+	//订单详情
+	Route::any('/admin/details/index/{oid}','admin\DetailsController@show');
+	//订单详情修改页
+	Route::any('/admin/details/edit/{id}','admin\DetailsController@edit');
+	Route::any('/admin/details/update/{id}','admin\DetailsController@update');
+
+
+
 	//  友情链接   zhang
 	Route::resource('/admin/friendlink', 'admin\FriendlinkController');
+
 
 
 
@@ -66,18 +83,35 @@ Route::group([],function(){
 	//商品管理 hou
 	Route::any('/home/goodslist/{id}','home\GoodsController@index');//商品列表页
 	Route::any('/home/goodsshow/{id}','home\GoodsController@show');//商品详情页
-	//购物车 hou
+	//个人中心邮箱验证hou
+	Route::any('/home/goods/email','home\GoodsController@email');//换绑email页面
+	Route::any('/home/goods/useremail','home\GoodsController@useremail');//验证email
+	Route::any('/home/goods/emailjihuo','home\GoodsController@emailjihuo');//激活新的email
+
+	//购物车 
 	Route::any('/home/cartc','home\CartController@store');
 
 	//  购物车页面  zhang
 	Route::any('/home/cart','home\CartController@index');    // 购物车页面
 	Route::any('/home/cart/del','home\CartController@del');//购物车商品删除
-	Route::any('/home/cart/incre','home\CartController@incre');//商品数量加1
-	Route::any('/home/cart/decre','home\CartController@decre');//商品数量减1
+	Route::any('/home/ajaxcart','home\CartController@ajaxcart');
+	
 
 
 	//  个人中心页面
 	Route::any('/home/self','home\SelfController@index');   //  个人中心页面
+
+	//结算页
+	Route::any('/home/balance','home\BalanceController@index');
+	//添加收货地址
+	Route::any('/home/balances','home\BalanceController@create');
+	Route::any('/home/balance_store','home\BalanceController@store');
+	Route::any('/home/balance_edit/{id}','home\BalanceController@edit');
+	Route::any('/home/balance_update/{id}','home\BalanceController@update');
+	Route::any('/home/balance_del','home\BalanceController@delete');
+
+
+
 
 
 

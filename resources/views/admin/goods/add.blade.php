@@ -79,7 +79,15 @@
                   autocomplete="off" class="layui-input">
               </div>
           </div>
-
+          <div class="layui-form-item">
+              <label for="username" class="layui-form-label">
+                  <span class="x-red"></span>商品口味
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="username" name="goodsattr" 
+                  autocomplete="off" class="layui-input">
+              </div>
+          </div>
 
 
 
@@ -221,29 +229,5 @@
 
 
   </body>
-<!--    <script type="text/javascript">
-        function readAsDataURL(){ 
-          var file = document.getElementById("file").files
 
-              //将文件以Data URL形式读入页面 
-              for(i=0;i<file.length;i++){
-              var reader = new FileReader();
-
-              
-                 reader.readAsDataURL(file[i]); 
-                reader.onload = function(e){ 
-                  console.log(e.currentTarget.result)
-                  
-                  var results =document.getElementById("result"); 
-                  
-                  //显示文件 
-                  results.innerHTML='<img src="' + e.currentTarget.result +'"/>'; 
-              } 
-
-
-          
-          }
-     
-        }
-</script> -->
 </html>

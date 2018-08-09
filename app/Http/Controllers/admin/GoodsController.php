@@ -41,6 +41,7 @@ class GoodsController extends Controller
     public function store(Request $request)
     {	
     	$res = $request->except('_token','gpic');
+       
         $res['uptime'] = time();
 
     	try{

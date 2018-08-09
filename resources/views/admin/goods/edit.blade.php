@@ -90,6 +90,15 @@
                   autocomplete="off" class="layui-input" value="{{$data->price}}">
               </div>
           </div>
+          <div class="layui-form-item">
+              <label for="username" class="layui-form-label">
+                  <span class="x-red">*</span>商品口味
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="username" name="goodsattr"
+                  autocomplete="off" class="layui-input" value="{{$data->goodsattr}}">
+              </div>
+          </div>
           <label for="phone" class="layui-form-label" style="width:100px">
                   <span class="x-red">*</span>商品图片
               </label>

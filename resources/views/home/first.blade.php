@@ -1,5 +1,9 @@
 @extends('common.home')
+@section('title', $title)
 @section('content')
+			
+
+
 			<div class="banner">
                       <!--轮播 -->
 						<div class="am-slider am-slider-default scoll" data-am-flexslider id="demo-slider-0">
@@ -50,22 +54,18 @@
 			</div>
 			<div class="shopNav">
 				<div class="slideall">
-
+					
 					   <div class="long-title"><span class="all-goods">全部分类</span></div>
 					   <div class="nav-cont">
 							<ul>
-								<li class="index"><a href="#">首页</a></li>
+								<li class="index"><a href="/">首页</a></li>
                                 <li class="qc"><a href="#">闪购</a></li>
                                 <li class="qc"><a href="#">限时抢</a></li>
                                 <li class="qc"><a href="#">团购</a></li>
                                 <li class="qc last"><a href="#">大包装</a></li>
 							</ul>
-						   <!--  <div class="nav-extra">
-						    	<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
-						    	<i class="am-icon-angle-right" style="padding-left: 10px;"></i>
-						    </div> -->
 						</div>
-		        				
+		        		
 						<!--侧边导航 -->
 						<div id="nav" class="navfull">
 							<div class="area clearfix">
@@ -88,7 +88,7 @@
 																	<dl class="dl-sort">
 																		<dt><span title="{{$vv->cname}}"><a href="/home/goodslist/{{$vv->cid}}">{{$vv->cname}}</a></span></dt>
 																		@foreach($vv->sub as $kkk=>$vvv)
-																		<dd><a title="蒸蛋糕" href="#"><span>{{$vvv->cname}}</span></a></dd>
+																		<dd><a title="{{$vvv->cname}}" href="/home/goodsshow/{{$vvv->goodss[0]->gid}}"><span>{{$vvv->cname}}</span></a></dd>
 																		@endforeach
 																		
 																	</dl>
@@ -97,12 +97,12 @@
 																</div>
 																<div class="brand-side">
 																	<dl class="dl-sort"><dt><span>实力商家</span></dt>
-																		<dd><a rel="nofollow" title="呵官方旗舰店" target="_blank" href="#" rel="nofollow"><span  class="red" >呵官方旗舰店</span></a></dd>
-																		<dd><a rel="nofollow" title="格瑞旗舰店" target="_blank" href="#" rel="nofollow"><span >格瑞旗舰店</span></a></dd>
-																		<dd><a rel="nofollow" title="飞彦大厂直供" target="_blank" href="#" rel="nofollow"><span  class="red" >飞彦大厂直供</span></a></dd>
-																		<dd><a rel="nofollow" title="红e·艾菲妮" target="_blank" href="#" rel="nofollow"><span >红e·艾菲妮</span></a></dd>
-																		<dd><a rel="nofollow" title="本真旗舰店" target="_blank" href="#" rel="nofollow"><span  class="red" >本真旗舰店</span></a></dd>
-																		<dd><a rel="nofollow" title="杭派女装批发网" target="_blank" href="#" rel="nofollow"><span  class="red" >杭派女装批发网</span></a></dd>
+																		<dd><a rel="nofollow" title="三只松鼠官方网站" target="_blank" href="http://www.3songshu.com/" rel="nofollow"><span  class="red" >三只松鼠官方网站</span></a></dd>
+																		<dd><a rel="nofollow" title="百草味旗舰店" target="_blank" href="https://baicaowei.tmall.com/search.htm" rel="nofollow"><span >百草味旗舰店</span></a></dd>
+																		<dd><a rel="nofollow" title="良品铺子旗舰店" target="_blank" href="https://liangpinpuzi.tmall.com/view_shop.htm?spm=a220m.1000858.0.0.22797422F51m1O&shop_id=63552270&rn=249bd7f34d536a1d29b12f6864bb2f0b" rel="nofollow"><span  class="red" >良品铺子旗舰店</span></a></dd>
+																		<dd><a rel="nofollow" title="熊孩子食品旗舰店" target="_blank" href="https://xionghaizisp.tmall.com/search.htm?spm=a220m.1000858.1000725.174.5ab7188ephfMb8&user_number_id=1872810511&rn=9b68ae43b9618002758c2750bf5d72a3&keyword=%C1%E3%CA%B3" rel="nofollow"><span >熊孩子食品旗舰店</span></a></dd>
+																		<dd><a rel="nofollow" title="百事集团官方旗舰店" target="_blank" href="https://pepsico.tmall.com/search.htm?spm=a220m.1000858.1000725.231.5ab7188ephfMb8&user_number_id=1893751150&rn=9b68ae43b9618002758c2750bf5d72a3&keyword=%C1%E3%CA%B3" rel="nofollow"><span  class="red" >百事集团官方旗舰店</span></a></dd>
+																		<dd><a rel="nofollow" title="天猫超市" target="_blank" href="https://chaoshi.tmall.com/?spm=a220m.1000858.1000725.13.5ab7188ephfMb8&user_number_id=725677994&rn=9b68ae43b9618002758c2750bf5d72a3&keyword=%C1%E3%CA%B3" rel="nofollow"><span  class="red" >天猫超市</span></a></dd>
 																	</dl>
 																</div>
 															</div>
@@ -164,7 +164,7 @@
 
 					<!--走马灯 -->
 
-					<!-- <div class="marqueen">
+				<!-- 	<div class="marqueen">
 						<span class="marqueen-title">商城头条</span>
 						<div class="demo">
 
@@ -210,8 +210,8 @@
                         <div class="advTip"><img src="/home/images/advTip.jpg"/></div>
 						</div>
 					</div>
-					<div class="clear"></div> -->
-				</div>
+					<div class="clear"></div>
+				</div> -->
 				<script type="text/javascript">
 					if ($(window).width() < 640) {
 						function autoScroll(obj) {
@@ -229,7 +229,7 @@
 					}
 				</script>
 			</div>
-			<div class="shopMainbg">
+			<div class="shopMainbg" style="margin-top: 30px">
 				<div class="shopMain" id="shopmain">
 
 					<!--今日推荐 -->
@@ -237,30 +237,30 @@
 					<div class="am-g am-g-fixed recommendation">
 						<div class="am-u-sm-4 am-u-lg-3 " style="margin-left: 40px;width:200px">
 							<div class="recommendationMain one" style="width:200px">
-								<a href=""><img src="/home/first/a1.png " style="width:200px;"></img></a>
+								<a href="/home/goodslist/5"><img src="/home/first/a1.png " style="width:200px;"></img></a>
 							</div>
 						</div>
 
 						<div class="am-u-sm-4 am-u-lg-3 " style="margin-left: 40px;width:200px">
 							<div class="recommendationMain one" style="width:200px">
-								<a href=""><img src="/home/first/a2.png " style="width:200px;"></img></a>
+								<a href="/home/goodslist/7"><img src="/home/first/a2.png " style="width:200px;"></img></a>
 							</div>
 						</div>	
 
 						<div class="am-u-sm-4 am-u-lg-3 " style="margin-left: 40px;width:200px">
 							<div class="recommendationMain one" style="width:200px">
-								<a href=""><img src="/home/first/a3.png " style="width:200px;"></img></a>
+								<a href="/home/goodslist/3"><img src="/home/first/a3.png " style="width:200px;"></img></a>
 							</div>
 						</div>	
 
 						<div class="am-u-sm-4 am-u-lg-3 " style="margin-left: 40px;width:200px">
 							<div class="recommendationMain one" style="width:200px">
-								<a href=""><img src="/home/first/a4.png " style="width:200px;"></img></a>
+								<a href="/home/goodslist/4"><img src="/home/first/a4.png " style="width:200px;"></img></a>
 							</div>
 						</div>	
 						<div class="am-u-sm-4 am-u-lg-3 " style="margin-left: 40px;width:200px">
 							<div class="recommendationMain one" style="width:200px">
-								<a href=""><img src="/home/first/a5.png " style="width:200px;"></img></a>
+								<a href="/home/goodslist/10"><img src="/home/first/a5.png " style="width:200px;"></img></a>
 							</div>
 						</div>	
 
@@ -339,27 +339,37 @@
 							<div class="floor-subtitle"><h3>每一个{{$v->cname}}都有一个故事</h3></div>
 							<div class="today-brands " style="right:0px ;top:13px;">
 								|@foreach($v->sub as $kk=>$vv)
-								<a href="# ">{{$vv->cname}}</a>|
+								<a href="/home/goodslist/{{$vv->cid}}">{{$vv->cname}}</a>|
 								@endforeach
 
 							</div>
 
 						</div>
 					</div>
-					
+				<!-- //首页商品列表 -->
 					<div class="am-g am-g-fixed floodSix ">				
 						<div class="am-u-sm-5 am-u-md-3 text-one list">
 							<div class="word">
 							<img src="/home/first/slogo.png" style=" position: relative;left: -11px;top: -135px;width: 200px">
 							</div>							
-							<a href="# ">
-								<img src="/home/images/5.jpg" />
+							<a href="/home/goodsshow/<?php
+											echo $v->sub[0]->sub[0]->goodss[0]->gid
+										?>">
+								<img src="<?php
+											echo $v->sub[0]->sub[0]->goodss[0]->goodspics[0]->gpic;
+										?>" />
 								<div class="outer-con ">
 									<div class="title ">
-										零食大礼包开抢啦
-									</div>
-									<div class="sub-title ">
-										
+										<?php
+											echo $v->sub[0]->sub[0]->cname;
+										?>									
+									</div>								
+									<div class="sub-title ">						
+
+										<?php
+											echo '超级好吃的'.$v->sub[0]->sub[0]->cname;
+										?>
+
 									</div>
 								</div>
 							</a>
@@ -367,17 +377,27 @@
 						</div>
 						
 						<div class="am-u-sm-7 am-u-md-5 am-u-lg-2 text-two big">
+
 							
 								<div class="outer-con ">
 									<div class="title ">
-										雪之恋和风大福
+										<?php
+											echo $v->sub[0]->sub[1]->cname;
+										?>
 									</div>
 									<div class="sub-title ">
-										¥13.8
+										<?php
+											echo $v->sub[0]->sub[1]->goodss[0]->price
+										?>
 									</div>
 									
 								</div>
-								<a href="# "><img src="/home/images/act1.png" /></a>						
+								<a href="/home/goodsshow/<?php
+											echo $v->sub[0]->sub[1]->goodss[0]->gid
+										?> ">
+										<img src="<?php
+											echo $v->sub[0]->sub[1]->goodss[0]->goodspics[0]->gpic;
+										?>" /></a>						
 						</div>
 
 						<li>
@@ -385,14 +405,20 @@
 							<div class="boxLi"></div>
 							<div class="outer-con ">
 								<div class="title ">
-									小优布丁
+									<?php
+											echo $v->sub[0]->sub[2]->cname;
+									?>
 								</div>								
 								<div class="sub-title ">
-									¥4.8
+									<?php
+											echo $v->sub[0]->sub[2]->goodss[0]->price
+									?>
 								</div>
 								
 							</div>
-							<a href="# "><img src="/home/images/1.jpg " /></a>
+							<a href="/home/goodsshow/<?php echo $v->sub[0]->sub[2]->goodss[0]->gid?>">
+							<img src="<?php echo $v->sub[0]->sub[2]->goodss[0]->goodspics[0]->gpic;?> "/>
+							</a>
 						</div>
 						</li>
 						<li>
@@ -400,14 +426,20 @@
 							<div class="boxLi"></div>
 							<div class="outer-con ">
 								<div class="title ">
-									小优布丁
+									<?php
+											echo $v->sub[0]->sub[3]->cname;
+									?>
 								</div>
 								<div class="sub-title ">
-									¥4.8
+									<?php
+											echo $v->sub[0]->sub[3]->goodss[0]->price
+									?>
 								</div>
 								
 							</div>
-							<a href="# "><img src="/home/images/2.jpg " /></a>
+							<a href="/home/goodsshow/<?php echo $v->sub[0]->sub[3]->goodss[0]->gid?>">
+								<img src="<?php echo $v->sub[0]->sub[3]->goodss[0]->goodspics[0]->gpic;?> "/>
+							</a>
 						</div>
 						</li>
 						<li>
@@ -415,14 +447,20 @@
 							<div class="boxLi"></div>
 							<div class="outer-con ">
 								<div class="title ">
-									小优布丁
+									<?php
+											echo $v->sub[0]->sub[4]->cname;
+									?>
 								</div>								
 								<div class="sub-title ">
-									¥4.8
+									<?php
+											echo $v->sub[0]->sub[4]->goodss[0]->price
+									?>
 								</div>
 								
 							</div>
-							<a href="# "><img src="/home/images/5.jpg" /></a>
+							<a href="/home/goodsshow/<?php echo $v->sub[0]->sub[4]->goodss[0]->gid?>">
+								<img src="<?php echo $v->sub[0]->sub[4]->goodss[0]->goodspics[0]->gpic;?> "/>
+							</a>
 						</div>	
 						</li>
 						<li>
@@ -430,14 +468,20 @@
 							<div class="boxLi"></div>
 							<div class="outer-con ">
 								<div class="title ">
-									小优布丁
+									<?php
+											echo $v->sub[0]->sub[5]->cname;
+									?>
 								</div>
 								<div class="sub-title ">
-									¥4.8
+									<?php
+											echo $v->sub[0]->sub[5]->goodss[0]->price
+									?>
 								</div>
 								
 							</div>
-							<a href="# "><img src="/home/images/3.jpg" /></a>
+							<a href="/home/goodsshow/<?php echo $v->sub[0]->sub[5]->goodss[0]->gid?>">
+								<img src="<?php echo $v->sub[0]->sub[5]->goodss[0]->goodspics[0]->gpic;?> " />
+							</a>
 						</div>	
 						</li>
 						<li>
@@ -445,14 +489,18 @@
 							<div class="boxLi"></div>
 							<div class="outer-con ">
 								<div class="title ">
-									小优布丁
+									<?php
+											echo $v->sub[0]->sub[6]->cname;
+									?>
 								</div>
 								<div class="sub-title ">
-									¥4.8
+									<?php
+											echo $v->sub[0]->sub[6]->goodss[0]->price
+									?>
 								</div>
 								
 							</div>
-							<a href="# "><img src="/home/images/4.jpg" /></a>
+							<a href="/home/goodsshow/<?php echo $v->sub[0]->sub[6]->goodss[0]->gid?>"><img src="<?php echo $v->sub[0]->sub[6]->goodss[0]->goodspics[0]->gpic;?> " /></a>
 						</div>	
 						</li>						
 					</div>
@@ -460,5 +508,6 @@
 					<div class="clear "></div>
             </div>
         @endforeach
-        @endsection 			
-				
+
+           		@endsection
+

@@ -30,7 +30,10 @@ Route::group([],function(){
 	//商品管理 hou
 	Route::resource('/admin/goods','admin\GoodsController');
 	//轮播图管理 hou
-	Route::resource('/admin/lunbo','admin\LunboController');
+	Route::any('/admin/lunbo/create','admin\LunboController@create');//添加轮播页面
+	Route::any('/admin/lunbo/store','admin\LunboController@store');//添加轮播页面
+	Route::any('/admin/lunbo/index','admin\LunboController@index');//轮播列表
+	Route::any('/admin/lunbo/status','admin\LunboController@status');//轮播状态管理
 
 	// 类别管理  zhang
 	Route::resource('/admin/cate', 'admin\CateController');

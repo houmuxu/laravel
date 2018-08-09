@@ -513,7 +513,7 @@
                                 		arr[1] = num;
                                         arr[2] = goodsattr;
                                 		$.get('/home/cartc',{res:arr},function(data){
-                                	
+                                	           console.log(data);
                                 		});
 
                                 		return false;

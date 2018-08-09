@@ -1410,7 +1410,6 @@
                 </div>
             </div>
             <!--菜单 -->
-        @include('common.homeright')
            
     </body>
     	<script type="text/javascript">

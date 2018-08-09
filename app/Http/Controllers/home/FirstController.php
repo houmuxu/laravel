@@ -17,10 +17,9 @@ class FirstController extends Controller
 	{
 		$data = Cate::getTreeCates();
 
-<<<<<<< HEAD
 
 
-		Cache::forever('data',$data);
+
 		$links = DB::table('friendlink')->get();
 
 
@@ -30,16 +29,14 @@ class FirstController extends Controller
 			$arr[] = $value->sub[0]->sub;
 		}
 	
-    	return view('home/first',['data'=>$data,'arr'=>$arr,'title'=>'首页-三只松鼠旗舰店']);
-=======
-		Cache::forever('data',$data);
+
 		$links = DB::table('friendlink')->get();
 
 		
-    	return view('home/first',['data'=>$data,'title'=>'首页-三只松鼠旗舰店','links'=>$links]);
+    	return view('home/first',['data'=>$data,'arr'=>$arr,'title'=>'首页-三只松鼠旗舰店','links'=>$links]);
 
 
->>>>>>> origin/zhang
+
 
 	}
 

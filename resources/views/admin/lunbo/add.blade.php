@@ -24,7 +24,11 @@
         
       @endif
     <div class="x-body">
+<<<<<<< HEAD
         <form class="layui-form" action="/admin/lunbo/store" enctype ="multipart/form-data" method="post">
+=======
+        <form class="layui-form" action="/admin/lunbo" enctype ="multipart/form-data" method="post">
+>>>>>>> origin/zhang
           {{csrf_field()}}
 
          

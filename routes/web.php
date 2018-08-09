@@ -30,10 +30,14 @@ Route::group([],function(){
 	//商品管理 hou
 	Route::resource('/admin/goods','admin\GoodsController');
 	//轮播图管理 hou
+<<<<<<< HEAD
 	Route::any('/admin/lunbo/create','admin\LunboController@create');//添加轮播页面
 	Route::any('/admin/lunbo/store','admin\LunboController@store');//添加轮播页面
 	Route::any('/admin/lunbo/index','admin\LunboController@index');//轮播列表
 	Route::any('/admin/lunbo/status','admin\LunboController@status');//轮播状态管理
+=======
+	Route::resource('/admin/lunbo','admin\LunboController');
+>>>>>>> origin/zhang
 
 	// 类别管理  zhang
 	Route::resource('/admin/cate', 'admin\CateController');
@@ -98,8 +102,8 @@ Route::group([],function(){
 	//  购物车页面  zhang
 	Route::any('/home/cart','home\CartController@index');    // 购物车页面
 	Route::any('/home/cart/del','home\CartController@del');//购物车商品删除
-	Route::any('/home/cart/incre','home\CartController@incre');//商品数量加1
-	Route::any('/home/cart/decre','home\CartController@decre');//商品数量减1
+	Route::any('/home/ajaxcart','home\CartController@ajaxcart');
+	
 
 
 	//  个人中心页面

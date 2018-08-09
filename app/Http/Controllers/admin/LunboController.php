@@ -21,7 +21,7 @@ class LunboController extends Controller
         return view('admin/lunbo/add');
     }
 
- 	public function store(Request $request)
+    public function store(Request $request)
     {
         $res = $request->except('file','_token');
 
@@ -50,16 +50,28 @@ class LunboController extends Controller
 
     public function status(Request $request)
     {
-    	$id = $request->input('id');
-    	$status = Lunbo::where('id',$id)->pluck('status');
-    	$statuss = $status[0];
-    	if($statuss == 1){
-    		$statuss = 2;
-    	} else {
-    		$statuss = 1;
-    	}
-    	$res = Lunbo::where('id',$id)->update(['status'=>$statuss]);
-    	echo $statuss;
+        $id = $request->input('id');
+        $status = Lunbo::where('id',$id)->pluck('status');
+        $statuss = $status[0];
+        if($statuss == 1){
+            $statuss = 2;
+        } else {
+            $statuss = 1;
+        }
+        $res = Lunbo::where('id',$id)->update(['status'=>$statuss]);
+        echo $statuss;
+    }
+
+    public function edit($id)
+    {
+        $data = Lunbo::where('id',$id)->first();
+        return view('admin/lunbo/edit',['data'=>$data]);
+    }
+
+    public function update(Request $request,$id)
+    {
+        $str = 'xxx';
+       return $str;
     }
 
 

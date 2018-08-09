@@ -212,7 +212,11 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
+<<<<<<< HEAD
                         <a _href="/admin/lunbo/index">
+=======
+                        <a _href="/admin/lunbo">
+>>>>>>> origin/zhang
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>轮播图列表</cite>
                         </a>

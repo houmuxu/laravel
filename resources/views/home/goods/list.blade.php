@@ -13,7 +13,10 @@
 		<script type="text/javascript" src="/home/basic/js/jquery-1.7.min.js"></script>
 		<script type="text/javascript" src="/home/js/script.js"></script>
 		
+<<<<<<< HEAD
 		
+=======
+>>>>>>> origin/zhang
 			<b class="line"></b>
            <div class="search">
 			<div class="search-list">
@@ -27,11 +30,26 @@
                                 <li class="qc"><a href="#">团购</a></li>
                                 <li class="qc last"><a href="#">大包装</a></li>
 							</ul>
+<<<<<<< HEAD
 						    
 						</div>
 			
 			</div>
 			
+=======
+						   <!--  <div class="nav-extra">
+						    	<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
+						    	<i class="am-icon-angle-right" style="padding-left: 10px;"></i>
+						    </div> -->
+						    
+						</div>
+			
+
+			</div>
+
+
+				
+>>>>>>> origin/zhang
 					<div class="am-g am-g-fixed">
 						<div class="am-u-sm-12 am-u-md-12">
 	                  	<div class="theme-popover">														
@@ -197,9 +215,12 @@
 
 						</div>
 					</div>
+<<<<<<< HEAD
 		
         
        
         
       
+=======
+>>>>>>> origin/zhang
 			@endsection

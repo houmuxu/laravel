@@ -75,7 +75,7 @@
            <td>{{$v->cid}}</td>
            <td>{{$v->cname}}</td>
            <td>
-           {{getName($v->pid)}}
+            {{getName($v->pid)}}
            </td>
            <td>{{$v->path}}</td>
             <td class="td-manage">

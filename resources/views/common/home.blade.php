@@ -70,8 +70,10 @@
 				<div class="footer ">
 						<div class="footer-hd ">
 							<p>
-								<a href="# ">合作伙伴</a>
+							@foreach($links as $k=>$v)
+								<a href="{{$v->furl}}">{{$v->fname}}</a>
 								<b>|</b>
+							@endforeach
 								<a href="# ">商城首页</a>
 								<b>|</b>
 								<a href="# ">支付宝</a>

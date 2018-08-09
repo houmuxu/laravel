@@ -13,7 +13,7 @@
 		<link href="/home/css/optstyle.css" rel="stylesheet" type="text/css" />
 
 		<script type="text/javascript" src="/home/js/jquery.js"></script>
-
+		<meta name="csrf-token" content="{{ csrf_token() }}"> 
 		<style type="text/css">
 			
 			.ds{
@@ -133,6 +133,8 @@
 
 					<div class="clear"></div>
 
+
+					
 					<tr class="item-list">
 						<div class="bundle  bundle-last ">
 						
@@ -142,7 +144,7 @@
 								<ul class="item-content clearfix">
 									<li class="td td-chk">
 										<div class="cart-checkbox ">
-											<input class="check" id="J_CheckBox_170769542747" name="items[]" value="170769542747" type="checkbox" gid="{{$v->id}}">
+											<input class="check" id="J_CheckBox_170769542747" name="items[]" value="170769542747" type="checkbox" gid="{{$v->id}}" goodsid="{{$v->gid}}" uid="{{$v->uid}}">
 											<label for="J_CheckBox_170769542747"></label>
 										</div>
 									</li>
@@ -150,7 +152,7 @@
 										<div class="item-pic">
 
 											<a href="#" target="_blank" data-title="美康粉黛醉美东方唇膏口红正品 持久保湿滋润防水不掉色护唇彩妆" class="J_MakePoint" data-point="tbcart.8.12">
-												<img src="
+												<img id="img" src="
 												@php
 												$gid = App\Model\Admin\Goodspic::where('gid',$v->gid)->first();
             									echo $gpic = $gid->gpic;
@@ -169,8 +171,6 @@
 									<li class="td td-info">
 										<div class="item-props item-props-can">
 											<span class="sku-line">{{$v->goodsattr}}</span>
-											
-											<span tabindex="0" class="btn-edit-sku theme-login">修改</span>
 											<i class="theme-login am-icon-sort-desc"></i>
 										</div>
 									</li>
@@ -234,7 +234,7 @@
 						<span>全选</span>
 					</div>
 					<div class="operations">
-						<a href="" hidefocus="true" class="deleteAll">删除</a>
+						
 						<a href="#" hidefocus="true" class="J_BatchFav">移入收藏夹</a>
 					</div>
 					<div class="float-bar-right">
@@ -251,19 +251,43 @@
 							<strong class="price">¥<em id="J_Total">0.0</em></strong>
 						</div>
 						<div class="btn-area">
-							<a href="pay.html" id="J_Go" class="submit-btn submit-btn-disabled" aria-label="请注意如果没有选择宝贝，将无法结算">
+							<a href="javascript:void(0)" id="J_Go" class="submit-btn submit-btn-disabled" aria-label="请注意如果没有选择宝贝，将无法结算">
 								<span>结&nbsp;算</span></a>
 						</div>
 					</div>
 
 				</div>
+			</div>
+			
+			
 
-				<div class="footer">
+
+		<!-- 商品删除后的购物车空的页面 -->
+		<div class='cart-empty ds'>
+			<div class="message">
+			    <ul>
+			        <li class="txt">
+			            购物车空空的哦~，去看看心仪的商品吧~
+			        </li>
+			        <li class="mt10">
+			            <a href="/" class="ftx-05">
+			                去购物&gt;
+			            </a>
+			        </li>
+			            
+			    </ul>
+	    	</div>
+		</div>
+
+		<!-- 尾部 -->
+		<div class="footer">
 					<div class="footer-hd">
 						<p>
-							<a href="#">恒望科技</a>
+							@foreach($links as $k=>$v)
+							<a href="{{$v->furl}}">{{$v->fname}}</a>
 							<b>|</b>
-							<a href="#">商城首页</a>
+							@endforeach
+							<a href="/">商城首页</a>
 							<b>|</b>
 							<a href="#">支付宝</a>
 							<b>|</b>
@@ -279,24 +303,6 @@
 							<em>© 2015-2025 Hengwang.com 版权所有. 更多模板 <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></em>
 						</p>
 					</div>
-				</div>
-
-			</div>
-
-		<div class='cart-empty ds'>
-			<div class="message">
-			    <ul>
-			        <li class="txt">
-			            购物车空空的哦~，去看看心仪的商品吧~
-			        </li>
-			        <li class="mt10">
-			            <a href="/" class="ftx-05">
-			                去购物&gt;
-			            </a>
-			        </li>
-			            
-			    </ul>
-	    	</div>
 		</div>
 
 	</body>
@@ -329,17 +335,16 @@
 			//  全选
 			var swith_All=true;
 			$('#J_SelectAllCbx2').click(function(){
-
 				if(swith_All){
 					$('input[name="items[]"]').attr('checked',true);
+
 				}else{
 					$('input[name="items[]"]').attr('checked',false);
-				}
-				swith_All=!swith_All;
 
-				
+				}
+				swith_All = !swith_All;
 				sum();
-				
+				cnt();
 				
 			});
 
@@ -368,6 +373,7 @@
 				//  金额发生改变  
 				$(this).parents('ul').find('.number').text(accMul(num,pr));
 				sum();
+				incre();
 			})
 
 
@@ -376,11 +382,6 @@
 				
 				//  获取数量
 				var num = Number($(this).next().val())-1;
-
-				if(num < 1){
-					num = 0;
-				}
-				
 
 				//  获取价格
 				var pr = $(this).parents('ul').find('.price-now').text();
@@ -397,31 +398,35 @@
 
 				}
 				
-				//  金额发生改变  
-				$(this).parents('ul').find('.number').text(accMul(num,pr));
-				sum();
-				
-			})  
-
+				//  金额发生改变
+					if(num < 1){
+						$(this).parents('ul').find('.number').text(accMul(1,pr));
+					}else{
+						$(this).parents('ul').find('.number').text(accMul(num,pr));
+						decre();
+					}
+					sum();	
+								
+				})  
+			
 
 			//  让总价发生改变
 			$('.check').click(function(){
 				sum();
+				cnt();
 			})
-
-			
 
 			//  封装总价的函数
 			function sum()
 			{
 				var sum = 0;
-				var cnt = 0;
+				// var cnt = 0;
 				//  判断多选框有没有被选中
 				$(':checkbox:checked').each(function(){
 					//  获取金额
 					var prs = $(this).parents('ul').find('.number').text();
 					//  获取数量
-					var num = $(this).parents('ul').find('#num').val();
+					// var num = $(this).parents('ul').find('#num').val();
 
 					// console.log(prs);
 
@@ -431,13 +436,125 @@
 					    try{r2=arg2.toString().split(".")[1].length}catch(e){r2=0}  
 					    m=Math.pow(10,Math.max(r1,r2))  
 					    return (arg1*m+arg2*m)/m  
-						}
-						sum = accAdd(sum,prs);
-						cnt = accAdd(cnt,num);
-					})
-					$('.price').text(sum);
-					$('#J_SelectedItemsCount').text(cnt);
+					}
+					sum = accAdd(sum,prs);
+					// cnt = accAdd(cnt,num);
+				})
+				$('.price').text(sum);
+				// $('#J_SelectedItemsCount').text(cnt);
 			}
-	
+
+			function cnt()
+			{
+				var cnt = 0;
+				//  判断多选框有没有被选中
+				$(':checkbox:checked').each(function(){
+					//  获取数量
+					var num = $(this).parents('ul').find('#num').val();
+
+
+					function accAdd(arg1,arg2){  
+					    var r1,r2,m;  
+					    try{r1=arg1.toString().split(".")[1].length}catch(e){r1=0}  
+					    try{r2=arg2.toString().split(".")[1].length}catch(e){r2=0}  
+					    m=Math.pow(10,Math.max(r1,r2))  
+					    return (arg1*m+arg2*m)/m  
+					}
+					cnt = accAdd(cnt,num);
+				})
+				$('#J_SelectedItemsCount').text(cnt);
+			}
+
+			function decre()
+			{
+				var cnt = 0;
+				//  判断多选框有没有被选中
+				$(':checkbox:checked').each(function(){
+					//  获取数量
+					var num = $(this).parents('ul').find('#num').val();
+
+
+					function accAdd(arg1,arg2){  
+					    var r1,r2,m;  
+					    try{r1=arg1.toString().split(".")[1].length}catch(e){r1=0}  
+					    try{r2=arg2.toString().split(".")[1].length}catch(e){r2=0}  
+					    m=Math.pow(10,Math.max(r1,r2))  
+					    return (arg1*m+arg2*m)/m  
+					}
+					cnt = accAdd(cnt,num);
+				})
+				$('#J_SelectedItemsCount').text(cnt-1);
+			}
+
+			function incre()
+			{
+				var cnt = 0;
+				//  判断多选框有没有被选中
+				$(':checkbox:checked').each(function(){
+					//  获取数量
+					var num = $(this).parents('ul').find('#num').val();
+
+
+					function accAdd(arg1,arg2){  
+					    var r1,r2,m;  
+					    try{r1=arg1.toString().split(".")[1].length}catch(e){r1=0}  
+					    try{r2=arg2.toString().split(".")[1].length}catch(e){r2=0}  
+					    m=Math.pow(10,Math.max(r1,r2))  
+					    return (arg1*m+arg2*m)/m  
+					}
+					cnt = accAdd(cnt,num);
+				})
+				$('#J_SelectedItemsCount').text(cnt+1);
+			}
+
+
+
+			$.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+			//  去结算页面
+			$('#J_Go').click(function(){
+
+				var arr = [];
+				$(':checkbox:checked').each(function(){
+					//  获取金额
+					var prs = $(this).parents('ul').find('.number').text();
+					//  获取数量
+					var num = $(this).parents('ul').find('#num').val();
+					//  获取id号
+					var id = $(this).attr('gid');
+					// alert(id);
+					// 	获取商品名称
+					var gname = $(this).parents('ul').find('.item-title').text();
+					// alert(gname);
+					//  获取商品单价
+					var price = $(this).parents('ul').find('.price-now').text();
+					// alert(price);
+					//  获取商品的描述
+					var goodsattr = $(this).parents('ul').find('.sku-line').text();
+					// alert(goodsattr);
+					//  获取商品的id
+					var goodsid = $(this).attr('goodsid');
+					//  获取uid
+					var uid = $(this).attr('uid');
+					// alert(goodsid);
+
+					arr.push([prs,id,num,gname,price,goodsattr,goodsid,uid]);
+
+					// console.log(arr);
+
+				})
+
+				$.post('/home/ajaxcart',{arr:arr},function(data){
+						
+					if(data){
+						location.replace('/home/balance');
+					}
+				})
+
+			})
+				
+				
+
+
+
 		</script>
 </html>

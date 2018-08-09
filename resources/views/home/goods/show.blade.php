@@ -508,18 +508,18 @@
                                 		var gid = $('#gid').val();
                                 		var num = $('#text_box').val();
                                 		var arr = [];
-<<<<<<< HEAD
+
                                       
-=======
-                                       alert(goodsattr)
->>>>>>> origin/zhang
+
+                                   
+
                                 		arr[0] = gid;
                                 		arr[1] = num;
                                         arr[2] = goodsattr;
                                 		$.get('/home/cartc',{res:arr},function(data){
-<<<<<<< HEAD
+
                                 	           console.log(data);
-=======
+
                                 			if(data){
             //                     				$(function(){
 												//    $('#LikBasket').shoping({
@@ -533,7 +533,7 @@
 												// 	})
 												// });
                                 			}
->>>>>>> origin/zhang
+
                                 		});
 
                                 		return false;
@@ -1337,7 +1337,7 @@
                         </div>
                         <div class="clear">
                         </div>
-<<<<<<< HEAD
+
                     
 <script type="text/javascript">
             $(function(){
@@ -1351,7 +1351,7 @@
                     }
                 })
             });
-=======
+</script>
                         <div class="footer">
                             <div class="footer-hd">
                                 <p>
@@ -1425,6 +1425,6 @@
 					}
 				})
 			});
->>>>>>> origin/zhang
+
 </script>
 @endsection

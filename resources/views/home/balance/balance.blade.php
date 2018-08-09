@@ -434,15 +434,15 @@
 				<div class="footer">
 					<div class="footer-hd">
 						<p>
-<<<<<<< HEAD
-							<a href="#">恒望科技</a>
-							<b>|</b>
-=======
+
+						
+							
+
 							@foreach($links as $k=>$v)
 							<a href="{{$v->furl}}">{{$v->fname}}</a>
 							<b>|</b>
 							@endforeach
->>>>>>> origin/zhang
+
 							<a href="#">商城首页</a>
 							<b>|</b>
 							<a href="#">支付宝</a>

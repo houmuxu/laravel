@@ -23,7 +23,7 @@ class CartController extends Controller
     	$price = $goods[0]->price;
     	$data = array('uid'=>$uid,'gid'=>$gid,'gname'=>$gname,'num'=>$num,'price'=>$price,'goodsattr'=>$goodsattr);
     	$res = Cart::create($data);
-    	echo $res;
+    	var_dump($data);
     }
 
     //  购物车页面

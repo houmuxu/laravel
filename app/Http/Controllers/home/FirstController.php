@@ -12,8 +12,7 @@ class FirstController extends Controller
 	public function index()
 	{
 		$data = Cate::getTreeCates();
-		
-
+		// dd($data);
 		$arr = [];
 		foreach ($data as $value) {
 			$arr[] = $value->sub[0]->sub;
@@ -22,14 +21,6 @@ class FirstController extends Controller
     	return view('home/first',['data'=>$data,'arr'=>$arr,'title'=>'首页-三只松鼠旗舰店']);
 
 	}
-
-
-
-
-
-
-
-
 
 
 

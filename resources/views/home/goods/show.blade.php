@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <title>
-            商品页面
-        </title>
+@extends('common.home')
+
+@section('title', $title)
+
+@section('content')
         <link href="/home/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet"
         type="text/css" />
         <link href="/home/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet"
@@ -29,135 +25,56 @@
         </script>
         <!-- 加入购物车特效 -->
         <style type="text/css">
-	.body-top {
-	    position: fixed;
-	    top: 0px;
-	    width: 100%;
-	    background: rgba(255,255,255,0.93);
-	    box-shadow: 0 0 10px #cfd0cf;
-	    z-index: 999;
-	}
-	.body-top-center {
-	    width: 1200px;
-	    margin: 0 auto;
+    .body-top {
+        position: fixed;
+        top: 0px;
+        width: 100%;
+        background: rgba(255,255,255,0.93);
+        box-shadow: 0 0 10px #cfd0cf;
+        z-index: 999;
+    }
+    .body-top-center {
+        width: 1200px;
+        margin: 0 auto;
     }
     .menu {
-    	float: left;
-	}
-	.menu-ul {
-	    overflow: hidden;
-	    float: left;
-	    padding: 10px 0;
-	}
-	.menu-li {
-	    float: left;
-	    width: 100px;
-	    height: 40px;
-	    margin-right: 5px;
-	}
-	.menu-a {
-	    display: block;
-	    width: 100px;
-	    height: 40px;
-	    text-align: center;
-	    line-height: 40px;
-	    font-size: 16px;
-	    -webkit-transition: all 0.5s ease;
-	    -moz-transition: all 0.5s ease;
-	    -o-transition: all 0.5s ease;
-	    -ms-transition: all 0.5s ease;
-	    transition: all 0.5s ease;
-	}
-	.carts{
-		margin-top: 200px;width: 100%;text-align: center;
-	}
-	.carts button{
-		margin: 10px;
-	}
+        float: left;
+    }
+    .menu-ul {
+        overflow: hidden;
+        float: left;
+        padding: 10px 0;
+    }
+    .menu-li {
+        float: left;
+        width: 100px;
+        height: 40px;
+        margin-right: 5px;
+    }
+    .menu-a {
+        display: block;
+        width: 100px;
+        height: 40px;
+        text-align: center;
+        line-height: 40px;
+        font-size: 16px;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        -ms-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+    }
+    .carts{
+        margin-top: 200px;width: 100%;text-align: center;
+    }
+    .carts button{
+        margin: 10px;
+    }
 </style>
 <script type="text/javascript" src="/home/js/jquery-addShopping.js"></script>
-	<!-- 加入购物车特效结束 -->
-    </head>
-    
-    <body>
-        <!--顶部导航条 -->
-        <div class="am-container header">
-            <ul class="message-l">
-                <div class="topMessage">
-                    <div class="menu-hd">
-                        <a href="#" target="_top" class="h">
-                            亲，请登录
-                        </a>
-                        <a href="#" target="_top">
-                            免费注册
-                        </a>
-                    </div>
-                </div>
-            </ul>
-            <ul class="message-r">
-                <div class="topMessage home">
-                    <div class="menu-hd">
-                        <a href="#" target="_top" class="h">
-                            商城首页
-                        </a>
-                    </div>
-                </div>
-                <div class="topMessage my-shangcheng">
-                    <div class="menu-hd MyShangcheng">
-                        <a href="#" target="_top">
-                            <i class="am-icon-user am-icon-fw">
-                            </i>
-                            个人中心
-                        </a>
-                    </div>
-                </div>
-                <div class="topMessage mini-cart">
-                    <div class="menu-hd">
-                        <a id="mc-menu-hd" href="/home/cart" target="_top">
-                            <i class="am-icon-shopping-cart  am-icon-fw">
-                            </i>
-                            <span>
-                                购物车
-                            </span>
-                            <strong id="J_MiniCartNum" class="h">
-                                0
-                            </strong>
-                        </a>
-                    </div>
-                </div>
-                <div class="topMessage favorite">
-                    <div class="menu-hd">
-                        <a href="#" target="_top">
-                            <i class="am-icon-heart am-icon-fw">
-                            </i>
-                            <span>
-                                收藏夹
-                            </span>
-                        </a>
-                    </div>
-            </ul>
-            </div>
-            <!--悬浮搜索框-->
-            <div class="nav white">
-                <div class="logo">
-                    <img src="/home/images/logo.png" />
-                </div>
-                <div class="logoBig">
-                    <li>
-                        <img src="/home/images/logobig.png" />
-                    </li>
-                </div>
-                <div class="search-bar pr">
-                    <a name="index_none_header_sysc" href="#">
-                    </a>
-                    <form>
-                        <input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索"
-                        autocomplete="off">
-                        <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
-                    </form>
-                </div>
-            </div>
-            <div class="clear">
+    <!-- 加入购物车特效结束 -->
+
+
             </div>
             <b class="line">
             </b>
@@ -319,7 +236,7 @@
                                             ¥
                                         </em>
                                         <b class="sys_item_mktprice">
-                                            {{$data->price+10}}
+                                            {{$data->price+3}}
                                         </b>
                                     </dd>
                                 </li>
@@ -359,11 +276,9 @@
                                         </select>
                                     </div>
                                     <div class="pay-logis">
-                                        快递
-                                        <b class="sys_item_freprice">
-                                            10
-                                        </b>
-                                        元
+                                        包邮
+                                     
+                                        
                                     </div>
                                 </div>
                             </dl>
@@ -593,24 +508,12 @@
                                 		var gid = $('#gid').val();
                                 		var num = $('#text_box').val();
                                 		var arr = [];
-                                       alert(goodsattr)
+                                      
                                 		arr[0] = gid;
                                 		arr[1] = num;
                                         arr[2] = goodsattr;
                                 		$.get('/home/cartc',{res:arr},function(data){
-                                			if(data){
-            //                     				$(function(){
-												//    $('#LikBasket').shoping({
-												// 		endElement:"#ceshi",
-												// 		iconImg:"/home/images/cart.png",
-												// 		endFunction:function(element){
-												// 			$(".cart_num").html(parseInt($(".cart_num").html())+1);
-												// 			console.log(element);
-												// 			return false;
-												// 		}
-												// 	})
-												// });
-                                			}
+                                	
                                 		});
 
                                 		return false;
@@ -830,7 +733,7 @@
                                 <div class="am-tab-panel am-fade am-in am-active">
                                     <div class="J_Brand">
                                         <li id="J_AttrUL">
-                                            <img src="//img.alicdn.com/tps/i1/T1DiulXX0sXXXXXXXX-16-17.png">
+                                            <img src="/home/images/T1DiulXX0sXXXXXXXX-16-17.png" style="width: 15px">
                                             商品具有
                                             <a target="_blank" href="//baike.taobao.com/view.htm?tp=18&amp;wd=SC11834020305037">
                                                 <b style="color:#35a">
@@ -1414,77 +1317,18 @@
                         </div>
                         <div class="clear">
                         </div>
-                        <div class="footer">
-                            <div class="footer-hd">
-                                <p>
-                                    <a href="#">
-                                        恒望科技
-                                    </a>
-                                    <b>
-                                        |
-                                    </b>
-                                    <a href="#">
-                                        商城首页
-                                    </a>
-                                    <b>
-                                        |
-                                    </b>
-                                    <a href="#">
-                                        支付宝
-                                    </a>
-                                    <b>
-                                        |
-                                    </b>
-                                    <a href="#">
-                                        物流
-                                    </a>
-                                </p>
-                            </div>
-                            <div class="footer-bd">
-                                <p>
-                                    <a href="#">
-                                        关于恒望
-                                    </a>
-                                    <a href="#">
-                                        合作伙伴
-                                    </a>
-                                    <a href="#">
-                                        联系我们
-                                    </a>
-                                    <a href="#">
-                                        网站地图
-                                    </a>
-                                    <em>
-                                        © 2015-2025 Hengwang.com 版权所有. 更多模板
-                                        <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">
-                                            模板之家
-                                        </a>
-                                        - Collect from
-                                        <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">
-                                            网页模板
-                                        </a>
-                                    </em>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--菜单 -->
-        @include('common.homeright')
-           
-    </body>
-    	<script type="text/javascript">
-			$(function(){
-			   $('#LikBasket').shoping({
-					endElement:"#ceshi",
-					iconImg:"/home/images/cart.png",
-					endFunction:function(element){
-						$(".cart_num").html(parseInt($(".cart_num").html())+1);
-						console.log(element);
-						return false;
-					}
-				})
-			});
+                    
+<script type="text/javascript">
+            $(function(){
+               $('#LikBasket').shoping({
+                    endElement:"#ceshi",
+                    iconImg:"/home/images/cart.png",
+                    endFunction:function(element){
+                        $(".cart_num").html(parseInt($(".cart_num").html())+1);
+                        console.log(element);
+                        return false;
+                    }
+                })
+            });
 </script>
-</html>
+@endsection

@@ -24,24 +24,40 @@ class Cate extends Model
      */
     protected $fillable = ['cname','pid','path'];
 
-        public static function getTreeCates($pid=0)
-    {
+  // public static function getTreeCates($pid=0)
+  //   {
 
-        $cate = Cate::where('pid',$pid)->get();
+  //       $cate = Cate::where('pid',$pid)->get();
         
-        $arr = [];
+  //       $arr = [];
 
-        foreach($cate as $k=>$v){
+  //       foreach($cate as $k=>$v){
 
+  //           if($v->pid==$pid){
+
+  //               $v->sub=self::getTreeCates($v->cid);
+
+  //               $arr[]=$v;
+  //           }
+  //       }  
+  //       return $arr;
+  //   }
+
+    static public function getTreeCates($cates=[],$pid=0)
+    {
+        if(empty($cates)){
+            $cates = self::all();
+        }
+        $tmp = [];
+        foreach($cates as $k=>$v){
             if($v->pid==$pid){
-
-                $v->sub=self::getTreeCates($v->cid);
-
-                $arr[]=$v;
-            }
-        }  
-        return $arr;
+            $v->sub = self::getTreeCates($cates,$v->cid);
+            $tmp[] = $v;
+        }
+        }
+        return $tmp;    
     }
+
 
     public function goodss()
     {

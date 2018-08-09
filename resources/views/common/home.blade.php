@@ -32,7 +32,7 @@
 				</ul>
 				<ul class="message-r">
 					<div class="topMessage home">
-						<div class="menu-hd"><a href="" target="_top" class="h">商城首页</a></div>
+						<div class="menu-hd"><a href="/" target="_top" class="h">商城首页</a></div>
 					</div>
 					<div class="topMessage my-shangcheng">
 						<div class="menu-hd MyShangcheng"><a href="/home/self" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
@@ -56,8 +56,8 @@
 
 					<div class="search-bar pr">
 						<a name="index_none_header_sysc" href="#"></a>
-						<form>
-							<input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
+						<form action="/home/goodslist">
+							<input id="searchInput" name="gname" type="text" placeholder="搜索" autocomplete="off">
 							<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
 						</form>
 					</div>

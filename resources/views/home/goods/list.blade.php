@@ -13,6 +13,7 @@
 		<script type="text/javascript" src="/home/basic/js/jquery-1.7.min.js"></script>
 		<script type="text/javascript" src="/home/js/script.js"></script>
 		
+		
 			<b class="line"></b>
            <div class="search">
 			<div class="search-list">
@@ -20,24 +21,17 @@
 					   <div class="long-title"><span class="all-goods">全部分类</span></div>
 					   <div class="nav-cont">
 							<ul>
-								<li class="index"><a href="#">首页</a></li>
+								<li class="index"><a href="/">首页</a></li>
                                 <li class="qc"><a href="#">闪购</a></li>
                                 <li class="qc"><a href="#">限时抢</a></li>
                                 <li class="qc"><a href="#">团购</a></li>
                                 <li class="qc last"><a href="#">大包装</a></li>
 							</ul>
-						   <!--  <div class="nav-extra">
-						    	<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
-						    	<i class="am-icon-angle-right" style="padding-left: 10px;"></i>
-						    </div> -->
 						    
 						</div>
 			
-
 			</div>
-
-
-				
+			
 					<div class="am-g am-g-fixed">
 						<div class="am-u-sm-12 am-u-md-12">
 	                  	<div class="theme-popover">														
@@ -203,4 +197,9 @@
 
 						</div>
 					</div>
+		
+        
+       
+        
+      
 			@endsection

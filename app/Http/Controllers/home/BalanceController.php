@@ -5,17 +5,9 @@ namespace App\Http\Controllers\home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
-<<<<<<< HEAD
-
-class BalanceController extends Controller
-{
-    public function index()
-    {
-    	$data = DB::table('address')->orderBy('id','asc')->get();
-    	// dd($data);
-    	return view('home/balance/balance',['data'=>$data]);
-=======
 use Session;
+
+
 
 class BalanceController extends Controller
 {
@@ -25,7 +17,7 @@ class BalanceController extends Controller
         $data = DB::table('address')->orderBy('id','asc')->get();
     	// dd($data);
     	return view('home/balance/balance',['data'=>$data,'links'=>$links]);
->>>>>>> origin/zhang
+
     }
 
     public function create()
@@ -83,8 +75,5 @@ class BalanceController extends Controller
     	$res = DB::table('address')->where('id','=',$id)->delete();
     	return $res;
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/zhang
 }

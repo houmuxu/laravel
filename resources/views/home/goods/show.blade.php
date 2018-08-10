@@ -1,5 +1,6 @@
 @extends('common.home')
 
+
 @section('title', $title)
 
 @section('content')
@@ -72,10 +73,20 @@
     }
 </style>
 <script type="text/javascript" src="/home/js/jquery-addShopping.js"></script>
-    <!-- 加入购物车特效结束 -->
+<!-- 加入购物车特效结束 -->
+
+<!-- 三级联动 -->
+<link rel="stylesheet" type="text/css" href="/home/houcity/css/index.css">
+
+<script type="text/javascript" src="/home/houcity/js/citydata.min.js"></script>
+<script type="text/javascript" src="/home/houcity/js/cityPicker-2.0.3.js"></script>
+<!-- 加入购物车 -->
+
+
 
 
             </div>
+
             <b class="line">
             </b>
             <div class="listMain">
@@ -114,7 +125,7 @@
                                 </a>
                             </li>
                         </ul>
-                        <div class="nav-extra">
+                  <!--       <div class="nav-extra">
                             <i class="am-icon-user-secret am-icon-md nav-user">
                             </i>
                             <b>
@@ -122,7 +133,7 @@
                             我的福利
                             <i class="am-icon-angle-right" style="padding-left: 10px;">
                             </i>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <ol class="am-breadcrumb am-breadcrumb-slash">
@@ -132,12 +143,12 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            分类
+                        <a href="/home/goodslist/{{$cate->cid}}">
+                           {{$cate->cname}}
                         </a>
                     </li>
                     <li class="am-active">
-                        内容
+                        {{$data->gname}}
                     </li>
                 </ol>
                 <script type="text/javascript">
@@ -250,40 +261,33 @@
                                 </dt>
                                 <div class="iteminfo_freprice">
                                     <div class="am-form-content address">
-                                        <select data-am-selected>
-                                            <option value="a">
-                                                浙江省
-                                            </option>
-                                            <option value="b">
-                                                湖北省
-                                            </option>
-                                        </select>
-                                        <select data-am-selected>
-                                            <option value="a">
-                                                温州市
-                                            </option>
-                                            <option value="b">
-                                                武汉市
-                                            </option>
-                                        </select>
-                                        <select data-am-selected>
-                                            <option value="a">
-                                                瑞安区
-                                            </option>
-                                            <option value="b">
-                                                洪山区
-                                            </option>
-                                        </select>
+
                                     </div>
-                                    <div class="pay-logis">
-                                        包邮
-                                     
-                                        
-                                    </div>
+                                   
                                 </div>
                             </dl>
+
                             <div class="clear">
                             </div>
+                        <!-- 城市联动 -->
+
+                             <div class="city-picker-selector" id="city-picker-selector2"></div>
+
+                                    <script type="text/javascript">
+                                         var selector2 = $('#city-picker-selector2').cityPicker({
+                                            dataJson: cityData,
+                                            renderMode: true,
+                                            search: false,
+                                            autoSelected: true,
+                                            code: 'cityCode',
+                                            level: 3,
+                                        });
+                            
+                                        // 设置城市
+                                        selector2.setCityVal('辽宁省, 鞍山市, 立山区');
+                                    </script>
+                        <!-- 城市联动结束    -->
+
                             <!--销量-->
                             <ul class="tm-ind-panel">
                                 <li class="tm-ind-item tm-ind-sellCount canClick">
@@ -342,7 +346,7 @@
                                         </div>
                                         <div class="theme-popbod dform">
              <form class="theme-signin" name="loginform" action="#">
-    				<input type="hidden" name="gid" id="gid" value="{{$data->gid}}">
+                    <input type="hidden" name="gid" id="gid" value="{{$data->gid}}">
 
                                                 <div class="theme-signin-left">
                                                     @if(!$data->goodsattr == NULL)
@@ -488,6 +492,32 @@
                                     </a>
                                 </div>
                             </li>
+                            <script type="text/javascript">
+
+                              
+                                var goodsattr = $('.sku-line,.selected').attr('attr')
+                                       $('.sku-line,.selected').click(function(){
+                                             goodsattr = $(this).attr('attr');
+                                           
+                                        })
+                                    $('#LikBuy').click(function(){
+                                        var gid = $('#gid').val();
+                                        var num = $('#text_box').val();
+                                        var arr = [];
+
+                                        arr[0] = gid;
+                                        arr[1] = num;
+                                        arr[2] = goodsattr;
+                                        $.get('/home/cartinfo',{res:arr},function(data){
+                                            if(data){
+                                                location.replace('/home/balance');
+                                            }
+                                        });
+
+                                        return false;
+                                    });
+                               
+                            </script>
                             <li>
                                 <div class="clearfix tb-btn tb-btn-basket theme-login">
                                     <a id="LikBasket" title="加入购物车" href="">
@@ -498,46 +528,27 @@
                                 </div>
 
                                 <script type="text/javascript">
+                                 
+                                    var goodsattr = $('.sku-line,.selected').attr('attr')
+                                    $('.sku-line,.selected').click(function(){
+                                         goodsattr = $(this).attr('attr');
+                                       
+                                    });
+                                    $('#LikBasket').click(function(){
+                                        var gid = $('#gid').val();
+                                        var num = $('#text_box').val();
+                                        var arr = [];
 
-                                      var goodsattr = $('.sku-line,.selected').attr('attr')
-                                       $('.sku-line,.selected').click(function(){
-                                             goodsattr = $(this).attr('attr');
-                                           
-                                        })
-                                	$('#LikBasket').click(function(){
-                                		var gid = $('#gid').val();
-                                		var num = $('#text_box').val();
-                                		var arr = [];
-
-                                      
-
-                                   
-
-                                		arr[0] = gid;
-                                		arr[1] = num;
+                                        arr[0] = gid;
+                                        arr[1] = num;
                                         arr[2] = goodsattr;
-                                		$.get('/home/cartc',{res:arr},function(data){
+                                        $.get('/home/cartc',{res:arr},function(data){
 
-                                	           console.log(data);
+                                        });
 
-                                			if(data){
-            //                     				$(function(){
-												//    $('#LikBasket').shoping({
-												// 		endElement:"#ceshi",
-												// 		iconImg:"/home/images/cart.png",
-												// 		endFunction:function(element){
-												// 			$(".cart_num").html(parseInt($(".cart_num").html())+1);
-												// 			console.log(element);
-												// 			return false;
-												// 		}
-												// 	})
-												// });
-                                			}
-
-                                		});
-
-                                		return false;
-                                	})
+                                        return false;
+                                    })
+                                
                                 </script>
                             </li>
                         </div>
@@ -636,91 +647,25 @@
                                         看了又看
                                     </h2>
                                 </div>
+                                @foreach($goods as $k=>$v)
                                 <li class="first">
                                     <div class="p-img">
-                                        <a href="#">
-                                            <img class="" src="/home/images/browse1.jpg">
+                                        <a href="/home/goodsshow/{{$v->gid}}">
+                                            <img class="" src="{{$v->goodspics[0]->gpic}}">
                                         </a>
                                     </div>
                                     <div class="p-name">
-                                        <a href="#">
-                                            【三只松鼠_开口松子】零食坚果特产炒货东北红松子原味
+                                        <a href="/home/goodsshow/{{$v->gid}}">
+                                            {{$v->gname}}
                                         </a>
                                     </div>
                                     <div class="p-price">
                                         <strong>
-                                            ￥35.90
+                                            ￥{{$v->price}}
                                         </strong>
                                     </div>
                                 </li>
-                                <li>
-                                    <div class="p-img">
-                                        <a href="#">
-                                            <img class="" src="/home/images/browse1.jpg">
-                                        </a>
-                                    </div>
-                                    <div class="p-name">
-                                        <a href="#">
-                                            【三只松鼠_开口松子】零食坚果特产炒货东北红松子原味
-                                        </a>
-                                    </div>
-                                    <div class="p-price">
-                                        <strong>
-                                            ￥35.90
-                                        </strong>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="p-img">
-                                        <a href="#">
-                                            <img class="" src="/home/images/browse1.jpg">
-                                        </a>
-                                    </div>
-                                    <div class="p-name">
-                                        <a href="#">
-                                            【三只松鼠_开口松子】零食坚果特产炒货东北红松子原味
-                                        </a>
-                                    </div>
-                                    <div class="p-price">
-                                        <strong>
-                                            ￥35.90
-                                        </strong>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="p-img">
-                                        <a href="#">
-                                            <img class="" src="/home/images/browse1.jpg">
-                                        </a>
-                                    </div>
-                                    <div class="p-name">
-                                        <a href="#">
-                                            【三只松鼠_开口松子】零食坚果特产炒货东北红松子原味
-                                        </a>
-                                    </div>
-                                    <div class="p-price">
-                                        <strong>
-                                            ￥35.90
-                                        </strong>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="p-img">
-                                        <a href="#">
-                                            <img class="" src="/home/images/browse1.jpg">
-                                        </a>
-                                    </div>
-                                    <div class="p-name">
-                                        <a href="#">
-                                            【三只松鼠_开口松子218g】零食坚果特产炒货东北红松子原味
-                                        </a>
-                                    </div>
-                                    <div class="p-price">
-                                        <strong>
-                                            ￥35.90
-                                        </strong>
-                                    </div>
-                                </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -1338,7 +1283,7 @@
                         <div class="clear">
                         </div>
 
-                    
+                   
 <script type="text/javascript">
             $(function(){
                $('#LikBasket').shoping({
@@ -1351,9 +1296,10 @@
                     }
                 })
             });
+
 </script>
-                      
-           
+
+
     </body>
 
 @endsection

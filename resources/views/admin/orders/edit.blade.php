@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   
-  <head>
+  <head> 
     <meta charset="UTF-8">
     <title>订单修改页面</title>
     <meta name="renderer" content="webkit">
@@ -101,23 +101,13 @@
               </div>
           </div>
 
-          <div class="layui-form-item">
-              <label for="L_username" class="layui-form-label">
-                  <span class="x-red"></span>状态
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text"  name="status" value="{{$res->status}}" required="" 
-                  autocomplete="off" class="layui-input">
-              </div>
-          </div>
-
           {{csrf_field()}}
           {{method_field('PUT')}}
           
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
-              <button  class="layui-btn" onclick="conf()" lay-filter="add" lay-submit="">
+              <button  class="layui-btn baocun" onclick="conf()" lay-filter="add" lay-submit="">
                   确认修改
               </button>
               <a href="/admin/orders" class="layui-btn" lay-filter="add" lay-submit="">
@@ -128,16 +118,96 @@
     </div>
 
     <script type="text/javascript">
-      function conf() 
-      { 
-        var str = confirm('确定修改么？')
-        if(str){
-          $('button').removeAttr('type','button');
-        } else {
-          $('button').attr('type','button');
-        }
+      // function conf() 
+      // { 
+      //   var str = confirm('确定修改么？')
+      //   if(str){
+      //     $('button').removeAttr('type','button');
+      //   } else {
+      //     $('button').attr('type','button');
+      //   }
         
+      // } 
+
+
+    //验证收货人
+    $('input[name=oname]').blur(function(){
+      var ov = $(this).val();
+      var reg = /^[a-zA-Z0-9\u4E00-\u9FA5]{2,8}$/;
+      if(!reg.test(ov)){
+        $(this).next().text(' *用户名格式不正确').css('color','red');
+        $(this).css('border','solid 1px red');
+        $('.baocun').attr('type','button');   //禁止提交
+      } else {
+        $(this).css('color','green');
+        $(this).css('border','solid 1px green');
+        $('.baocun').removeAttr('type','button'); 
+      }
+    })
+
+    //验证手机号
+    $('input[name=tel]').blur(function(){
+      var tv = $(this).val();
+      var reg = /^1[3456789]\d{9}$/;
+      if(!reg.test(tv)){
+        $(this).css('color','red');
+        $(this).css('border','solid 1px red');
+        $('.baocun').attr('type','button');   //禁止提交
+      }else{
+        $(this).css('color','green');
+        $(this).css('border','solid 1px green');
+        $('.baocun').removeAttr('type','button');
+      }
+    })
+
+    //验证详细地址
+    $('input[name=addr]').blur(function(){
+      var av = $(this).val();
+      // console.log(av.length);
+      if(av.length >1 && av.length < 100 ){
+        $(this).css('color','green');
+        $(this).css('border','solid 1px green');
+        $('.baocun').removeAttr('type','button');
+      } else {
+        $(this).css('color','red');
+        $(this).css('border','solid 1px red');
+        $('.baocun').attr('type','button');   //禁止提交
+      }
+    })
+
+    //验证总金额
+    $('input[name=sum]').blur(function(){
+      var tv = $(this).val();
+      var reg = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
+      if(!reg.test(tv)){
+        $(this).css('color','red');
+        $(this).css('border','solid 1px red');
+        $('.baocun').attr('type','button');   //禁止提交
+      }else{
+        $(this).css('color','green');
+        $(this).css('border','solid 1px green');
+        $('.baocun').removeAttr('type','button');
+      }
+    })
+
+
+    //不为空
+    $('.baocun').click(function(){
+      if($('input[name=oname]').val()==''){
+        $('input[name=oname]').css('border','solid 1px red');
+        return false;
+      }
+      if($('input[name=tel]').val()==''){
+        $('input[name=tel]').css('border','solid 1px red');
+        return false;
+      }
+      if($('#addr').val()==''){
+        $('#addr').css('border','solid 1px red');
+        return false;
       } 
+    })
+
+
     </script>
    
   </body>

@@ -168,7 +168,7 @@
 		//验证详细地址
 		$('#addr').blur(function(){
 			var av = $(this).val();
-			console.log(av.length);
+			// console.log(av.length);
 			if(av.length >1 && av.length < 100 ){
 				$(this).css('color','green');
 				$(this).css('border','solid 1px green');

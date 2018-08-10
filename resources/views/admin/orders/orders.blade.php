@@ -46,7 +46,7 @@
           <tr>
             <th>订单编号</th>
             <th>收货人</th>
-            <th>收货地址</th>
+            <th style="width:250px">收货地址</th>
             <th>联系电话</th>
             <th>购买时间</th>
             <th>总金额</th>

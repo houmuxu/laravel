@@ -13,10 +13,10 @@ class Goods extends Model
      * @var string
      */
     protected $table = 'goods';
-	protected $primaryKey = 'gid';
+    protected $primaryKey = 'gid';
     public $timestamps = false;
 
-	/**
+    /**
      * 可以被批量赋值的属性。
      *
      * @var array
@@ -25,11 +25,11 @@ class Goods extends Model
 
     public function goodspics()
     {
-    	return $this->hasMany('App\Model\Admin\Goodspic','gid');
+        return $this->hasMany('App\Model\Admin\Goodspic','gid');
     }
 
     public function cates()
     {
-    	return $this->belongsTo('App\Model\Admin\Cate','cid');
+        return $this->belongsTo('App\Model\Admin\Cate','cid');
     }
 }

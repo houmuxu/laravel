@@ -9,6 +9,7 @@ use App\Model\Admin\Goods;
 use App\Model\Admin\User;
 use Mail;
 use Cache;
+use DB;
 
     class GoodsController extends Controller
     {
@@ -24,17 +25,19 @@ use Cache;
 
                 $goods = Goods::whereIn('cid',$arr_cid)->paginate(8);
                 $cate = Cate::where('cid',$id)->first();
+                $links = DB::table('friendlink')->get();
                
 
 
-           return view('home/goods/list',['title'=>$cate->cname,'goods'=>$goods]);
+           return view('home/goods/list',['title'=>$cate->cname,'goods'=>$goods,'links'=>$links]);
         }
 
 
         public function show($id)
         {
+            $links = DB::table('friendlink')->get();
            $data = Goods::where('gid',$id)->first();
-           return view('home/goods/show',['data'=>$data,'title'=>$data->gname]);
+           return view('home/goods/show',['data'=>$data,'title'=>$data->gname,'links'=>$links]);
         }
 
 

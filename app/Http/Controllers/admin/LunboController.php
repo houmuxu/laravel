@@ -23,7 +23,7 @@ class LunboController extends Controller
 
     public function store(Request $request)
     {
-        $res = $request->except('file','_token');
+        $res = $request->except('pic','_token');
 
         $pic = $request->file('pic');
         //名字
@@ -70,18 +70,55 @@ class LunboController extends Controller
 
     public function update(Request $request,$id)
     {
-        $str = 'xxx';
-       return $str;
+        $res = $request->except('pic','_token');
+        $res['uptime'] = time();
+        if($request->hasFile('pic')){
+           $pic = $request->file('pic');
+            //名字
+            $name =  date('Ymd',time()).str_random(6);
+            //后缀
+            $suffix = $pic->getClientOriginalExtension();
+            //移动
+            $pic->move(Config::get('webconfig.uploadlunbo'),$name.'.'.$suffix);
+            //存入数组
+            $res['pic'] = '/uploads/lunbo/'.$name.'.'.$suffix;
+
+        }
+            try{
+                $ju = Lunbo::where('id',$id)->update($res);
+                if($ju){
+                return redirect('/admin/lunbo/index')->with('success','轮播图修改成功!');
+
+                }
+            }catch(\Exception $e){
+                return back()->with('error','轮播图修改失败! 返回首页请点击');
+                
+            }
+  
     }
 
+    public function delete(Request $request)
+    {
+        $id = $request->input('ids');
+        $res = Lunbo::find($id);
+        $rs = unlink('.'.$res->pic);
+        if($rs){
+            $ls = Lunbo::destroy($id);
+        }
+        echo $ls;
+    }
 
+    public function ajaxdel(Request $request)
+    {
+        $arr = $request->input('ids');
+        foreach ($arr as $v) {
+            $res = Lunbo::find($v);
+            $rs = unlink('.'.$res->pic);
+            if($rs){
+                $ls = Lunbo::destroy($v);
+            }
+        }
+            echo $ls;
 
- 
-
-
-
-
-
-
-
+    }
 }

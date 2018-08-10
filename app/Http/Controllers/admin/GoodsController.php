@@ -12,8 +12,8 @@ use App\Model\Admin\Goodspic;
 
 class GoodsController extends Controller
 {
-	public function index(Request $request)
-	{  
+    public function index(Request $request)
+    {  
         $gname = $request->input('gname');
         $data = Goods::orderBy('gid','asc')->where(function($query) use($request){
             $gname = $request->input('gname');
@@ -29,47 +29,47 @@ class GoodsController extends Controller
                  $query->where('price','<=',$max);
             }
         })->paginate(10);
-		return view('admin/goods/index',['title'=>'商品列表','data'=>$data,'request'=>$request]);
-	}
+        return view('admin/goods/index',['title'=>'商品列表','data'=>$data,'request'=>$request]);
+    }
 
     public function create()
     {
-    	$cates = DB::select('select cid,cname,concat(path,cid) cpath from cate order by cpath');
-    	return view('admin/goods/add',['cates'=>$cates]);
+        $cates = DB::select('select cid,cname,concat(path,cid) cpath from cate order by cpath');
+        return view('admin/goods/add',['cates'=>$cates]);
     }
 
     public function store(Request $request)
-    {	
-    	$res = $request->except('_token','gpic');
+    {   
+        $res = $request->except('_token','gpic');
        
         $res['uptime'] = time();
 
-    	try{
-    		$data = Goods::create($res);
-    		$id = $data->gid;
-    		$goods = Goods::find($id);
-	    	if($request->hasFile('gpic')){
-	    	 	foreach($request->file('gpic') as $k => $v){
-	    	 		//名字
-	    	 		$name =  date('Ymd',time()).str_random(6);
-	    	 		//后缀
-	           		$suffix = $v->getClientOriginalExtension();
-	           		//移动
-	           		$v->move(Config::get('webconfig.uploadgoods'),$name.'.'.$suffix);
-	           		//一对多添加到商品关联图片
-	           		$goods->goodspics()->createMany([
-	           			['gpic' => '/uploads/goods/'.$name.'.'.$suffix]
-    				]);
-	    	 	}
-	    	 }
-    		if($data){
+        try{
+            $data = Goods::create($res);
+            $id = $data->gid;
+            $goods = Goods::find($id);
+            if($request->hasFile('gpic')){
+                foreach($request->file('gpic') as $k => $v){
+                    //名字
+                    $name =  date('Ymd',time()).str_random(6);
+                    //后缀
+                    $suffix = $v->getClientOriginalExtension();
+                    //移动
+                    $v->move(Config::get('webconfig.uploadgoods'),$name.'.'.$suffix);
+                    //一对多添加到商品关联图片
+                    $goods->goodspics()->createMany([
+                        ['gpic' => '/uploads/goods/'.$name.'.'.$suffix]
+                    ]);
+                }
+             }
+            if($data){
                 return redirect('/admin/goods')->with('success','商品添加成功!');
                 
-    		}
-    	}catch(\Exception $e){
+            }
+        }catch(\Exception $e){
             return back()->with('error','商品添加失败! 返回首页请点击');
-    		
-    	}
+            
+        }
     }
 
     /**

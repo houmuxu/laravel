@@ -9,9 +9,11 @@ use DB;
 
 class BalanceController extends Controller 
 {
+
+    
     public function index()
     {
-       $uid = 1;
+        $uid = 1;
     	$data = DB::table('address')->orderBy('id','asc')->get();
         $res = DB::table('cartinfo')->where('uid',$uid)->get();
         $links = DB::table('friendlink')->get();
@@ -19,18 +21,36 @@ class BalanceController extends Controller
     	return view('home/balance/balance',['data'=>$data,'res'=>$res,'links'=>$links,'title'=>'结算页面']);
     }
 
+    public function indexone()
+    {
+        $uid = 1;
+        $data = DB::table('address')->orderBy('id','asc')->get();
+        $res = DB::table('cartinfoone')->where('uid',$uid)->get();
+        $links = DB::table('friendlink')->get();
+              
+        return view('home/balance/balanceone',['data'=>$data,'res'=>$res,'links'=>$links,'title'=>'结算页面']);
+    }
+
     public function create()
     {
-    	return view('home/balance/create');
+        $links = DB::table('friendlink')->get();
+    	return view('home/balance/create',['links'=>$links,'title'=>'添加收货地址']);
+    }
+
+    public function createone()
+    {
+        $links = DB::table('friendlink')->get();
+        return view('home/balance/createone',['links'=>$links,'title'=>'添加收货地址']);
     }
 
     public function store(Request $request)
     {
-    	// dd($_POST);
+
     	//自定义uid
     	session(['uid'=>'1']);
 
     	$data = $request->except('_token');
+
     	//城市三级联动拼接
     	$data['addr'] = $data['area1'].' '.$data['area2'].' '.$data['area3'].' '.$data['addr'];
     	array_splice($data,2,3);
@@ -46,12 +66,44 @@ class BalanceController extends Controller
 
     }
 
+    public function storeone(Request $request)
+    {
+ 
+        //自定义uid
+        session(['uid'=>'1']);
+
+        $data = $request->except('_token');
+
+        //城市三级联动拼接
+        $data['addr'] = $data['area1'].' '.$data['area2'].' '.$data['area3'].' '.$data['addr'];
+        array_splice($data,2,3);
+        $data['uid'] = session('uid');
+
+        $res = DB::table('address')->insert($data);
+
+        if($res){
+            return redirect('/home/balance_one');
+        } else{
+            return back();
+        }
+
+    }
+
     public function edit($id)
     {
     	// echo $id;
     	$res = DB::table('address')->where('id',$id)->first();
+        $links = DB::table('friendlink')->get();
     	// dd($res);
-    	return view('home/balance/edit',['res'=>$res]);
+    	return view('home/balance/edit',['res'=>$res,'links'=>$links,'title'=>'收货信息修改页面']);
+    }
+
+    public function editone($id)
+    {
+        // echo $id;
+        $res = DB::table('address')->where('id',$id)->first();
+        // dd($res);
+        return view('home/balance/editone',['res'=>$res,'links'=>$links,'title'=>'收货信息修改页面']);
     }
 
     public function update(Request $request,$id)
@@ -65,6 +117,20 @@ class BalanceController extends Controller
     	} else {
     		return back();
     	}
+
+    }
+
+    public function updateone(Request $request,$id)
+    {
+        $data = $request->except('_token');
+        // dd($res);
+        $res = DB::table('address')->where('id',$id)->update($data);
+
+        if($res){
+            return redirect('/home/balance_one');
+        } else {
+            return back();
+        }
 
     }
 
@@ -118,15 +184,17 @@ class BalanceController extends Controller
 
     public function payok(Request $request)
     {
+        //接收oid,查询orders里面的数据
         $oid = $request->get('oid');
         $data = DB::table('orders')->where('oid','=',$oid)->first();
         //dd ($data);
         
         $uid = 1;
+        //清空购物车catinfo
         $res = DB::table('cartinfo')->where('uid','=',$uid)->delete();
+        //清空购物车cartinfoone
+        $res = DB::table('cartinfoone')->where('uid','=',$uid)->delete();
 
-        // $aa = session('uid');
-        // echo $aa;
         $links = DB::table('friendlink')->get();
 
         return view('home/balance/payok',['data'=>$data,'links'=>$links,'title'=>'付款成功页面']);

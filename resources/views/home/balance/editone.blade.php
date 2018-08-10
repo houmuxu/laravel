@@ -1,4 +1,4 @@
-	@extends('common.home') 
+	@extends('common.home')
 
 	@section('title', $title)
 
@@ -15,6 +15,8 @@
 		<script type="text/javascript" src="/home/city/js/zcity.js"></script>
 
 
+		
+
 			<div class="theme-popover-mask"></div>
 			<div class="concent" style="width:500px">
 
@@ -25,40 +27,32 @@
 				<hr/>
 
 				<div class="am-u-md-12">
-					<form action="/home/balance_store" method="post" class="am-form am-form-horizontal">
+					<form action="/home/balance_updateone/{{$res->id}}" method="post" class="am-form am-form-horizontal">
 
 						<div class="am-form-group">
 							<label for="user-name" class="am-form-label">收货人</label>
 							<div class="am-form-content">
-								<input type="text" name="oname" id="user-name" placeholder="2 ~ 8 位 中文, 英文，数字，下划线 ">
+								<input type="text" name="oname" value="{{$res->oname}}" id="user-name" placeholder="2 ~ 8 位 中文, 英文，数字，下划线 ">
 							</div>
 						</div>
 
 						<div class="am-form-group" style="margin-top:30px">
 							<label for="user-phone" class="am-form-label">手机号码</label>
 							<div class="am-form-content">
-								<input type="text" name="tel" id="user-phone" placeholder="必填">
-							</div>
-						</div>
-
-						<div class="am-form-group" style="margin-top:30px">
-							<label for="user-phone" class="am-form-label">所在地</label>
-							<div class="am-form-content address chengshi">
-				                <div class="zcityGroup" city-range="{'level_start':1,'level_end':3}" city-ini="北京,北京,昌平区"></div>
-								
+								<input type="text" name="tel" value="{{$res->tel}}" id="user-phone" placeholder="必填">
 							</div>
 						</div>
 
 						<div class="am-form-group" style="margin-top:30px">
 							<label for="user-intro" class="am-form-label">详细地址</label>
 							<div class="am-form-content">
-								<textarea name="addr" id="addr" rows="3" id="user-intro" placeholder="输入详细地址(100字以内)"></textarea>
+								<textarea name="addr" id="addr" rows="3" id="user-intro" placeholder="输入详细地址(100字以内)">{{$res->addr}}</textarea>
 							</div>
 						</div>
 
 						<div class="am-form-group theme-poptit" style="margin-top:30px">
 							<div class="am-u-sm-9 am-u-sm-push-3">
-								<button class="am-btn am-btn-danger baocun">保存</button>
+								<button onclick="conf()" class="am-btn am-btn-danger baocun">修改</button>
 								<a href="/home/balance" class="am-btn am-btn-danger close">返回</a href="/home/balance">
 							</div>
 						</div>
@@ -118,7 +112,7 @@
 		//验证详细地址
 		$('#addr').blur(function(){
 			var av = $(this).val();
-			// console.log(av.length);
+			console.log(av.length);
 			if(av.length >1 && av.length < 100 ){
 				$(this).css('color','green');
 				$(this).css('border','solid 1px green');
@@ -147,6 +141,16 @@
 		})
 
 
-		</script>
-	
+	      // function conf() 
+	      // { 
+	      //   var str = confirm('确定修改么？')
+	      //   if(str){
+	      //     // $('.baocun').removeAttr('type','button');
+	      //   } else {
+	      //     $('.baocun').attr('type','button');
+	      //   } 
+	      // } 
+
+		</script>	
+
 @endsection

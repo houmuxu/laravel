@@ -9,6 +9,8 @@
 		<link href="/home/css/jsstyle.css" rel="stylesheet" type="text/css" />
 
 		<script type="text/javascript" src="/home/js/address.js"></script>
+
+
 		
 		<!-- 主体内容 -->
 		<div class="concent">
@@ -19,7 +21,7 @@
 				<div class="address">
 					<h3>确认收货地址 </h3>
 					<div class="control">
-						<a href="/home/balance_create" class="tc-btn createAddr am-btn am-btn-danger">创建新地址</a href="/home/balances">
+						<a href="/home/balance_createone" class="tc-btn createAddr am-btn am-btn-danger">创建新地址</a href="/home/balances">
 					</div>
 					<div class="clear"></div>
 				
@@ -47,7 +49,7 @@
 								<div class="clear"></div>
 								<div class="new-addr-btn">
 									<span class="new-addr-bar hidden">|</span>
-									<a href="/home/balance_edit/{{$v->id}}" class=''>编辑</a>
+									<a href="/home/balance_editone/{{$v->id}}" class=''>编辑</a>
 									<span class="new-addr-bar">|</span>
 									<a href="javascript:void(0)"  onclick="delClick(this,{{$v->id}})">删除</a>
 								</div>
@@ -248,7 +250,7 @@
 			  	//删除
 		        $(obj).parents('.user-addresslist').remove();
 
-		        $.get('/home/balance_del',{id:id},function(data){
+		        $.get('/home/balance_delone',{id:id},function(data){
 		        	// if(data==1){alert('删除成功')}else{alert('删除失败')}
 		        })
 			}

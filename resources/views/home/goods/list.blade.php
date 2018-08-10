@@ -1,4 +1,4 @@
-@extends('common.home')
+@extends('common.home') 
 
 @section('title', $title)
 

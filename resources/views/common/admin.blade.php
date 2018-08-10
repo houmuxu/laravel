@@ -232,6 +232,32 @@
 
             <!-- 轮播图管理结束 -->
 
+            <!-- 促销商品管理 -->
+             <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>促销商品管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="/admin/sales">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>促销商品列表</cite>
+                        </a>
+                    </li >
+                </ul>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="/admin/sales/create">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>添加促销商品</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
+            <!-- 促销商品管理结束 -->
+
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe6ce;</i>

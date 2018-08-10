@@ -60,6 +60,9 @@ Route::group([],function(){
 	//  友情链接   zhang
 	Route::resource('/admin/friendlink', 'admin\FriendlinkController');
 
+	//  促销商品    zhang
+	Route::resource('/admin/sales', 'admin\SalesController');
+
 
 
 

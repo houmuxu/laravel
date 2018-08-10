@@ -508,12 +508,32 @@
                                 		var gid = $('#gid').val();
                                 		var num = $('#text_box').val();
                                 		var arr = [];
+
                                       
+
+                                   
+
                                 		arr[0] = gid;
                                 		arr[1] = num;
                                         arr[2] = goodsattr;
                                 		$.get('/home/cartc',{res:arr},function(data){
+
                                 	           console.log(data);
+
+                                			if(data){
+            //                     				$(function(){
+												//    $('#LikBasket').shoping({
+												// 		endElement:"#ceshi",
+												// 		iconImg:"/home/images/cart.png",
+												// 		endFunction:function(element){
+												// 			$(".cart_num").html(parseInt($(".cart_num").html())+1);
+												// 			console.log(element);
+												// 			return false;
+												// 		}
+												// 	})
+												// });
+                                			}
+
                                 		});
 
                                 		return false;
@@ -1317,6 +1337,7 @@
                         </div>
                         <div class="clear">
                         </div>
+
                     
 <script type="text/javascript">
             $(function(){
@@ -1331,4 +1352,8 @@
                 })
             });
 </script>
+                      
+           
+    </body>
+
 @endsection

@@ -9,6 +9,7 @@ use App\Model\Admin\Goods;
 use App\Model\Admin\User;
 use Mail;
 use Cache;
+use DB;
 
     class GoodsController extends Controller
     {
@@ -18,23 +19,25 @@ use Cache;
             if($id){
                 $arr_cid = Cate::where('path','like',"%,$id,%")->pluck('cid');
 
-            }	
-            	// 为了避免没有子分类 把自己加里面
-            	$arr_cid[] = $id;
+            }   
+                // 为了避免没有子分类 把自己加里面
+                $arr_cid[] = $id;
 
-            	$goods = Goods::whereIn('cid',$arr_cid)->paginate(8);
+                $goods = Goods::whereIn('cid',$arr_cid)->paginate(8);
                 $cate = Cate::where('cid',$id)->first();
+                $links = DB::table('friendlink')->get();
                
 
 
-           return view('home/goods/list',['title'=>$cate->cname,'goods'=>$goods]);
+           return view('home/goods/list',['title'=>$cate->cname,'goods'=>$goods,'links'=>$links]);
         }
 
 
         public function show($id)
         {
+            $links = DB::table('friendlink')->get();
            $data = Goods::where('gid',$id)->first();
-           return view('home/goods/show',['data'=>$data,'title'=>$data->gname]);
+           return view('home/goods/show',['data'=>$data,'title'=>$data->gname,'links'=>$links]);
         }
 
 
@@ -42,7 +45,9 @@ use Cache;
         {
             $gname = $request->input('gname');
             $goods = Goods::where('gname','like','%'.$gname.'%')->paginate(8);
-            return view('home/goods/list',['title'=>'商品列表','goods'=>$goods,'request'=>$request]);
+                $links = DB::table('friendlink')->get();
+            
+            return view('home/goods/list',['title'=>'商品列表','goods'=>$goods,'request'=>$request,'links'=>$links]);
         }
 
 

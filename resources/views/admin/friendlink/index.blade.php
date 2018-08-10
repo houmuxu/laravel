@@ -49,33 +49,36 @@
             <th>操作</th>
         </thead>
         <tbody>
-
+          @foreach($data as $k=>$v)
           <tr>
             <td>
               <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
             </td>
-            <td>1</td>
-            <td>会员相关</td>
+            <td>{{$v->fid}}</td>
+            <td>{{$v->fname}}</td>
+            <td>{{$v->furl}}</td>
+            
             <td class="td-manage">
-              <a title="编辑"  onclick="x_admin_show('编辑','admin-edit.html')" href="javascript:;">
-                <i class="layui-icon">&#xe642;</i>
-              </a>
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                <i class="layui-icon">&#xe640;</i>
-              </a>
+              <form action="/admin/friendlink/{{$v->fid}}/edit" method="get" style="display:inline">
+                <button><i class="layui-icon">&#xe642;</i></button>
+              </form>
+                
+              
+              <form action="/admin/friendlink/{{$v->fid}}" method="post" style="display:inline">
+                {{csrf_field()}}
+                {{method_field('DELETE')}}
+             
+                <button><i class="layui-icon">&#xe640;</i></button>
+              
+              </form>
             </td>
           </tr>
-
+          @endforeach
         </tbody>
       </table>
       <div class="page">
         <div>
-          <a class="prev" href="">&lt;&lt;</a>
-          <a class="num" href="">1</a>
-          <span class="current">2</span>
-          <a class="num" href="">3</a>
-          <a class="num" href="">489</a>
-          <a class="next" href="">&gt;&gt;</a>
+         {{$data->links()}}
         </div>
       </div>
 
@@ -120,13 +123,13 @@
       }
 
       /*用户-删除*/
-      function member_del(obj,id){
+     /* function member_del(obj,id){
           layer.confirm('确认要删除吗？',function(index){
               //发异步删除数据
               $(obj).parents("tr").remove();
-              layer.msg('已删除!',{icon:1,time:1000});
+              layer.msg('已删除!',{icon:1,time:2000});
           });
-      }
+      }*/
 
 
 

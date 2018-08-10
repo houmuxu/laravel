@@ -86,7 +86,7 @@
         reader.onload=function(e){ 
             var result=document.getElementById("result"); 
             //显示文件 
-            result.innerHTML='<img src="' + this.result +'" width="800px"/>'; 
+            result.innerHTML='<img src="' + this.result +'" width="400px"/>'; 
         } 
 
       } 

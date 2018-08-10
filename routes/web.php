@@ -31,9 +31,14 @@ Route::group([],function(){
 	Route::resource('/admin/goods','admin\GoodsController');
 	//轮播图管理 hou
 	Route::any('/admin/lunbo/create','admin\LunboController@create');//添加轮播页面
-	Route::any('/admin/lunbo/store','admin\LunboController@store');//添加轮播页面
+	Route::any('/admin/lunbo/store','admin\LunboController@store');//添加轮播
 	Route::any('/admin/lunbo/index','admin\LunboController@index');//轮播列表
 	Route::any('/admin/lunbo/status','admin\LunboController@status');//轮播状态管理
+	Route::any('/admin/lunbo/edit/{id}','admin\LunboController@edit');//轮播修改页面
+	Route::any('/admin/lunbo/update/{id}','admin\LunboController@update');//轮播修改
+	Route::any('/admin/lunbo/delete','admin\LunboController@delete');//轮播单条删除
+	Route::any('/admin/lunbo/ajaxdel','admin\LunboController@ajaxdel');//轮播多条删除
+
 
 	// 类别管理  zhang
 	Route::resource('/admin/cate', 'admin\CateController');
@@ -98,21 +103,26 @@ Route::group([],function(){
 	//  购物车页面  zhang
 	Route::any('/home/cart','home\CartController@index');    // 购物车页面
 	Route::any('/home/cart/del','home\CartController@del');//购物车商品删除
-	Route::any('/home/cart/incre','home\CartController@incre');//商品数量加1
-	Route::any('/home/cart/decre','home\CartController@decre');//商品数量减1
+	Route::any('/home/ajaxcart','home\CartController@ajaxcart');
+	
 
 
 	//  个人中心页面
 	Route::any('/home/self','home\SelfController@index');   //  个人中心页面
 
 	//结算页
-	Route::any('/home/balance','home\BalanceController@index');
-	//添加收货地址
-	Route::any('/home/balances','home\BalanceController@create');
+	Route::any('/home/balance','home\BalanceController@index');//结算主页面
+	Route::any('/home/balance_create','home\BalanceController@create');//收货信息添加页
 	Route::any('/home/balance_store','home\BalanceController@store');
-	Route::any('/home/balance_edit/{id}','home\BalanceController@edit');
+	Route::any('/home/balance_edit/{id}','home\BalanceController@edit');//收货信息修改页
 	Route::any('/home/balance_update/{id}','home\BalanceController@update');
-	Route::any('/home/balance_del','home\BalanceController@delete');
+	Route::any('/home/balance_del','home\BalanceController@delete');//收货信息删除
+
+	Route::any('/home/balance_order','home\BalanceController@order');//订单信息存入
+
+
+	//支付成功页
+	Route::any('/home/pay_ok','home\BalanceController@payok');//收货信息删除
 
 
 

@@ -8,38 +8,38 @@
 						<div class="am-slider am-slider-default scoll" data-am-flexslider id="demo-slider-0">
 							<ul class="am-slides">
 								<li class="banner1" style="background: white">
-									<a>
+									<a href="/home/goodslist/7">
 										<img src="/home/first/3.png" style="width: 1020px;height: 455px" />
 									</a>
 								</li>
 								<li class="banner1" style="background: white">
-									<a>
+									<a href="/home/goodslist/4">
 										<img src="/home/first/1.png" style="width: 1000px;height: 400px" />
 									</a>
 								</li>						
 								<li class="banner1" style="background: white">
-									<a>
+									<a href="/home/goodslist/6">
 										<img src="/home/first/4.png" style="width: 1000px;height: 440px;margin-top: 20px" />
 									</a>
 								</li>
 								<li class="banner1" style="background: white">
-									<a>
+									<a href="/home/goodslist/8">
 										<img src="/home/first/9.png" style="width: 1000px;height: 430px;margin-top:20px" />
 									</a>
 								</li>
 								<li class="banner1" style="background: white;">
-									<a>
+									<a href="/home/goodslist/3">
 										<img src="/home/first/5.png" style="width: 1000px;height: 455px;margin-top:-20px" />
 									</a>
 								</li>
 								<li class="banner1" style="background: white">
-									<a>
+									<a href="/home/goodslist/9">
 										<img src="/home/first/6.png" style="width: 1000px;height: 473px;margin-top:-40px" />
 									</a>
 								</li>
 								<li class="banner1" style="background: white">
-									<a>
-										<img src="/home/first/8.png" style="width: 1000px;height: 390px;margin-top:30px;" />
+									<a href="/home/goodslist/1">
+										<img src="/home/first/8.png" style="width: 990px;height: 390px;margin-top:30px;" />
 									</a>
 								</li>
 								<li class="banner1" style="background: white">

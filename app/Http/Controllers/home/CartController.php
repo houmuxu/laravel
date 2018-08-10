@@ -8,6 +8,7 @@ use App\Model\Admin\Goods;
 use App\Model\home\Cart;
 use App\Model\Admin\Goodspic;
 use DB;
+use App\Model\home\Cartsinfo;
 
 class CartController extends Controller
 {
@@ -31,6 +32,7 @@ class CartController extends Controller
     {
         //  获取数据
         $data = DB::table('cart')->where('uid',1)->get();
+        $links = DB::table('friendlink')->get();
        
          //  求总数量,总金额
         $cnt = 0;
@@ -46,9 +48,10 @@ class CartController extends Controller
 
         }
 
+
         //  通过gid找到商品的图片
 
-        return view('home.cart.index',['data'=>$data,'cnt'=>$cnt,'sum'=>$sum,'gpic'=>$gpic]);
+        return view('home.cart.index',['data'=>$data,'cnt'=>$cnt,'sum'=>$sum,'gpic'=>$gpic,'links'=>$links]);
     }
 
     //  购物车删除商品
@@ -63,6 +66,29 @@ class CartController extends Controller
         echo $data;
     }
 
+    public function ajaxcart(Request $request)
+    {
+        $arr = $request->input('arr');
+
+        $data = [];
+        $res = [];
+        foreach($arr as $k=>$v){
+            $data = array('gid'=>$v[6],'num'=>$v[2],'price'=>$v[4],'gname'=>$v[3],'prs'=>$v[0],'uid'=>$v[7],'goodsattr'=>$v[5]);
+            $res[] = $data;
+        }
+
+        // var_dump($res);
+        try{
+            $rs = DB::table('cartinfo')->insert($res);
+            if($rs){
+                echo 1;
+            }
+        } catch(\Exception $e){
+            echo 0;
+        }
+        echo $rs;
+        
+    }
 
    
 

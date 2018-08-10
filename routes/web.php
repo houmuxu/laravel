@@ -12,7 +12,7 @@
 */
 
 //后台
-Route::group([],function(){
+Route::group([],function(){   
 	//后台首页zhao
 	Route::any('/admin/first','admin\FistUserController@first');
 	//管理员 
@@ -120,9 +120,11 @@ Route::group([],function(){
 
 	Route::any('/home/balance_order','home\BalanceController@order');//订单信息存入
 
-
 	//支付成功页
 	Route::any('/home/pay_ok','home\BalanceController@payok');//收货信息删除
+
+	//订单管理
+	Route::any('/person/order','home\MydealController@index');//个人中心订单
 
 
 

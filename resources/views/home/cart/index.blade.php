@@ -517,7 +517,7 @@
 					//  获取金额
 					var prs = $(this).parents('ul').find('.number').text();
 					//  获取数量
-					var num = $(this).parents('ul').find('#num').val();
+					var num = $(this).parents('ul').find('#nums').val();
 					//  获取id号
 					var id = $(this).attr('gid');
 					// alert(id);

@@ -45,7 +45,9 @@ use DB;
         {
             $gname = $request->input('gname');
             $goods = Goods::where('gname','like','%'.$gname.'%')->paginate(8);
-            return view('home/goods/list',['title'=>'商品列表','goods'=>$goods,'request'=>$request]);
+                $links = DB::table('friendlink')->get();
+            
+            return view('home/goods/list',['title'=>'商品列表','goods'=>$goods,'request'=>$request,'links'=>$links]);
         }
 
 

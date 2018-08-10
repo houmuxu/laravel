@@ -1,14 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+@extends('common.home')
 
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0 ,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+@section('title', $title)
 
-		<title>结算页面</title>
-
-		<link href="/home/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
-
+@section('content')
 		<link href="/home/basic/css/demo.css" rel="stylesheet" type="text/css" />
 		<link href="/home/css/cartstyle.css" rel="stylesheet" type="text/css" />
 
@@ -19,52 +13,9 @@
 		<link rel="stylesheet" type="text/css" href="/home/city/css/zcity.css">
 		<script type="text/javascript" src="/home/city/js/jquery-1.9.1.min.js"></script>
 		<script type="text/javascript" src="/home/city/js/zcity.js"></script>
-	</head>
 
-	<body>
 
-		<!--顶部导航条 -->
-		<div class="am-container header">
-			<ul class="message-l">
-				<div class="topMessage">
-					<div class="menu-hd">
-						<a href="#" target="_top" class="h">亲，请登录</a>
-						<a href="#" target="_top">免费注册</a>
-					</div>
-				</div>
-			</ul>
-			<ul class="message-r">
-				<div class="topMessage home">
-					<div class="menu-hd"><a href="/" target="_top" class="h">商城首页</a></div>
-				</div>
-				<div class="topMessage my-shangcheng">
-					<div class="menu-hd MyShangcheng"><a href="/home/self" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
-				</div>
-				<div class="topMessage mini-cart">
-					<div class="menu-hd"><a id="mc-menu-hd" href="/home/cartc" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
-				</div>
-				<div class="topMessage favorite">
-					<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
-				</div>
-			</ul>
-		</div>
-			
-		<!--logo搜索框-->
-		<div class="nav white">
-			<div class="logo"><img src="/home/images/logo.png" /></div>
-			<div class="logoBig">
-				<li><img src="/home/images/logobig.png" /></li>
-			</div>
 
-			<div class="search-bar pr">
-				<a name="index_none_header_sysc" href="#"></a>
-				<form>
-					<input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
-					<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
-				</form>
-			</div>
-		</div>
-		<div class="clear"></div>
 		
 		<!-- 主体内容 -->
 		<div class="concent">
@@ -278,34 +229,11 @@
 				</div>
 			</div>
 
-			<div class="footer">
-				<div class="footer-hd">
-					<p>
-						@foreach($links as $k=>$v)
-							<a href="{{$v->furl}}">{{$v->fname}}</a>
-							<b>|</b>
-						@endforeach
-						<a href="#">商城首页</a>
-						<b>|</b>
-						<a href="#">支付宝</a>
-						<b>|</b>
-						<a href="#">物流</a>
-					</p>
-				</div>
-				<div class="footer-bd">
-					<p>
-						<a href="#">关于恒望</a>
-						<a href="#">合作伙伴</a>
-						<a href="#">联系我们</a>
-						<a href="#">网站地图</a>
-						<em>© 2015-2025 Hengwang.com 版权所有. 更多模板 <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></em>
-					</p>
-				</div>
-			</div>	
+			
 		</div>
 
 
-		<script type="text/javascript">
+	<script type="text/javascript">
 		//再次确认页面最下的收货信息
 		function xinxi(obj)
 		{
@@ -334,126 +262,144 @@
 
 		}
 
-	//***********订单修改相关****************************************
-			$(function(){
-				sum();
-			})
-
-			//  加1
-			$('input[name="incre"]').click(function(){
-				
-				//  获取数量
-				var num = Number($(this).prev().val())+1;
-
-				//  获取价格
-				var pr = $(this).parents('ul').find('.price-now').text();
-
-				//  金额发生改变  
-				$(this).parents('ul').find('.number').text(num*pr);
-				sum();
-			})
-
-
-			//  减1 
-			$('input[name="decre"]').click(function(){
-				
-				//  获取数量
-				var num = Number($(this).next().val())-1;
-// 
-				// if(num < 1){ num = 0}
-
-				//  获取价格
-				var pr = $(this).parents('ul').find('.price-now').text();
-				
-				//小于1,按钮变灰
-				if(num <= 1){
-					$(this).parents('ul').find('.number').text(1*pr);
-				} else {
-					$(this).parents('ul').find('.number').text(num*pr);
-				}
-
-				sum();
-
-			})  
-
-
-			//  封装总价的函数
-			function sum()
-			{
-				var sum = 0;
-
-				//  遍历中的每个金额相加
-				$('.number').each(function(){
-					//  获取金额
-					var prs = $(this).text();
-
-					function accAdd(arg1,arg2){  
-					    var r1,r2,m;  
-					    try{r1=arg1.toString().split(".")[1].length}catch(e){r1=0}  
-					    try{r2=arg2.toString().split(".")[1].length}catch(e){r2=0}  
-					    m=Math.pow(10,Math.max(r1,r2))  
-					    return (arg1*m+arg2*m)/m  
-						}
-						sum = accAdd(sum,prs);
-					})
-
-					$('.pay-sum').text(sum);
-					$('#J_ActualFee').text(sum);
-			}
-
-
-	//***********提交不为空****************************************
-	$('#J_Go').click(function(){
-		//获取地址信息,去除两边空白
-        var aa = $('.jisongzhi').html().replace(/(^\s*)|(\s*$)/g, "");
-        var bb = $('.shouhuoren').html().replace(/(^\s*)|(\s*$)/g, "");
-        var cc = $('.shoujihao').html().replace(/(^\s*)|(\s*$)/g, "");
-        if(aa=='点击上方地址,选择您的收货地址' ||bb=='点击上方地址,选择收货人' ||cc=='手机号'){
-        	alert('请 您 填 写 收 货 信 息, 谢 谢 ! ! ! ')
-        	return false;
-        }	
-	})
-
-	//***********保存数据到数据库****************************************
-	$('#J_Go').click(function(){
-
-		//获取订单信息
-		var arr=[];
-		var oname = $('.shouhuoren').html().replace(/(^\s*)|(\s*$)/g, "");
-		var tel = $('.shoujihao').html().replace(/(^\s*)|(\s*$)/g, "");
-		var addr = $('.jisongzhi').html().replace(/(^\s*)|(\s*$)/g, "");
-		var sum = $('#J_ActualFee').text().replace(/(^\s*)|(\s*$)/g, "");
-		var msg = $('input[name=msg]').val().replace(/(^\s*)|(\s*$)/g, "");
-		arr.push([oname,tel,addr,sum,msg]);
-
-		//获取订单详情信息
-		var arr2=[];
-		$('.J_Price').each(function(){
-			//  获取金额
-			var gid = $(this).parents('ul').find('.gid').val();
-			var price = $(this).text();
-			var cnt = $(this).parents('ul').find('.text_box').val();
-			
-			arr2.push([gid,price,cnt]);
-			
+		//***********订单修改相关****************************************
+		$(function(){
+			sum();
 		})
-		
-		//通过ajax发送到后台进行保存数据
-		$.get('/home/balance_order',{arr:arr,arr2:arr2},function(oid){
-			//console.log(oid);
-			if(oid){
-				location.replace('/home/pay_ok?oid='+oid);
+
+		//  加1
+		$('input[name="incre"]').click(function(){
+			
+			//  获取数量
+			var num = Number($(this).prev().val())+1;
+
+			//  获取价格
+			var pr = $(this).parents('ul').find('.price-now').text();
+
+			function accMul(arg1, arg2) {
+
+		        var m = 0, s1 = arg1.toString(), s2 = arg2.toString();
+
+		        try { m += s1.split(".")[1].length } catch (e) { }
+
+		        try { m += s2.split(".")[1].length } catch (e) { }
+
+		        return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m)
+
 			}
-        })
+
+			//  金额发生改变  
+			$(this).parents('ul').find('.number').text(accMul(num,pr));
+			sum();
+		})
 
 
+		//  减1 
+		$('input[name="decre"]').click(function(){
+			
+			//  获取数量
+			var num = Number($(this).next().val())-1;
 
-	})
+			//  获取价格
+			var pr = $(this).parents('ul').find('.price-now').text();
+
+			function accMul(arg1, arg2) {
+
+		        var m = 0, s1 = arg1.toString(), s2 = arg2.toString();
+
+		        try { m += s1.split(".")[1].length } catch (e) { }
+
+		        try { m += s2.split(".")[1].length } catch (e) { }
+
+		        return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m)
+
+			}
+			
+			// 金额发生改变
+			if(num <= 1){
+				$(this).parents('ul').find('.number').text(accMul(1,pr));
+			} else {
+				$(this).parents('ul').find('.number').text(accMul(num,pr));
+			}
+
+			sum();
+
+		})  
 
 
+		//  封装总价的函数
+		function sum()
+		{
+			var sum = 0;
+
+			//  遍历中的每个金额相加
+			$('.number').each(function(){
+				//  获取金额
+				var prs = $(this).text();
+
+				function accAdd(arg1,arg2){  
+				    var r1,r2,m;  
+				    try{r1=arg1.toString().split(".")[1].length}catch(e){r1=0}  
+				    try{r2=arg2.toString().split(".")[1].length}catch(e){r2=0}  
+				    m=Math.pow(10,Math.max(r1,r2))  
+				    return (arg1*m+arg2*m)/m  
+					}
+					sum = accAdd(sum,prs);
+				})
+
+				$('.pay-sum').text(sum);
+				$('#J_ActualFee').text(sum);
+		}
 
 
-		</script>
-	</body>
+		//***********保存数据到数据库****************************************
+		$('#J_Go').click(function(){
 
-</html>
+			//获取订单信息
+			var arr=[];
+			var oname = $('.shouhuoren').html().replace(/(^\s*)|(\s*$)/g, "");
+			var tel = $('.shoujihao').html().replace(/(^\s*)|(\s*$)/g, "");
+			var addr = $('.jisongzhi').html().replace(/(^\s*)|(\s*$)/g, "");
+			var sum = $('#J_ActualFee').text().replace(/(^\s*)|(\s*$)/g, "");
+			var msg = $('input[name=msg]').val().replace(/(^\s*)|(\s*$)/g, "");
+			arr.push([oname,tel,addr,sum,msg]);
+
+			//获取订单详情信息
+			var arr2=[];
+			$('.J_Price').each(function(){
+				//  获取金额
+				var gid = $(this).parents('ul').find('.gid').val();
+				var price = $(this).text();
+				var cnt = $(this).parents('ul').find('.text_box').val();
+				
+				arr2.push([gid,price,cnt]);
+				
+			})
+
+			//获取地址信息,去除两边空白
+	        var aa = $('.jisongzhi').html().replace(/(^\s*)|(\s*$)/g, "");
+	        var bb = $('.shouhuoren').html().replace(/(^\s*)|(\s*$)/g, "");
+	        var cc = $('.shoujihao').html().replace(/(^\s*)|(\s*$)/g, "");
+
+	        if(aa=='点击上方地址,选择您的收货地址' ||bb=='点击上方地址,选择收货人' ||cc=='手机号'){
+	        	alert('请 您 填 写 收 货 信 息, 谢 谢 ! ! ! ')
+	        	return false;
+	        } else {
+	        	//通过ajax发送到后台进行保存数据
+				$.get('/home/balance_order',{arr:arr,arr2:arr2},function(oid){
+					//console.log(oid);
+					if(oid){
+						location.replace('/home/pay_ok?oid='+oid);
+					}
+	       	 	})
+	        }
+			
+			
+
+
+		})
+
+	</script>
+
+
+@endsection

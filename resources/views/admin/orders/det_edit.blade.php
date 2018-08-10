@@ -92,6 +92,8 @@
     </div>
 
     <script type="text/javascript">
+
+      //修改按钮
       function conf() { 
         var msg = "您确定要修改吗？\r\n请确认！"; 
         if (confirm(msg)==true){ 
@@ -100,6 +102,36 @@
           return false; 
         } 
       } 
+
+    //验证单价
+    $('input[name=price]').blur(function(){
+      var tv = $(this).val();
+      var reg = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
+      if(!reg.test(tv)){
+        $(this).css('color','red');
+        $(this).css('border','solid 1px red');
+        $('.baocun').attr('type','button');   //禁止提交
+      }else{
+        $(this).css('color','green');
+        $(this).css('border','solid 1px green');
+        $('.baocun').removeAttr('type','button');
+      }
+    })
+
+    //验证数量
+    $('input[name=cnt]').blur(function(){
+      var tv = $(this).val();
+      var reg = /^-?[1-9]\d*$/;
+      if(!reg.test(tv)){
+        $(this).css('color','red');
+        $(this).css('border','solid 1px red');
+        $('.baocun').attr('type','button');   //禁止提交
+      }else{
+        $(this).css('color','green');
+        $(this).css('border','solid 1px green');
+        $('.baocun').removeAttr('type','button');
+      }
+    })
     </script>
     
   </body>

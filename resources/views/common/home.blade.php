@@ -68,7 +68,7 @@
 
 				@show
 				<div class="footer ">
-						<div class="footer-hd ">
+						<div class="footer-hd "> 
 							<p>
 							@foreach($links as $k=>$v)
 								<a href="{{$v->furl}}">{{$v->fname}}</a>

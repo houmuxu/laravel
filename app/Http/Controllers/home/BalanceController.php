@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\home;
+namespace App\Http\Controllers\home; 
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,7 +16,7 @@ class BalanceController extends Controller
         $res = DB::table('cartinfo')->where('uid',$uid)->get();
         $links = DB::table('friendlink')->get();
               
-    	return view('home/balance/balance',['data'=>$data,'res'=>$res,'links'=>$links]);
+    	return view('home/balance/balance',['data'=>$data,'res'=>$res,'links'=>$links,'title'=>'结算页面']);
     }
 
     public function create()
@@ -127,8 +127,9 @@ class BalanceController extends Controller
 
         // $aa = session('uid');
         // echo $aa;
+        $links = DB::table('friendlink')->get();
 
-        return view('home/balance/payok',['data'=>$data]);
+        return view('home/balance/payok',['data'=>$data,'links'=>$links,'title'=>'付款成功页面']);
     }
 
 

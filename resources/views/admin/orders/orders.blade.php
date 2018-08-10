@@ -46,13 +46,13 @@
           <tr>
             <th>订单编号</th>
             <th>收货人</th>
-            <th style="width:250px">收货地址</th>
+            <th>收货地址</th>
             <th>联系电话</th>
             <th>购买时间</th>
             <th>总金额</th>
             <th>留言</th>
-            <th>状态</th>
-            <th >操作</th>
+            <th style="width:45px">状态</th>
+            <th style="width:70px">操作</th>
           </tr>
         </thead>
         <tbody>
@@ -64,7 +64,7 @@
             <td> {{$v->oname}} </td>
             <td>{{$v->addr}}</td>
             <td>{{$v->tel}}</td>
-            <td>{{$v->addtime}}</td>
+            <td>{{date('Y-m-d H:i:s',$v->addtime)}}</td>
             <td>{{$v->sum}}</td>
             <td>{{$v->msg}}</td>
             <td class="td_status">@if($v->status==1)未发货@elseif($v->status==2)已发货@elseif($v->status==3)已签收@elseif($v->status==4)已取消@endif</td>

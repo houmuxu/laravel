@@ -12,6 +12,7 @@
 
 		<script type="text/javascript" src="/home/basic/js/jquery-1.7.min.js"></script>
 		<script type="text/javascript" src="/home/js/script.js"></script>
+		<link rel="stylesheet" href="/home/layui/css/layui.css" media="all">
 		
 		
 			<b class="line"></b>
@@ -35,17 +36,10 @@
 					<div class="am-g am-g-fixed">
 						<div class="am-u-sm-12 am-u-md-12">
 	                  	<div class="theme-popover">														
-							<div class="searchAbout">
-								<span class="font-pale">相关搜索：</span>
-								<a title="坚果" href="#">坚果</a>
-								<a title="瓜子" href="#">瓜子</a>
-								<a title="鸡腿" href="#">豆干</a>
-
-							</div>
 							<ul class="select">
 								<p class="title font-normal">
-									<span class="fl">松子</span>
-									<span class="total fl">搜索到<strong class="num">997</strong>件相关商品</span>
+									<span class="fl">{{$cate->cname}}</span>
+									<span class="total fl">搜索到<strong class="num">{{$shu}}</strong>件相关商品</span>
 								</p>
 								<div class="clear"></div>
 								<li class="select-result">
@@ -56,46 +50,19 @@
 									</dl>
 								</li>
 								<div class="clear"></div>
-								<li class="select-list">
-									<dl id="select1">
-										<dt class="am-badge am-round">品牌</dt>	
-									
-										 <div class="dd-conent">										
-											<dd class="select-all selected"><a href="#">全部</a></dd>
-											<dd><a href="#">百草味</a></dd>
-											<dd><a href="#">良品铺子</a></dd>
-											<dd><a href="#">新农哥</a></dd>
-											<dd><a href="#">楼兰蜜语</a></dd>
-											<dd><a href="#">口水娃</a></dd>
-											<dd><a href="#">考拉兄弟</a></dd>
-										 </div>
-						
-									</dl>
-								</li>
+
 								<li class="select-list">
 									<dl id="select2">
 										<dt class="am-badge am-round">种类</dt>
 										<div class="dd-conent">
 											<dd class="select-all selected"><a href="#">全部</a></dd>
-											<dd><a href="#">东北松子</a></dd>
-											<dd><a href="#">巴西松子</a></dd>
-											<dd><a href="#">夏威夷果</a></dd>
-											<dd><a href="#">松子</a></dd>
+											@foreach($sub as $k=>$v)
+											<dd><a href="/home/goodslist/{{$v->cid}}">{{$v->cname}}</a></dd>
+											@endforeach
 										</div>
 									</dl>
 								</li>
-								<li class="select-list">
-									<dl id="select3">
-										<dt class="am-badge am-round">选购热点</dt>
-										<div class="dd-conent">
-											<dd class="select-all selected"><a href="#">全部</a></dd>
-											<dd><a href="#">手剥松子</a></dd>
-											<dd><a href="#">薄壳松子</a></dd>
-											<dd><a href="#">进口零食</a></dd>
-											<dd><a href="#">有机零食</a></dd>
-										</div>
-									</dl>
-								</li>
+								
 					        
 							</ul>
 							<div class="clear"></div>
@@ -140,46 +107,23 @@
 									经典搭配
 								</div>
 <!-- 经典搭配另建表 -->
+							@foreach($jingdian as $k=>$v)
 								<li>
 									<div class="i-pic check">
-										<img src="/home/images/cp.jpg" />
-										<p class="check-title">萨拉米 1+1小鸡腿</p>
+										<a href="/home/goodsshow/{{$v->gid}}">
+										<img src="{{$v->goodspics[0]->gpic}}" />
+										</a>								
+										<p class="title fl">{{$v->gname}}</p>
 										<p class="price fl">
 											<b>¥</b>
-											<strong>29.90</strong>
+											<strong>{{$v->price}}</strong>
 										</p>
 										<p class="number fl">
-											销量<span>1110</span>
+											销量<span>{{$v->num}}</span>
 										</p>
 									</div>
 								</li>
-								<li>
-									<div class="i-pic check">
-										<img src="/home/images/cp2.jpg" />
-										<p class="check-title">ZEK 原味海苔</p>
-										<p class="price fl">
-											<b>¥</b>
-											<strong>8.90</strong>
-										</p>
-										<p class="number fl">
-											销量<span>1110</span>
-										</p>
-									</div>
-								</li>
-								<li>
-									<div class="i-pic check">
-										<img src="/home/images/cp.jpg" />
-										<p class="check-title">萨拉米 1+1小鸡腿</p>
-										<p class="price fl">
-											<b>¥</b>
-											<strong>29.90</strong>
-										</p>
-										<p class="number fl">
-											销量<span>1110</span>
-										</p>
-									</div>
-								</li>
-
+							@endforeach
 							</div>
 							<div class="clear"></div>
 							<!--分页 -->
@@ -198,8 +142,22 @@
 						</div>
 					</div>
 		
-        
+        <div id="test1">
+        	{!!$goods->links()!!}
+        </div>
        
-        
+        <script src="/home/layui/layui.js"></script>
+		<script>
+		layui.use('laypage', function(){
+		  var laypage = layui.laypage;
+		  
+		  //执行一个laypage实例
+		  laypage.render({
+		    elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
+		    ,count: 16//数据总数，从服务端得到
+		    ,limit:12
+		  });
+		});
+		</script>
       
 			@endsection

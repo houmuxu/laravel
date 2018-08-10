@@ -514,6 +514,7 @@
 			$('#J_Go').click(function(){
 
 				var arr = [];
+				var brr = [];
 				$(':checkbox:checked').each(function(){
 					//  获取金额
 					var prs = $(this).parents('ul').find('.number').text();
@@ -538,14 +539,15 @@
 					// alert(goodsid);
 
 					arr.push([prs,id,num,gname,price,goodsattr,goodsid,uid]);
-
+					brr.push([id]);
 					// console.log(arr);
 
 				})
-
-				$.post('/home/ajaxcart',{arr:arr},function(data){
+				var del = $(this)
+				$.post('/home/ajaxcart',{arr:arr,id:brr},function(data){
 						
 					if(data){
+						del.parents('ul').remove();
 						location.replace('/home/balance');
 					}
 				})

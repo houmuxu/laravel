@@ -67,12 +67,16 @@ class CartController extends Controller
     }
 
     public function ajaxcart(Request $request)
-   {
+
+    {
+      
         $arr = $request->input('arr');
+
 
         //   获取id号删除cart表数据
         $id = $request->input('id');
         
+
 
         //   将所得数据存入cartinfo表
         $data = [];
@@ -81,6 +85,7 @@ class CartController extends Controller
             $data = array('gid'=>$v[6],'num'=>$v[2],'price'=>$v[4],'gname'=>$v[3],'prs'=>$v[0],'uid'=>$v[7],'goodsattr'=>$v[5]);
             $res[] = $data;
         }
+
 
         // var_dump($res);
         try{
@@ -93,13 +98,15 @@ class CartController extends Controller
         }
         echo $rs;
 
+
         foreach($id as $k=>$v){
             $fin = DB::table('cart')->where('id',$v[0])->delete();
         }
         echo $fin;
     
-    }
+    
 
    
 
+    }
 }

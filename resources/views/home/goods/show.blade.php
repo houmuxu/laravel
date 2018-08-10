@@ -534,6 +534,7 @@
                                          goodsattr = $(this).attr('attr');
                                        
                                     });
+
                                     $('#LikBasket').click(function(){
                                         var gid = $('#gid').val();
                                         var num = $('#text_box').val();
@@ -548,6 +549,7 @@
 
                                         return false;
                                     })
+
                                 
                                 </script>
                             </li>

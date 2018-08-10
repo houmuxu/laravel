@@ -191,7 +191,7 @@
 											<div class="item-amount ">
 												<div class="sl">
 													<input class="min am-btn" name="decre" type="button" value="-" />
-													<input class="text_box" name="" id=num type="text" value="{{$v->num}}" style="width:20px;line-height:18px;text-align:center" />
+													<input class="text_box" name="" id='nums' type="text" value="{{$v->num}}" style="width:20px;line-height:18px;text-align:center" />
 													<input class="add am-btn" name="incre" type="button" value="+" />
 												</div>
 											</div>
@@ -228,7 +228,7 @@
 				<div class="float-bar-wrapper">
 					<div id="J_SelectAll2" class="select-all J_SelectAll">
 						<div class="cart-checkbox">
-							<input class="check-all check" id="J_SelectAllCbx2" name="select-all" value="true" type="checkbox">
+							<input class="check-all" id="J_SelectAllCbx2" name="select-all" value="true" type="checkbox">
 							<label for="J_SelectAllCbx2"></label>
 						</div>
 						<span>全选</span>
@@ -343,8 +343,9 @@
 
 				}
 				swith_All = !swith_All;
-				sum();
 				cnt();
+				sum();
+				
 				
 			});
 
@@ -419,7 +420,7 @@
 			//  封装总价的函数
 			function sum()
 			{
-				var sum = 0;
+				var sm = 0;
 				// var cnt = 0;
 				//  判断多选框有没有被选中
 				$(':checkbox:checked').each(function(){
@@ -437,22 +438,21 @@
 					    m=Math.pow(10,Math.max(r1,r2))  
 					    return (arg1*m+arg2*m)/m  
 					}
-					sum = accAdd(sum,prs);
+					sm = accAdd(sm,prs);
 					// cnt = accAdd(cnt,num);
 				})
-				$('.price').text(sum);
+				$('.price').text(sm);
 				// $('#J_SelectedItemsCount').text(cnt);
-			}
+			} 
 
 			function cnt()
 			{
-				var cnt = 0;
+				var cnts = 0;
 				//  判断多选框有没有被选中
-				$(':checkbox:checked').each(function(){
+				$('.check:checked').each(function(){
 					//  获取数量
-					var num = $(this).parents('ul').find('#num').val();
-
-
+					nums = parseInt($(this).parents('ul').find('#nums').val());
+					// // console.log(num);
 					function accAdd(arg1,arg2){  
 					    var r1,r2,m;  
 					    try{r1=arg1.toString().split(".")[1].length}catch(e){r1=0}  
@@ -460,19 +460,21 @@
 					    m=Math.pow(10,Math.max(r1,r2))  
 					    return (arg1*m+arg2*m)/m  
 					}
-					cnt = accAdd(cnt,num);
+
+					cnts = accAdd(cnts,nums);
+
 				})
-				$('#J_SelectedItemsCount').text(cnt);
+
+				$('#J_SelectedItemsCount').text(cnts);
 			}
 
 			function decre()
 			{
 				var cnt = 0;
 				//  判断多选框有没有被选中
-				$(':checkbox:checked').each(function(){
+				$('.check:checked').each(function(){
 					//  获取数量
-					var num = $(this).parents('ul').find('#num').val();
-
+					var num = $(this).parents('ul').find('#nums').val();
 
 					function accAdd(arg1,arg2){  
 					    var r1,r2,m;  
@@ -490,10 +492,9 @@
 			{
 				var cnt = 0;
 				//  判断多选框有没有被选中
-				$(':checkbox:checked').each(function(){
+				$('.check:checked').each(function(){
 					//  获取数量
-					var num = $(this).parents('ul').find('#num').val();
-
+					var num = $(this).parents('ul').find('#nums').val();
 
 					function accAdd(arg1,arg2){  
 					    var r1,r2,m;  
@@ -507,17 +508,11 @@
 				$('#J_SelectedItemsCount').text(cnt+1);
 			}
 
-
-
 			$.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
 			//  去结算页面
 			$('#J_Go').click(function(){
-
 				var arr = [];
-
 				var brr = [];
-
-
 				$(':checkbox:checked').each(function(){
 					//  获取金额
 					var prs = $(this).parents('ul').find('.number').text();
@@ -556,18 +551,9 @@
 						location.replace('/home/balance');
 					// console.log(arr);
 					}
-				})
-
-				
-						
-					
-				
+				})	
 
 			})
-				
-				
-
-
 
 		</script>
 </html>

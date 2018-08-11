@@ -115,7 +115,18 @@ Route::group([],function(){
 	//  个人中心页面
 	Route::any('/home/self','home\SelfController@index');   //  个人中心页面
 
-	//结算页
+
+
+	// 立即购买
+	Route::any('/home/balance_one','home\BalanceController@indexone');
+	Route::any('/home/balance_createone','home\BalanceController@createone');//收货信息添加页
+	Route::any('/home/balance_storeone','home\BalanceController@storeone');
+	Route::any('/home/balance_editone/{id}','home\BalanceController@editone');//收货信息修改页
+	Route::any('/home/balance_updateone/{id}','home\BalanceController@updateone');
+	Route::any('/home/balance_delone','home\BalanceController@deleteone');//收货信息删除
+
+
+	// 结算页
 	Route::any('/home/balance','home\BalanceController@index');//结算主页面
 	Route::any('/home/balance_create','home\BalanceController@create');//收货信息添加页
 	Route::any('/home/balance_store','home\BalanceController@store');
@@ -123,13 +134,17 @@ Route::group([],function(){
 	Route::any('/home/balance_update/{id}','home\BalanceController@update');
 	Route::any('/home/balance_del','home\BalanceController@delete');//收货信息删除
 
-	Route::any('/home/balance_order','home\BalanceController@order');//订单信息存入
+	// 订单、订单详情 存入数据库
+	Route::any('/home/balance_order','home\BalanceController@order');
 
-	//支付成功页
+	// 支付成功页
 	Route::any('/home/pay_ok','home\BalanceController@payok');//收货信息删除
 
-	//订单管理
-	Route::any('/person/order','home\MydealController@index');//个人中心订单
+
+	
+
+	// 个人中心 之 我的交易
+	Route::any('/person/order','home\MydealController@index');//订单管理
 
 
 

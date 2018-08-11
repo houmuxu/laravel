@@ -15,6 +15,8 @@
 		<script type="text/javascript" src="/home/city/js/zcity.js"></script>
 
 
+
+
 			<div class="theme-popover-mask"></div>
 			<div class="concent" style="width:500px">
 
@@ -25,7 +27,7 @@
 				<hr/>
 
 				<div class="am-u-md-12">
-					<form action="/home/balance_store" method="post" class="am-form am-form-horizontal">
+					<form action="/home/balance_storeone" method="post" class="am-form am-form-horizontal">
 
 						<div class="am-form-group">
 							<label for="user-name" class="am-form-label">收货人</label>
@@ -149,4 +151,4 @@
 
 		</script>
 	
-@endsection
+	@endsection

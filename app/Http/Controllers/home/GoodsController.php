@@ -43,7 +43,7 @@ use App\Model\home\Cartsinfo;
                }
                $sub = Cate::getTreeCates([],$cate->cid);          
 
-           return view('home/goods/list',['title'=>$cate->cname,'goods'=>$goods,'links'=>$links,'shu'=>$shu,'cate'=>$cate,'sub'=>$sub,'jingdian'=>$jingdian]);
+           return view('home/goods/list',['title'=>$cate->cname.'-三只松鼠旗舰店','goods'=>$goods,'links'=>$links,'shu'=>$shu,'cate'=>$cate,'sub'=>$sub,'jingdian'=>$jingdian]);
         }
 
 
@@ -114,7 +114,7 @@ use App\Model\home\Cartsinfo;
             $price = $goods[0]->price;
             $prs = (string)($price*$num);
             $data = array('uid'=>$uid,'gid'=>$gid,'gname'=>$gname,'prs'=>$prs,'num'=>$num,'price'=>$price,'goodsattr'=>$goodsattr);
-            $res = Cartsinfo::create($data);
+            $res = DB::table('cartinfoone')->insert($data);
             var_dump($res);
         }
 

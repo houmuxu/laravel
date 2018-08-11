@@ -495,7 +495,7 @@ type="text/css" />
                                         arr[2] = goodsattr;
                                         $.get('/home/cartinfo',{res:arr},function(data){
                                             if(data){
-                                                location.replace('/home/balance');
+                                                location.replace('/home/balance_one');
                                             }
                                         });
 

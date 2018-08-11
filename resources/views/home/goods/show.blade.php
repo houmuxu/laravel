@@ -2,6 +2,7 @@
 
 
 @section('title', $title)
+ 
 
 @section('content')
 <link href="/home/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet"
@@ -79,8 +80,22 @@ type="text/css" />
 <link rel="stylesheet" type="text/css" href="/home/houcity/css/index.css">
 <script type="text/javascript" src="/home/houcity/js/citydata.min.js"></script>
 <script type="text/javascript" src="/home/houcity/js/cityPicker-2.0.3.js"></script>
-<!-- 加入购物车 -->
-
+<!-- 三级联动结束 -->
+       <!-- 弹窗 -->
+        <link rel="stylesheet" href="/home/houtanchuang/message.css">
+        <script src="/home/houtanchuang/message.min.js"></script>
+        <style>
+            /* 非组件样式 */
+            .btn{
+                margin-right:20px;
+            }
+            .p40{
+                padding:40px;
+            }
+            .mt20{
+                margin-top:20px;
+            }
+        </style>
             <b class="line">
             </b>
             <div class="listMain">
@@ -301,7 +316,7 @@ type="text/css" />
                                             累计评价
                                         </span>
                                         <span class="tm-count">
-                                            640
+                                           {{$all}}
                                         </span>
                                     </div>
                                 </li>
@@ -529,7 +544,10 @@ type="text/css" />
                                         arr[1] = num;
                                         arr[2] = goodsattr;
                                         $.get('/home/cartc',{res:arr},function(data){
-
+                                            if(data){
+                                                // 弹窗
+                                                $.message('已添加购物车');
+                                            }
                                         });
 
                                         return false;
@@ -630,7 +648,7 @@ type="text/css" />
                         <div class="mc">
                             <ul>
                                 <div class="mt">
-                                    <h2>
+                                    <h2 style="font-weight: 700">
                                         看了又看
                                     </h2>
                                 </div>
@@ -642,7 +660,7 @@ type="text/css" />
                                         </a>
                                     </div>
                                     <div class="p-name">
-                                        <a href="/home/goodsshow/{{$v->gid}}">
+                                        <a href="/home/goodsshow/{{$v->gid}}" style="font-size: 10px">
                                             {{$v->gname}}
                                         </a>
                                     </div>
@@ -762,7 +780,7 @@ type="text/css" />
                                     <div class="actor-new">
                                         <div class="rate">
                                             <strong>
-                                                100
+                                                {{$haopinglv}}
                                                 <span>
                                                     %
                                                 </span>
@@ -862,7 +880,7 @@ type="text/css" />
                                                         全部评价
                                                     </span>
                                                     <span class="tb-tbcr-num">
-                                                        (32)
+                                                       {{$all}}
                                                     </span>
                                                 </div>
                                             </li>
@@ -872,7 +890,7 @@ type="text/css" />
                                                         好评
                                                     </span>
                                                     <span class="tb-tbcr-num">
-                                                        (32)
+                                                        {{$hao}}
                                                     </span>
                                                 </div>
                                             </li>
@@ -882,7 +900,7 @@ type="text/css" />
                                                         中评
                                                     </span>
                                                     <span class="tb-tbcr-num">
-                                                        (32)
+                                                        {{$zhong}}
                                                     </span>
                                                 </div>
                                             </li>
@@ -892,7 +910,7 @@ type="text/css" />
                                                         差评
                                                     </span>
                                                     <span class="tb-tbcr-num">
-                                                        (32)
+                                                        {{$cha}}
                                                     </span>
                                                 </div>
                                             </li>
@@ -901,6 +919,10 @@ type="text/css" />
                                     <div class="clear">
                                     </div>
                                     <ul class="am-comments-list am-comments-list-flip">
+                                    @foreach($evals as $k=>$v)
+                                        @php
+                                        $user = App\Model\Admin\User::where('uid',$v->uid)->first();
+                                        @endphp
                                         <li class="am-comment">
                                             <!-- 评论容器 -->
                                             <a href="">
@@ -914,28 +936,26 @@ type="text/css" />
                                                     <div class="am-comment-meta">
                                                         <!-- 评论元数据 -->
                                                         <a href="#link-to-user" class="am-comment-author">
-                                                            b***1 (匿名)
+                                                           {{$user->uname}}
                                                         </a>
                                                         <!-- 评论者 -->
                                                         评论于
                                                         <time datetime="">
-                                                            2015年11月02日 17:46
+                                                           {{date('Y年m月d日 m:i',$v->uptime)}}
                                                         </time>
                                                     </div>
                                                 </header>
                                                 <div class="am-comment-bd">
                                                     <div class="tb-rev-item " data-id="255776406962">
                                                         <div class="J_TbcRate_ReviewContent tb-tbcr-content ">
-                                                            摸起来丝滑柔软，不厚，没色差，颜色好看！买这个衣服还接到诈骗电话，我很好奇他们是怎么知道我买了这件衣服，并且还知道我的电话的！
-                                                        </div>
-                                                        <div class="tb-r-act-bar">
-                                                            颜色分类：柠檬黄&nbsp;&nbsp;尺码：S
+                                                           {{$v->msg}}
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <!-- 评论内容 -->
                                             </div>
                                         </li>
+                                    @endforeach
                                     </ul>
                                     <div class="clear">
                                     </div>
@@ -992,234 +1012,29 @@ type="text/css" />
                                 <div class="am-tab-panel am-fade">
                                     <div class="like">
                                         <ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
+                                        @foreach($allgoods as $k=>$v)
                                             <li>
                                                 <div class="i-pic limit">
-                                                    <img src="/home/images/imgsearch1.jpg" />
-                                                    <p>
-                                                        【良品铺子_开口松子】零食坚果特产炒货
+                                                    <a href="/home/goodsshow/{{$v->gid}}">
+                                                    <img src="{{$v->goodspics[0]->gpic}}" />
+                                                    </a>
+                                                    <p style="font-size: 10px">
+                                                        {{$v->gname}}
                                                         <span>
-                                                            东北红松子奶油味
+                                                        {{$v->goodsattr}}
                                                         </span>
                                                     </p>
                                                     <p class="price fl">
-                                                        <b>
+                                                        <b style="color:red">
                                                             ¥
                                                         </b>
-                                                        <strong>
-                                                            298.00
+                                                        <strong style="color:red;font-weight: 700">
+                                                           {{$v->price}}
                                                         </strong>
                                                     </p>
                                                 </div>
                                             </li>
-                                            <li>
-                                                <div class="i-pic limit">
-                                                    <img src="/home/images/imgsearch1.jpg" />
-                                                    <p>
-                                                        【良品铺子_开口松子】零食坚果特产炒货
-                                                        <span>
-                                                            东北红松子奶油味
-                                                        </span>
-                                                    </p>
-                                                    <p class="price fl">
-                                                        <b>
-                                                            ¥
-                                                        </b>
-                                                        <strong>
-                                                            298.00
-                                                        </strong>
-                                                    </p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="i-pic limit">
-                                                    <img src="/home/images/imgsearch1.jpg" />
-                                                    <p>
-                                                        【良品铺子_开口松子】零食坚果特产炒货
-                                                        <span>
-                                                            东北红松子奶油味
-                                                        </span>
-                                                    </p>
-                                                    <p class="price fl">
-                                                        <b>
-                                                            ¥
-                                                        </b>
-                                                        <strong>
-                                                            298.00
-                                                        </strong>
-                                                    </p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="i-pic limit">
-                                                    <img src="/home/images/imgsearch1.jpg" />
-                                                    <p>
-                                                        【良品铺子_开口松子】零食坚果特产炒货
-                                                        <span>
-                                                            东北红松子奶油味
-                                                        </span>
-                                                    </p>
-                                                    <p class="price fl">
-                                                        <b>
-                                                            ¥
-                                                        </b>
-                                                        <strong>
-                                                            298.00
-                                                        </strong>
-                                                    </p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="i-pic limit">
-                                                    <img src="/home/images/imgsearch1.jpg" />
-                                                    <p>
-                                                        【良品铺子_开口松子】零食坚果特产炒货
-                                                        <span>
-                                                            东北红松子奶油味
-                                                        </span>
-                                                    </p>
-                                                    <p class="price fl">
-                                                        <b>
-                                                            ¥
-                                                        </b>
-                                                        <strong>
-                                                            298.00
-                                                        </strong>
-                                                    </p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="i-pic limit">
-                                                    <img src="/home/images/imgsearch1.jpg" />
-                                                    <p>
-                                                        【良品铺子_开口松子】零食坚果特产炒货
-                                                        <span>
-                                                            东北红松子奶油味
-                                                        </span>
-                                                    </p>
-                                                    <p class="price fl">
-                                                        <b>
-                                                            ¥
-                                                        </b>
-                                                        <strong>
-                                                            298.00
-                                                        </strong>
-                                                    </p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="i-pic limit">
-                                                    <img src="/home/images/imgsearch1.jpg" />
-                                                    <p>
-                                                        【良品铺子_开口松子】零食坚果特产炒货
-                                                        <span>
-                                                            东北红松子奶油味
-                                                        </span>
-                                                    </p>
-                                                    <p class="price fl">
-                                                        <b>
-                                                            ¥
-                                                        </b>
-                                                        <strong>
-                                                            298.00
-                                                        </strong>
-                                                    </p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="i-pic limit">
-                                                    <img src="/home/images/imgsearch1.jpg" />
-                                                    <p>
-                                                        【良品铺子_开口松子】零食坚果特产炒货
-                                                        <span>
-                                                            东北红松子奶油味
-                                                        </span>
-                                                    </p>
-                                                    <p class="price fl">
-                                                        <b>
-                                                            ¥
-                                                        </b>
-                                                        <strong>
-                                                            298.00
-                                                        </strong>
-                                                    </p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="i-pic limit">
-                                                    <img src="/home/images/imgsearch1.jpg" />
-                                                    <p>
-                                                        【良品铺子_开口松子】零食坚果特产炒货
-                                                        <span>
-                                                            东北红松子奶油味
-                                                        </span>
-                                                    </p>
-                                                    <p class="price fl">
-                                                        <b>
-                                                            ¥
-                                                        </b>
-                                                        <strong>
-                                                            298.00
-                                                        </strong>
-                                                    </p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="i-pic limit">
-                                                    <img src="/home/images/imgsearch1.jpg" />
-                                                    <p>
-                                                        【良品铺子_开口松子】零食坚果特产炒货
-                                                        <span>
-                                                            东北红松子奶油味
-                                                        </span>
-                                                    </p>
-                                                    <p class="price fl">
-                                                        <b>
-                                                            ¥
-                                                        </b>
-                                                        <strong>
-                                                            298.00
-                                                        </strong>
-                                                    </p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="i-pic limit">
-                                                    <img src="/home/images/imgsearch1.jpg" />
-                                                    <p>
-                                                        【良品铺子_开口松子】零食坚果特产炒货
-                                                        <span>
-                                                            东北红松子奶油味
-                                                        </span>
-                                                    </p>
-                                                    <p class="price fl">
-                                                        <b>
-                                                            ¥
-                                                        </b>
-                                                        <strong>
-                                                            298.00
-                                                        </strong>
-                                                    </p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="i-pic limit">
-                                                    <img src="/home/images/imgsearch1.jpg" />
-                                                    <p>
-                                                        【良品铺子_开口松子】零食坚果特产炒货
-                                                        <span>
-                                                            东北红松子奶油味
-                                                        </span>
-                                                    </p>
-                                                    <p class="price fl">
-                                                        <b>
-                                                            ¥
-                                                        </b>
-                                                        <strong>
-                                                            298.00
-                                                        </strong>
-                                                    </p>
-                                                </div>
-                                            </li>
+                                        @endforeach
                                         </ul>
                                     </div>
                                     <div class="clear">

@@ -21,7 +21,7 @@ class Goods extends Model
      *
      * @var array
      */
-    protected $fillable = ['cid','gname','desc','price','state','stock','num','goodsattr','uptime'];
+    protected $fillable = ['cid','gname','desc','price','state','stock','num','goodsattr','uptime','eval'];
 
     public function goodspics()
     {
@@ -31,5 +31,10 @@ class Goods extends Model
     public function cates()
     {
         return $this->belongsTo('App\Model\Admin\Cate','cid');
+    }
+
+    public function evals()
+    {
+        return $this->hasMany('App\Model\Admin\Eva','gid');
     }
 }

@@ -67,19 +67,16 @@ Route::group([],function(){
 
 
 
-
-
 });
 
 
 
+	//  首页 hou
+	Route::any('/', 'home\FirstController@index');
+
+	//  注册页面
+	// Route::any('/login', 'home\HomeController@login');
 //前台
-//  首页
-Route::any('/', 'home\FirstController@index');
-
-//  注册页面
-// Route::any('/login', 'home\HomeController@login');
-
 Route::group([],function(){
 	//用户手机注册
 	Route::resource('/user/zhuce','home\UserController');
@@ -95,7 +92,14 @@ Route::group([],function(){
 
 	//商品管理 hou
 	Route::any('/home/goodslist/{id}','home\GoodsController@index');//商品列表页
+	Route::any('/home/goodslistxiao/{id}','home\GoodsController@xiaoliang');//商品列表按销量查
+	Route::any('/home/goodslistzhong/{id}','home\GoodsController@zhonghe');//商品列表按综合查
+	Route::any('/home/goodslistjia/{id}','home\GoodsController@jiage');//商品列表按价格查
+	Route::any('/home/goodslistping/{id}','home\GoodsController@pingjia');//商品列表按价格查
 	Route::any('/home/goods/where','home\GoodsController@where');//搜索商品列表页
+	Route::any('/home/goods/wherexiao/{id}','home\GoodsController@wherexiao');//搜索商品按销量查
+	Route::any('/home/goods/wherejia/{id}','home\GoodsController@wherejia');//搜索商品按价格查
+	Route::any('/home/goods/wherezhong/{id}','home\GoodsController@wherezhong');//搜索商品按综合查
 	Route::any('/home/goodsshow/{id}','home\GoodsController@show');//商品详情页
 	//个人中心邮箱验证hou
 	Route::any('/home/goods/email','home\GoodsController@email');//换绑email页面
@@ -116,6 +120,17 @@ Route::group([],function(){
 
 	//  个人中心页面
 	Route::any('/home/self','home\SelfController@index');   //  个人中心页面
+
+
+	//我的小窝hou
+	Route::any('/home/eval/make','admin\EvalController@make');  //待评价页面
+	Route::any('/home/eval/store','admin\EvalController@store');  //评价内容入库
+	Route::any('/home/eval/list','admin\EvalController@index');  //评价内容入库
+
+
+
+
+
 
 
 

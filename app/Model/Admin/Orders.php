@@ -25,11 +25,9 @@ class Orders extends Model
     protected $fillable = ['gid','oname','addr','uid','tel','addtime','sum','msg','status'];
 
 
-     /**
-     * 获得与用户关联的信息。
-     */
-    // public function detailss()
-    // {
-    //     return $this->hasMany('App\Model\Admin\Details','oid','oid');
-    // }
+     //与订单详情表关联 hou
+    public function detailss()
+    {
+        return $this->hasMany('App\Model\Admin\Details','oid','oid');
+    }
 }

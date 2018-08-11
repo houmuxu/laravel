@@ -22,7 +22,7 @@ class Details extends Model
      *
      * @var array
      */
-    protected $fillable = ['price','cnt'];
+    protected $fillable = ['price','cnt','status'];
 
     public function det_goods() 
     {

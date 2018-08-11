@@ -24,4 +24,10 @@ class User extends Model
      * @var array
      */
     protected $fillable = ['uname','upwd','usex','utel','uemail','uaddr','utime'];
+
+    //与订单表关联 hou
+    public function orders()
+    {
+        return $this->hasMany('App\Model\Admin\Orders','uid');
+    }
 }

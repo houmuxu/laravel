@@ -74,26 +74,11 @@
 								<a href="{{$v->furl}}">{{$v->fname}}</a>
 								<b>|</b>
 							@endforeach
-								<a href="# ">商城首页</a>
-								<b>|</b>
-								<a href="# ">支付宝</a>
-								<b>|</b>
-								<a href="# ">物流</a>
-								<b>|</b>
-								<a href="# ">网站地图</a>
-								<b>|</b>
-								<a href="# ">联系我们</a>
+							
 
 							</p>
 						</div>
-						<div class="footer-bd ">
-							<p>
-								<a href="# ">合作伙伴</a>
-								<a href="# ">联系我们</a>
-								<a href="# ">网站地图</a>
-								<em>© 2015-2025 Hengwang.com 版权所有. 更多模板 <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></em>
-							</p>
-						</div>
+					
 					</div>
 				</div>
 			</div>

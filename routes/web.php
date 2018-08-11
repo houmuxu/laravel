@@ -29,6 +29,8 @@ Route::group([],function(){
 
 	//商品管理 hou
 	Route::resource('/admin/goods','admin\GoodsController');
+	Route::any('/admin/goodss/status','admin\GoodssController@status');//修改状态
+	Route::any('/admin/goodss/del','admin\GoodssController@destroy');//删除商品
 	//轮播图管理 hou
 	Route::any('/admin/lunbo/create','admin\LunboController@create');//添加轮播页面
 	Route::any('/admin/lunbo/store','admin\LunboController@store');//添加轮播

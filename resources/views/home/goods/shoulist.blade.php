@@ -67,7 +67,11 @@
 								<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
 									
 									@foreach($goods as $k=>$v)
-										
+										@if($v->state == 2)
+											@php
+												continue;
+											@endphp
+										@endif
 										
 									<li>
 										<div class="i-pic limit">
@@ -96,6 +100,11 @@
 								</div>
 <!-- 经典搭配另建表 -->
 							@foreach($jingdian as $k=>$v)
+								@if($v->state == 2)
+									@php
+										continue;
+									@endphp
+								@endif
 								<li>
 									<div class="i-pic check">
 										<a href="/home/goodsshow/{{$v->gid}}">

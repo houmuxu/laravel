@@ -76,14 +76,15 @@
             <td> <img src="{{$v->pic}}"></td>
             <td>{{date('Y-m-d',$v->uptime)}}</td>
             <td class="td-status">
-              <span class="layui-btn layui-btn-normal layui-btn-mini"> @if($v->status == 1)
+              <span class="layui-btn layui-btn-normal layui-btn-mini"> @if($v->state == 1)
                   已启用
                 @else
                   已停用
-                @endif</span></td>
+                @endif</span>
+              </td>
             <td class="td-manage">
               <a onclick="member_stop(this,{{$v->id}})" href="javascript:;"  title="
-                @if($v->status == 1)
+                @if($v->state == 1)
                   停用
                 @else
                   启用

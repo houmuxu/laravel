@@ -80,7 +80,11 @@
 									
 									@foreach($goods as $k=>$v)
 										
-										
+									@if($v->state == 2)
+										@php
+											continue;
+										@endphp
+									@endif
 									<li>
 										<div class="i-pic limit">
 											<a href="/home/goodsshow/{{$v->gid}}">
@@ -108,6 +112,11 @@
 								</div>
 <!-- 经典搭配另建表 -->
 							@foreach($jingdian as $k=>$v)
+								@if($v->state == 2)
+									@php
+										continue;
+									@endphp
+								@endif
 								<li>
 									<div class="i-pic check">
 										<a href="/home/goodsshow/{{$v->gid}}">

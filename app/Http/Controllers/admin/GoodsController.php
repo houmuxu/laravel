@@ -152,35 +152,33 @@ class GoodsController extends Controller
     {
 
         //删除服务器上照片
-        $res = Goodspic::where('gid',$id)->get();
-        foreach ($res as $k => $v) {
-            $rs = unlink('.'.$v->gpic);
-        }
+       //  $res = Goodspic::where('gid',$id)->get();
+       //  foreach ($res as $k => $v) {
+       //      $rs = unlink('.'.$v->gpic);
+       //  }
 
-        if($rs){
-            //删除图片关联表
-            $gs = Goods::find($id);
+       //  if($rs){
+       //      //删除图片关联表
+       //      $gs = Goods::find($id);
 
-            $data = $gs->goodspics()->delete();
+       //      $data = $gs->goodspics()->delete();
 
-        }
+       //  }
 
-        if($data){
-            //删除主表
-            $re = Goods::destroy($id);
+       //  if($data){
+       //      //删除主表
+       //      $re = Goods::destroy($id);
 
-        }
+       //  }
 
-        if($re){
-                return redirect('/admin/goods')->with('success','商品删除成功!');
-            
-        }
-            return back()->with('error','商品删除失败!');
-           
+       // echo $re;
+           // echo $id;
     }
 
     public function error()
     {
         return view('admin/goods/error');
     }
+
+ 
 }

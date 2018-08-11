@@ -4,26 +4,26 @@
 @section('title', $title)
 
 @section('content')
-        <link href="/home/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet"
-        type="text/css" />
-        <link href="/home/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet"
-        type="text/css" />
-        <link href="/home/basic/css/demo.css" rel="stylesheet" type="text/css"
-        />
-        <link type="text/css" href="/home/css/optstyle.css" rel="stylesheet" />
-        <link type="text/css" href="/home/css/style.css" rel="stylesheet" />
-        <script type="text/javascript" src="/home/basic/js/jquery-1.7.min.js">
-        </script>
-        <script type="text/javascript" src="/home/basic/js/quick_links.js">
-        </script>
-        <script type="text/javascript" src="/home/AmazeUI-2.4.2/assets/js/amazeui.js">
-        </script>
-        <script type="text/javascript" src="/home/js/jquery.imagezoom.min.js">
-        </script>
-        <script type="text/javascript" src="/home/js/jquery.flexslider.js">
-        </script>
-        <script type="text/javascript" src="/home/js/list.js">
-        </script>
+<link href="/home/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet"
+type="text/css" />
+<link href="/home/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet"
+type="text/css" />
+<link href="/home/basic/css/demo.css" rel="stylesheet" type="text/css"
+/>
+<link type="text/css" href="/home/css/optstyle.css" rel="stylesheet" />
+<link type="text/css" href="/home/css/style.css" rel="stylesheet" />
+<script type="text/javascript" src="/home/basic/js/jquery-1.7.min.js">
+</script>
+<script type="text/javascript" src="/home/basic/js/quick_links.js">
+</script>
+<script type="text/javascript" src="/home/AmazeUI-2.4.2/assets/js/amazeui.js">
+</script>
+<script type="text/javascript" src="/home/js/jquery.imagezoom.min.js">
+</script>
+<script type="text/javascript" src="/home/js/jquery.flexslider.js">
+</script>
+<script type="text/javascript" src="/home/js/list.js">
+</script>
         <!-- 加入购物车特效 -->
         <style type="text/css">
     .body-top {
@@ -77,15 +77,9 @@
 
 <!-- 三级联动 -->
 <link rel="stylesheet" type="text/css" href="/home/houcity/css/index.css">
-
 <script type="text/javascript" src="/home/houcity/js/citydata.min.js"></script>
 <script type="text/javascript" src="/home/houcity/js/cityPicker-2.0.3.js"></script>
 <!-- 加入购物车 -->
-
-
-
-
-            </div>
 
             <b class="line">
             </b>
@@ -125,15 +119,6 @@
                                 </a>
                             </li>
                         </ul>
-                  <!--       <div class="nav-extra">
-                            <i class="am-icon-user-secret am-icon-md nav-user">
-                            </i>
-                            <b>
-                            </b>
-                            我的福利
-                            <i class="am-icon-angle-right" style="padding-left: 10px;">
-                            </i>
-                        </div> -->
                     </div>
                 </div>
                 <ol class="am-breadcrumb am-breadcrumb-slash">

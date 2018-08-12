@@ -83,7 +83,7 @@
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
-              <button onclick="conf()"  class="layui-btn" lay-filter="add" lay-submit="">
+              <button onclick="conf()"  class="layui-btn queren" lay-filter="add" lay-submit="">
                   确认修改
               </button>
           </div>
@@ -94,13 +94,14 @@
     <script type="text/javascript">
 
       //修改按钮
-      function conf() { 
-        var msg = "您确定要修改吗？\r\n请确认！"; 
-        if (confirm(msg)==true){ 
-          return true; 
-        }else{ 
-          return false; 
-        } 
+      function conf() 
+      { 
+        var msg = confirm("您确定要修改吗？\r\n请确认！"); 
+       if(msg){
+          $('button').removeAttr('type','button');
+        } else {
+          $('button').attr('type','button');
+        }
       } 
 
     //验证单价

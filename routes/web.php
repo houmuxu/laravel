@@ -132,7 +132,12 @@ Route::group([],function(){
 
 
 
-
+	// 个人中心 之 我的交易
+	Route::any('/home/order/index','home\MydealController@index');//订单管理
+	Route::any('/home/order/del','home\MydealController@delete');//前台订单删除
+	Route::any('/home/order/status','home\MydealController@status');//ajax确认收货
+	Route::any('/home/order/details/{oid}','home\MydealController@details');//前台订单详情
+	Route::any('/home/order/details_status','home\MydealController@details_status');//ajax订单详情确认收货
 
 	// 立即购买
 	Route::any('/home/balance_one','home\BalanceController@indexone');
@@ -140,7 +145,7 @@ Route::group([],function(){
 	Route::any('/home/balance_storeone','home\BalanceController@storeone');
 	Route::any('/home/balance_editone/{id}','home\BalanceController@editone');//收货信息修改页
 	Route::any('/home/balance_updateone/{id}','home\BalanceController@updateone');
-	Route::any('/home/balance_delone','home\BalanceController@deleteone');//收货信息删除
+	Route::any('/home/balance_delone','home\BalanceController@delete');//收货信息删除
 
 
 	// 结算页
@@ -160,8 +165,7 @@ Route::group([],function(){
 
 	
 
-	// 个人中心 之 我的交易
-	Route::any('/person/order','home\MydealController@index');//订单管理
+	
 
 
 

@@ -67,7 +67,7 @@
             <td>{{date('Y-m-d H:i:s',$v->addtime)}}</td>
             <td>{{$v->sum}}</td>
             <td>{{$v->msg}}</td>
-            <td class="td_status">@if($v->status==1)未发货@elseif($v->status==2)已发货@elseif($v->status==3)已签收@elseif($v->status==4)已取消@endif</td>
+            <td class="td_status">@if($v->status==1)未发货@elseif($v->status==2)已发货@elseif($v->status==3)已签收@elseif($v->status==4)已取消@elseif($v->status==5)前台用户删除@endif</td>
             <td class="td-manage">
 
               <button title="发货" onclick="fahuo(this)"><i class="layui-icon @if($v->status != '1') kill_key @endif">&#xe609;</i>

@@ -31,13 +31,23 @@ class DetailsController extends Controller
 
     public function update(Request $request, $id)
     {
-
+        // dd($request->all());
         $res = $request->except('gname','sum','_token','_method');
 
         $data = Details::where('did', $id)->update($res);
         
         //获取路由参数oid
         $abc = Details::find($id)->oid;
+
+                        //更改orders表中的总价钱
+                        $all = Details::where('oid',$abc)->get();
+                        // dd($all);
+                        $sum = 0;
+                        foreach($all as $k=>$v){
+                           $sum += $v['price']*$v['cnt'];
+                        }
+                        
+                        Orders::where('oid',$abc)->update(['sum'=>$sum]);
 
         if($data){
             return redirect('/admin/details/index/'.$abc);

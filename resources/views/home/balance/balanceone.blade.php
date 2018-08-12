@@ -97,7 +97,7 @@
 										<div class="pay-phone">
 											<li class="td td-item">
 												<div class="item-pic">
-													<a href="#" class="J_MakePoint">
+													<a href="/home/goodsshow/{{$v->gid}}" class="J_MakePoint">
 														<!-- <img src="/home/images/kouhong.jpg_80x80.jpg" class="itempic J_ItemImg"> -->
 														<img src="
 															@php
@@ -109,7 +109,7 @@
 												</div>
 												<div class="item-info">
 													<div class="item-basic-info">
-														<a href="#" class="item-title J_MakePoint" data-point="tbcart.8.11"><strong>{{$v->gname}}</strong></a>
+														<a href="/home/goodsshow/{{$v->gid}}" class="item-title J_MakePoint" data-point="tbcart.8.11"><strong>{{$v->gname}}</strong></a>
 														<input class="gid" type="hidden" value="{{$v->gid}}" />
 													</div>
 												</div>

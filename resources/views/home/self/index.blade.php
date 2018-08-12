@@ -1,6 +1,8 @@
 @extends('common.geren')
 @section('title', $title)
 @section('content')
+<link href="/home/css/personal.css" rel="stylesheet" type="text/css">
+		<link href="/home/css/systyle.css" rel="stylesheet" type="text/css">
 		<div class="center">
 			<div class="col-main">
 				<div class="main-wrap">

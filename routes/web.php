@@ -125,7 +125,7 @@ Route::group([],function(){
 	//我的小窝hou
 	Route::any('/home/eval/make','admin\EvalController@make');  //待评价页面
 	Route::any('/home/eval/store','admin\EvalController@store');  //评价内容入库
-	Route::any('/home/eval/list','admin\EvalController@index');  //评价内容入库
+	Route::any('/home/eval/list','admin\EvalController@index');  //已评价页面
 
 
 

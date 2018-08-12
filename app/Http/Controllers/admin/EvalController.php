@@ -44,5 +44,13 @@ class EvalController extends Controller
     	var_dump($res);
     }
 
+    public function index()
+    {
+        $uid = 1;
+        $evals = Eva::where('uid',$uid)->get();
+        $links = DB::table('friendlink')->get();
+        return view('home/eval/index',['title'=>'我的已评价商品','links'=>$links,'evals'=>$evals]);
+    }
+
 
 }

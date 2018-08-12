@@ -117,7 +117,7 @@
 							var arr = [];
 							arr[0] = gid;
 							arr[1] = rank;
-							if(msg = 'undefined'){
+							if(msg == ''){
 								msg = '用户无评论';
 							}
 							arr[2] = msg;

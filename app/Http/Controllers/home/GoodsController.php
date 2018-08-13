@@ -11,6 +11,7 @@ use Mail;
 use Cache;
 use DB;
 use App\Model\home\Cartsinfo;
+use App\Model\home\Coll;
 
     class GoodsController extends Controller
     {
@@ -76,7 +77,22 @@ use App\Model\home\Cartsinfo;
                 
             }
             // 评价结束
-            return view('home/goods/show',['data'=>$data,'title'=>$data->gname,'links'=>$links,'goods'=>$goods,'cate'=>$cate,'allgoods'=>$allgoods,'evals'=>$evals,'hao'=>$hao,'zhong'=>$zhong,'cha'=>$cha,'all'=>$all,'haopinglv'=>$haopinglv]);
+            // 收藏
+            $uid = 1;
+            $coll = Coll::where(function($query) use($uid,$id){
+                $query->where('uid',$uid);
+                $query->where('gid',$id);
+            })->first();
+           
+
+            if($coll != NULL){
+                 $collstatus = $coll->status;
+            } else {
+                $collstatus = 0;
+            }
+            // 收藏结束
+            
+            return view('home/goods/show',['data'=>$data,'title'=>$data->gname,'links'=>$links,'goods'=>$goods,'cate'=>$cate,'allgoods'=>$allgoods,'evals'=>$evals,'hao'=>$hao,'zhong'=>$zhong,'cha'=>$cha,'all'=>$all,'haopinglv'=>$haopinglv,'collstatus'=>$collstatus]);
         }
 
 

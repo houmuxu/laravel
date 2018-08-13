@@ -13,8 +13,8 @@ type="text/css" />
 />
 <link type="text/css" href="/home/css/optstyle.css" rel="stylesheet" />
 <link type="text/css" href="/home/css/style.css" rel="stylesheet" />
-<script type="text/javascript" src="/home/basic/js/jquery-1.7.min.js">
-</script>
+<script type="text/javascript" src="/js/jquery-3.2.1.min.js">
+</script> 
 <script type="text/javascript" src="/home/basic/js/quick_links.js">
 </script>
 <script type="text/javascript" src="/home/AmazeUI-2.4.2/assets/js/amazeui.js">
@@ -72,6 +72,7 @@ type="text/css" />
     .carts button{
         margin: 10px;
     }
+
 </style>
 <script type="text/javascript" src="/home/js/jquery-addShopping.js"></script>
 <!-- 加入购物车特效结束 -->
@@ -96,6 +97,20 @@ type="text/css" />
                 margin-top:20px;
             }
         </style>
+        <!-- 弹窗结束 -->
+        <!-- /*收藏开始*/ -->
+    <link href='https://fonts.googleapis.com/css?family=Patrick+Hand+SC' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="/home/hou_shouchang/fonts/font-awesome-4.5.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/home/hou_shouchang/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/home/hou_shouchang/css/htmleaf-demo.css">
+    <link rel="stylesheet" type="text/css" href="/home/hou_shouchang/css/icons.css" />
+
+
+<!-- /*收藏结束*/ -->
+
+<body>
+
             <b class="line">
             </b>
             <div class="listMain">
@@ -150,7 +165,9 @@ type="text/css" />
                     <li class="am-active">
                         {{$data->gname}}
                     </li>
+
                 </ol>
+
                 <script type="text/javascript">
                     $(function() {});
                     $(window).load(function() {
@@ -162,6 +179,7 @@ type="text/css" />
                         });
                     });
                 </script>
+
                 <div class="scoll">
                     <section class="slider">
                         <div class="flexslider">
@@ -179,6 +197,7 @@ type="text/css" />
                         </div>
                     </section>
                 </div>
+
                 <!--放大镜-->
                 <div class="item-inform">
                     <div class="clearfixLeft" id="clearcontent">
@@ -199,6 +218,8 @@ type="text/css" />
                                     class="jqzoom" />
                                 </a>
                             </div>
+
+
                             <ul class="tb-thumb" id="thumblist">
                                 @foreach($data->goodspics as $k=>$v)
                                 <li class="tb-selected">
@@ -211,20 +232,69 @@ type="text/css" />
                                 @endforeach
                             </ul>
                         </div>
+
                         <div class="clear">
                         </div>
+
                     </div>
+
                     <div class="clearfixRight">
                         <!--规格属性-->
                         <!--名称-->
-                        <div class="tb-detail-hd">
+
+                        <div class="tb-detail-hd" style="width: 500px">
+                    <!-- 收藏按钮 -->
+                <div style="float: right;margin-top:-25px ">
+                    <ol class="grid">
+                        <li class="grid__item">
+                            <button class="icobutton icobutton--heart"><span class="fa fa-heart" gid="{{$data->gid}}" style="font-size:30px"></span><span class="icobutton__text icobutton__text--side" style="font-size: 15px;width: 100px;">@if($collstatus == 1) 已收藏 @else 未收藏 @endif</span></button>
+                        </li>
+                    </ol>
+                </div> 
+                <!-- 收藏按钮结束 -->
+
+                <script type="text/javascript">
+                        
+
+                            var pd = $('.icobutton__text').text().trim();
+                            if(pd == '已收藏'){
+                                $('.icobutton--heart').attr('style','color:rgb(243, 81, 134)');
+                            }
+           
+                    $('.fa-heart').click(function(){
+                        var gid = $(this).attr('gid');
+                        var str = $(this).next().html().trim();
+
+                        if(str == '未收藏'){
+                            str = 1;
+                        } else {
+                            str = 0;
+                        }
+                        
+                        var arr = [];
+                        arr[0] = gid;
+                        arr[1] = str;
+                        $.get('/home/coll/store',{arr:arr},function(data){
+                            console.log(data);
+                        });
+                    })
+
+                     $('.icobutton__text--side').click(function(){
+                       return false;
+                    })
+                </script>
                             <h1>
                                 {{$data->gname}}
                             </h1>
-                        </div>
+          
+         </div>
+
                         <div class="tb-detail-list">
+
                             <!--价格-->
+
                             <div class="tb-detail-price">
+
                                 <li class="price iteminfo_price">
                                     <dt>
                                         促销价
@@ -238,6 +308,7 @@ type="text/css" />
                                         </b>
                                     </dd>
                                 </li>
+
                                 <li class="price iteminfo_mktprice">
                                     <dt>
                                         原价
@@ -251,9 +322,12 @@ type="text/css" />
                                         </b>
                                     </dd>
                                 </li>
+
                                 <div class="clear">
+
                                 </div>
                             </div>
+
                             <!--地址-->
                             <dl class="iteminfo_parameter freight">
                                 <dt>
@@ -269,7 +343,8 @@ type="text/css" />
 
                             <div class="clear">
                             </div>
-                        <!-- 城市联动 -->
+
+                     <!-- 城市联动 -->
 
                              <div class="city-picker-selector" id="city-picker-selector2"></div>
 
@@ -1085,7 +1160,6 @@ type="text/css" />
                         <div class="clear">
                         </div>
 
-                   
 <script type="text/javascript">
             $(function(){
                $('#LikBasket').shoping({
@@ -1099,9 +1173,10 @@ type="text/css" />
                 })
             });
 
+
 </script>
-
-
+     <script src="/home/hou_shouchang/js/mo.min.js"></script>
+    <script src="/home/hou_shouchang/js/demo.js"></script>
     </body>
 
 @endsection

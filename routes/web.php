@@ -126,6 +126,7 @@ Route::group([],function(){
 	Route::any('/home/eval/make','admin\EvalController@make');  //待评价页面
 	Route::any('/home/eval/store','admin\EvalController@store');  //评价内容入库
 	Route::any('/home/eval/list','admin\EvalController@index');  //已评价页面
+	Route::any('/home/coll/store','home\CollController@store');  //收藏存入DB
 
 
 
@@ -173,3 +174,14 @@ Route::group([],function(){
 
 
 });
+
+
+
+
+
+
+
+
+// hou redis test
+//redis测试
+Route::get('testRedis','RedisController@testRedis')->name('testRedis');

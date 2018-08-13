@@ -5,6 +5,8 @@ namespace App\Http\Controllers\home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
+use App\Model\Admin\Goods;
+
 // use App\Model\Admin\Orders;
 
 class BalanceController extends Controller 
@@ -14,7 +16,7 @@ class BalanceController extends Controller
     public function index()
     {
         $uid = 1;
-    	$data = DB::table('address')->orderBy('id','asc')->get();
+    	$data = DB::table('address')->orderBy('id','desc')->where('uid',$uid)->get();
         $res = DB::table('cartinfo')->where('uid',$uid)->get();
         $links = DB::table('friendlink')->get();
               
@@ -24,7 +26,7 @@ class BalanceController extends Controller
     public function indexone()
     {
         $uid = 1;
-        $data = DB::table('address')->orderBy('id','asc')->get();
+        $data = DB::table('address')->orderBy('id','desc')->where('uid',$uid)->get();
         $res = DB::table('cartinfoone')->where('uid',$uid)->get();
         $links = DB::table('friendlink')->get();
               
@@ -102,6 +104,7 @@ class BalanceController extends Controller
     {
         // echo $id;
         $res = DB::table('address')->where('id',$id)->first();
+        $links = DB::table('friendlink')->get();
         // dd($res);
         return view('home/balance/editone',['res'=>$res,'links'=>$links,'title'=>'收货信息修改页面']);
     }
@@ -166,9 +169,9 @@ class BalanceController extends Controller
         foreach ($arr2 as $k=>$v){
             $arr2[$k] = ['gid'=>$arr2[$k][0],'price'=>$arr2[$k][1],'cnt'=>$arr2[$k][2]];
             $arr2[$k]['oid']=$oid;
-        }
-        //var_dump($arr2);
 
+        }
+      
         $res2 = DB::table('details')->insert($arr2);
         //echo $res2;
         

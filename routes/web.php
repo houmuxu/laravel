@@ -139,6 +139,12 @@ Route::group([],function(){
 	Route::any('/home/order/details/{oid}','home\MydealController@details');//前台订单详情
 	Route::any('/home/order/details_status','home\MydealController@details_status');//ajax订单详情确认收货
 
+	Route::any('/home/address/index','home\MydealController@address');//个人中心地址管理
+	Route::any('/home/address/store','home\MydealController@store');
+	Route::any('/home/address/edit/{id}','home\MydealController@edit');//地址修改
+	Route::any('/home/address/update/{id}','home\MydealController@update');
+	Route::any('/home/address/del','home\MydealController@del');//地址删除
+
 	// 立即购买
 	Route::any('/home/balance_one','home\BalanceController@indexone');
 	Route::any('/home/balance_createone','home\BalanceController@createone');//收货信息添加页

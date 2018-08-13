@@ -129,7 +129,7 @@
 					<li class="person">
 						<a>我的小窝</a>
 						<ul>
-							<li> <a href="collection.html">收藏</a></li>
+							<li> <a href="/home/coll/index">收藏</a></li>
 							<li> <a href="foot.html">足迹</a></li>
 							<li> <a href="/home/eval/make">未评价</a></li>
 							<li> <a href="/home/eval/list">已评价</a></li>

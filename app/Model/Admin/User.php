@@ -30,4 +30,10 @@ class User extends Model
     {
         return $this->hasMany('App\Model\Admin\Orders','uid');
     }
+
+    //与收藏关联 hou
+    public function colls()
+    {
+        return $this->hasMany('App\Model\home\Coll','uid');
+    }
 }

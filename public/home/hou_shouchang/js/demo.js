@@ -219,6 +219,7 @@
 				})
 			],
 			onCheck : function() {
+			
 				el14.style.color = '#F35186';
 				el14counter.innerHTML ='已收藏';
 			},
@@ -302,7 +303,7 @@
 
 		moTimeline.add(moburst1, moburst2, moburst3, moburst4, moburst5);
 		molinkEl.addEventListener('mouseenter', function() {
-			moTimeline.start();
+			// moTimeline.start();
 		});
 	}
 	

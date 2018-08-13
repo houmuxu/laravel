@@ -14,8 +14,21 @@ class MydealController extends Controller
     {
     	$uid = 1;
     	$orders = Orders::orderBy('id','desc')->where('uid',$uid)->where('status','!=',5)->get();
+
+        //代发货
+        $daifahuo = Orders::orderBy('id','desc')->where('uid',$uid)->where('status',1)->get();
+        // dd($daifahuo);
+
+        //待收货
+        $daishouhuo = Orders::orderBy('id','desc')->where('uid',$uid)->where('status',2)->get();
+        // dd($daishouhuo);
+
+        //已签收
+        $yiqianshou = Orders::orderBy('id','desc')->where('uid',$uid)->where('status',3)->get();
+        // dd($yiqianshou);
+
     	$links = DB::table('friendlink')->get();
-    	return view('home/order/mydeal',['orders'=>$orders,'links'=>$links,'title'=>'订单管理']);
+    	return view('home/order/mydeal',['orders'=>$orders,'daifahuo'=>$daifahuo,'daishouhuo'=>$daishouhuo,'yiqianshou'=>$yiqianshou,'links'=>$links,'title'=>'订单管理']);
     }
 
     //删除订单

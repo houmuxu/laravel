@@ -10,8 +10,9 @@ class SelfController extends Controller
 {
     public function index()
     {
-        $links = DB::table('friendlink')->get();
-    	return view('home.self.index',['links'=>$links,'title'=>'个人中心首页']);
+
+    	$links = DB::table('friendlink')->get();
+    	return view('home.self.index',['title'=>'个人中心首页','links'=>$links]);
 
     }
 }

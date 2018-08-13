@@ -153,13 +153,22 @@
 
 											<a href="#" target="_blank" data-title="美康粉黛醉美东方唇膏口红正品 持久保湿滋润防水不掉色护唇彩妆" class="J_MakePoint" data-point="tbcart.8.12">
 												<img id="img" src="
-												@php
-												$gid = App\Model\Admin\Goodspic::where('gid',$v->gid)->first();
-            									echo $gpic = $gid->gpic;
+												@if($v->gid >= 30)
+													@php
+														$gid = App\Model\Admin\Goodspic::where('gid',$v->gid)->first();
+		            									echo $gpic = $gid->gpic;
+	            									@endphp
+	            								@else 
+	            									 @php
+									                  $gid = App\Model\Admin\Salespic::where('sid',$v->gid)->first();
+									                  echo $salespic = $gid['salespic']; 
+									                  
+									                @endphp
 
-												@endphp
+												@endif
 												" class="itempic J_ItemImg" width="78px"></a>
 										</div>
+
 										<div class="item-info">
 											<div class="item-basic-info">
 												<a href="#" target="_blank" title="美康粉黛醉美唇膏 持久保湿滋润防水不掉色" class="item-title J_MakePoint" data-point="tbcart.8.11">{{$v->gname}}
@@ -178,7 +187,7 @@
 										<div class="item-price price-promo-promo">
 											<div class="price-content">
 												<div class="price-line">
-													<em class="price-original">78.00</em>
+													<em class="price-original"></em>
 												</div>
 												<div class="price-line">
 													<span class="J_Price price-now" tabindex="0">{{$v->price}}</span>
@@ -216,7 +225,8 @@
 										</div>
 									</li>
 								</ul>
-								@endforeach
+					@endforeach
+
 							</div>
 						</div>
 					</tr>
@@ -384,6 +394,10 @@
 				//  获取数量
 				var num = Number($(this).next().val())-1;
 
+				if(num < 1){
+					return false;
+				}
+
 				//  获取价格
 				var pr = $(this).parents('ul').find('.price-now').text();
 
@@ -406,7 +420,8 @@
 						$(this).parents('ul').find('.number').text(accMul(num,pr));
 						decre();
 					}
-					sum();	
+					sum();
+					decre();	
 								
 				})  
 			

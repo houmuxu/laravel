@@ -9,14 +9,17 @@ use App\Model\home\Cart;
 use App\Model\Admin\Goodspic;
 use DB;
 use App\Model\home\Cartsinfo;
+use App\Model\Admin\Sales;
+use App\Model\Admin\Salespic;
 
 class CartController extends Controller
 {
     public function store(Request $request)
     {
+        //  商品
     	$uid = 1;
     	$arr = $_GET['res'];
-    	$gid = $arr[0];
+       	$gid = $arr[0];
     	$num = $arr[1];
         $goodsattr = $arr[2];
     	$goods = Goods::where('gid',$gid)->get();
@@ -25,6 +28,23 @@ class CartController extends Controller
     	$data = array('uid'=>$uid,'gid'=>$gid,'gname'=>$gname,'num'=>$num,'price'=>$price,'goodsattr'=>$goodsattr);
     	$res = Cart::create($data);
     	var_dump($data);
+
+    }
+
+    public function cartadd(Request $request)
+    {
+        //  促销商品
+        $uid = 1;
+        $arr = $_GET['arr'];
+        $sid = $arr[0];
+        $num = $arr[1];
+        $goodsattr = $arr[2];
+        $goods = Sales::where('sid',$sid)->get();
+        $gname = $goods[0]->gname;
+        $newprice = $goods[0]->newprice;
+        $data = array('uid'=>$uid,'gid'=>$sid,'gname'=>$gname,'num'=>$num,'price'=>$newprice,'goodsattr'=>$goodsattr);
+        $res = Cart::create($data);
+        var_dump($data);
     }
 
     //  购物车页面
@@ -32,6 +52,7 @@ class CartController extends Controller
     {
         //  获取数据
         $data = DB::table('cart')->where('uid',1)->get();
+       
         $links = DB::table('friendlink')->get();
        
          //  求总数量,总金额
@@ -43,8 +64,13 @@ class CartController extends Controller
             $sum += $v->price * $v->num;
 
             $id = $v->gid;
-            $gid = Goodspic::where('gid',$id)->first();
-            $gpic = $gid->gpic;
+            if($id >= 30){
+                $gid = Goodspic::where('gid',$id)->first();
+                $gpic = $gid->gpic;
+            }else{
+                $gid = Salespic::where('sid',$id)->first();
+                $salespic = $gid->salespic;
+            }
 
         }
 

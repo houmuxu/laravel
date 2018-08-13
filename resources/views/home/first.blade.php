@@ -222,56 +222,21 @@
 					<div class="am-container activity ">
 						<div class="shopTitle ">
 							<h4>活动</h4>
-							<h3>每期活动 优惠享不停 </h3>
+							<h3>七夕 网红零食节 </h3>
 							<span class="more ">
-                               <a href="# ">全部活动<i class="am-icon-angle-right" style="padding-left:10px ;" ></i></a>
+                               <a href="/home/sales">全部活动<i class="am-icon-angle-right" style="padding-left:10px ;" ></i></a>
                             </span>
 						</div>
 					
 					  <div class="am-g am-g-fixed ">
-						<div class="am-u-sm-3 ">
-							<div class="icon-sale one "></div>	
-								<h4>秒杀</h4>							
-							<div class="activityMain ">
-								<a href=""><img src="/home/images/activity1.jpg "></img></a>
-							</div>
-							<div class="info ">
-								<h3>春节送礼优选</h3>
-							</div>														
+						<div class="am-u-sm-12 ">
+							<a href="/home/sales">
+								<img src="/logo/4.jpg" height="300px">
+								
+							</a>									
 						</div>
 						
-						<div class="am-u-sm-3 ">
-						  <div class="icon-sale two "></div>	
-							<h4>特惠</h4>
-							<div class="activityMain ">
-								<img src="/home/images/activity2.jpg "></img>
-							</div>
-							<div class="info ">
-								<h3>春节送礼优选</h3>								
-							</div>							
-						</div>						
 						
-						<div class="am-u-sm-3 ">
-							<div class="icon-sale three "></div>
-							<h4>团购</h4>
-							<div class="activityMain ">
-								<img src="/home/images/activity3.jpg "></img>
-							</div>
-							<div class="info ">
-								<h3>春节送礼优选</h3>
-							</div>							
-						</div>						
-
-						<div class="am-u-sm-3 last ">
-							<div class="icon-sale "></div>
-							<h4>超值</h4>
-							<div class="activityMain ">
-								<img src="/home/images/activity.jpg "></img>
-							</div>
-							<div class="info ">
-								<h3>春节送礼优选</h3>
-							</div>													
-						</div>
 
 					  </div>
                    </div>

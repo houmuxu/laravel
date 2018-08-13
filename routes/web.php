@@ -100,8 +100,16 @@ Route::group([],function(){
 	Route::any('/home/goods/useremail','home\GoodsController@useremail');//验证email
 	Route::any('/home/goods/emailjihuo','home\GoodsController@emailjihuo');//激活新的email
 
+
+	//  促销商品  zhang
+	Route::any('/home/sales', 'home\SalesController@index');
+	Route::any('/home/show/{id}', 'home\SalesController@show');
+	//  促销商品添加购物车
+	Route::any('/home/cartadd','home\CartController@cartadd');
+
 	//购物车 
 	Route::any('/home/cartc','home\CartController@store');
+	
 
 	//  购物车页面  zhang
 	Route::any('/home/cart','home\CartController@index');    // 购物车页面

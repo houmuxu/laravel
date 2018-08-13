@@ -4,11 +4,13 @@ namespace App\Http\Controllers\home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use DB;
 
 class SelfController extends Controller
 {
     public function index()
     {
-    	return view('home.self.index');
+    	$links = DB::table('friendlink')->get();
+    	return view('home.self.index',['title'=>'个人中心首页','links'=>$links]);
     }
 }

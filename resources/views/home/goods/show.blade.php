@@ -269,6 +269,8 @@ type="text/css" />
                             str = 1;
                         } else {
                             str = 0;
+                            $('.icobutton--heart').attr('style','color:rgb(243, 81, 134)');
+
                         }
                         
                         var arr = [];

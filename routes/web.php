@@ -84,6 +84,9 @@ Route::group([],function(){
 	Route::any('/sendcode','home\UserController@sendcode');
 		//检验验证码
 	Route::any('/checkcode','home\UserController@checkcode');
+		//登录
+	Route::any('/user/login','home\UserController@login');
+	Route::any('/user/dologin','home\UserController@dologin');
 
 
 
@@ -133,6 +136,7 @@ Route::group([],function(){
 
 	//  个人中心页面
 	Route::any('/home/self','home\SelfController@index');   //  个人中心页面
+	Route::any('/home/self/userinfo','home\UserinfoController@index');   //  用户详情
 
 
 	//我的小窝hou

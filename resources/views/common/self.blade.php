@@ -93,7 +93,6 @@
 				<div class="main-wrap">
 					@section('content')
 					@show
-
 				</div>
 					
 				<!--底部-->

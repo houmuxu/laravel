@@ -143,7 +143,7 @@ Route::group([],function(){
 	Route::any('/home/self/upwdupdate','home\UserinfoController@upwdupdate');        //修改密码
 	Route::any('/home/self/userutel','home\UserinfoController@userutel');        	 //手机
 	Route::any('/home/self/utelupdate','home\UserinfoController@utelupdate');        //修改手机
-      //收货地址手机
+
 
 
 

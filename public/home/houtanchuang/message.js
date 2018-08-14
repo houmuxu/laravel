@@ -21,7 +21,7 @@ $.extend({
       var defaults={
           message:' 操作成功',
           time:'2000',
-          type:'success',
+          type:'error',
           showClose:false,
           autoClose:true,
           onClose:function(){}

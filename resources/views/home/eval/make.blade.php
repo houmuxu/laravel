@@ -68,11 +68,7 @@
 								<div class="item-comment">
 									<textarea placeholder="请写下对宝贝的感受吧，对他人帮助很大哦！" class="textarea" gid='{{$goods->gid}}' did='{{$v->did}}'></textarea>
 								</div>
-								<!-- <div class="filePic">
-									<input type="file" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*" >
-									<span>晒照片(0/5)</span>
-									<img src="../images/image.jpg" alt="">
-								</div> -->
+						
 								<div class="item-opinion">
 									<li><i class="op1 active" rank="1"></i>好评</li>
 									<li><i class="op2" rank="2"></i>中评</li>

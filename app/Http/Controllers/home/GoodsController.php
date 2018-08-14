@@ -169,13 +169,14 @@ use App\Model\home\Coll;
 
         public function email()
         {
-            return view('home/goods/email');
+            $links = DB::table('friendlink')->get();
+            return view('home/goods/email',['title'=>'换绑邮箱','links'=>$links]);
         }
 
         public function useremail(Request $request)
         {
-            
-             Mail::send('home/goods/emailcode', ['uid' => '1','email'=>$request->input('emails')], function ($m) use ($request) {
+            $uid = 1;
+             Mail::send('home/goods/emailcode', ['uid' => $uid,'email'=>$request->input('emails')], function ($m) use ($request) {
                 $m->from(env('MAIL_USERNAME'), '三只松鼠旗舰店');
 
                 $m->to($request->input('emails'), '侯牧序')->subject('更换邮箱验证');

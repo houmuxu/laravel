@@ -39,18 +39,11 @@
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
     </div>
     <div class="x-body">
-      <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so">
-          <input class="layui-input" placeholder="开始日" name="start" id="start">
-          <input class="layui-input" placeholder="截止日" name="end" id="end">
-          <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
-          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-        </form>
-      </div>
+ 
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
          <a href="/admin/lunbo/create" style="color: white;margin-left:10px "><button class="layui-btn"><i class="layui-icon"></i>添加</button></a>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+        <span class="x-right" style="line-height:40px">共有数据：{{$zong}} 条</span>
       </xblock>
       <table class="layui-table">
         <thead>
@@ -76,9 +69,10 @@
             <td> <img src="{{$v->pic}}"></td>
             <td>{{date('Y-m-d',$v->uptime)}}</td>
             <td class="td-status">
-              <span class="layui-btn layui-btn-normal layui-btn-mini"> @if($v->state == 1)
+              <span class="layui-btn layui-btn-normal layui-btn-mini"> 
+                @if($v->status == 1)
                   已启用
-                @else
+                @elseif($v->status == 2)
                   已停用
                 @endif</span>
               </td>
@@ -104,14 +98,7 @@
         </tbody>
       </table>
       <div class="page">
-        <div>
-          <a class="prev" href="">&lt;&lt;</a>
-          <a class="num" href="">1</a>
-          <span class="current">2</span>
-          <a class="num" href="">3</a>
-          <a class="num" href="">489</a>
-          <a class="next" href="">&gt;&gt;</a>
-        </div>
+      {{$data->links()}}
       </div>
 
     </div>

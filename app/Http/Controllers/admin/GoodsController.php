@@ -29,7 +29,9 @@ class GoodsController extends Controller
                  $query->where('price','<=',$max);
             }
         })->paginate(10);
-        return view('admin/goods/index',['title'=>'商品列表','data'=>$data,'request'=>$request]);
+        $allgoods = Goods::all();
+        $zong = count($allgoods);
+        return view('admin/goods/index',['title'=>'商品列表','data'=>$data,'request'=>$request,'zong'=>$zong]);
     }
 
     public function create()

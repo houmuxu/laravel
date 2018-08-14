@@ -13,9 +13,9 @@
     <script type="text/javascript" src="/admin/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/admin/js/xadmin.js"></script>
 
-    <!-- <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"crossorigin="anonymous">
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"integrity="sha384-Tc5  IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"> -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"integrity="sha384-Tc5  IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
     </script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
   </head>
@@ -35,8 +35,8 @@
       <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so" method="get" action="/admin/goods">
           
-          <input class="layui-input" placeholder="最低价格" name="min" id="start" value="{{$request->input('min')}}">
-          <input class="layui-input" placeholder="最高价格" name="max" id="end" value="{{$request->input('max')}}">
+          <input class="layui-input" placeholder="最低价格" name="min"  value="{{$request->input('min')}}">
+          <input class="layui-input" placeholder="最高价格" name="max"  value="{{$request->input('max')}}">
           <input type="text" name="gname" value="{{$request->input('gname')}}" placeholder="请输入商品名" autocomplete="off" class="layui-input">
           <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
         </form>
@@ -44,7 +44,7 @@
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
          <a href="/admin/goods/create" style="color: white;margin-left:10px "><button class="layui-btn"><i class="layui-icon"></i>添加</button></a>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+        <span class="x-right" style="line-height:40px">共有数据：{{$zong}} 条</span>
       </xblock>
 
       @if(session('success'))
@@ -63,10 +63,10 @@
             </th>
             <th style="width: 60px">ID</th>
             <th style="width: 130px">商品名称</th>
-            <th style="width: 150px">商品图片</th>
+            <th style="width: 140px">商品图片</th>
             <th>单价</th>
             <th>口味</th>
-            <th>库存</th>
+            <th style="width: 70px">库存</th>
             <th>类别</th>
             <!-- <th>商品描述</th> -->
             <th>添加时间</th>
@@ -77,7 +77,7 @@
       @foreach($data as $k=>$v)
           <tr>
             <td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='{{$v->gid}}'><i class="layui-icon">&#xe605;</i></div>
             </td>
             <td>{{$v->gid}}</td>
             <td>{{$v->gname}}</td>
@@ -217,7 +217,7 @@
   
         layer.confirm('确认要删除吗？'+data,function(index){
             //捉到所有被选中的，发异步进行删除
-            $.get('/admin/lunbo/ajaxdel',{ids:data},function(info){
+            $.get('/admin/goodss/ajaxdel',{ids:data},function(info){
               if(info){
                 layer.msg('删除成功', {icon: 1});
                 $(".layui-form-checked").not('.header').parents('tr').remove();

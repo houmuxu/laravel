@@ -8,6 +8,8 @@ use App\Model\home\Coll;
 use DB;
 use App\Model\Admin\User;
 use App\Model\Admin\Goods;
+use Mrgoon\AliSms\AliSms;
+
 
 class CollController extends Controller
 {
@@ -72,6 +74,36 @@ class CollController extends Controller
 
     public function telindex() //我的小窝手机号页面
     {
-        echo "ssss";
+        $links = DB::table('friendlink')->get();
+
+        return view('home/coll/tel',['title'=>'换绑手机号','links'=>$links]);
+    }
+
+    public function oldcode(Request $request)
+    {
+        $tel =$request->input('tel');
+        $code = rand(1111,9999);
+        session(['telcode'=>$code]);
+        session(['newtel'=>$tel]);
+        var_dump(session('telcode'));
+        
+        $aliSms = new AliSms();
+        $response = $aliSms->sendSms($tel, 'SMS_142070526', ['code'=>$code]);
+        var_dump($response); 
+    }
+
+    public function newcode(Request $request)
+    {
+       $code = $request->input('code');
+       $oldcode = session('telcode');
+       $newtel = session('newtel');
+       // $uid = session('uid');
+       $uid = 1;
+       if($code == $oldcode){
+            $res = User::where('uid',$uid)->update(['utel'=>$newtel]);
+            if($res){
+                echo 1;
+            }
+       }
     }
 }

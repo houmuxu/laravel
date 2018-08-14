@@ -31,6 +31,7 @@ Route::group([],function(){
 	Route::resource('/admin/goods','admin\GoodsController');
 	Route::any('/admin/goodss/status','admin\GoodssController@status');//修改状态
 	Route::any('/admin/goodss/del','admin\GoodssController@destroy');//删除商品
+	Route::any('/admin/goodss/ajaxdel','admin\GoodssController@ajaxdel');//批量删除商品
 	//轮播图管理 hou
 	Route::any('/admin/lunbo/create','admin\LunboController@create');//添加轮播页面
 	Route::any('/admin/lunbo/store','admin\LunboController@store');//添加轮播
@@ -142,6 +143,8 @@ Route::group([],function(){
 	Route::any('/home/coll/store','home\CollController@store');  //收藏存入DB
 	Route::any('/home/coll/index','home\CollController@index');  //我的收藏页面
 	Route::any('/home/tel/index','home\CollController@telindex');  //更换手机号页面
+	Route::any('/home/tel/oldcode','home\CollController@oldcode');  //old手机号验证码
+	Route::any('/home/tel/newcode','home\CollController@newcode');  //new手机号验证
 	
 
 

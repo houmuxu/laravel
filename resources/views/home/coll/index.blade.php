@@ -3,10 +3,10 @@
 
 
 @section('content')
-	<link href="../AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
-	<link href="../AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
-	<link href="../css/personal.css" rel="stylesheet" type="text/css">
-	<link href="../css/colstyle.css" rel="stylesheet" type="text/css">
+	<link href="/home/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
+	<link href="/home/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
+	<link href="/home/css/personal.css" rel="stylesheet" type="text/css">
+	<link href="/home/css/colstyle.css" rel="stylesheet" type="text/css">
 
 			<b class="line"></b>
 		<div class="center">
@@ -21,10 +21,7 @@
 						<hr/>
 
 						<div class="you-like">
-							<div class="s-bar">
-								我的收藏
-								<a class="am-badge am-badge-danger am-round">下架</a>
-							</div>
+							
 							<div class="s-content">
 
 							@foreach($goods as $k=>$v)
@@ -48,9 +45,7 @@
 											</div>
 										</div>
 										<div class="s-tp">
-											<span class="ui-btn-loading-before">找相似</span>
-											<i class="am-icon-shopping-cart"></i>
-											<span class="ui-btn-loading-before buy">加入购物车</span>
+										
 										
 										</div>
 									</div>

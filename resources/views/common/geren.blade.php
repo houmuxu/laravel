@@ -137,6 +137,8 @@
 							<li> <a href="foot.html">足迹</a></li>
 							<li> <a href="/home/eval/make">未评价</a></li>
 							<li> <a href="/home/eval/list">已评价</a></li>
+							<li> <a href="/home/goods/email">更换邮箱</a></li>
+							<li> <a href="/home/tel/index">更换手机号</a></li>
 						</ul>
 					</li>
 

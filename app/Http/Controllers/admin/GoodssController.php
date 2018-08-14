@@ -49,4 +49,30 @@ class GoodssController extends Controller
        echo $re;
            
     }
+
+    public function ajaxdel(Request $request)
+    {
+        $arr = $request->input('ids');
+        foreach ($arr as $k=>$v) {
+            $res = Goodspic::where('gid',$v)->get();
+             foreach ($res as $kk => $vv) {
+                $rs = unlink('.'.$vv->gpic);
+            }
+
+            if($rs){
+                //删除图片关联表
+                $gs = Goods::find($v);
+
+             $data = $gs->goodspics()->delete();
+            }
+
+            if($data){
+                //删除主表
+                $re = Goods::destroy($v);
+            }
+
+        }
+            
+            var_dump($re);
+    }
 }

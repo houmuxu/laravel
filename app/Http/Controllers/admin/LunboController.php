@@ -11,9 +11,10 @@ class LunboController extends Controller
 {
     public function index()
     {
-        $data = Lunbo::all();
+        $data = Lunbo::paginate(10);
+        $zong = count($data);
         
-        return view('admin/lunbo/index',['data'=>$data]);
+        return view('admin/lunbo/index',['data'=>$data,'zong'=>$zong]);
     }
 
     public function create()

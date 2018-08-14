@@ -70,7 +70,7 @@
                   <span class="x-red"></span>购买时间
               </label>
               <div class="layui-input-inline">
-                  <input type="text" readonly="true" name="addtime" value="{{$res->addtime}}" required="" 
+                  <input type="text" readonly="true" name="addtime" value="{{date('Y-m-d H:i:s',$res->addtime)}}" required="" 
                   autocomplete="off" class="layui-input">
               </div>
               <div class="layui-form-mid layui-word-aux">

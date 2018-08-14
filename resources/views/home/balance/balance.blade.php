@@ -95,19 +95,38 @@
 										<div class="pay-phone">
 											<li class="td td-item">
 												<div class="item-pic">
-													<a href="/home/goodsshow/{{$v->gid}}" class="J_MakePoint">
+													<a href="
+														@if($v->gid >= 30)
+															/home/goodsshow/{{$v->gid}}
+														@else
+															/home/show/{{$v->gid}}
+														@endif
+															" class="J_MakePoint">
 														<!-- <img src="/home/images/kouhong.jpg_80x80.jpg" class="itempic J_ItemImg"> -->
 														<img src="
+														@if($v->gid >= 30)
 															@php
 															$gid = App\Model\Admin\Goodspic::where('gid',$v->gid)->first();
 			            									echo $gpic = $gid->gpic;
 															@endphp
+														@else
+															@php
+															$sid = App\Model\Admin\Salespic::where('sid',$v->gid)->first();
+			            									echo $salespic = $sid->salespic;
+															@endphp
+														@endif
 														" class="itempic J_ItemImg" width="78px">
 													</a>
 												</div>
 												<div class="item-info">
 													<div class="item-basic-info">
-														<a href="/home/goodsshow/{{$v->gid}}" class="item-title J_MakePoint" data-point="tbcart.8.11"><strong>{{$v->gname}}</strong></a>
+														<a href="
+															@if($v->gid >= 30)
+																/home/goodsshow/{{$v->gid}}
+															@else
+																/home/show/{{$v->gid}}
+															@endif
+														" class="item-title J_MakePoint" data-point="tbcart.8.11"><strong>{{$v->gname}}</strong></a>
 														<input class="gid" type="hidden" value="{{$v->gid}}" />
 													</div>
 												</div>

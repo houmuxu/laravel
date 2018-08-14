@@ -28,7 +28,7 @@
                   <span class="x-red"></span>商品名称
               </label>
               <div class="layui-input-inline">
-                  <input type="text" readonly="true"  name="gname" value="{{$res->det_goods->gname}}" required="" 
+                  <input type="text" readonly="true"  name="gname" value="@if($res->gid >= 30){{$res->det_goods->gname}}@else{{$res->det_sales->gname}}@endif" required="" 
                   autocomplete="off" class="layui-input">
               </div>
               <div class="layui-form-mid layui-word-aux">
@@ -40,7 +40,13 @@
                   <span class="x-red"></span>商品图片
               </label>
               <div class="layui-input-inline">
-                  <img src="{{$res->det_goodspic[0]->gpic}}">
+                  <img src="
+                              @if($res->gid >= 30)
+                                {{$res->det_goodspic[0]->gpic}}
+                              @else
+                                {{$res->det_salespic[0]->salespic}}
+                              @endif
+                  ">
               </div>
           </div>
 

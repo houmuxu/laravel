@@ -49,7 +49,7 @@
             <th>购买单价</th>
             <th>购买数量</th>
             <th>总金额</th>
-            <th >操作</th>
+            <!-- <th >操作</th> -->
           </tr>
         </thead>
         <tbody>
@@ -58,17 +58,29 @@
 
           <tr>
            
-            <td>{{$v->det_goods->gname}}</td>
-            <td><img src="{{$v->det_goodspic[0]->gpic}}"></td>
+            <td>
+              @if($v->gid >= 30)
+                {{$v->det_goods->gname}}
+              @else
+                {{$v->det_sales->gname}}
+              @endif
+            </td>
+            <td><img src="
+               @if($v->gid >= 30)
+                {{$v->det_goodspic[0]->gpic}}
+              @else
+                {{$v->det_salespic[0]->salespic}}
+              @endif
+              "></td>
             <td>{{$v->price}}</td>
             <td>{{$v->cnt}}</td>
             <td>{{$v->price*$v->cnt}}</td>
 
-            <td class="td-manage" width="30px">
+            <!-- <td class="td-manage" width="30px">
               <a title="编辑" @if($status != '1') href='javascript:void(0)' @endif href='/admin/details/edit/{{$v->did}}'>
                 <button><i class="layui-icon @if($status != '1') kill_key @endif">&#xe642;</i></button>
               </a>
-            </td>
+            </td> -->
 
           </tr>
 
@@ -77,9 +89,9 @@
         </tbody>
         
       </table>
-      <a href="/admin/orders" class="layui-btn layui-btn-danger" lay-filter="add" lay-submit="">
+      <button class="layui-btn layui-btn-danger" onclick="javascript:history.go(-1);" lay-filter="add" lay-submit="">
                   返回 
-              </a>
+      </button>
    
   </body>
 

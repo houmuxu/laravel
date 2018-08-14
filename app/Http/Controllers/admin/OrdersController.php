@@ -92,7 +92,7 @@ class OrdersController extends Controller
     {
 
         // dd($request->all());
-        $res = $request->except('_token','_method');
+        $res = $request->except('addtime','_token','_method');
 
         $data =Orders::where('id', $id)->update($res);
 

@@ -112,16 +112,46 @@
 											<ul class="item-list">
 												<li class="td td-item">
 													<div class="item-pic">
-														<a href="/home/goodsshow/{{$vv->gid}}" class="J_MakePoint">
-															<img src="{{$vv->det_goodspic[0]->gpic}}" class="itempic J_ItemImg">
+														<a href="
+															@if($vv->gid >= 30)
+																/home/goodsshow/{{$vv->gid}}
+															@else
+																/home/show/{{$vv->gid}}
+															@endif
+														" class="J_MakePoint">
+															<img src="
+																 @if($vv->gid >= 30)
+													                {{$vv->det_goodspic[0]->gpic}}
+													              @else
+													                {{$vv->det_salespic[0]->salespic}}
+													              @endif
+															" class="itempic J_ItemImg">
 														</a>
 													</div>
 													<div class="item-info">
 														<div class="item-basic-info">
-															<a href="/home/goodsshow/{{$vv->gid}}">
-																<p>{{$vv->det_goods->gname}}</p>
+															<a href="
+																		@if($vv->gid >= 30)
+																			/home/goodsshow/{{$vv->gid}}
+																		@else
+																			/home/show/{{$vv->gid}}
+																		@endif
+															">
+																<p>
+																	@if($vv->gid >= 30)
+														                {{$vv->det_goods->gname}}
+														            @else
+														                {{$vv->det_sales->gname}}
+														            @endif
+																</p>
 																<p class="info-little">
-																	<br/>{{$vv->det_goods->goodsattr}} </p>
+																	<br/>
+																	@if($vv->gid >= 30)
+														                {{$vv->det_goods->goodsattr}} 
+														            @else
+														                {{$vv->det_sales->goodsattr}}
+														            @endif
+																</p>
 															</a>
 														</div>
 													</div>

@@ -69,4 +69,9 @@ class CollController extends Controller
         $links = DB::table('friendlink')->get();
         return view('home/coll/index',['title'=>'我的收藏','links'=>$links,'goods'=>$goods,'haopinglv'=>$haopinglv]);
     }
+
+    public function telindex() //我的小窝手机号页面
+    {
+        echo "ssss";
+    }
 }

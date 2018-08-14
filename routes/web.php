@@ -141,6 +141,8 @@ Route::group([],function(){
 	Route::any('/home/eval/list','admin\EvalController@index');  //已评价页面
 	Route::any('/home/coll/store','home\CollController@store');  //收藏存入DB
 	Route::any('/home/coll/index','home\CollController@index');  //我的收藏页面
+	Route::any('/home/tel/index','home\CollController@telindex');  //更换手机号页面
+	
 
 
 

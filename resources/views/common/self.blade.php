@@ -128,11 +128,10 @@
 						<a href="index.html">个人中心</a>
 					</li>
 					<li class="person">
-						<a href="#">个人资料</a>
+						<p>个人资料</p>
 						<ul>
-							<li> <a href="information.html">个人信息</a></li>
-							<li> <a href="safety.html">安全设置</a></li>
-							<li> <a href="address.html">收货地址</a></li>
+							<li> <a href="/home/self/userinfo">个人信息</a></li>
+							<li> <a href="/home/self/usersafety">安全设置</a></li>
 						</ul>
 					</li>
 					<li class="person">

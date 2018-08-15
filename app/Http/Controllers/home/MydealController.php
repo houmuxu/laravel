@@ -80,9 +80,18 @@ class MydealController extends Controller
     //地址管理---保存
     public function store(Request $request)
     {
+        // dd($request->all());
         $uid = 1;
+
         $data = $request->except('_token');
+        
+        // dd($data);
+
+        //拼接三级联动到addr下面
+        $data['addr'] = $data['sheng'].' '.$data['shi'].' '.$data['xian'].' '.$data['addr'];
+        array_splice($data,2,3);
         $data['uid'] = $uid;
+
         // dd($data);
 
         $res = DB::table('address')->insert($data);

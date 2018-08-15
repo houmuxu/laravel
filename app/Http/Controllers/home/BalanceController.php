@@ -200,7 +200,11 @@ class BalanceController extends Controller
 
         $links = DB::table('friendlink')->get();
 
-        return view('home/balance/payok',['data'=>$data,'links'=>$links,'title'=>'付款成功页面']);
+        //随机获取广告
+        $advert = DB::table('advert')->inRandomOrder()->first();
+        $advert2 = DB::table('advert')->inRandomOrder()->first();
+
+        return view('home/balance/payok',['data'=>$data,'links'=>$links,'title'=>'付款成功页面','advert'=>$advert,'advert2'=>$advert2]);
     }
 
 

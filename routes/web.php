@@ -58,6 +58,11 @@ Route::group([],function(){
 	Route::any('/admin/details/edit/{id}','admin\DetailsController@edit');
 	Route::any('/admin/details/update/{id}','admin\DetailsController@update');
 
+	//广告
+	Route::resource('/admin/advert', 'admin\AdvertController');
+	Route::any('/admin/advert_del','admin\AdvertajaxController@destroy');//删除广告
+	Route::any('/admin/advert_delall','admin\AdvertajaxController@destroyall');//批量删除
+
 
 
 	//  友情链接   zhang

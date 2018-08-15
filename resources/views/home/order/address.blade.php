@@ -8,6 +8,11 @@
 		<link href="/home/css/addstyle.css" rel="stylesheet" type="text/css">
 		<script src="/home/AmazeUI-2.4.2/assets/js/jquery.min.js" type="text/javascript"></script>
 		<script src="/home/AmazeUI-2.4.2/assets/js/amazeui.js"></script>
+		
+		<!-- 三级联动 -->
+		<script src="/home/city2/js/distpicker.data.js"></script>
+		<script src="/home/city2/js/distpicker.js"></script>
+		<script src="/home/city2/js/main.js"></script>
 
 	
 
@@ -74,6 +79,18 @@
 												<input id="user-phone" placeholder="必填" type="text" name="tel">
 											</div>
 										</div>
+
+										<div class="am-form-group">
+											<label for="user-phone" class="am-form-label">所在地</label>
+												<div class="am-form-content address">
+													<div data-toggle="distpicker">
+													  <select name="sheng"></select>
+													  <select name="shi"></select>
+													  <select name="xian"></select>
+													</div>
+												</div>
+										</div>
+
 										<div class="am-form-group">
 											<label for="user-intro" class="am-form-label">详细地址</label>
 											<div class="am-form-content">
@@ -181,7 +198,7 @@
 						        $(obj).parents('.user-addresslist').remove();
 
 						        $.get('/home/address/del',{id:id},function(data){
-						        	console.log(data);
+						        	// console.log(data);
 						        	// if(data==1){alert('删除成功')}else{alert('删除失败')}
 						        })
 							}

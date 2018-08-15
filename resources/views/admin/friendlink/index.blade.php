@@ -42,7 +42,6 @@
         </form>
       </div>
       <xblock>
-        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
          <a href="/admin/friendlink/create" style="color: white;margin-left:10px "><button class="layui-btn"><i class="layui-icon"></i>添加</button></a>
         <span class="x-right" style="line-height:40px"></span>
       </xblock>

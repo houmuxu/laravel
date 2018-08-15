@@ -50,7 +50,7 @@
        </form>
      </div>
      <xblock>
-       <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
+       
        <button class="layui-btn" onclick="location.replace('/admin/cate/create')"><i class="layui-icon"></i>添加</button>
        <span class="x-right" style="line-height:40px"></span>
      </xblock>

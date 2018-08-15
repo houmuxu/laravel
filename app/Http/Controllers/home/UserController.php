@@ -3,6 +3,8 @@ namespace App\Http\Controllers\home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Ucpaas;
+use DB;
+use Mail;
 
 
 class UserController extends Controller
@@ -129,6 +131,51 @@ class UserController extends Controller
             echo 0;
         }
 
+    }
+
+
+
+    //   邮箱注册
+    public function doemail(Request $request)
+    {
+        $res = [];
+        $email = $request->input('email');
+        $pass = $request->input('pass');
+        
+        $res['uemail'] = $email;
+        $res['upwd'] = $pass;
+        $res['utime'] = time();
+        $res['upic'] = '/home/images/getAvatar.do.jpg';
+        $res['uname'] = date('Ymd',time()).str_random(4);
+        
+        $rs = DB::table('users')->insertGetId($res);
+
+        if($rs){
+
+            //发送邮件
+            Mail::send('home.user.reminder', ['id' => $rs], function ($m) use ($res) {
+
+                $m->from(env('MAIL_USERNAME'), '三只松鼠商城人力资源部');
+
+                $m->to($res['uemail'], $res['uname'])->subject('诚邀加入三只松鼠集团');
+            });
+
+          return view('home.user.tixing',['title'=>'新用户激活的提醒信息']);
+
+        } else {
+
+            return back();
+
+        }
+        
+    }
+
+
+    //   激活处理
+    public function jihuo()
+    {
+        
+         echo "<script>alert('激活成功');window.location.href='/'</script>";
     }
 
 }

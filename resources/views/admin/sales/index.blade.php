@@ -23,20 +23,28 @@
   <body>
     <div class="x-nav">
       <span class="layui-breadcrumb">
-        <a href="">首页</a>
-        <a href="">演示</a>
+        <a href="/admin/first">首页</a>
+       
         <a>
-          <cite>导航元素</cite></a>
+          <cite>{{$title}}</cite></a>
       </span>
       <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
     </div>
     <div class="x-body">
-     
+     <div class="layui-row">
+        <form class="layui-form layui-col-md12 x-so" method="get" action="/admin/sales">
+          
+          <input class="layui-input" placeholder="最低价格" name="min" id="start" value="{{$request->input('min')}}">
+          <input class="layui-input" placeholder="最高价格" name="max" id="end" value="{{$request->input('max')}}">
+          <input type="text" name="gname" value="{{$request->input('gname')}}" placeholder="请输入商品名" autocomplete="off" class="layui-input">
+          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+        </form>
+      </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
         <button class="layui-btn" onclick="x_admin_show('添加用户','/admin/sales/create')"><i class="layui-icon"></i>添加</button>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+        <span class="x-right" style="line-height:40px"></span>
       </xblock>
       <table class="layui-table">
         <thead>
@@ -129,11 +137,16 @@
         var data = tableCheck.getData();
   
         layer.confirm('确认要删除吗？'+data,function(index){
-            //捉到所有被选中的，发异步进行删除
-            layer.msg('删除成功', {icon: 1});
-            $(".layui-form-checked").not('.header').parents('tr').remove();
+            //捉到所有被选中的，发异步进行删
+            $.get('/admin/sales/ajaxdel',{ids:data},function(info){
+              if(info){
+                layer.msg('删除成功', {icon: 1});
+                $(".layui-form-checked").not('.header').parents('tr').remove();
+              }
+            })
         });
       }
+
     </script>
  
   </body>

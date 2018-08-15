@@ -80,8 +80,10 @@ Route::group([],function(){
 	//  首页 hou
 	Route::any('/', 'home\FirstController@index');
 
-	//  注册页面
-	// Route::any('/login', 'home\HomeController@login');
+	//  邮箱注册
+	Route::any('/doemail','home\UserController@doemail');
+	Route::any('/jihuo','Home\UserController@jihuo');
+
 //前台
 Route::group([],function(){
 	//用户手机注册

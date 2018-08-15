@@ -638,82 +638,38 @@ type="text/css" />
                     <div class="clear">
                     </div>
                 </div>
-                <!--优惠套装-->
+                <!--限时活动-->
                 <div class="match">
                     <div class="match-title">
-                        优惠套装
+                        限时活动
                     </div>
                     <div class="match-comment">
                         <ul class="like_list">
+
+                        @foreach($sales as $k=>$v)
                             <li>
                                 <div class="s_picBox">
-                                    <a class="s_pic" href="#">
-                                        <img src="/home/images/cp.jpg">
+                                    <a class="s_pic" href="/home/show/{{$v->sid}}">
+                                        <img src="{{$v->salespic[0]->salespic}}">
                                     </a>
                                 </div>
-                                <a class="txt" target="_blank" href="#">
-                                    萨拉米 1+1小鸡腿
+                                <div style="width: 200px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                <a class="txt" target="_blank" href="/home/show/{{$v->sid}}" style="font-size: 15px">
+                                    {{$v->gname}}
                                 </a>
+                                </div>
                                 <div class="info-box">
                                     <span class="info-box-price">
-                                        ¥ 29.90
+                                        ¥ {{$v->newprice}}
                                     </span>
                                     <span class="info-original-price">
-                                        ￥ 199.00
+                                        ￥ {{$v->oldprice}}
                                     </span>
                                 </div>
                             </li>
-                            <li class="plus_icon">
-                                <i>
-                                    +
-                                </i>
-                            </li>
-                            <li>
-                                <div class="s_picBox">
-                                    <a class="s_pic" href="#">
-                                        <img src="/home/images/cp2.jpg">
-                                    </a>
-                                </div>
-                                <a class="txt" target="_blank" href="#">
-                                    ZEK 原味海苔
-                                </a>
-                                <div class="info-box">
-                                    <span class="info-box-price">
-                                        ¥ 8.90
-                                    </span>
-                                    <span class="info-original-price">
-                                        ￥ 299.00
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="plus_icon">
-                                <i>
-                                    =
-                                </i>
-                            </li>
-                            <li class="total_price">
-                                <p class="combo_price">
-                                    <span class="c-title">
-                                        套餐价:
-                                    </span>
-                                    <span>
-                                        ￥35.00
-                                    </span>
-                                </p>
-                                <p class="save_all">
-                                    共省:
-                                    <span>
-                                        ￥463.00
-                                    </span>
-                                </p>
-                                <a href="#" class="buy_now">
-                                    立即购买
-                                </a>
-                            </li>
-                            <li class="plus_icon">
-                                <i class="am-icon-angle-right">
-                                </i>
-                            </li>
+                        @endforeach
+                          
+                           
                         </ul>
                     </div>
                 </div>

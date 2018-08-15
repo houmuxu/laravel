@@ -12,6 +12,7 @@ use Cache;
 use DB;
 use App\Model\home\Cartsinfo;
 use App\Model\home\Coll;
+use App\Model\Admin\Sales;
 
     class GoodsController extends Controller
     {
@@ -92,7 +93,9 @@ use App\Model\home\Coll;
             }
             // 收藏结束
             
-            return view('home/goods/show',['data'=>$data,'title'=>$data->gname,'links'=>$links,'goods'=>$goods,'cate'=>$cate,'allgoods'=>$allgoods,'evals'=>$evals,'hao'=>$hao,'zhong'=>$zhong,'cha'=>$cha,'all'=>$all,'haopinglv'=>$haopinglv,'collstatus'=>$collstatus]);
+            $sales = Sales::inRandomOrder()->limit(4)->get();
+
+            return view('home/goods/show',['data'=>$data,'title'=>$data->gname,'links'=>$links,'goods'=>$goods,'cate'=>$cate,'allgoods'=>$allgoods,'evals'=>$evals,'hao'=>$hao,'zhong'=>$zhong,'cha'=>$cha,'all'=>$all,'haopinglv'=>$haopinglv,'collstatus'=>$collstatus,'sales'=>$sales]);
         }
 
 

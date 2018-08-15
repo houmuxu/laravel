@@ -13,11 +13,16 @@ class FriendlinkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = DB::table('friendlink')->paginate(5);
+        $data = DB::table('friendlink')->where(function($query) use($request){
+            $fname = $request->input('fname');
+            if(!empty($fname)){
+                $query->where('fname','like','%'.$fname.'%');
+            }
+        })->paginate(10);
         
-        return view('admin.friendlink.index',['data'=>$data]);
+        return view('admin.friendlink.index',['data'=>$data,'request'=>$request,'title'=>'链接列表']);
     }
 
     /**
@@ -85,14 +90,25 @@ class FriendlinkController extends Controller
     public function update(Request $request, $id)
     {
         $res = $request->except('_token','_method');
+        $res_fname = $res['fname'];
+        $res_furl = $res['furl'];
 
+        $rs = DB::table('friendlink')->where('fid',$id)->get();
+        
+        $rs_fname = $rs[0]->fname;
+        $rs_furl = $rs[0]->furl;
+
+        if(($res_fname == $rs_fname) && ($res_furl == $rs_furl)){
+            return back();
+        }
+        
         try{
             $data = DB::table('friendlink')->where('fid',$id)->update($res);
             if($data){
                 echo "<script>alert('修改成功');window.location.href='/admin/friendlink'</script>";
             }
         }catch(\Exception $e){
-            echo "<script>alert('修改失败');window.location.href='{$_SERVER['HTTP_REFERER']}'</script>";
+            echo "<script>alert('修改失败');return back();'</script>";
         }
     }
 
@@ -114,4 +130,5 @@ class FriendlinkController extends Controller
             echo "<script>alert('删除失败');window.location.href='{$_SERVER['HTTP_REFERER']}'</script>";
         }
     }
+
 }

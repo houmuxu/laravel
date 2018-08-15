@@ -21,22 +21,32 @@
   </head>
   
   <body>
-    <div class="x-nav">
+     <div class="x-nav">
       <span class="layui-breadcrumb">
-        <a href="">首页</a>
-        <a href="">演示</a>
+        <a href="/admin/first">首页</a>
+        
         <a>
-          <cite>导航元素</cite></a>
+          <cite>{{$title}}</cite></a>
       </span>
       <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
     </div>
     <div class="x-body">
-     
+
+     <div class="layui-row">
+        <form class="layui-form layui-col-md12 x-so" method="get" action="/admin/friendlink">
+          
+          <input class="layui-input" placeholder="链接名称" name="fname" value="{{$request->input('fname')}}">
+          
+          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+        </form>
+      </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+         <a href="/admin/friendlink/create" style="color: white;margin-left:10px "><button class="layui-btn"><i class="layui-icon"></i>添加</button></a>
+        <span class="x-right" style="line-height:40px"></span>
       </xblock>
+
       <table class="layui-table">
         <thead>
           <tr>

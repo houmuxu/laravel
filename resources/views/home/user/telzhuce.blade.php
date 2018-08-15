@@ -35,35 +35,39 @@
 								<li><a href="">手机号注册</a></li>
 							</ul>
 
-							<div class="am-tabs-bd">
-								<div class="am-tab-panel am-active">
-									<form method="post">
-										
-							   <div class="user-email">
+					<div class="am-tabs-bd">
+						<div class="am-tab-panel am-active">
+							<form  method="post">
+									{{csrf_field()}}
+							    <div class="user-email">
 										<label for="email"><i class="am-icon-envelope-o"></i></label>
-										<input type="email" name="" id="email" placeholder="请输入邮箱账号">
-                 </div>										
-                 <div class="user-pass">
+										<input type="email" name="email" id="email" placeholder="请输入邮箱账号">
+                 				</div>										
+                				<div class="user-pass">
 								    <label for="password"><i class="am-icon-lock"></i></label>
-								    <input type="password" name="" id="password" placeholder="设置密码">
-                 </div>										
-                 <div class="user-pass">
+								    <input type="password" name="pass" id="pass" placeholder="请输入8-12位密码">
+                				</div>										
+                 				<div class="user-pass">
 								    <label for="passwordRepeat"><i class="am-icon-lock"></i></label>
-								    <input type="password" name="" id="passwordRepeat" placeholder="确认密码">
-                 </div>	
+								    <input type="password" name="repass" id="repass" placeholder="确认密码">
+                 				</div>	
                  
-                 </form>
-                 
+                 			</form>
+                 			
 								 <div class="login-links">
-										<label for="reader-me">
-											<input id="reader-me" type="checkbox"> 点击表示您同意商城《服务协议》
-										</label>
+									<label for="reader-me">
+										<input id="reader-me" name="reader" type="checkbox"> 点击表示您同意商城《服务协议》
+									</label>
 							  	</div>
-										<div class="am-cf">
-											<input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
-										</div>
+							  
 
+								<div class="am-cf">
+									<input type="submit" id="register" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
 								</div>
+							
+
+						</div>
+
 
 								<div class="am-tab-panel">
 									<form method="post">
@@ -161,6 +165,85 @@
 									$(function() {
 									    $('#doc-my-tabs').tabs();
 									  })
+
+
+									//  邮箱注册
+									/*$('#register').click(function(){
+										var email = $(this).parents('.am-active').find('#email').val();
+										// console.log(email);
+										var pass = $(this).parents('.am-active').find('#pass').val();
+										var repass = $(this).parents('.am-active').find('#repass').val();
+										// console.log(pass);
+
+										//  邮箱正则匹配
+
+										var reg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+
+										if ( !reg.exec(email)) {
+ 										 	
+ 										 	return confirm('填写的邮箱不合法'); 
+										}
+
+										if(pass != repass){
+											return confirm('两次密码不一致');
+										}
+
+									})*/
+
+
+									//  邮箱注册
+									$('input[name=email]').blur(function(){
+										var ev = $(this).val();
+										var reg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+										if(!reg.test(ev)){
+											$(this).css('border','1px solid red');
+										} else {
+											$(this).css('border','1px solid blue');
+										}
+									})
+
+									//   密码验证
+									$('input[name=pass]').blur(function(){
+										var pv = $(this).val();
+										var reg = /^\S{8,12}$/;
+										if(!reg.test(pv)){
+											$(this).css('border','1px solid red');
+										} else {
+											$(this).css('border','1px solid blue');
+										}
+									})
+
+									//  两次密码验证
+									$('input[name=repass]').blur(function(){
+										var rpv = $(this).val();
+										var pv = $('input[name=pass]').val();
+
+										if(rpv != pv){
+											$(this).css('border','1px solid red');
+										} else {
+											$(this).css('border','1px solid blue');
+										}
+									})  
+
+									$('#register').click(function(){ 
+										// 验证协议是否选中
+										/*var reader = $('input[name=reader]').attr('checked',true);
+										alert(reader);
+										if(!reader){return false;}*/
+										// arr = [];
+										var email = $(this).parents('.am-active').find('#email').val();
+										var pass = $(this).parents('.am-active').find('#pass').val();
+
+										// arr.push([email,pass]);
+										// console.log(arr);
+										$.post('/doemail',{email:email,pass:pass},function(data){
+
+											/*if(data == 1){
+												return confirm('请激活你的邮箱才能登录');
+											}*/
+										})
+									})
+
 								</script>
 
 							</div>

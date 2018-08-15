@@ -20,6 +20,8 @@
   <body>
     <div class="x-body">
         <form class="layui-form" action="/admin/friendlink/{{$res[0]->fid}}" method="post">
+          {{csrf_field()}}
+          {{method_field('PUT')}}
           <div class="layui-form-item">
               <label for="username" class="layui-form-label">
                   <span class="x-red">*</span>链接名
@@ -47,8 +49,7 @@
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
-              {{csrf_field()}}
-              {{method_field('PUT')}}
+              
               <button  class="layui-btn" lay-filter="add" lay-submit="">
                 修改
               </button>

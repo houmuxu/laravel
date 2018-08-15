@@ -20,8 +20,13 @@ class CateController extends Controller
         //  获取数据
         // $cates = DB::table('cate')->paginate(10);
         $cates = Cate::select(DB::raw('*,concat(path,cid) as npath'))
-            ->orderBy('npath','asc')
-            ->paginate(10);
+            ->orderBy('npath','asc')->where(function($query) use($request){
+            $cname = $request->input('cname');
+            if(!empty($cname)){
+                $query->where('cname','like','%'.$cname.'%');
+            }
+        })->paginate(10);
+
 
         //  遍历判断path路径中逗号出现的次数
         foreach($cates as $k=>$v){
@@ -33,7 +38,7 @@ class CateController extends Controller
 
         }
         //  显示数据
-        return view('admin/cate/index',['cates'=>$cates,'request'=>$request]);
+        return view('admin/cate/index',['cates'=>$cates,'request'=>$request,'title'=>'浏览类别']);
     }
 
     /**

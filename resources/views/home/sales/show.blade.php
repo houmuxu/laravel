@@ -25,51 +25,63 @@
         </script>
         <!-- 加入购物车特效 -->
         <style type="text/css">
-    .body-top {
-        position: fixed;
-        top: 0px;
-        width: 100%;
-        background: rgba(255,255,255,0.93);
-        box-shadow: 0 0 10px #cfd0cf;
-        z-index: 999;
-    }
-    .body-top-center {
-        width: 1200px;
-        margin: 0 auto;
-    }
-    .menu {
-        float: left;
-    }
-    .menu-ul {
-        overflow: hidden;
-        float: left;
-        padding: 10px 0;
-    }
-    .menu-li {
-        float: left;
-        width: 100px;
-        height: 40px;
-        margin-right: 5px;
-    }
-    .menu-a {
-        display: block;
-        width: 100px;
-        height: 40px;
-        text-align: center;
-        line-height: 40px;
-        font-size: 16px;
-        -webkit-transition: all 0.5s ease;
-        -moz-transition: all 0.5s ease;
-        -o-transition: all 0.5s ease;
-        -ms-transition: all 0.5s ease;
-        transition: all 0.5s ease;
-    }
-    .carts{
-        margin-top: 200px;width: 100%;text-align: center;
-    }
-    .carts button{
-        margin: 10px;
-    }
+            .body-top {
+                position: fixed;
+                top: 0px;
+                width: 100%;
+                background: rgba(255,255,255,0.93);
+                box-shadow: 0 0 10px #cfd0cf;
+                z-index: 999;
+            }
+            .body-top-center {
+                width: 1200px;
+                margin: 0 auto;
+            }
+            .menu {
+                float: left;
+            }
+            .menu-ul {
+                overflow: hidden;
+                float: left;
+                padding: 10px 0;
+            }
+            .menu-li {
+                float: left;
+                width: 100px;
+                height: 40px;
+                margin-right: 5px;
+            }
+            .menu-a {
+                display: block;
+                width: 100px;
+                height: 40px;
+                text-align: center;
+                line-height: 40px;
+                font-size: 16px;
+                -webkit-transition: all 0.5s ease;
+                -moz-transition: all 0.5s ease;
+                -o-transition: all 0.5s ease;
+                -ms-transition: all 0.5s ease;
+                transition: all 0.5s ease;
+            }
+            .carts{
+                margin-top: 200px;width: 100%;text-align: center;
+            }
+            .carts button{
+                margin: 10px;
+            }
+            .tm-promo-type {
+            background-color: #f47a86;
+            border-radius: 1px;
+            color: #fff;
+            height: 16px;
+            line-height: 16px;
+            margin: 0 2px 4px 6px;
+            padding: 1px 5px;
+            position: relative;
+            }
+            em{font-style:normal;}
+            dd{color:#333;margin-left:70px;font-family:Arial;}
 </style>
 <script type="text/javascript" src="/home/js/jquery-addShopping.js"></script>
     <!-- 加入购物车特效结束 -->
@@ -225,6 +237,10 @@
                                         <b class="sys_item_price">
                                             {{$data->newprice}}
                                         </b>
+                                        <em class="tm-promo-type">
+                                            <s></s>
+                                            聚划算
+                                        </em>
                                     </dd>
                                 </li>
                                 <li class="price iteminfo_mktprice">
@@ -455,7 +471,7 @@
                                     <div class="gold-list">
                                         <ul>
                                             <li>
-                                                125减5
+                                                98减5
                                             </li>
                                             <li>
                                                 198减10

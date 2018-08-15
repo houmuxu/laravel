@@ -18,9 +18,22 @@ class SalesController extends Controller
     public function index(Request $request)
     {
 
-        $data = DB::table('sales')->paginate(10);
+        $data = DB::table('sales')->where(function($query) use($request){
+            $gname = $request->input('gname');
+            $min = $request->input('min');
+            $max = $request->input('max');
+            if(!empty($gname)){
+                $query->where('gname','like','%'.$gname.'%');
+            }
+            if(!empty($min)){
+                 $query->where('newprice','>=',$min);
+            }
+            if(!empty($max)){
+                 $query->where('newprice','<=',$max);
+            }
+        })->paginate(10);
         
-        return view('admin.sales.index',['data'=>$data,'request'=>$request]);
+        return view('admin.sales.index',['data'=>$data,'request'=>$request,'title'=>'促销商品列表']);
     }
 
     /**

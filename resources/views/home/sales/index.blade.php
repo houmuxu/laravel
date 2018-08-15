@@ -3,6 +3,7 @@
 @section('title', $title)
 
 @section('content')
+
 		<link href="/home/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
 		<link href="/home/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
 
@@ -12,7 +13,6 @@
 
 		<script type="text/javascript" src="/home/basic/js/jquery-1.7.min.js"></script>
 		<script type="text/javascript" src="/home/js/script.js"></script>
-		
 		
 			<b class="line"></b>
            <div class="search">
@@ -33,11 +33,11 @@
 			</div>
 			<div class="am-g am-g-fixed">
 						<div class="am-u-sm-12 am-u-md-12">
-	                  	<div class="theme-popover">														
+	                  	<div class="theme-popover">			 											
 							<div class="searchAbout">
-								<img src="/logo/1.jpg" height="320px">
-								<img src="/logo/2.jpg" height="320px">
-								<img src="/logo/3.jpg" height="320px">
+								<img src="/logo/1.jpg" height="320px" width="100%">
+								<img src="/logo/2.jpg" height="320px" width="100%">
+								<img src="/logo/3.jpg" height="320px" width="100%">
 
 							</div>
 							
@@ -95,46 +95,55 @@
 							<div class="search-side">
 
 								<div class="side-title">
-									经典搭配
+									<strong>浪漫七夕</strong>
 								</div>
 <!-- 经典搭配另建表 -->
 								<li>
-									<div class="i-pic check">
-										<img src="/home/images/cp.jpg" />
-										<p class="check-title">萨拉米 1+1小鸡腿</p>
-										<p class="price fl">
-											<b>¥</b>
-											<strong>29.90</strong>
+									<div class="i-pic check" >
+										<img src="/home/images/12.png" />
+										<p class="check-title">
+											<a href="/home/show/20">七夕送女朋友大礼包</a>
 										</p>
-										<p class="number fl">
-											销量<span>1110</span>
-										</p>
+										
+										
 									</div>
 								</li>
 								<li>
 									<div class="i-pic check">
-										<img src="/home/images/cp2.jpg" />
-										<p class="check-title">ZEK 原味海苔</p>
-										<p class="price fl">
-											<b>¥</b>
-											<strong>8.90</strong>
+										<img src="/home/images/13.jpg" />
+										<p class="check-title">
+											<a href="/home/goodsshow/110">甜蜜七夕</a>
 										</p>
-										<p class="number fl">
-											销量<span>1110</span>
-										</p>
+										
 									</div>
 								</li>
 								<li>
 									<div class="i-pic check">
-										<img src="/home/images/cp.jpg" />
-										<p class="check-title">萨拉米 1+1小鸡腿</p>
-										<p class="price fl">
-											<b>¥</b>
-											<strong>29.90</strong>
+										<img src="/home/images/14.jpg" />
+										<p class="check-title">
+											<a href="/home/show/19">热辣七夕</a>
 										</p>
-										<p class="number fl">
-											销量<span>1110</span>
+										
+									</div>
+								</li>
+
+								<li>
+									<div class="i-pic check">
+										<img src="/home/images/15.jpg" />
+										<p class="check-title">
+											<a href="/home/goodsshow/122">七夕大礼包</a>
 										</p>
+										
+									</div>
+								</li>
+
+								<li>
+									<div class="i-pic check">
+										<img src="/home/images/10.png" />
+										<p class="check-title">
+											<a href="/home/goodsshow/84">爱豆七夕</a>
+										</p>
+										
 									</div>
 								</li>
 

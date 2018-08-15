@@ -297,22 +297,10 @@
 							<a href="{{$v->furl}}">{{$v->fname}}</a>
 							<b>|</b>
 							@endforeach
-							<a href="/">商城首页</a>
-							<b>|</b>
-							<a href="#">支付宝</a>
-							<b>|</b>
-							<a href="#">物流</a>
+							
 						</p>
 					</div>
-					<div class="footer-bd">
-						<p>
-							<a href="#">关于恒望</a>
-							<a href="#">合作伙伴</a>
-							<a href="#">联系我们</a>
-							<a href="#">网站地图</a>
-							<em>© 2015-2025 Hengwang.com 版权所有. 更多模板 <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></em>
-						</p>
-					</div>
+					
 		</div>
 
 	</body>
@@ -366,8 +354,15 @@
 				//  获取数量
 				var num = Number($(this).prev().val())+1;
 
+				/*var par = $('input[name="items[]"]').attr('checked',false);
+				
+				if(par){
+					decre();
+				}*/
+
 				//  获取价格
 				var pr = $(this).parents('ul').find('.price-now').text();
+
 
 				function accMul(arg1, arg2) {
 
@@ -385,6 +380,7 @@
 				$(this).parents('ul').find('.number').text(accMul(num,pr));
 				sum();
 				incre();
+	
 			})
 
 
@@ -394,9 +390,9 @@
 				//  获取数量
 				var num = Number($(this).next().val())-1;
 
-				if(num < 1){
-					return false;
-				}
+				// var par = $(this).parents('ul').find(':checked').attr('checked',false);
+				// if(par){return false;}
+				
 
 				//  获取价格
 				var pr = $(this).parents('ul').find('.price-now').text();
@@ -421,7 +417,11 @@
 						decre();
 					}
 					sum();
-					decre();	
+					decre();
+					if(par || num < 1){
+					return false;
+					}
+
 								
 				})  
 			

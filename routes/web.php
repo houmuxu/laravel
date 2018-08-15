@@ -10,6 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//后台登录页面
+Route::any('/admin/login','admin\AdminController@login');
+Route::any('/admin/dologin', 'Admin\AdminController@dologin');
+Route::any('/admin/captcha', 'Admin\AdminController@captcha');
+Route::any('/admin/logout', 'Admin\AdminController@logout');
+
+
+
+
 
 //后台
 Route::group([],function(){   
@@ -17,11 +26,14 @@ Route::group([],function(){
 	Route::any('/admin/first','admin\FistUserController@first');
 	//管理员 
 	Route::resource('/admin/admin','admin\AdminController');
+	Route::any('/admin/admininfo/{id}','admin\AdminController@infoedit');
+	Route::any('/admin/adminedit/{id}','admin\AdminController@infoupdate');
 	Route::any('/admin/adminall','admin\AdminController@del');
 	Route::any('/admin/adminsta/{id}','admin\AdminController@start');
 	Route::any('/admin/adminclo/{id}','admin\AdminController@close');
 	//用户
 	Route::resource('/admin/user','admin\UserController');
+
 
 	
 	
@@ -83,17 +95,19 @@ Route::group([],function(){
 	//  邮箱注册
 	Route::any('/doemail','home\UserController@doemail');
 	Route::any('/jihuo','Home\UserController@jihuo');
+	//用户手机注册
+	Route::resource('/user/zhuce','home\UserController');
+	//发送验证码
+	Route::any('/sendcode','home\UserController@sendcode');
+	//检验验证码
+	Route::any('/checkcode','home\UserController@checkcode');
+	//登录
+	Route::any('/user/login','home\UserController@login');
+	Route::any('/user/dologin','home\UserController@dologin');
+
 
 //前台
 Route::group([],function(){
-	//用户手机注册
-	Route::resource('/user/zhuce','home\UserController');
-		//发送验证码
-	Route::any('/sendcode','home\UserController@sendcode');
-		//检验验证码
-	Route::any('/checkcode','home\UserController@checkcode');
-
-
 
 
 
@@ -140,7 +154,16 @@ Route::group([],function(){
 
 
 	//  个人中心页面
-	Route::any('/home/self','home\SelfController@index');   //  个人中心页面
+	Route::any('/home/self','home\SelfController@index');                            //  个人中心页面
+	//用户
+	Route::any('/home/self/userinfo','home\UserinfoController@infoindex');           //  用户详情
+	Route::any('/home/self/userinfo/update','home\UserinfoController@infoupdate');   //  用户详情修改
+	Route::any('/home/self/usersafety','home\UserinfoController@safetyindex');       //  用户安全
+	Route::any('/home/self/userupwd','home\UserinfoController@userupwd');  		     // 密码
+	Route::any('/home/self/upwdupdate','home\UserinfoController@upwdupdate');        //修改密码
+	Route::any('/home/self/userutel','home\UserinfoController@userutel');        	 //手机
+	Route::any('/home/self/utelupdate','home\UserinfoController@utelupdate');         //修改手机
+
 
 
 	//我的小窝hou

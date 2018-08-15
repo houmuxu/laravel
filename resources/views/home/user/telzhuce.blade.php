@@ -69,15 +69,15 @@
 						</div>
 
 
-								<div class="am-tab-panel">
-									<form method="post">
+															<div class="am-tab-panel">
+									<form action="/user/zhuce" method="post">
                  <div class="user-phone">
 								    <label for="phone"><i class="am-icon-mobile-phone am-icon-md"></i></label>
 								    <input type="tel" name="utel" id="phone" placeholder="请输入手机号">
                  </div>																			
 										<div class="verification">
 											<label for="code"><i class="am-icon-code-fork"></i></label>
-											<input type="tel" name="code" id="code" placeholder="请输入验证码">
+											<input type="text" name="code" id="code" placeholder="请输入验证码">
 											{{csrf_field()}}
 											<button id='but'>获取</button>
 										</div>
@@ -87,17 +87,18 @@
                  </div>										
                  <div class="user-pass">
 								    <label for="passwordRepeat"><i class="am-icon-lock"></i></label>
-								    <input type="password" name="" id="passwordRepeat" placeholder="确认密码">
+								    <input type="password" name="reupwd" id="passwordRepeat" placeholder="确认密码">
                  </div>	
+                 <div class="am-cf">
+											<input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
+										</div>
 									</form>
 								 <div class="login-links">
 										<label for="reader-me">
 											<input id="reader-me" type="checkbox"> 点击表示您同意商城《服务协议》
 										</label>
 							  	</div>
-										<div class="am-cf">
-											<input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
-										</div>
+										
 								
 									<hr>
 								</div>
@@ -109,58 +110,118 @@
 									    }
 									});
 
+								//密码
+								var futel = false;
+								var fcode = false;
+								var fupwd = false;
+								var freupwd = false;
 
+							$('input[name=upwd]').blur(function(){
+								var pv = $(this).val();
+								var reg =  /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,}$/ ;
+								if(!reg.test(pv)){
+									$(this).css('border','solid 1px red');
+									$(this).val('');
+									$(this).attr('placeholder','要求至少8为包含字母数字')
+								} else {
+									$(this).css('border','solid 1px green');
+									 fupwd = true;
+								}
+							})
+
+							//确实密码
+							$('input[name=reupwd]').blur(function(){
+
+								var rpv = $(this).val();
+
+								var pv = $('input[name=upwd]').val();
+
+								if(rpv != pv){
+									$(this).val('');
+
+									$(this).attr('placeholder','两次密码不一致');
+
+									$(this).css('border','solid 1px red');
+
+								} else {
+
+
+									$(this).css('border','solid 1px green');
+									 freupwd = true;
+								}
+
+							})
+
+							//手机号
+
+							$('input[name=utel]').blur(function(){
+								var nv = $(this).val();
+								var reg = /^1[3456789]\d{9}$/;
+								if(!reg.test(nv)){
+									$(this).val('');
+									$(this).attr('placeholder','手机号码不正确');
+									$(this).css('border','solid 1px red');
+								} else {
+									$(this).css('border','solid 1px green');
+									futel= true;
+								}
+							})
 
 								//点击发送验证码
 								$('#but').click(function(){
-
 									//获取手机号
 									var utel = $('input[name=utel]').val();
-
-
 
 									$.post('/sendcode',{number:utel},function(data){
 
 										console.log(data);
 									});
-										return false;
+									return false;
 
 
 								})
-								var CV = true;
+
+
 								//检测验证码
-								$('input[name=code]').focus(function(){
-									$(this).css('border','solid 2px purple');
-								})
 
 								$('input[name=code]').blur(function(){
 
 									var cv = $(this).val();
-
 									var cds = $(this);
 
 									$.get('/checkcode',{code:cv},function(data){
 
-										// console.log(data);
+
 										if(data == '0'){
 
-											cds.next().text(' *验证码不正确').css('color','red');
+										cds.val('');
 
-											cds.css('border','solid 2px red');
+										cds.attr('placeholder','验证码不正确');
 
-											CV = false;
+
+											cds.css('border','solid 1px red');
+
+
 										} else {
 
-											cds.next().text(' √').css('color','green');
+											cds.css('border','solid 1px green');
+											fcode= true;
 
-											cds.css('border','solid 2px green');
 
-											CV = true;
 										}
 									})
 								})
 
 
+								//提交控制
+								$(':submit').click(function(){
+								if(futel && fcode && fupwd && freupwd ){
+		
+									return true;
+								}
+								
+								return false;
+							})
 									//切换控制
 									$(function() {
 									    $('#doc-my-tabs').tabs();

@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Model\Admin\Admin;
 use Hash;
 use DB;
+use Gregwar\Captcha\CaptchaBuilder;
+use Gregwar\Captcha\PhraseBuilder;
 
 
 class AdminController extends Controller
@@ -63,19 +65,10 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-
-
-
         
         $res = $request->except('_token','_method','repass');
          $res['atime']= time();
-        // $aname=$res['aname'];
-        // $obj =DB::table('admin')->pluck('aname')->toArray();
-        // if(in_array($aname,$obj)){
-
-        // }else{
-
-        // }
+         $res['apwd'] = Hash::make($request->input('apwd'));
 
         $aname=$res['aname'];
         $rname=DB::select('select aname from admin where aname = ?',[$aname]);
@@ -109,13 +102,6 @@ class AdminController extends Controller
                 return view('errors.message',["data"=>$data]);
            
         }
-
-
-
-
-
-
-
 
     }
 
@@ -160,6 +146,7 @@ class AdminController extends Controller
     {
         
         $res = $request->except('_token','_method','profile','repass');
+        $res['apwd'] = Hash::make($request->input('apwd'));
  
         $data = DB::table("admin")->where('aid', $id)->update($res);
         if($res){
@@ -178,6 +165,41 @@ class AdminController extends Controller
             'url' => '/admin/admin',
             ];
             return view('errors.dell',["data"=>$data]);
+        }
+
+    }
+    public function infoedit(Request $request, $id)
+    {
+        
+       $res = Admin::find($id);
+
+        return view('admin.admin.admininfo',['res'=>$res]);
+
+    }
+
+    public function infoupdate(Request $request, $id)
+    {
+        
+        $res = $request->except('_token','_method','profile','repass');
+        $res['apwd'] = Hash::make($request->input('apwd'));
+ 
+        $data = DB::table("admin")->where('aid', $id)->update($res);
+        if($res){
+
+            $data = [
+            'info' => 'success',
+            'message' => '修改成功',
+            'url' => '/admin/admin',
+            ];
+            return view('errors.infodell',["data"=>$data]);
+
+        }else{
+            $data = [
+            'info' => 'error',
+            'message' => '修改失败',
+            'url' => '/admin/admin',
+            ];
+            return view('errors.infodell',["data"=>$data]);
         }
 
     }
@@ -244,4 +266,93 @@ class AdminController extends Controller
         $data = DB::table('admin')->where('aid',$id)->update($res);
         return redirect('/admin/admin');
     }
+
+
+    //登录
+    public function login()
+    {
+        return view('admin.admin.login');
+    }
+    //验证
+    public function dologin(Request $request)
+    {
+        $aname = $request->input('aname');
+
+
+        $res =Admin::where('aname',$aname)->first();
+
+
+        if(!$res){
+
+            return back()->with('error','用户名或密码错误');
+        }
+
+        //判断密码
+        $pass = $request->input('apwd');
+
+
+        if (!Hash::check($pass, $res->apwd)) {
+            
+            return back()->with('error','密码错误');
+
+        }
+
+        //判断验证码
+        $code = $request->input('code');
+
+       /* dump($code);
+        dump(session('code'));*/
+
+        if($code != session('code')){
+
+            return back()->with('error','验证码错误');
+        }
+
+        //存储session信息  给中间件使用
+        session(['aname'=>$res->aname]);
+
+        session(['aid'=>$res->aid]);
+
+        return redirect('/admin/first');
+    }  
+    
+
+    //验证码
+    public function captcha()
+{
+    $phrase = new PhraseBuilder;
+    // 设置验证码位数
+    $code = $phrase->build(3);
+    // 生成验证码图片的Builder对象，配置相应属性
+    $builder = new CaptchaBuilder($code, $phrase);
+    // 设置背景颜色
+    $builder->setBackgroundColor(123, 203, 255);
+    $builder->setMaxAngle(25);
+    $builder->setMaxBehindLines(0);
+    $builder->setMaxFrontLines(0);
+    // 可以设置图片宽高及字体
+    $builder->build($width = 90, $height = 35, $font = null);
+    // 获取验证码的内容
+    $phrase = $builder->getPhrase();
+    // 把内容存入session
+    //Session::flash('code', $phrase);
+    session(['code'=>$phrase]);
+    // 生成图片
+    header("Cache-Control: no-cache, must-revalidate");
+    header("Content-Type:image/jpeg");
+    $builder->output();
+}
+public function logout()
+{
+    //清空session
+    session(['aname'=>null]);
+    session(['aid'=>null]);
+    return redirect('/admin/login');
+}
+
+
+
+
+
+
 }

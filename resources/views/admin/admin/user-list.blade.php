@@ -39,7 +39,7 @@
             <th>性别</th>
             <th>手机</th>
             <th>邮箱</th>
-            <th>地址</th>
+
             <th>加入时间</th>
             <th>操作</th></tr>
         </thead>
@@ -60,7 +60,7 @@
             </td>
             <td>{{$v->utel}}</td>
             <td>{{$v->uemail}}</td>
-            <td>{{$v->uaddr}}</td>
+
             <td>{{ date('Y-m-d',$v->utime)}}</td>
             <td class="td-manage">
               <form action="/admin/user/{{$v->uid}}/edit" method='get' style='display:inline'>

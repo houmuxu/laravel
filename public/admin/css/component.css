@@ -10,7 +10,7 @@
 }
 
 .demo-1 .large-header {
-	background-image: url('../img/demo-1-bg.jpg');
+	background-image: url('/admin/img/demo-1-bg.jpg');
 }
 .logo_box{
 	width: 400px;
@@ -50,18 +50,48 @@
 	position: relative;
 	border: rgba(255,255,255,0.2) 2px solid !important;
 }
+.input_code{
+	height: 46px;
+	padding: 0 5px;
+	margin-bottom: 30px;
+	border-radius: 50px;
+	position: relative;
+	border: rgba(255,255,255,0.2) 2px solid !important;
+	width: 180px;
+}
+.img{
+	height: 46px;
+	padding: 0 5px;
+	margin-bottom: 30px;
+	border-radius: 50px;
+	position: relative;
+	left:190px;
+  	top:0px;
+  	display: block;
+
+
+
+}
 .u_user{
 	width: 25px;
 	height: 25px;
-	background: url(../img/login_ico.png);
+	background: url(/admin/img/login_ico.png);
 	background-position:  -125px 0;
+	position: absolute;
+	margin: 10px 13px;
+}
+.us_code{
+	width: 25px;
+	height: 25px;
+	background: url(/admin/img/login_ico.png);
+	background-position:  -85px -155px;
 	position: absolute;
 	margin: 10px 13px;
 }
 .us_uer{
 	width: 25px;
 	height: 25px;
-	background-image: url(../img/login_ico.png);
+	background-image: url(/admin/img/login_ico.png);
 	background-position: -125px -34px;
 	position: absolute;
 	margin: 10px 13px;
@@ -100,9 +130,10 @@
 	display: block;
 }
 .act-but{
-	line-height: 20px;
+	line-height: 15px;
 	text-align: center;
 	font-size: 20px;
 	border-radius: 50px;
 	background: #0096e6;
+	width: 330px;
 }

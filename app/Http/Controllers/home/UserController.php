@@ -4,7 +4,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Ucpaas;
 use DB;
-use Mail;
 
 
 class UserController extends Controller
@@ -37,7 +36,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $res = $request->except('_token','_method','reupwd','code');
+        $res['utime']= time();
+        $res['upic']= '/home/images/getAvatar.do.jpg';
+        $res['uname']= date('Ymd',time()).rand(1111,9999);
+        User::insert($res);
     }
 
     /**
@@ -89,8 +92,7 @@ class UserController extends Controller
 
     public function sendcode(Request $request)
     {
-
-        //初始化必填
+//初始化必填
         $options['accountsid']='fd24829d8bfcbd80834aca0aef04a05e';
         $options['token']='316b7e37616ca8dff338b0d262d0ad00';
 
@@ -99,17 +101,19 @@ class UserController extends Controller
 
         //开发者账号信息查询默认为json或xml
         $ucpass->getDevinfo('xml');
-         $code = rand(1111,9999);
+        $code = rand(1111,9999);
 
         $toNumber = $request->post('number');
 
-        session('code',$code);
-
-        $appId = "9776d6202bb14ce49d26885fb13a84ac";
+         session(['code'=>$code]);
+         //此处测试多加了一个a
+        $appId = "a9776d6202bb14ce49d26885fb13a84ac";
         $templateId = "349335";
         $param=$code;
 
-       echo  $ucpass->templateSMS($appId,$toNumber,$templateId,$param);
+        $ucpass->templateSMS($appId,$toNumber,$templateId,$param);
+
+        echo $code;
 
 
 
@@ -133,49 +137,27 @@ class UserController extends Controller
 
     }
 
-
-
-    //   邮箱注册
-    public function doemail(Request $request)
+    public function login()
     {
-        $res = [];
-        $email = $request->input('email');
-        $pass = $request->input('pass');
-        
-        $res['uemail'] = $email;
-        $res['upwd'] = $pass;
-        $res['utime'] = time();
-        $res['upic'] = '/home/images/getAvatar.do.jpg';
-        $res['uname'] = date('Ymd',time()).str_random(4);
-        
-        $rs = DB::table('users')->insertGetId($res);
-
-        if($rs){
-
-            //发送邮件
-            Mail::send('home.user.reminder', ['id' => $rs], function ($m) use ($res) {
-
-                $m->from(env('MAIL_USERNAME'), '三只松鼠商城人力资源部');
-
-                $m->to($res['uemail'], $res['uname'])->subject('诚邀加入三只松鼠集团');
-            });
-
-          return view('home.user.tixing',['title'=>'新用户激活的提醒信息']);
-
-        } else {
-
-            return back();
-
-        }
-        
+        return view('home.user.login');
     }
 
-
-    //   激活处理
-    public function jihuo()
+    public function dologin(Request $request)
     {
+        $uname = $request->input('uname');
+
+        $res = DB::table('users')->where('uname',$uname)->first();
+
+ 
+
+
+        //存储session信息  给中间件使用
+        session(['uname'=>$res->uname]);
+
+        session(['uid'=>$res->uid]);
+
+        return redirect('/home/self/userinfo');
         
-         echo "<script>alert('激活成功');window.location.href='/'</script>";
     }
 
 }

@@ -17,6 +17,9 @@
 
 </head>
 <body>
+         @php
+         $res = DB::table('admin')->where('aid',session('aid'))->first();           
+        @endphp
     <!-- 顶部开始 -->
     <div class="container">
         <div class="logo"><a href="/admin/first">三只松鼠后台管理</a></div>
@@ -35,11 +38,10 @@
         </ul>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
-            <a href="javascript:;">admin</a>
+            <a href="javascript:;">{{$res->aname}}</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-              <dd><a onclick="x_admin_show('个人信息','http://www.baidu.com')">个人信息</a></dd>
-              <dd><a onclick="x_admin_show('切换帐号','http://www.baidu.com')">切换帐号</a></dd>
-              <dd><a href="./login.html">退出</a></dd>
+              <dd><a onclick="x_admin_show('个人信息','/admin/admininfo/{{$res->aid}}')">个人信息</a></dd>
+              <dd><a href="/admin/logout">退出</a></dd>
             </dl>
           </li>
           <li class="layui-nav-item to-index"><a href="/">前台首页</a></li>
@@ -143,40 +145,6 @@
 
         <!-- 商品管理结束 -->
 
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe726;</i>
-                    <cite>管理员管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="admin-list.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>管理员列表</cite>
-                        </a>
-                    </li >
-                    <li>
-                        <a _href="admin-role.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>角色管理</cite>
-                        </a>
-                    </li >
-                    <li>
-                        <a _href="admin-cate.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>权限分类</cite>
-                        </a>
-                    </li >
-                    <li>
-                        <a _href="admin-rule.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>权限管理</cite>
-                        </a>
-                    </li >
-                </ul>
-            </li>
-
             <!-- 友情链接管理 -->
              <li>
                 <a href="javascript:;">
@@ -257,32 +225,6 @@
                 </ul>
             </li>
             <!-- 促销商品管理结束 -->
-
-             <!-- 广告管理 -->
-             <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe723;</i>
-                    <cite>广告管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="/admin/advert">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>广告列表</cite>
-                        </a>
-                    </li >
-                </ul>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="/admin/advert/create">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>添加广告</cite>
-                        </a>
-                    </li >
-                </ul>
-            </li>
-            <!-- 广告管理结束 -->
 
             <li>
                 <a href="javascript:;">

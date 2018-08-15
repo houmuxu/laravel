@@ -176,19 +176,24 @@ use App\Model\home\Coll;
         public function useremail(Request $request)
         {
             $uid = 1;
-             Mail::send('home/goods/emailcode', ['uid' => $uid,'email'=>$request->input('emails')], function ($m) use ($request) {
+             $res = Mail::send('home/goods/emailcode', ['uid' => $uid,'email'=>$request->input('emails')], function ($m) use ($request) {
                 $m->from(env('MAIL_USERNAME'), '三只松鼠旗舰店');
 
                 $m->to($request->input('emails'), '侯牧序')->subject('更换邮箱验证');
             });
-
+             echo 1;
         }
 
         public function emailjihuo(Request $request)
         {
             $uid = $request->input('id');
             $email = $request->input('email');
-            //等待uodate
+            $res = User::where('uid',$uid)->update(['uemail'=>$email]);
+           
+
+                $links = DB::table('friendlink')->get();
+                return view('home/goods/emailyes',['title'=>'邮箱更换成功','links'=>$links]);
+            
 
         }
 

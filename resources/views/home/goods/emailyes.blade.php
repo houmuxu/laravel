@@ -12,6 +12,12 @@
 				<!-- 弹窗 -->
         <link rel="stylesheet" href="/home/houtanchuang/message.css">
         <script src="/home/houtanchuang/message.js"></script>
+        			<!-- 弹窗 -->
+  	<link rel="stylesheet" type="text/css" href="/home/hou_email/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="/home/hou_email/css/htmleaf-demo.css">
+	<link rel="stylesheet" href="/home/hou_email/css/style.css">
+	<link rel="stylesheet" href="/home/hou_email/css/x0popup.min.css">
+	<link rel="stylesheet" href="/home/hou_email/css/rainbow.monokai.css">
 @section('content')
 			<b class="line"></b>
 		<div class="center">
@@ -152,5 +158,20 @@
 
 				})
 				</script>
+					<script src="/home/hou_email/js/x0popup.min.js"></script>
+	<script src="/home/hou_email/js/rainbow.min.js"></script>
+	<script src="/home/hou_email/js/rainbow.linenumbers.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			x0p('三只松鼠提示您', '更换邮箱成功!');
+			
+			setTimeout(function(){
+				location.replace('/home/self');
+			},1000);
+		})
+	
+			
+		// }
+	</script>
 				<!--底部-->
 		@endsection

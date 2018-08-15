@@ -135,25 +135,44 @@
 							@endforeach
 							</div>
 							<div class="clear"></div>
-							<!--分页 -->
-							<ul class="am-pagination am-pagination-right">
-								<li class="am-disabled"><a href="#">&laquo;</a></li>
-								<li class="am-active"><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">&raquo;</a></li>
-							
-
-							</ul>
+			
 
 						</div>
 					</div>
 		
-        <div id="test1">
-        	{!!$goods->links()!!}
-        </div>
+       
+        <style type="text/css">
+								.pagination{
+									margin-left: 1000px;
+								}
+
+								.pagination li{
+									    padding: 0.5em 1em;
+									    background-color: #fff;
+									    border: 1px solid #ddd;
+									    border-radius: 0;
+									    margin-bottom: 5px;
+									    margin-right: 5px;
+									    float: left;
+								}
+
+								.pagination li a{
+									text-align: center;
+									font-size: 14px;
+								}
+
+								.pagination .active{
+									z-index: 2;
+								    color: #fff;
+								    background-color: #0e90d2;
+								    border-color: #0e90d2;
+								    cursor: default;
+								}
+							</style>	
+							<!--分页 -->
+							<ul class="am-pagination am-pagination-right">
+								{{$goods->links()}}
+							</ul>
        
         <script src="/home/layui/layui.js"></script>
 		<script>

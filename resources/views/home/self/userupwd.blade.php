@@ -6,9 +6,7 @@
 <link href="/home/css/stepstyle.css" rel="stylesheet" type="text/css">
 
 
-		 @php
-            $res = DB::table('users')->where('uid',session('uid'))->first();
-        @endphp
+
 		
 				
 
@@ -16,7 +14,16 @@
 						<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">修改密码</strong> / <small>Password</small></div>
 					</div>
 					<hr/>
-					<!--进度条-->
+					    @if (count($errors) > 0)
+					        <div class="mws-form-message error">
+					            错误信息是
+					            <ol>
+					                @foreach ($errors->all() as $error)
+					                    <li style='font-size:15px'>{{ $error }}</li>
+					                @endforeach
+					            </ol>
+					        </div>
+					    @endif
 					<form class="am-form am-form-horizontal" action="/home/self/upwdupdate" method="post">
 						<div class="am-form-group">
 							<label for="user-old-password" class="am-form-label">原密码</label>

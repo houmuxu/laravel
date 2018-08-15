@@ -19,6 +19,9 @@
 
 
 	</head>
+		@php
+            $res = DB::table('users')->where('uid',session('uid'))->first();
+        @endphp
 
 	<body>
 		<!--头 -->

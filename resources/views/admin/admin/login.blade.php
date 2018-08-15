@@ -20,7 +20,12 @@
 					<canvas id="demo-canvas"></canvas>
 					<div class="logo_box">
 						<h3>欢迎你</h3>
-						<form action="#" name="f" method="post">
+						<form action="/admin/dologin" name="f" method="post" >
+						@if(session('error')) 
+           					 <div class="mws-form-message warning" style='font-size:16px'>                
+                    		{{session('error')}}
+           					 </div>
+           				 @endif
 							<div class="input_outer">
 								<span class="u_user"></span>
 								<input name="aname" class="text" style="color: #FFFFFF !important" type="text" placeholder="请输入账户">
@@ -31,10 +36,11 @@
 							</div>
 							<div class="input_code">
 								<span class="us_code"></span>
-								<input name="apwd" class="text" style="color: #FFFFFF !important; position:absolute; z-index:100;"value="" type="password" placeholder="请输入验证码">
+								<input name="code" class="text" style="color: #FFFFFF !important; position:absolute; z-index:100;"value="" type="text" placeholder="请输入验证码">
 								 <img id="img" class="img" src="/admin/captcha" alt="" onclick="this.src = this.src +='?1'">
 							</div>
-							<div class="mb2"><a class="act-but submit" href="javascript:;" style="color: #FFFFFF">登录</a></div>
+							{{csrf_field()}}
+							<button class="act-but submit"  style="color: #FFFFFF">登录</button>
 						</form>
 					</div>
 				</div>
@@ -46,10 +52,7 @@
 		<script src="/admin/js/demo-1.js"></script>
 
 
-作者：王羽落
-链接：https://www.jianshu.com/p/73fcc4118767
-來源：简书
-简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。
+
 		<div style="text-align:center;">
 <p>更多模板：<a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>
 </div>

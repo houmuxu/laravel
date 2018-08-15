@@ -71,13 +71,7 @@ class AdminController extends Controller
         
         $res = $request->except('_token','_method','repass');
          $res['atime']= time();
-        // $aname=$res['aname'];
-        // $obj =DB::table('admin')->pluck('aname')->toArray();
-        // if(in_array($aname,$obj)){
-
-        // }else{
-
-        // }
+         $res['apwd'] = Hash::make($request->input('apwd'));
 
         $aname=$res['aname'];
         $rname=DB::select('select aname from admin where aname = ?',[$aname]);
@@ -246,10 +240,48 @@ class AdminController extends Controller
     {
         return view('admin.admin.login');
     }
+    //验证
     public function dologin(Request $request)
     {
-        return view('admin.admin.login');
-    }
+        $aname = $request->input('aname');
+
+
+        $res =Admin::where('aname',$aname)->first();
+
+
+        if(!$res){
+
+            return back()->with('error','用户名或密码错误');
+        }
+
+        //判断密码
+        $pass = $request->input('apwd');
+
+        if (!Hash::check($pass, $res->apwd)) {
+            
+            return back()->with('error','密码错误');
+
+        }
+
+        //判断验证码
+        $code = $request->input('code');
+
+       /* dump($code);
+        dump(session('code'));*/
+
+        if($code != session('code')){
+
+            return back()->with('error','验证码错误');
+        }
+
+        //存储session信息  给中间件使用
+        session(['aname'=>$res->aname]);
+
+        session(['aid'=>$res->aid]);
+
+        return redirect('/admin/first');
+    }  
+    
 
     //验证码
     public function captcha()
@@ -269,13 +301,20 @@ class AdminController extends Controller
     // 获取验证码的内容
     $phrase = $builder->getPhrase();
     // 把内容存入session
-    \Session::flash('code', $phrase);
+    //Session::flash('code', $phrase);
+    session(['code'=>$phrase]);
     // 生成图片
     header("Cache-Control: no-cache, must-revalidate");
     header("Content-Type:image/jpeg");
     $builder->output();
 }
-
+public function logout()
+{
+    //清空session
+    session(['aname'=>null]);
+    session(['aid'=>null]);
+    return redirect('/admin/login');
+}
 
 
 

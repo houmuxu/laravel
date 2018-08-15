@@ -12,7 +12,7 @@
 */
 	//后台登录页面
 	Route::any('/admin/login','admin\AdminController@login');
-	Route::any('admin/dologin', 'Admin\AdminController@dologin');
+	Route::any('/admin/dologin', 'Admin\AdminController@dologin');
 	Route::any('/admin/captcha', 'Admin\AdminController@captcha');
 	Route::any('/admin/logout', 'Admin\AdminController@logout');
 //后台

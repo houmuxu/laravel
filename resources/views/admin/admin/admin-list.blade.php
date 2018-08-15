@@ -50,7 +50,7 @@
             <td>
               <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id="{{$v->aid}}"><i class="layui-icon"></i></div>
             </td>
-            <!-- <td>{{$v->aid}}</td> -->
+            <td>{{$v->aid}}</td>
             <td>{{$v->aname}}</td>
             <td>{{$v->atel}}</td>
             <td>{{$v->aemail}}</td>

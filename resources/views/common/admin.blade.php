@@ -17,6 +17,9 @@
 
 </head>
 <body>
+         @php
+         $res = DB::table('admin')->where('aid',session('aid'))->first();           
+        @endphp
     <!-- 顶部开始 -->
     <div class="container">
         <div class="logo"><a href="/admin/first">三只松鼠后台管理</a></div>
@@ -35,11 +38,11 @@
         </ul>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
-            <a href="javascript:;">admin</a>
+            <a href="javascript:;">{{$res->aname}}</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
               <dd><a onclick="x_admin_show('个人信息','http://www.baidu.com')">个人信息</a></dd>
               <dd><a onclick="x_admin_show('切换帐号','http://www.baidu.com')">切换帐号</a></dd>
-              <dd><a href="./login.html">退出</a></dd>
+              <dd><a href="/admin/logout">退出</a></dd>
             </dl>
           </li>
           <li class="layui-nav-item to-index"><a href="/">前台首页</a></li>

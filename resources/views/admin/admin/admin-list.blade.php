@@ -110,32 +110,24 @@
 
 
 <script type="text/javascript">
-  
-      function delAll (argument) {
+        function delAll (argument) {
 
         var data = tableCheck.getData();
+        // console.log(data);
   
         layer.confirm('确认要删除吗？'+data,function(index){
             //捉到所有被选中的，发异步进行删除
-            console.log(data);
-            $.ajax({
-              url:"/admin/adminall",
-              data:{
-                data:data
-              },
-              type:"get",
-              dataType:"text",
-              success:function(e){
-                if(e){
-
-                }else{
-
-                }
+            $.get('/admin/admindelall',{ids:data},function(info){
+                console.log(info);
+              if(info){
+                // console.log(data);
+                layer.msg('删除成功', {icon: 1});
+                $(".layui-form-checked").not('.header').parents('tr').remove();
               }
-            });
-            layer.msg('删除成功', {icon: 1});
-            $(".layui-form-checked").not('.header').parents('tr').remove();
+            })
+            
         });
+
       }
 
 

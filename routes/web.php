@@ -21,11 +21,12 @@ Route::any('/admin/logout', 'Admin\AdminController@logout');
 
 
 //后台
-Route::group([],function(){   
+Route::group(['middleware'=>'adminlogin'],function(){   
 	//后台首页zhao
 	Route::any('/admin/first','admin\FistUserController@first');
 	//管理员 
 	Route::resource('/admin/admin','admin\AdminController');
+	Route::any('/admin/admindelall','admin\AdminController@destroyall');
 	Route::any('/admin/admininfo/{id}','admin\AdminController@infoedit');
 	Route::any('/admin/adminedit/{id}','admin\AdminController@infoupdate');
 	Route::any('/admin/adminall','admin\AdminController@del');

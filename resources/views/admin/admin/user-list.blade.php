@@ -23,9 +23,7 @@
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <form action="/admin/user/create" method="get" style='display:inline'>
-         <button class="layui-btn" ><i class="layui-icon"></i>添加</button>
-        </form>
+
         <span class="x-right" style="line-height:40px">共有数据：{{$numm}} 条</span>
       </xblock>
       <table class="layui-table">
@@ -39,7 +37,6 @@
             <th>性别</th>
             <th>手机</th>
             <th>邮箱</th>
-
             <th>加入时间</th>
             <th>操作</th></tr>
         </thead>

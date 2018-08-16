@@ -193,15 +193,20 @@ class UserController extends Controller
         $res['utime'] = time();
         $res['upic'] = '/home/images/getAvatar.do.jpg';
         $res['uname'] = date('Ymd',time()).str_random(4);
+
+        // 存储email
+        session(['uemail'=>$email]);
         
         $rs = DB::table('users')->insertGetId($res);
+
+
         if($rs){
             //发送邮件
             Mail::send('home.user.reminder', ['id' => $rs], function ($m) use ($res) {
                 $m->from(env('MAIL_USERNAME'), '三只松鼠商城人力资源部');
                 $m->to($res['uemail'], $res['uname'])->subject('诚邀加入三只松鼠集团');
             });
-          return view('home.user.tixing',['title'=>'新用户激活的提醒信息']);
+          return redirect('/tixing');
         } else {
             return back();
         }
@@ -212,6 +217,12 @@ class UserController extends Controller
     {
         
          echo "<script>alert('激活成功');window.location.href='/'</script>";
+    }
+
+
+    public function tixing()
+    {
+        return view('home.user.tixing',['title'=>'新用户激活的提醒信息']);
     }
 
 }

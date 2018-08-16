@@ -226,6 +226,58 @@
             </li>
             <!-- 促销商品管理结束 -->
 
+            <!-- 广告管理 -->
+             <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>广告管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="/admin/advert">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>广告列表</cite>
+                        </a>
+                    </li >
+                </ul>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="/admin/advert/create">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>添加广告</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
+            <!-- 广告管理结束 -->
+
+            <!-- 松鼠知 -->
+             <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>松鼠知</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="/admin/zhi">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>松鼠知列表</cite>
+                        </a>
+                    </li >
+                </ul>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="/admin/zhi/create">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>添加松鼠知</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
+            <!-- 松鼠知结束 -->
+
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe6ce;</i>

@@ -76,6 +76,12 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	Route::any('/admin/advert_del','admin\AdvertajaxController@destroy');//删除广告
 	Route::any('/admin/advert_delall','admin\AdvertajaxController@destroyall');//批量删除
 
+	//松鼠知
+	Route::resource('/admin/zhi', 'admin\ZhiController');		//资源路由
+	Route::any('/admin/zhi_del', 'admin\AdvertajaxController@zhi_del');		//删除单个
+	Route::any('/admin/zhi_delall', 'admin\AdvertajaxController@zhi_delall');  //批量删除
+	Route::any('/admin/zhi_status/{id}', 'admin\AdvertajaxController@zhi_status');  //停用，启用
+
 
 
 	//  友情链接   zhang
@@ -92,6 +98,9 @@ Route::group(['middleware'=>'adminlogin'],function(){
 
 	//  首页 hou
 	Route::any('/', 'home\FirstController@index');
+
+	//松鼠知
+	Route::any('/home/zhi/index','home\ZhiController@index');
 
 	//  邮箱注册
 	Route::any('/doemail','home\UserController@doemail');

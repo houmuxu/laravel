@@ -331,7 +331,7 @@ class AdminController extends Controller
 
         session(['aid'=>$res->aid]);
 
-        return redirect('/home/self');
+        return redirect('/admin/first');
     }  
     
 
@@ -365,7 +365,7 @@ public function logout()
     //清空session
     session(['aname'=>null]);
     session(['aid'=>null]);
-    return redirect('/user/login');
+    return redirect('/admin/login');
 }
 
 

@@ -49,14 +49,15 @@
       <table class="layui-table">
         <thead>
           <tr>
-            <th style="width: 48px">
+            <th style="width:20px">
               <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
-            <th>ID</th>
+            <th >ID</th>
             <th>广告名</th>
             <th>广告地址</th>
             <th>广告图片</th>
-            <th style="width: 40px">操作</th>
+            <th style="width:80px">松鼠知状态</th>
+            <th style="width:60px">操作</th>
         </thead>
         <tbody>
           @foreach($data as $k=>$v)
@@ -70,9 +71,34 @@
             <td>
                 <img src="{{$v->adpic}}" alt="">
             </td>
-            
+            <td class="td-status">
+              <span class="layui-btn layui-btn-normal layui-btn-mini">
+              @if($v->zhi_status == 1)
+                  关闭
+              @elseif($v->zhi_status == 2)
+                  开启
+              @endif
+              </span>
+            </td>
             <td class="td-manage">
-              
+                
+                
+                  <!-- <a title="开启"  href="/admin/advert_status/{{$v->adid}}"><i class="layui-icon">&#xe605;</i></a> -->
+               
+                  <!-- <a title="关闭"  href="/admin/advert_status/{{$v->adid}}"><i class="layui-icon">&#x1006;</i></a> -->
+               
+
+                <a onclick="member_stop(this,{{$v->adid}})" href="javascript:;"  title="
+                @if($v->zhi_status == 1)
+                  开启
+                @else
+                  关闭
+                @endif
+                ">
+                <i class="layui-icon">@if($v->zhi_status == 1)&#xe605;@else&#x1006;@endif</i>
+              </a>             
+  
+
                 <a title="编辑" href="/admin/advert/{{$v->adid}}/edit">
                   <i class="layui-icon">&#xe642;</i>
                 </a>
@@ -80,7 +106,7 @@
                 
               
               
-              <a title="删除" onclick="member_del(this,{{$v->adid}})" href="javascript:;">
+              <a title="删除" onclick="member_del(this,{{$v->adid}},{{$v->zhi_status}})" href="javascript:;">
                 <i class="layui-icon">&#xe640;</i>
               </a>
 
@@ -108,30 +134,31 @@
     });
 
 
+
        /*用户-停用*/
       function member_stop(obj,id){
           layer.confirm('确认要'+obj.title+'吗？',function(index){
-                       $.get('/admin/goodss/status',{id:id},function(data){
+                       $.get('/admin/advert_status',{id:id},function(data){
                         if(data == 1){
-                           $(obj).attr('title','下架')
-                      $(obj).find('i').html('&#xe601;');
+                             $(obj).attr('title','开启')
+                            $(obj).find('i').html('&#xe605');
 
-                      $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已上架');
-                      layer.msg('已上架!',{icon: 6,time:1000});
-                    }else{
-                       $(obj).attr('title','上架')
-                      $(obj).find('i').html('&#xe62f;');
+                            $(obj).parents("tr").find(".td-status").find('span').html('关闭');
+                            layer.msg('已关闭!',{icon: 5,time:1000});
+                          }else{
+                             $(obj).attr('title','关闭')
+                            $(obj).find('i').html('&#x1006');
 
-                      $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已下架');
-                      layer.msg('已下架!',{icon: 5,time:1000});
-                    }
-                    })
+                            $(obj).parents("tr").find(".td-status").find('span').html('开启');
+                            layer.msg('已开启!',{icon: 6,time:1000});
+                          }
+                      })
               
           });
       }
 
       /*用户-删除*/
-      function member_del(obj,id){
+      function member_del(obj,id,status){
 
           layer.confirm('确认要删除吗？',function(index){
             // console.log(id);
@@ -146,6 +173,7 @@
                 
               
           });
+
       }
 
 

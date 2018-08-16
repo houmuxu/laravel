@@ -84,7 +84,15 @@
             <td><div>{{$v->zhi2}}</div></td>
             <td><div>{{$v->zhi3}}</div></td>
             <td><div>{{$v->zhi4}}</div></td>
-            <td>@if($v->status==1)停用@else启用@endif</td>
+            <td class="td-status">
+              <span class="layui-btn layui-btn-normal layui-btn-mini">
+              @if($v->status == 1)
+                  关闭
+              @elseif($v->status == 2)
+                  开启
+              @endif
+              </span>
+            </td>
             <td class="td-manage">
                 
                 @if($v->status==1)
@@ -137,7 +145,6 @@
               
           
     }
-
 
 
       /*用户-删除*/

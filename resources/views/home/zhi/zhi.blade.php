@@ -20,7 +20,7 @@
         <li class="qc"><a href="#">闪购</a></li>
         <li class="qc"><a href="#">限时抢</a></li>
         <li class="qc"><a href="#">团购</a></li>
-        <li class="qc last"><a href="/home/news/index">松鼠知</a></li>
+        <li class="qc last"><a href="/home/zhi/index">松鼠知</a></li>
       </ul>
     </div>
 	</div>
@@ -53,7 +53,7 @@
           <p>{{$zhi->zhi2}}</p>
 
 
-         <strong class="blog-tit"><p>###<span>丨</span>###</p></strong>
+         <strong class="blog-tit"><p>松鼠使命<span>丨</span>让天下主人爽起来</p></strong>
           <div class="Row" style="display:block">
 
           	   @foreach ($goods2 as $k=>$v)
@@ -67,7 +67,7 @@
           <p>{{$zhi->zhi3}}</p>
           
           
-         <strong class="blog-tit"><p>###<span>丨</span>###</p></strong>
+         <strong class="blog-tit"><p>松鼠梦想：<span>丨</span>创造独特的松鼠王国</p></strong>
           <div class="Row">
 
           	 @foreach ($goods3 as $k=>$v)
@@ -94,14 +94,20 @@
     <div class="am-panel-group">
 
       <section class="am-panel am-panel-default">
-        <div class="am-panel-hd">热门话题</div>
-        <ul class="am-list blog-list">
+        <div class="am-panel-hd">热门广告</div>
+
+        @foreach ($advert as $k=>$v)
+        <div  style="margin-top:10px">
+          <a href="{{$v->adurl}}" target="_blank"><img src="{{$v->adpic}}" alt=""></a>
+        </div>
+        @endforeach
+        <!-- <ul class="am-list blog-list">
         	<li><a href="#"><p>[特惠]闺蜜喊你来囤国货啦</p></a></li>  
           <li><a href="#"><p>[公告]华北、华中部分地区配送延迟</p></a></li>
           <li><a href="#"><p>[特惠]家电狂欢千亿礼券 买1送1！</p></a></li>
           <li><a href="#"><p>[公告]商城与广州市签署战略合作协议</p></a></li>
           <li><a href="#"><p>[特惠]洋河年末大促，低至两件五折</p></a></li>      
-        </ul>
+        </ul> -->
       </section>
 
     </div>

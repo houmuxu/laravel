@@ -63,8 +63,8 @@
 			<ul class="message-l">
 				<div class="topMessage">
 					<div class="menu-hd">
-						<a href="#" target="_top" class="h">亲，请登录</a>
-						<a href="#" target="_top">免费注册</a>
+						<a href="/user/login" target="_top" class="h">亲，请登录</a>
+						<a href="/user/zhuce" target="_top">免费注册</a>
 					</div>
 				</div>
 			</ul>
@@ -76,10 +76,10 @@
 					<div class="menu-hd MyShangcheng"><a href="/home/self" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
 				</div>
 				<div class="topMessage mini-cart">
-					<div class="menu-hd"><a id="mc-menu-hd" href="#" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
+					<div class="menu-hd"><a id="mc-menu-hd" href="/home/cart" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
 				</div>
 				<div class="topMessage favorite">
-					<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
+					<div class="menu-hd"><a href="/home/coll/index" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
 			</ul>
 			</div>
 
@@ -213,9 +213,7 @@
 									</li>
 									<li class="td td-op">
 										<div class="td-inner">
-											<a title="移入收藏夹" class="btn-fav" href="#">
-							
-                 						 移入收藏夹</a>
+											
                   						<input type="hidden" name="delete" value="{{$v->id}}">
 										<a href="" data-point-url="#" class="delete">
 
@@ -245,7 +243,7 @@
 					</div>
 					<div class="operations">
 						
-						<a href="#" hidefocus="true" class="J_BatchFav">移入收藏夹</a>
+						
 					</div>
 					<div class="float-bar-right">
 						<div class="amount-sum">
@@ -349,16 +347,10 @@
 
 
 			//  加1
-			$('input[name="incre"]').click(function(){
-				
+			
+			$('input[name="incre"]').click(function(){				
 				//  获取数量
 				var num = Number($(this).prev().val())+1;
-
-				/*var par = $('input[name="items[]"]').attr('checked',false);
-				
-				if(par){
-					decre();
-				}*/
 
 				//  获取价格
 				var pr = $(this).parents('ul').find('.price-now').text();
@@ -376,12 +368,15 @@
 
 				}
 				
+				
 				//  金额发生改变  
 				$(this).parents('ul').find('.number').text(accMul(num,pr));
 				sum();
 				incre();
+				
 	
 			})
+		
 
 
 			//  减1 
@@ -411,18 +406,13 @@
 				
 				//  金额发生改变
 					if(num < 1){
-						$(this).parents('ul').find('.number').text(accMul(1,pr));
+						$(this).parents('ul').find('.number').text(accMul(1,pr));					
 					}else{
 						$(this).parents('ul').find('.number').text(accMul(num,pr));
 						decre();
 					}
 					sum();
-					decre();
-					if(par || num < 1){
-					return false;
-					}
-
-								
+										
 				})  
 			
 

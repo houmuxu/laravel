@@ -20,6 +20,7 @@
          @php
          $res = DB::table('admin')->where('aid',session('aid'))->first();           
         @endphp
+
     <!-- 顶部开始 -->
     <div class="container">
         <div class="logo"><a href="/admin/first">三只松鼠后台管理</a></div>
@@ -38,9 +39,9 @@
         </ul>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
-            <a href="javascript:;">{{$res->aname}}</a>
+            <a href="javascript:;">admin</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-              <dd><a onclick="x_admin_show('个人信息','/admin/admininfo/{{$res->aid}}')">个人信息</a></dd>
+              <dd><a onclick="x_admin_show('个人信息','/admin/admininfo/1')">个人信息</a></dd>
               <dd><a href="/admin/logout">退出</a></dd>
             </dl>
           </li>

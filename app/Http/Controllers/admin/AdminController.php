@@ -327,9 +327,9 @@ class AdminController extends Controller
         }
 
         //存储session信息  给中间件使用
-        session(['aname'=>$res->aname]);
+        session(['aname'=>'admin']);
 
-        session(['aid'=>$res->aid]);
+        session(['aid'=>'1']);
 
         return redirect('/admin/first');
     }  

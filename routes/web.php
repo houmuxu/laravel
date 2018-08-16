@@ -21,7 +21,7 @@ Route::any('/admin/logout', 'Admin\AdminController@logout');
 
 
 //后台
-Route::group(['middleware'=>'adminlogin'],function(){   
+Route::group([],function(){   
 	//后台首页zhao
 	Route::any('/admin/first','admin\FistUserController@first');
 	//管理员 
@@ -96,6 +96,7 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	//  邮箱注册
 	Route::any('/doemail','home\UserController@doemail');
 	Route::any('/jihuo','Home\UserController@jihuo');
+	Route::any('/tixing','Home\UserController@tixing');
 	//用户手机注册
 	Route::resource('/user/zhuce','home\UserController');
 	//发送验证码
@@ -176,7 +177,9 @@ Route::group([],function(){
 	Route::any('/home/tel/index','home\CollController@telindex');  //更换手机号页面
 	Route::any('/home/tel/oldcode','home\CollController@oldcode');  //old手机号验证码
 	Route::any('/home/tel/newcode','home\CollController@newcode');  //new手机号验证
-	Route::any('/home/zuji','home\CollController@zuji');//我的足迹
+
+	Route::any('/home/zuji','home\CollController@zuji');//我的足迹  zhang
+
 
 
 

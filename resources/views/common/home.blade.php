@@ -25,7 +25,11 @@
 				<ul class="message-l">
 					<div class="topMessage">
 						<div class="menu-hd">
-							<a href="#" target="_top" class="h">亲，请登录</a>
+							@if(!empty(session('uemail')))
+								<a href="/user/login" target="_top" class="h">{{session('uemail')}}</a>
+							@else
+							<a href="/user/login" target="_top" class="h">亲，请登录</a>
+							@endif
 							<a href="/user/zhuce" target="_top">免费注册</a>
 						</div>
 					</div>

@@ -6,8 +6,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\home\Coll;
 use DB;
+use Cookie;
 use App\Model\Admin\User;
 use App\Model\Admin\Goods;
+use App\Model\Admin\Sales;
+use App\Model\Admin\Salespic;
+
 // use Mrgoon\AliSms\AliSms;
 
 
@@ -92,6 +96,7 @@ class CollController extends Controller
     //     var_dump($response); 
     // }
 
+
     // public function newcode(Request $request)
     // {
     //    $code = $request->input('code');
@@ -106,4 +111,48 @@ class CollController extends Controller
     //         }
     //    }
     // }
+
+
+    //  我的足迹
+    public function zuji()
+    {
+        //  通过Cookie得到uid和商品gid
+        $arr = [];
+        $uid = Cookie::get('uid');
+        $gid = Cookie::get('gid');
+        $uptime = Cookie::get('uptime');
+        $arr['uid'] = $uid;
+        $arr['gid'] = $gid;
+        $arr['uptime'] = $uptime;
+
+        DB::table('footprint')->insert($arr);
+
+        $links = DB::table('friendlink')->get();
+
+        //根据gid获取商品信息
+        $res = DB::table('footprint')->pluck('gid');
+        
+        $arr = [];
+        $brr = [];
+        foreach($res as $k=>$v){
+            if($v >=30){
+                $arr[] += $v; 
+            }else{
+                $brr[] += $v;
+            }
+        } 
+        // dd($arr);
+        // dd($brr);
+        $goods = Goods::find($arr);
+        // dd($goods);
+        $sales = Sales::find($brr);
+
+        // dd($sales);
+
+        // echo '<pre>';
+        // var_dump($sales);
+        
+        return view('home.coll.zuji',['goods'=>$goods,'title'=>'我的足迹','links'=>$links,'sales'=>$sales]);
+    }
+
 }

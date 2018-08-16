@@ -50,6 +50,71 @@ class AdvertajaxController extends Controller
     }
 
 
+        //松鼠知广告启用状态
+    public function advert_status(Request $request)
+    {
+        
+        //查询状态为2的数据
+        // $er = DB::table('advert')->where('zhi_status',2)->first();
+
+        //把数据变成数组,更新数据库
+        // $aa=['adid'=>$er->adid,'adname'=>$er->adname,'adurl'=>$er->adurl,'adpic'=>$er->adpic,'zhi_status'=>1];
+        // $res =  DB::table('advert')->where('adid',$aa['adid'])->update($aa);
+        // dd($res);
+
+        // $data = DB::table('advert')->where('adid',$id)->update(['zhi_status'=>2]);
+        // if($data){
+        //     return redirect('/admin/advert')->with('success','启用成功');
+        // } else {
+        //     return back()->with('error','添加失败');
+        // }
+
+        $id = $request->input('id');
+        $status = DB::table('advert')->where('adid',$id)->pluck('zhi_status');
+        $statuss = $status[0];
+        if($statuss == 1){
+            $statuss = 2;
+        } else {
+            $statuss = 1;
+        }
+        $res = DB::table('advert')->where('adid',$id)->update(['zhi_status'=>$statuss]);
+        echo $statuss;
+
+
+
+
+
+        // $adids = $er->adid;
+        // 
+
+        // dd($res);
+
+        
+
+        //遍历所有数据，把状态全都改成1
+        // foreach ($all as $k=>$v){
+
+        //     $v->status = 1;
+        //     if($v->id == $id){$v->status = 2;}
+
+        //     $aa=['author'=>$v->author,'status'=>$v->status,'addtime'=>$v->addtime,'zhi1'=>$v->zhi1,'zhi2'=>$v->zhi2,'zhi3'=>$v->zhi3,'zhi4'=>$v->zhi4];
+
+        //     DB::table('zhi')->where('id',$v->id)->update($aa);
+        // }
+        // dd($all);
+
+        // $data = DB::table('zhi')->update($all);
+
+        // if($data){
+                // return redirect('/admin/zhi')->with('success','启用成功');
+        //     } else {
+        //         return back()->with('error','添加失败');
+        //     }
+
+
+    }
+
+
     //松鼠知单个删除
     public function zhi_del(Request $request)
     {

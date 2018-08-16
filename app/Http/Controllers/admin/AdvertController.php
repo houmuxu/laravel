@@ -64,6 +64,8 @@ class AdvertController extends Controller
                     // dd($res);
 
             }
+            $res['zhi_status'] = 1;
+            // dd($res);
 
             $data = DB::table('advert')->insert($res);
 

@@ -75,6 +75,7 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	Route::resource('/admin/advert', 'admin\AdvertController');
 	Route::any('/admin/advert_del','admin\AdvertajaxController@destroy');//删除广告
 	Route::any('/admin/advert_delall','admin\AdvertajaxController@destroyall');//批量删除
+	Route::any('/admin/advert_status', 'admin\AdvertajaxController@advert_status');  //停用，启用
 
 	//松鼠知
 	Route::resource('/admin/zhi', 'admin\ZhiController');		//资源路由

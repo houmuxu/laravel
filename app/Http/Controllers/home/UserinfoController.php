@@ -5,6 +5,7 @@ namespace App\Http\Controllers\home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Admin\User;
+use Hash;
 
 class UserinfoController extends Controller
 {
@@ -38,9 +39,15 @@ class UserinfoController extends Controller
    		return view('home.self.userupwd');
    	}
    	//修改密码
-   	public function upwdupdate()
+   	public function upwdupdate(Request $request)
    	{
-   		echo'1';
+         $aid=session('uid');
+         $res =User::where('uid',$aid)->first();
+   		$pass = $request->input('oldupwd');
+         dd($pass);
+        if (!Hash::check($pass, $res->upwd)) {
+            return back()->with('error','原始密码错误');
+        }
    	}
    	//手机
    	public function userutel()

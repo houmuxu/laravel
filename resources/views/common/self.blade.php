@@ -19,9 +19,7 @@
 
 
 	</head>
-		@php
-            $res = DB::table('users')->where('uid',session('uid'))->first();
-        @endphp
+
 
 	<body>
 		<!--头 -->
@@ -33,8 +31,8 @@
 						<ul class="message-l">
 							<div class="topMessage">
 								<div class="menu-hd">
-									<a href="#" target="_top" class="h">亲，请登录</a>
-									<a href="#" target="_top">免费注册</a>
+									你好{{$res->uname}}
+									<a href="/user/logout" target="_top">退出</a>
 								</div>
 							</div>
 						</ul>

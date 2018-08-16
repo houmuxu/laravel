@@ -105,6 +105,7 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	//登录
 	Route::any('/user/login','home\UserController@login');
 	Route::any('/user/dologin','home\UserController@dologin');
+	Route::any('/user/logout','home\UserController@logout');
 
 
 //前台

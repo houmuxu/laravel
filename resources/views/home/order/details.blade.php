@@ -83,7 +83,7 @@
 									<td class="td-inner">数量</td>
 								</div>
 								<div class="th th-operation">
-									<td class="td-inner">商品操作</td>
+									<td class="td-inner">小计</td>
 								</div>
 								<div class="th th-amount">
 									<td class="td-inner">合计</td>
@@ -168,7 +168,7 @@
 												</li>
 												<li class="td td-operation">
 													<div class="item-operation">
-														
+														{{$vv->price*$vv->cnt}}
 													</div>
 												</li>
 											</ul>

@@ -83,8 +83,11 @@
                   <span class="x-red"></span>总金额
               </label>
               <div class="layui-input-inline">
-                  <input type="text"  name="sum" value="{{$res->sum}}" required="" 
+                  <input type="text" readonly="true"  name="sum" value="{{$res->sum}}" required="" 
                   autocomplete="off" class="layui-input">
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>不可更改
               </div>
           </div>
 

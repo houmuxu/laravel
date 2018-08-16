@@ -2,8 +2,10 @@
 namespace App\Http\Controllers\home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Admin\User;
 use Ucpaas;
 use DB;
+use Hash;
 
 
 class UserController extends Controller
@@ -39,8 +41,15 @@ class UserController extends Controller
         $res = $request->except('_token','_method','reupwd','code');
         $res['utime']= time();
         $res['upic']= '/home/images/getAvatar.do.jpg';
-        $res['uname']= date('Ymd',time()).rand(1111,9999);
+        $res['uname']= date('Ymd',time()).rand(11111,99999);
+        $res['upwd'] = Hash::make($request->input('upwd'));
         User::insert($res);
+
+        $uname=($res['uname']);
+        $rs =User::where('uname',$uname)->first();
+        session(['uname'=>$rs->aname]);
+        session(['uid'=>$rs->aid]);
+        return redirect('/');
     }
 
     /**
@@ -120,21 +129,18 @@ class UserController extends Controller
     }
 
 
-    public function checkuser(Request $request)
+    public function checkcode(Request $request)
     {
-        $users = $request->get('username');
+        $code = $request->get('code');
 
-        $res = Db::table('user')->where('username',$users)->find();
-
-        // dump($res);
-        if($res){
+        if(session('code') == $code){
 
             echo 1;
         } else {
 
             echo 0;
         }
-
+        // echo $code;
     }
 
     public function login()
@@ -159,5 +165,13 @@ class UserController extends Controller
         return redirect('/home/self/userinfo');
         
     }
+
+    public function logout()
+{
+    //清空session
+    session(['uname'=>null]);
+    session(['uid'=>null]);
+    return redirect('/user/login');
+}
 
 }

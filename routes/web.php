@@ -152,7 +152,7 @@ Route::group([],function(){
 	Route::any('/home/tel/index','home\CollController@telindex');  //更换手机号页面
 	Route::any('/home/tel/oldcode','home\CollController@oldcode');  //old手机号验证码
 	Route::any('/home/tel/newcode','home\CollController@newcode');  //new手机号验证
-	
+	Route::any('/home/zuji','home\CollController@zuji');//我的足迹
 
 
 

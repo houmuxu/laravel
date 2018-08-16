@@ -10,6 +10,7 @@ use App\Model\Admin\User;
 use Mail;
 use Cache;
 use DB;
+use Cookie;
 use App\Model\home\Cartsinfo;
 use App\Model\home\Coll;
 use App\Model\Admin\Sales;
@@ -92,6 +93,15 @@ use App\Model\Admin\Sales;
                 $collstatus = 0;
             }
             // 收藏结束
+
+
+            // 我的足迹
+           
+            Cookie::queue('uid',1,7*24*60);
+            Cookie::queue('gid',$id,7*24*60);
+            Cookie::queue('uptime',time(),7*24*60);
+
+            //  我的足迹结束
             
             $sales = Sales::inRandomOrder()->limit(4)->get();
 

@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\home\Coll;
 use DB;
+use Cookie;
 use App\Model\Admin\User;
 use App\Model\Admin\Goods;
-use Mrgoon\AliSms\AliSms;
+use App\Model\Admin\Sales;
+use App\Model\Admin\Salespic;
+// use Mrgoon\AliSms\AliSms;
 
 
 class CollController extends Controller
@@ -79,31 +82,74 @@ class CollController extends Controller
         return view('home/coll/tel',['title'=>'换绑手机号','links'=>$links]);
     }
 
-    public function oldcode(Request $request)
-    {
-        $tel =$request->input('tel');
-        $code = rand(1111,9999);
-        session(['telcode'=>$code]);
-        session(['newtel'=>$tel]);
-        var_dump(session('telcode'));
+    // public function oldcode(Request $request)
+    // {
+    //     $tel =$request->input('tel');
+    //     $code = rand(1111,9999);
+    //     session(['telcode'=>$code]);
+    //     session(['newtel'=>$tel]);
+    //     var_dump(session('telcode'));
         
-        $aliSms = new AliSms();
-        $response = $aliSms->sendSms($tel, 'SMS_142070526', ['code'=>$code]);
-        var_dump($response); 
-    }
+    //     $aliSms = new AliSms();
+    //     $response = $aliSms->sendSms($tel, 'SMS_142070526', ['code'=>$code]);
+    //     var_dump($response); 
+    // }
 
-    public function newcode(Request $request)
+    // public function newcode(Request $request)
+    // {
+    //    $code = $request->input('code');
+    //    $oldcode = session('telcode');
+    //    $newtel = session('newtel');
+    //    // $uid = session('uid');
+    //    $uid = 1;
+    //    if($code == $oldcode){
+    //         $res = User::where('uid',$uid)->update(['utel'=>$newtel]);
+    //         if($res){
+    //             echo 1;
+    //         }
+    //    }
+    // }
+
+
+    //  我的足迹
+    public function zuji()
     {
-       $code = $request->input('code');
-       $oldcode = session('telcode');
-       $newtel = session('newtel');
-       // $uid = session('uid');
-       $uid = 1;
-       if($code == $oldcode){
-            $res = User::where('uid',$uid)->update(['utel'=>$newtel]);
-            if($res){
-                echo 1;
+        //  通过Cookie得到uid和商品gid
+        $arr = [];
+        $uid = Cookie::get('uid');
+        $gid = Cookie::get('gid');
+        $uptime = Cookie::get('uptime');
+        $arr['uid'] = $uid;
+        $arr['gid'] = $gid;
+        $arr['uptime'] = $uptime;
+
+        DB::table('footprint')->insert($arr);
+
+        $links = DB::table('friendlink')->get();
+
+        //根据gid获取商品信息
+        $res = DB::table('footprint')->pluck('gid');
+        
+        $arr = [];
+        $brr = [];
+        foreach($res as $k=>$v){
+            if($v >=30){
+                $arr[] += $v; 
+            }else{
+                $brr[] += $v;
             }
-       }
+        } 
+        // dd($arr);
+        // dd($brr);
+        $goods = Goods::find($arr);
+        // dd($goods);
+        $sales = Sales::find($brr);
+
+        // dd($sales);
+
+        // echo '<pre>';
+        // var_dump($sales);
+        
+        return view('home.coll.zuji',['goods'=>$goods,'title'=>'我的足迹','links'=>$links,'sales'=>$sales]);
     }
 }

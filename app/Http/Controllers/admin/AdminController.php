@@ -68,6 +68,7 @@ class AdminController extends Controller
         
         $res = $request->except('_token','_method','repass');
          $res['atime']= time();
+         $res['astatus']= '2';
          $res['apwd'] = Hash::make($request->input('apwd'));
 
         $aname=$res['aname'];
@@ -235,19 +236,22 @@ class AdminController extends Controller
 
     }
 
-    public function del(Request $request)
+   public function destroyall(Request $request)
     {
+        $arr = $request->input('ids');
+
+        foreach ($arr as $k=>$v) {
+            
+            $res = DB::table('admin')->where('aid',$v)->first();
+ 
+
+                //删除数据库信息
+                 DB::table('admin')->where('aid',$v)->delete();
 
 
-
-        $res = $request->except('_token','_method')->toArray();
-
-
-        $id = $res['id'];
-        for ($i=0; $i < count($id); $i++) { 
-           Admin::destroy($id[$i]);
         }
-        echo "true";
+           var_dump($arr);
+
     }
 
 
@@ -306,6 +310,20 @@ class AdminController extends Controller
         if($code != session('code')){
 
             return back()->with('error','验证码错误');
+        }
+        //判定状态
+        $astatus = Admin::where('aname',$aname)->get();
+
+
+
+
+        foreach($astatus as $values) {
+             $status=$values->astatus;
+             $auth=$values->astatus;
+        };
+        
+        if($status=='2'){
+            return back()->with('error','账号未启用');
         }
 
         //存储session信息  给中间件使用

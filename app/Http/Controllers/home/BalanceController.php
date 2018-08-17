@@ -203,6 +203,13 @@ class BalanceController extends Controller
         //随机获取广告
         $advert = DB::table('advert')->inRandomOrder()->first();
         $advert2 = DB::table('advert')->inRandomOrder()->first();
+        // dd($advert2);
+
+        //如果没有查询到数据,设定一个默认值
+        if($advert == null || $advert2 == null){
+            $advert = (object)['adurl' => '','adpic' => ''];
+            $advert2 = (object)['adurl' => '','adpic' => ''];
+        }
 
         return view('home/balance/payok',['data'=>$data,'links'=>$links,'title'=>'付款成功页面','advert'=>$advert,'advert2'=>$advert2]);
     }

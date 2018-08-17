@@ -15,11 +15,12 @@
     <!-- 广告结束 -->
 
     <!-- 广告1开始 -->
-    <div id="wzsse" style="position:absolute;z-index:999;width:200px">
-      <div style="text-align:right;cursor:pointer;" id="closepiaofu">关闭</div>
-      <a href="{{$advert->adurl}}" target="_blank"><img src="{{$advert->adpic}}" border="0"/></a>
-    </div>
-
+    @if($advert->adurl !='')
+      <div id="wzsse" style="position:absolute;z-index:999;width:200px">
+        <div style="text-align:right;cursor:pointer;" id="closepiaofu">关闭</div>
+        <a href="{{$advert->adurl}}" target="_blank"><img src="{{$advert->adpic}}" border="0"/></a>
+      </div>
+    @endif
     <script type="text/javascript">
       $(function(){
         $("#closepiaofu").click(function () {
@@ -32,10 +33,12 @@
     <!-- 广告1结束 -->
 
       <!-- 广告2开始 -->
-    <div id="wzsse2" style="position:absolute;z-index:999;width:200px">
-      <div style="text-align:right;cursor:pointer;" id="closepiaofu">关闭</div>
-      <a href="{{$advert2->adurl}}" target="_blank"><img src="{{$advert2->adpic}}" border="0"/></a>
-    </div>
+    @if($advert2->adurl !='')
+      <div id="wzsse2" style="position:absolute;z-index:999;width:200px">
+        <div style="text-align:right;cursor:pointer;" id="closepiaofu">关闭</div>
+        <a href="{{$advert2->adurl}}" target="_blank"><img src="{{$advert2->adpic}}" border="0"/></a>
+      </div>
+    @endif
 
     <script type="text/javascript">
       $(function(){

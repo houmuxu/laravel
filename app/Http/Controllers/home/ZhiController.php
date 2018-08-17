@@ -35,6 +35,14 @@ class ZhiController extends Controller
         //随机获取一条广告,右下角
         $youxiajiao = DB::table('advert')->inRandomOrder()->take(1)->get(); 
 
+        $youxiajiao = $youxiajiao->toArray();
+        // dd($youxiajiao);
+        if($youxiajiao == []){
+        	$youxiajiao = (object)['adurl' => '','adpic' => ''];
+        	$youxiajiao = ['0'=>$youxiajiao];
+        }
+        // dd($youxiajiao);
+
 		$links = DB::table('friendlink')->get();
 		return view('home/zhi/zhi',['youxiajiao'=>$youxiajiao,'advert'=>$advert,'zhi'=>$zhi,'goods1'=>$goods1,'goods2'=>$goods2,'goods3'=>$goods3,'title'=>'松鼠新闻','links'=>$links]);
 	}

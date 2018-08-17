@@ -63,7 +63,12 @@
 			<ul class="message-l">
 				<div class="topMessage">
 					<div class="menu-hd">
-						<a href="/user/login" target="_top" class="h">亲，请登录</a>
+
+						@if(!empty(session('uemail')))
+							<a href="/user/login" target="_top" class="h">{{session('uemail')}}</a>
+						@else
+							<a href="/user/login" target="_top" class="h">亲，请登录</a>
+						@endif
 						<a href="/user/zhuce" target="_top">免费注册</a>
 					</div>
 				</div>
@@ -200,7 +205,7 @@
 											<div class="item-amount ">
 												<div class="sl">
 													<input class="min am-btn" name="decre" type="button" value="-" />
-													<input class="text_box" name="" id='nums' type="text" value="{{$v->num}}" style="width:20px;line-height:18px;text-align:center" />
+													<input class="text_box" name=""  readonly='true' id='nums' type="text" value="{{$v->num}}" style="width:20px;line-height:18px;text-align:center" />
 													<input class="add am-btn" name="incre" type="button" value="+" />
 												</div>
 											</div>

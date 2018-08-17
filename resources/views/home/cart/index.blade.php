@@ -53,6 +53,11 @@
 			    
 			    font-size:12px;
 			   }
+
+			.amount-sum{
+				display:none;
+			}
+
 		</style>
 	</head>
 
@@ -137,7 +142,6 @@
 
 
 					<div class="clear"></div>
-
 
 					
 					<tr class="item-list">
@@ -338,10 +342,8 @@
 			$('#J_SelectAllCbx2').click(function(){
 				if(swith_All){
 					$('input[name="items[]"]').attr('checked',true);
-
 				}else{
 					$('input[name="items[]"]').attr('checked',false);
-
 				}
 				swith_All = !swith_All;
 				cnt();
@@ -378,7 +380,6 @@
 				$(this).parents('ul').find('.number').text(accMul(num,pr));
 				sum();
 				incre();
-				
 	
 			})
 		
@@ -474,7 +475,7 @@
 					cnts = accAdd(cnts,nums);
 
 				})
-
+				$('.amount-sum').css('display','block');
 				$('#J_SelectedItemsCount').text(cnts);
 			}
 
@@ -496,6 +497,7 @@
 					cnt = accAdd(cnt,num);
 				})
 				$('#J_SelectedItemsCount').text(cnt-1);
+
 			}
 
 			function incre()

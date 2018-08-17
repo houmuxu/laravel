@@ -35,7 +35,7 @@
               </label>
               <div class="layui-input-inline">
                   <input type="password" id="L_pass" name="apwd" required="" lay-verify="pass"
-                  autocomplete="off" class="layui-input">
+                  autocomplete="off" class="layui-input" value="{{$res->apwd}}">
               </div>
               <div class="layui-form-mid layui-word-aux">
                   6到16个字符
@@ -47,7 +47,7 @@
               </label>
               <div class="layui-input-inline">
                   <input type="password" id="L_repass" name="repass" required="" lay-verify="repass"
-                  autocomplete="off" class="layui-input">
+                  autocomplete="off" class="layui-input" value="{{$res->apwd}}>
               </div>
           </div>
           <div class="layui-form-item">

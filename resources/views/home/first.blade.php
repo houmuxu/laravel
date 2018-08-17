@@ -43,7 +43,7 @@
 									</a>
 								</li>
 								<li class="banner1" style="background: white">
-									<a>
+									<a href="/home/goodslist/1">
 										<img src="/home/first/10.png" style="width: 1000px;height: 480px;margin-top:-20px;" />
 									</a>
 								</li>								

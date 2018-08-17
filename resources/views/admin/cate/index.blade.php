@@ -80,7 +80,7 @@
            <td>{{$v->path}}</td>
             <td class="td-manage">
 
-             <button><a href="/admin/cate/{{$v->cid}}/edit" class='btu btu-info'><i class="layui-icon">&#xe642;</i></a></button>
+             <a href="/admin/cate/{{$v->cid}}/edit" class='btu btu-info'><button><i class="layui-icon">&#xe642;</i></button></a>
              <form action="/admin/cate/{{$v->cid}}" method="post" style="display:inline">
                
               {{csrf_field()}}

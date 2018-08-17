@@ -39,9 +39,9 @@
         </ul>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
-            <a href="javascript:;">admin</a>
+            <a href="javascript:;">{{$res->aname}}</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-              <dd><a onclick="x_admin_show('个人信息','/admin/admininfo/1')">个人信息</a></dd>
+              <dd><a onclick="x_admin_show('个人信息','/admin/admininfo/{{$res->aid}}')">个人信息</a></dd>
               <dd><a href="/admin/logout">退出</a></dd>
             </dl>
           </li>
@@ -345,9 +345,9 @@
 
 @show
  <!-- 底部开始 -->
-    <div class="footer" style="height:20px">
+    <!-- <div class="footer" style="height:20px">
         <div class="copyright" style="line-height: 20px ">欢迎来到我的后台,不要轻举妄动哦,(* ￣3)(ε￣ *)!!!</div>  
-    </div>
+    </div> -->
     <!-- 底部结束 -->
     <script>
     //百度统计可去掉

@@ -91,11 +91,12 @@
               <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td> -->
             <td class="td-manage">
             
-              <button>
-                <a title="编辑" href="/admin/sales/{{$v->sid}}/edit">
-                  <i class="layui-icon">&#xe642;</i>
+             
+                <a title="编辑" href="/admin/sales/{{$v->sid}}/edit"> <button>
+                  <i class="layui-icon">&#xe642;</i></button>
                 </a>
-              </button>
+              
+              
               <form action="/admin/sales/{{$v->sid}}" method="post" style="display:inline">
                 {{csrf_field()}}
                 {{method_field('DELETE')}}

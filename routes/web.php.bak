@@ -34,7 +34,6 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	Route::any('/admin/adminclo/{id}','admin\AdminController@close');
 	//用户
 	Route::resource('/admin/user','admin\UserController');
-	Route::any('/admin/userdelall','admin\UserController@destroyall'); 
 
 
 	
@@ -76,13 +75,6 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	Route::resource('/admin/advert', 'admin\AdvertController');
 	Route::any('/admin/advert_del','admin\AdvertajaxController@destroy');//删除广告
 	Route::any('/admin/advert_delall','admin\AdvertajaxController@destroyall');//批量删除
-	Route::any('/admin/advert_status', 'admin\AdvertajaxController@advert_status');  //停用，启用
-
-	//松鼠知
-	Route::resource('/admin/zhi', 'admin\ZhiController');		//资源路由
-	Route::any('/admin/zhi_del', 'admin\AdvertajaxController@zhi_del');		//删除单个
-	Route::any('/admin/zhi_delall', 'admin\AdvertajaxController@zhi_delall');  //批量删除
-	Route::any('/admin/zhi_status/{id}', 'admin\AdvertajaxController@zhi_status');  //停用，启用
 
 	//  友情链接   zhang
 	Route::resource('/admin/friendlink', 'admin\FriendlinkController');
@@ -99,13 +91,9 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	//  首页 hou
 	Route::any('/', 'home\FirstController@index');
 
-	//松鼠知
-	Route::any('/home/zhi/index','home\ZhiController@index');
-
 	//  邮箱注册
 	Route::any('/doemail','home\UserController@doemail');
 	Route::any('/jihuo','Home\UserController@jihuo');
-	Route::any('/tixing','Home\UserController@tixing');
 	//用户手机注册
 	Route::resource('/user/zhuce','home\UserController');
 	//发送验证码
@@ -189,9 +177,7 @@ Route::group([],function(){
 	Route::any('/home/tel/index','home\CollController@telindex');  //更换手机号页面
 	Route::any('/home/tel/oldcode','home\CollController@oldcode');  //old手机号验证码
 	Route::any('/home/tel/newcode','home\CollController@newcode');  //new手机号验证
-
-	Route::any('/home/zuji','home\CollController@zuji');//我的足迹  zhang
-
+	
 
 
 

@@ -68,9 +68,8 @@
             <td>{{$v->furl}}</td>
             
             <td class="td-manage">
-              <form action="/admin/friendlink/{{$v->fid}}/edit" method="get" style="display:inline">
-                <button><i class="layui-icon">&#xe642;</i></button>
-              </form>
+            
+              <a href="/admin/friendlink/{{$v->fid}}/edit" class='btu btu-info'><button><i class="layui-icon">&#xe642;</i></button></a>
                 
               
               <form action="/admin/friendlink/{{$v->fid}}" method="post" style="display:inline">

@@ -44,7 +44,7 @@
           @foreach($res as $k => $v)
           <tr>
             <td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id="2"><i class="layui-icon"></i></div>
+              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id="{{$v->uid}}"><i class="layui-icon"></i></div>
             </td>
             <td>{{$v->uid}}</td>
             <td>{{$v->uname}}</td>
@@ -81,6 +81,28 @@
 
     </div>
 
+<script type="text/javascript">
+        function delAll (argument) {
+        var data = tableCheck.getData();
+        // console.log(data);
+        layer.confirm('确认要删除吗？'+data,function(index){
+            //捉到所有被选中的，发异步进行删除
+            $.get('/admin/userdelall',{ids:data},function(info){
+                console.log(info);
+              if(info){
+                // console.log(data);
+                layer.msg('删除成功', {icon: 1});
+                $(".layui-form-checked").not('.header').parents('tr').remove();
+              }
+            })
+            
+        });
+
+
+      }
+
+
+</script>
 
 
 @endsection

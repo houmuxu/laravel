@@ -95,7 +95,7 @@
                   <span class="x-red">*</span>商品图片
               </label>
               <div class="layui-input-inline">
-                  <input type="file" id="file" multiple="multiple" name="salespic[]" required="" autocomplete="off" >
+                  <input type="file" id="file" multiple="multiple" name="salespic[]" >
                 
                         <img src="
                          @php

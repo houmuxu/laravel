@@ -185,6 +185,28 @@ class UserController extends Controller
             'url' => '/admin/user',
             ];
             return view('errors.dell',["data"=>$data]);
+        }
     }
-}
+    public function destroyall(Request $request)
+    {
+        $arr = $request->input('ids');
+
+
+        foreach ($arr as $k=>$v) {
+            
+            $res = DB::table('users')->where('uid',$v)->first();
+ 
+
+
+                //删除数据库信息
+                 DB::table('users')->where('uid',$v)->delete();
+
+
+
+
+        }
+           var_dump($arr);
+
+
+    }
 }

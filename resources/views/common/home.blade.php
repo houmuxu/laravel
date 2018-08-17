@@ -24,20 +24,18 @@
 					<div class="topMessage">
 						<div class="menu-hd">
 
-
-
-							
-
-							@if(session('uname')==null)
-
-							<a href="/user/login" target="_top" class="h">亲，请登录</a>							
-
-							<a href="/user/zhuce" target="_top">免费注册</a>
-							@else
-							您好
-							<b> {{$res->uname}} </b> | 
+							@if(!empty(session('uemail')))
+							<a href="/user/login" target="_top" class="h">{{session('uemail')}}</a>				
 							<a href="/user/logout" target="_top">退出</a>
-							
+							@elseif(session('uname')==null) 
+
+								<a href="/user/login" target="_top" class="h">亲，请登录</a>							
+								<a href="/user/zhuce" target="_top">免费注册</a>
+							@else
+								您好
+								<b> {{$res->uname}} </b> | 
+								<a href="/user/logout" target="_top">退出</a>
+
 							@endif
 
 						</div>

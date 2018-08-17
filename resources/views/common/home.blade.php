@@ -3,22 +3,20 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
 		<title>@yield('title')</title>
-
 		<link href="/home/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
 		<link href="/home/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
-
 		<link href="/home/basic/css/demo.css" rel="stylesheet" type="text/css" />
-
 		<link href="/home/css/hmstyle.css" rel="stylesheet" type="text/css" />
+
 		<script src="/home/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
 		<script src="/home/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
-
-
 	</head>
 
 	<body>
+		@php
+            $res = DB::table('users')->where('uid',session('uid'))->first();
+        @endphp
 		<div class="hmtop">
 			<!--顶部导航条 -->
 			<div class="am-container header">
@@ -27,13 +25,21 @@
 						<div class="menu-hd">
 
 
-							@if(!empty(session('uemail')))
-								<a href="/user/login" target="_top" class="h">{{session('uemail')}}</a>
-							@else
-							<a href="/user/login" target="_top" class="h">亲，请登录</a>
-							@endif
+
+							
+
+							@if(session('uname')==null)
+
+							<a href="/user/login" target="_top" class="h">亲，请登录</a>							
 
 							<a href="/user/zhuce" target="_top">免费注册</a>
+							@else
+							您好
+							<b> {{$res->uname}} </b> | 
+							<a href="/user/logout" target="_top">退出</a>
+							
+							@endif
+
 						</div>
 					</div>
 				</ul>

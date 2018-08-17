@@ -9,7 +9,7 @@
 		<meta name="format-detection" content="telephone=no">
 		<meta name="renderer" content="webkit">
 		<meta http-equiv="Cache-Control" content="no-siteapp" />
-
+		<link href="/admin/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="/home/AmazeUI-2.4.2/assets/css/amazeui.css" />
 		<link href="/home/css/dlstyle.css" rel="stylesheet" type="text/css">
 	</head>
@@ -31,6 +31,14 @@
 						
 						<div class="login-form">
 						  <form action="/user/dologin" method="get">
+						  	@if(session('error')) 
+           					                 
+                    		
+                    		<div class="alert alert-warning alert-dismissable">
+							  <strong>{{session('error')}}</strong>
+							</div>
+
+           					 @endif
 							   <div class="user-name">
 								    <label for="user"><i class="am-icon-user"></i></label>
 								    <input type="text" name="uname" id="user" placeholder="邮箱/手机/用户名">

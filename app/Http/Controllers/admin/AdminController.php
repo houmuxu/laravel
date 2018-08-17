@@ -293,7 +293,7 @@ class AdminController extends Controller
 
         //判断密码
         $pass = $request->input('apwd');
-
+        
 
         if (!Hash::check($pass, $res->apwd)) {
             

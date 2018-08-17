@@ -38,7 +38,7 @@
 					<div class="am-tabs-bd">
 						<div class="am-tab-panel am-active">
 							<form  method="post">
-									{{csrf_field()}}
+									
 							    <div class="user-email">
 										<label for="email"><i class="am-icon-envelope-o"></i></label>
 										<input type="email" name="email" id="email" placeholder="请输入邮箱账号">
@@ -51,7 +51,7 @@
 								    <label for="passwordRepeat"><i class="am-icon-lock"></i></label>
 								    <input type="password" name="repass" id="repass" placeholder="确认密码">
                  				</div>	
-                 
+                 			{{csrf_field()}}
                  			</form>
                  			
 								 <div class="login-links">
@@ -78,7 +78,7 @@
 										<div class="verification">
 											<label for="code"><i class="am-icon-code-fork"></i></label>
 											<input type="text" name="code" id="code" placeholder="请输入验证码">
-											{{csrf_field()}}
+											
 											<button id='but'>获取</button>
 										</div>
                  <div class="user-pass">
@@ -92,6 +92,7 @@
                  <div class="am-cf">
 											<input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
 										</div>
+										{{csrf_field()}}
 									</form>
 								 <div class="login-links">
 										<label for="reader-me">

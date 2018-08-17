@@ -51,8 +51,17 @@ class UserController extends Controller
 
         $uname=($res['uname']);
         $rs =User::where('uname',$uname)->first();
-        session(['uname'=>$rs->aname]);
-        session(['uid'=>$rs->aid]);
+        $data=[];
+        $arr=['uname','utel','uemail'];
+        foreach ($arr as $key => $v) {
+            if(User::where($v,$uname)->first()){$data['user']=User::where($v,$uname)->first();
+            }else{$data[]=false;}  
+        };
+        //存储session信息  给中间件使用
+        session(['uname'=>$data['user']->uname]);
+
+        session(['uid'=>$data['user']->uid]);
+
         return redirect('/');
     }
 
@@ -105,7 +114,8 @@ class UserController extends Controller
 
     public function sendcode(Request $request)
     {
-//初始化必填
+
+        //初始化必填
         $options['accountsid']='fd24829d8bfcbd80834aca0aef04a05e';
         $options['token']='316b7e37616ca8dff338b0d262d0ad00';
 
@@ -127,7 +137,6 @@ class UserController extends Controller
         $ucpass->templateSMS($appId,$toNumber,$templateId,$param);
 
         echo $code;
-
 
 
     }
@@ -156,19 +165,39 @@ class UserController extends Controller
     {
         $uname = $request->input('uname');
 
-        $res = DB::table('users')->where('uname',$uname)->first();
+        $data=[];
+        $arr=['uname','utel','uemail'];
+        foreach ($arr as $key => $v) {
+            if(User::where($v,$uname)->first()){$data['user']=User::where($v,$uname)->first();
+            }else{$data[]=false;}
+            
+        };
+        
+        
+        
+        
 
- 
+        if(empty($data['user'])){
 
+            return back()->with('error','用户名或密码错误');
+        }
+
+        //判断密码
+        $pass = $request->input('upwd');
+        
+        if (!Hash::check($pass, $data['user']->upwd)) {    
+            return back()->with('error','密码错误');
+        }
 
         //存储session信息  给中间件使用
-        session(['uname'=>$res->uname]);
+        session(['uname'=>$data['user']->uname]);
 
-        session(['uid'=>$res->uid]);
+        session(['uid'=>$data['user']->uid]);
 
-        return redirect('/home/self/userinfo');
+        return redirect('/');
+    }  
         
-    }
+    
 
 
     public function logout()
@@ -176,7 +205,7 @@ class UserController extends Controller
     //清空session
     session(['uname'=>null]);
     session(['uid'=>null]);
-    return redirect('/user/login');
+    return redirect('/');
 }
 
 

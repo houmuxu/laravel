@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
 <meta name="viewport" content="width=device-width, initial-scale=1"> 
-<title>login</title>
+<title>三只松鼠后台登录</title>
 <link rel="stylesheet" type="text/css" href="/admin/css/normalize.css" />
 <link rel="stylesheet" type="text/css" href="/admin/css/demo.css" />
 <!--必要样式-->
@@ -53,9 +53,7 @@
 
 
 
-		<div style="text-align:center;">
-<p>更多模板：<a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>
-</div>
+
 	</body>
 
 </html>

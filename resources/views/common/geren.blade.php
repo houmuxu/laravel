@@ -11,9 +11,10 @@
 		<link href="/home/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
 		<!-- <link href="/home/css/personal.css" rel="stylesheet" type="text/css"> -->
 		<!-- <link href="/home/css/systyle.css" rel="stylesheet" type="text/css"> -->
-
 	</head>
-
+		@php
+     	  $res = DB::table('users')->where('uid',session('uid'))->first();
+        @endphp
 	<body>
 		<!--头 -->
 		<header>
@@ -23,10 +24,16 @@
 					<div class="am-container header">
 						<ul class="message-l">
 							<div class="topMessage">
-								<div class="menu-hd">
-									<a href="#" target="_top" class="h">亲，请登录</a>
-									<a href="#" target="_top">免费注册</a>
-								</div>
+							<div class="menu-hd">
+							@if(session('uname')==null)
+							<a href="/user/login" target="_top" class="h">亲，请登录</a>
+							<a href="/user/zhuce" target="_top">免费注册</a>
+							@elseif(session('uname')!==null)
+							您好
+							<b> {{$res->uname}} </b> | 
+							<a href="/user/logout" target="_top">退出</a>
+							@endif
+							</div>
 							</div>
 						</ul>
 						<ul class="message-r">
@@ -43,9 +50,7 @@
 								<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
 						</ul>
 						</div>
-
 						<!--悬浮搜索框-->
-
 						<div class="nav white">
 							<div class="logoBig">
 								<li><img src="/home/images/logobig.png" /></li>
@@ -59,7 +64,6 @@
 								</form>
 							</div>
 						</div>
-
 						<div class="clear"></div>
 					</div>
 				</div>
@@ -73,7 +77,7 @@
                                 <li class="qc"><a href="#">闪购</a></li>
                                 <li class="qc"><a href="#">限时抢</a></li>
                                 <li class="qc"><a href="#">团购</a></li>
-                                <li class="qc last"><a href="#">大包装</a></li>
+                                <li class="qc last"><a href="/home/zhi/index">松鼠知</a></li>
 							</ul>
 
 						</div>
@@ -100,16 +104,13 @@
 			<aside class="menu">
 				<ul>
 					<li class="person active">
-						<a href="index.html">个人中心</a>
+						<a href="/home/self">个人中心</a>
 					</li>
 					<li class="person">
-						<a href="#">个人资料</a>
+						<p>个人资料</p>
 						<ul>
-							<li> <a href="information.html">个人信息</a></li>
-							<li> <a href="safety.html">安全设置</a></li>
-
-
-
+							<li> <a href="/home/self/userinfo">个人信息</a></li>
+							<li> <a href="/home/self/usersafety">安全设置</a></li>
 						</ul>
 					</li>
 					<li class="person">
@@ -134,7 +135,7 @@
 						<a>我的小窝</a>
 						<ul>
 							<li> <a href="/home/coll/index">收藏</a></li>
-							<li> <a href="foot.html">足迹</a></li>
+							<li> <a href="/home/zuji">足迹</a></li>
 							<li> <a href="/home/eval/make">未评价</a></li>
 							<li> <a href="/home/eval/list">已评价</a></li>
 							<li> <a href="/home/goods/email">更换邮箱</a></li>

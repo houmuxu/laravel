@@ -9,7 +9,15 @@
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
 
   <link href="/home/css/personal.css" rel="stylesheet" type="text/css">
-
+  
+  <!-- 右下角广告开始 -->
+  <style type="text/css">
+    .lanrenzhijia{ width:260px; height:160px; position:fixed; z-index:999; right:-262px; bottom:10px;}
+    .lanrenzhijia .close{ width:30px; height:22px; line-height:22px;display:block; float:right;
+                        font-size:12px; color:#666; text-decoration:none;
+                        }
+  </style>
+  <!-- 右下角广告结束 -->
 
 
   <div class="nav-table">
@@ -101,19 +109,27 @@
           <a href="{{$v->adurl}}" target="_blank"><img src="{{$v->adpic}}" alt=""></a>
         </div>
         @endforeach
-        <!-- <ul class="am-list blog-list">
-        	<li><a href="#"><p>[特惠]闺蜜喊你来囤国货啦</p></a></li>  
-          <li><a href="#"><p>[公告]华北、华中部分地区配送延迟</p></a></li>
-          <li><a href="#"><p>[特惠]家电狂欢千亿礼券 买1送1！</p></a></li>
-          <li><a href="#"><p>[公告]商城与广州市签署战略合作协议</p></a></li>
-          <li><a href="#"><p>[特惠]洋河年末大促，低至两件五折</p></a></li>      
-        </ul> -->
+
       </section>
 
     </div>
   </div>
 
 </div>
+
+    <!-- 右下角广告 -->
+    <script>
+      $(function (){
+        $('.lanrenzhijia').animate({right:'50px'},1000);
+        $('.lanrenzhijia .close').click(function(){
+           $('.lanrenzhijia').hide();
+        });
+      });
+    </script>
+<div class="lanrenzhijia">
+    <a href="javascript:" class="close">关闭</a>
+    <a href="{{$youxiajiao[0]->adurl}}" target="_blank"><img src="{{$youxiajiao[0]->adpic}}" alt="" /></a>
+  </div>
 
 
 <script src="/home/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>

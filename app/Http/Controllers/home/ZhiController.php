@@ -31,10 +31,12 @@ class ZhiController extends Controller
 
         //查询状态为2的广告
         $advert = DB::table('advert')->where('zhi_status',2)->get();
-        // dd($advert);
+        
+        //随机获取一条广告,右下角
+        $youxiajiao = DB::table('advert')->inRandomOrder()->take(1)->get(); 
 
 		$links = DB::table('friendlink')->get();
-		return view('home/zhi/zhi',['advert'=>$advert,'zhi'=>$zhi,'goods1'=>$goods1,'goods2'=>$goods2,'goods3'=>$goods3,'title'=>'松鼠新闻','links'=>$links]);
+		return view('home/zhi/zhi',['youxiajiao'=>$youxiajiao,'advert'=>$advert,'zhi'=>$zhi,'goods1'=>$goods1,'goods2'=>$goods2,'goods3'=>$goods3,'title'=>'松鼠新闻','links'=>$links]);
 	}
 
 }

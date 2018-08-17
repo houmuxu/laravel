@@ -206,7 +206,7 @@ class UserController extends Controller
                 $m->from(env('MAIL_USERNAME'), '三只松鼠商城人力资源部');
                 $m->to($res['uemail'], $res['uname'])->subject('诚邀加入三只松鼠集团');
             });
-          return redirect('/tixing');
+          return view('home.user.tixing',['title'=>'新用户激活的提醒信息']);
         } else {
             return back();
         }
@@ -217,12 +217,6 @@ class UserController extends Controller
     {
         
          echo "<script>alert('激活成功');window.location.href='/'</script>";
-    }
-
-
-    public function tixing()
-    {
-        return view('home.user.tixing',['title'=>'新用户激活的提醒信息']);
     }
 
 }

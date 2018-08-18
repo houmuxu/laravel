@@ -25,6 +25,11 @@ class Admin extends Model
      */
     protected $fillable = ['aname','apwd','atel','aemail','auth','astatus'];
 
+     //hou
+    public function roles()
+    {
+        return $this->belongsToMany('App\Model\Admin\Role', 'role_user', 'user_id', 'role_id');
+    }
 
 
 }

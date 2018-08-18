@@ -26,7 +26,7 @@
                                 <li class="qc"><a href="#">闪购</a></li>
                                 <li class="qc"><a href="#">限时抢</a></li>
                                 <li class="qc"><a href="#">团购</a></li>
-                                <li class="qc last"><a href="#">大包装</a></li>
+                                <li class="qc last"><a href="/home/zhi/index">松鼠知</a></li>
 							</ul>
 						    
 						</div>
@@ -56,12 +56,12 @@
 							<div class="clear"></div>
                         </div>
 							<div class="search-content">
-								<div class="sort">
+								<!-- <div class="sort">
 									<li class="first"><a title="综合" href="/home/goods/wherezhong/{{$gname}}">综合排序</a></li>
 									<li><a title="销量" href="/home/goods/wherexiao/{{$gname}}">销量排序</a></li>
 									<li><a title="价格" href="/home/goods/wherejia/{{$gname}}">价格优先</a></li>
 									<li class="big"><a title="评价" href="#">评价为主</a></li>
-								</div>
+								</div> -->
 								<div class="clear"></div>
 
 								<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
@@ -123,38 +123,43 @@
 							@endforeach
 							</div>
 							<div class="clear"></div>
-							<!--分页 -->
-							<ul class="am-pagination am-pagination-right">
-								<li class="am-disabled"><a href="#">&laquo;</a></li>
-								<li class="am-active"><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">&raquo;</a></li>
 							
-
-							</ul>
-
 						</div>
 					</div>
-		
-        <div id="test1">
-        	{!!$goods->links()!!}
-        </div>
-       
-        <script src="/home/layui/layui.js"></script>
-		<script>
-		layui.use('laypage', function(){
-		  var laypage = layui.laypage;
-		  
-		  //执行一个laypage实例
-		  laypage.render({
-		    elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
-		    ,count: 16//数据总数，从服务端得到
-		    ,limit:12
-		  });
-		});
-		</script>
+		<!--分页 -->
+         <style type="text/css">
+								.pagination{
+									margin-left: 1000px;
+								}
+
+								.pagination li{
+									    padding: 0.5em 1em;
+									    background-color: #fff;
+									    border: 1px solid #ddd;
+									    border-radius: 0;
+									    margin-bottom: 5px;
+									    margin-right: 5px;
+									    float: left;
+								}
+
+								.pagination li a{
+									text-align: center;
+									font-size: 14px;
+								}
+
+								.pagination .active{
+									z-index: 2;
+								    color: #fff;
+								    background-color: #0e90d2;
+								    border-color: #0e90d2;
+								    cursor: default;
+								}
+							</style>	
+							<!--分页 -->
+							<ul class="am-pagination am-pagination-right">
+								{{$goods->appends($request->all())->links()}}
+							</ul>
+        	
+      
       
 			@endsection

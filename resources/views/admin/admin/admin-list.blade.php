@@ -72,6 +72,7 @@
               </div>
             </td>
             <td class="td-manage">
+              <button class='btn btn-danger' onclick="x_admin_show('编辑','/admin/hou/edit/{{$v->aid}}')">角色</button>
             @if ($v->astatus!=1)
             <form action="/admin/adminsta/{{$v->aid}}" method='get' style='display:inline'>
                 {{csrf_field()}}

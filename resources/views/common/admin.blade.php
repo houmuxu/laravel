@@ -27,16 +27,7 @@
         <div class="left_open">
             <i title="展开左侧栏" class="iconfont">&#xe699;</i>
         </div>
-        <ul class="layui-nav left fast-add" lay-filter="">
-          <li class="layui-nav-item">
-            <a href="javascript:;">+新增</a>
-            <dl class="layui-nav-child"> <!-- 二级菜单 -->
-              <dd><a onclick="x_admin_show('资讯','http://www.baidu.com')"><i class="iconfont">&#xe6a2;</i>资讯</a></dd>
-              <dd><a onclick="x_admin_show('图片','http://www.baidu.com')"><i class="iconfont">&#xe6a8;</i>图片</a></dd>
-               <dd><a onclick="x_admin_show('用户','http://www.baidu.com')"><i class="iconfont">&#xe6b8;</i>用户</a></dd>
-            </dl>
-          </li>
-        </ul>
+       
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
             <a href="javascript:;">{{$res->aname}}</a>
@@ -69,14 +60,42 @@
                             
                         </a>
                     </li >
-                    <li>
+                 <!--    <li>
                         <a _href="/admin/admin">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>后台管理员</cite>
                             
                         </a>
-                    </li>
+                    </li> -->
 
+                </ul>
+            </li>
+                        <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe726;</i>
+                    <cite>管理员管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="/admin/admin">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>管理员列表</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="/admin/role/index">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>角色管理</cite>
+                        </a>
+                    </li >
+
+                    <li>
+                        <a _href="/admin/per/index">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>权限管理</cite>
+                        </a>
+                    </li >
                 </ul>
             </li>
             <li>
@@ -97,7 +116,7 @@
         <!-- 类别管理 -->  
             <li>
                 <a href="javascript:;">
-                    <i class="iconfont">&#xe723;</i>
+                    <i class="iconfont">&#xe722;</i>
                     <cite>类别管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
@@ -122,7 +141,7 @@
         <!-- 商品管理 -->
             <li>
                 <a href="javascript:;">
-                    <i class="iconfont">&#xe723;</i>
+                    <i class="iconfont">&#xe728;</i>
                     <cite>商品管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
@@ -149,7 +168,7 @@
             <!-- 友情链接管理 -->
              <li>
                 <a href="javascript:;">
-                    <i class="iconfont">&#xe723;</i>
+                    <i class="iconfont">&#xe718;</i>
                     <cite>链接管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
@@ -204,7 +223,7 @@
             <!-- 促销商品管理 -->
              <li>
                 <a href="javascript:;">
-                    <i class="iconfont">&#xe723;</i>
+                    <i class="iconfont">&#xe713;</i>
                     <cite>促销商品管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
@@ -230,7 +249,7 @@
             <!-- 广告管理 -->
              <li>
                 <a href="javascript:;">
-                    <i class="iconfont">&#xe723;</i>
+                    <i class="iconfont">&#xe715;</i>
                     <cite>广告管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
@@ -256,7 +275,7 @@
             <!-- 松鼠知 -->
              <li>
                 <a href="javascript:;">
-                    <i class="iconfont">&#xe723;</i>
+                    <i class="iconfont">&#xe717;</i>
                     <cite>松鼠知</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
@@ -279,63 +298,6 @@
             </li>
             <!-- 松鼠知结束 -->
 
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe6ce;</i>
-                    <cite>系统统计</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="echarts1.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>拆线图</cite>
-                        </a>
-                    </li >
-                    <li>
-                        <a _href="echarts2.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>柱状图</cite>
-                        </a>
-                    </li>
-                    <li>
-                        <a _href="echarts3.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>地图</cite>
-                        </a>
-                    </li>
-                    <li>
-                        <a _href="echarts4.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>饼图</cite>
-                        </a>
-                    </li>
-                    <li>
-                        <a _href="echarts5.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>雷达图</cite>
-                        </a>
-                    </li>
-                    <li>
-                        <a _href="echarts6.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>k线图</cite>
-                        </a>
-                    </li>
-                    <li>
-                        <a _href="echarts7.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>热力图</cite>
-                        </a>
-                    </li>
-                    <li>
-                        <a _href="echarts8.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>仪表图</cite>
-                        </a>
-                    </li>
-                </ul>
-            </li>
         </ul>
       </div>
     </div>
@@ -345,9 +307,9 @@
 
 @show
  <!-- 底部开始 -->
-    <!-- <div class="footer" style="height:20px">
-        <div class="copyright" style="line-height: 20px ">欢迎来到我的后台,不要轻举妄动哦,(* ￣3)(ε￣ *)!!!</div>  
-    </div> -->
+    <div class="footer" style="height:20px">
+        <div class="copyright" style="line-height: 20px ">欢迎来到我的后台(* ￣3)(ε￣ *)!!!</div>  
+    </div>
     <!-- 底部结束 -->
     <script>
     //百度统计可去掉

@@ -19,7 +19,7 @@ class CollController extends Controller
 {
     public function store(Request $request)
     {   
-        $uid = 1;
+        $uid = session('uid');
         $arr = $request->input('arr');
         $arr[2] = $uid;
         $status = $arr[1];
@@ -42,7 +42,7 @@ class CollController extends Controller
 
     public function index()
     {
-        $uid = 1;
+        $uid = session('uid');
         $user = User::where('uid',$uid)->first();
         $coll = $user->colls;
         // 商品
@@ -83,34 +83,6 @@ class CollController extends Controller
         return view('home/coll/tel',['title'=>'换绑手机号','links'=>$links]);
     }
 
-    // public function oldcode(Request $request)
-    // {
-    //     $tel =$request->input('tel');
-    //     $code = rand(1111,9999);
-    //     session(['telcode'=>$code]);
-    //     session(['newtel'=>$tel]);
-    //     var_dump(session('telcode'));
-        
-    //     $aliSms = new AliSms();
-    //     $response = $aliSms->sendSms($tel, 'SMS_142070526', ['code'=>$code]);
-    //     var_dump($response); 
-    // }
-
-
-    // public function newcode(Request $request)
-    // {
-    //    $code = $request->input('code');
-    //    $oldcode = session('telcode');
-    //    $newtel = session('newtel');
-    //    // $uid = session('uid');
-    //    $uid = 1;
-    //    if($code == $oldcode){
-    //         $res = User::where('uid',$uid)->update(['utel'=>$newtel]);
-    //         if($res){
-    //             echo 1;
-    //         }
-    //    }
-    // }
 
 
     //  我的足迹
@@ -141,18 +113,38 @@ class CollController extends Controller
                 $brr[] += $v;
             }
         } 
-        // dd($arr);
-        // dd($brr);
+     
         $goods = Goods::find($arr);
-        // dd($goods);
+ 
         $sales = Sales::find($brr);
-
-        // dd($sales);
-
-        // echo '<pre>';
-        // var_dump($sales);
         
         return view('home.coll.zuji',['goods'=>$goods,'title'=>'我的足迹','links'=>$links,'sales'=>$sales]);
     }
 
+    public function oldcode(Request $request)
+    {
+        $tel =$request->input('tel');
+        $code = rand(1111,9999);
+        session(['telcode'=>$code]);
+        session(['newtel'=>$tel]);
+        var_dump(session('telcode'));
+        
+        $aliSms = new AliSms();
+        $response = $aliSms->sendSms($tel, 'SMS_142070526', ['code'=>$code]);
+        var_dump($response); 
+    }
+
+    public function newcode(Request $request)
+    {
+       $code = $request->input('code');
+       $oldcode = session('telcode');
+       $newtel = session('newtel');
+       $uid = session('uid');
+       if($code == $oldcode){
+            $res = User::where('uid',$uid)->update(['utel'=>$newtel]);
+            if($res){
+                echo 1;
+            }
+       }
+    }
 }

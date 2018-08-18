@@ -31,7 +31,21 @@ class GoodsController extends Controller
         })->paginate(10);
         $allgoods = Goods::all();
         $zong = count($allgoods);
-        return view('admin/goods/index',['title'=>'商品列表','data'=>$data,'request'=>$request,'zong'=>$zong]);
+        $pic = [];
+
+        foreach ($data as $k => $v) {
+            $pic[]= $v->goodspics->toArray();                   
+        }
+        $pic1 = [];
+        foreach ($pic as $k => $v) {
+            if($v == []){
+                $pic1[] = '#';
+            } else{
+                $pic1[] = $v[0]['gpic'];
+            }
+        }       
+        
+        return view('admin/goods/index',['title'=>'商品列表','data'=>$data,'request'=>$request,'zong'=>$zong,'pic'=>$pic1]);
     }
 
     public function create()

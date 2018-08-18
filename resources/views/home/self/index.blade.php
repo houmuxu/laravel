@@ -31,44 +31,7 @@
 								</div>
 
 								<!--个人资产-->
-								<div class="m-userproperty">
-									<div class="s-bar">
-										<i class="s-icon"></i>个人资产
-									</div>
-									<p class="m-bonus">
-										<a href="bonus.html">
-											<i><img src="/home/images/bonus.png"/></i>
-											<span class="m-title">红包</span>
-											<em class="m-num">2</em>
-										</a>
-									</p>
-									<p class="m-coupon">
-										<a href="coupon.html">
-											<i><img src="/home/images/coupon.png"/></i>
-											<span class="m-title">优惠券</span>
-											<em class="m-num">2</em>
-										</a>
-									</p>
-									<p class="m-bill">
-										<a href="bill.html">
-											<i><img src="/home/images/wallet.png"/></i>
-											<span class="m-title">钱包</span>
-											<em class="m-num">2</em>
-										</a>
-									</p>
-									<p class="m-big">
-										<a href="#">
-											<i><img src="/home/images/day-to.png"/></i>
-											<span class="m-title">签到有礼</span>
-										</a>
-									</p>
-									<p class="m-big">
-										<a href="#">
-											<i><img src="/home/images/72h.png"/></i>
-											<span class="m-title">72小时发货</span>
-										</a>
-									</p>
-								</div>
+							
 							</div>
 							<div class="box-container-bottom"></div>
 
@@ -103,83 +66,9 @@
 							<!--物流 -->
 							<div class="m-logistics">
 
-								<div class="s-bar">
-									<i class="s-icon"></i>我的物流
-								</div>
+								
 								<div class="s-content">
-									<ul class="lg-list">
-
-										<li class="lg-item">
-											<div class="item-info">
-												<a href="#">
-													<img src="/home/images/65.jpg_120x120xz.jpg" alt="抗严寒冬天保暖隔凉羊毛毡底鞋垫超薄0.35厘米厚吸汗排湿气舒适">
-												</a>
-
-											</div>
-											<div class="lg-info">
-
-												<p>快件已从 义乌 发出</p>
-												<time>2015-12-20 17:58:05</time>
-
-												<div class="lg-detail-wrap">
-													<a class="lg-detail i-tip-trigger" href="logistics.html">查看物流明细</a>
-													<div class="J_TipsCon hide">
-														<div class="s-tip-bar">中通快递&nbsp;&nbsp;&nbsp;&nbsp;运单号：373269427686</div>
-														<div class="s-tip-content">
-															<ul>
-																<li>快件已从 义乌 发出2015-12-20 17:58:05</li>
-																<li>义乌 的 义乌总部直发车 已揽件2015-12-20 17:54:49</li>
-																<li class="s-omit"><a data-spm-anchor-id="a1z02.1.1998049142.3" target="_blank" href="#">··· 查看全部</a></li>
-																<li>您的订单开始处理2015-12-20 08:13:48</li>
-
-															</ul>
-														</div>
-													</div>
-												</div>
-
-											</div>
-											<div class="lg-confirm">
-												<a class="i-btn-typical" href="#">确认收货</a>
-											</div>
-										</li>
-										<div class="clear"></div>
-
-										<li class="lg-item">
-											<div class="item-info">
-												<a href="#">
-													<img src="/home/images/88.jpg_120x120xz.jpg" alt="礼盒袜子女秋冬 纯棉袜加厚 女式中筒袜子 韩国可爱 女袜 女棉袜">
-												</a>
-
-											</div>
-											<div class="lg-info">
-
-												<p>已签收,签收人是青年城签收</p>
-												<time>2015-12-19 15:35:42</time>
-
-												<div class="lg-detail-wrap">
-													<a class="lg-detail i-tip-trigger" href="logistics.html">查看物流明细</a>
-													<div class="J_TipsCon hide">
-														<div class="s-tip-bar">天天快递&nbsp;&nbsp;&nbsp;&nbsp;运单号：666287461069</div>
-														<div class="s-tip-content">
-															<ul>
-
-																<li>已签收,签收人是青年城签收2015-12-19 15:35:42</li>
-																<li>【光谷关山分部】的派件员【关山代派】正在派件 电话:*2015-12-19 14:27:28</li>
-																<li class="s-omit"><a data-spm-anchor-id="a1z02.1.1998049142.7" target="_blank" href="//wuliu.taobao.com/user/order_detail_new.htm?spm=a1z02.1.1998049142.7.8BJBiJ&amp;trade_id=1479374251166800&amp;seller_id=1651462988&amp;tracelog=yimaidaologistics">··· 查看全部</a></li>
-																<li>您的订单开始处理2015-12-17 14:27:50</li>
-
-															</ul>
-														</div>
-													</div>
-												</div>
-
-											</div>
-											<div class="lg-confirm">
-												<a class="i-btn-typical" href="#">确认收货</a>
-											</div>
-										</li>
-
-									</ul>
+									
 
 								</div>
 
@@ -188,9 +77,8 @@
 							<!--收藏夹 -->
 							<div class="you-like">
 								<div class="s-bar">我的收藏
-									<a class="am-badge am-badge-danger am-round">降价</a>
-									<a class="am-badge am-badge-danger am-round">下架</a>
-									<a class="i-load-more-item-shadow" href="#"><i class="am-icon-refresh am-icon-fw"></i>换一组</a>
+									
+								
 								</div>
 								<div class="s-content">
 									<div class="s-item-wrap">
@@ -351,20 +239,8 @@
 						</div>
 						<!--新品 -->
 						<div class="new-goods">
-							<div class="s-bar">
-								<i class="s-icon"></i>今日新品
-								<a class="i-load-more-item-shadow">15款新品</a>
-							</div>
-							<div class="new-goods-info">
-								<a class="shop-info" href="#" target="_blank">
-									<div class="face-img-panel">
-										<img src="/home/images/imgsearch1.jpg" alt="">
-									</div>
-									<span class="new-goods-num ">4</span>
-									<span class="shop-title">剥壳松子</span>
-								</a>
-								<a class="follow " target="_blank">关注</a>
-							</div>
+							
+						
 						</div>
 
 						<!--热卖推荐 -->

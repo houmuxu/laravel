@@ -13,5 +13,8 @@ class FistUserController extends Controller
         return view('admin/first');
     }
 
-    
+    public function noper()
+    {
+    	return view('admin/noper');
+    }
 }

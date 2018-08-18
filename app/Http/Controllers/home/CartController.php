@@ -17,7 +17,7 @@ class CartController extends Controller
     public function store(Request $request)
     {
         //  商品
-    	$uid = 1;
+    	$uid = session('uid');
     	$arr = $_GET['res'];
        	$gid = $arr[0];
     	$num = $arr[1];
@@ -34,7 +34,7 @@ class CartController extends Controller
     public function cartadd(Request $request)
     {
         //  促销商品
-        $uid = 1;
+        $uid = session('uid');
         $arr = $_GET['arr'];
         $sid = $arr[0];
         $num = $arr[1];

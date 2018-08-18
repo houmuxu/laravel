@@ -74,6 +74,7 @@
             <th>操作</th>
         </thead>
         <tbody>
+          
       @foreach($data as $k=>$v)
           <tr>
             <td>
@@ -82,7 +83,7 @@
             <td>{{$v->gid}}</td>
             <td>{{$v->gname}}</td>
 
-            <td><img src="{{$v->goodspics[0]->gpic}}" style="width: 150px;"></td>
+            <td><img src="{{$pic[$k]}}" style="width: 150px;"></td>
 
             <td>{{$v->price}}</td>
             <td>{{$v->goodsattr}}</td>

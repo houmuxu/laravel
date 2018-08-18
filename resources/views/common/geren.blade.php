@@ -47,7 +47,7 @@
 								<div class="menu-hd"><a id="mc-menu-hd" href="/home/cart" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h"></strong></a></div>
 							</div>
 							<div class="topMessage favorite">
-								<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
+								<div class="menu-hd"><a href="/home/coll/index" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
 						</ul>
 						</div>
 						<!--悬浮搜索框-->
@@ -73,7 +73,7 @@
 					   <div class="long-title"><span class="all-goods">全部分类</span></div>
 					   <div class="nav-cont">
 							<ul>
-								<li class="index"><a href="#">首页</a></li>
+								<li class="index"><a href="/">首页</a></li>
                                 <li class="qc"><a href="#">闪购</a></li>
                                 <li class="qc"><a href="#">限时抢</a></li>
                                 <li class="qc"><a href="#">团购</a></li>
@@ -122,14 +122,6 @@
 
 						</ul>
 					</li>
-					<li class="person">
-						<a href="#">我的资产</a>
-						<ul>
-							<li> <a href="coupon.html">优惠券 </a></li>
-							<li> <a href="bonus.html">红包</a></li>
-							<li> <a href="bill.html">账单明细</a></li>
-						</ul>
-					</li>
 
 					<li class="person">
 						<a>我的小窝</a>
@@ -148,12 +140,7 @@
 			</aside>
 		</div>
 		<!--引导 -->
-	<!-- 	<div class="navCir">
-			<li><a href="/home/home/home.html"><i class="am-icon-home "></i>首页</a></li>
-			<li><a href="/home/home/sort.html"><i class="am-icon-list"></i>分类</a></li>
-			<li><a href="/home/home/shopcart.html"><i class="am-icon-shopping-basket"></i>购物车</a></li>	
-			<li class="active"><a href="index.html"><i class="am-icon-user"></i>我的</a></li>					
-		</div> -->
+	
 	</body>
 
 </html>

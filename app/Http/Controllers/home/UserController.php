@@ -130,7 +130,7 @@ class UserController extends Controller
 
          session(['code'=>$code]);
          //此处测试多加了一个a
-        $appId = "a9776d6202bb14ce49d26885fb13a84ac";
+        $appId = "9776d6202bb14ce49d26885fb13a84ac";
         $templateId = "349335";
         $param=$code;
 
@@ -193,8 +193,8 @@ class UserController extends Controller
         session(['uname'=>$data['user']->uname]);
 
         session(['uid'=>$data['user']->uid]);
-
-        return redirect('/');
+        
+        return redirect(session('userurl'));
     }  
         
     

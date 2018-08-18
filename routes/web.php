@@ -16,8 +16,12 @@ Route::any('/admin/dologin', 'Admin\AdminController@dologin');
 Route::any('/admin/captcha', 'Admin\AdminController@captcha');
 Route::any('/admin/logout', 'Admin\AdminController@logout');
 
-
-
+//后台管理权限	'middleware'=>'hasper'
+Route::group(['middleware'=>['adminlogin','hasper']],function(){   
+	Route::resource('/admin/admin','admin\AdminController'); //管理员
+	Route::any('/admin/role/index','admin\RoleController@index');//角色列表
+	Route::any('/admin/per/index','admin\PermissionController@index');//权限列表
+});
 
 
 //后台
@@ -25,7 +29,7 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	//后台首页zhao
 	Route::any('/admin/first','admin\FistUserController@first');
 	//管理员 
-	Route::resource('/admin/admin','admin\AdminController');
+	// Route::resource('/admin/admin','admin\AdminController');
 	Route::any('/admin/admindelall','admin\AdminController@destroyall');
 	Route::any('/admin/admininfo/{id}','admin\AdminController@infoedit');
 	Route::any('/admin/adminedit/{id}','admin\AdminController@infoupdate');
@@ -36,12 +40,7 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	Route::resource('/admin/user','admin\UserController');
 	Route::any('/admin/userdelall','admin\UserController@destroyall'); 
 
-
-	
-	
-	
-
-	//商品管理 hou
+	// //商品管理 hou
 	Route::resource('/admin/goods','admin\GoodsController');
 	Route::any('/admin/goodss/status','admin\GoodssController@status');//修改状态
 	Route::any('/admin/goodss/del','admin\GoodssController@destroy');//删除商品
@@ -56,13 +55,10 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	Route::any('/admin/lunbo/delete','admin\LunboController@delete');//轮播单条删除
 	Route::any('/admin/lunbo/ajaxdel','admin\LunboController@ajaxdel');//轮播多条删除
 
-
-	// 类别管理  zhang
+	// // 类别管理  zhang
 	Route::resource('/admin/cate', 'admin\CateController');
 
-
-
-	//后台订单---资源路由---(yang)
+	// //后台订单---资源路由---(yang)
 	Route::resource('/admin/orders','admin\OrdersController');
 	//发货ajax
 	Route::any('/send','admin\OrdersajaxController@send');
@@ -78,19 +74,34 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	Route::any('/admin/advert_delall','admin\AdvertajaxController@destroyall');//批量删除
 	Route::any('/admin/advert_status', 'admin\AdvertajaxController@advert_status');  //停用，启用
 
-	//松鼠知
+	// //松鼠知
 	Route::resource('/admin/zhi', 'admin\ZhiController');		//资源路由
 	Route::any('/admin/zhi_del', 'admin\AdvertajaxController@zhi_del');		//删除单个
 	Route::any('/admin/zhi_delall', 'admin\AdvertajaxController@zhi_delall');  //批量删除
 	Route::any('/admin/zhi_status/{id}', 'admin\AdvertajaxController@zhi_status');  //停用，启用
 
-	//  友情链接   zhang
+	// //  友情链接   zhang
 	Route::resource('/admin/friendlink', 'admin\FriendlinkController');
 
 	//  促销商品    zhang
 	Route::resource('/admin/sales', 'admin\SalesController');
-
-
+		//权限管理
+	Route::any('/admin/hou/edit/{id}','admin\RoleController@houedit');//给admin添加角色
+	Route::any('/admin/hou/update/{id}','admin\RoleController@houupdate');//给admin添加角色入库
+	Route::any('/admin/role/create','admin\RoleController@create');//添加角色
+	Route::any('/admin/role/store','admin\RoleController@store');//角色入库
+	Route::any('/admin/role/del/{id}','admin\RoleController@del');//角色删除
+	Route::any('/admin/role/edit/{id}','admin\RoleController@edit');//角色添加权限
+	Route::any('/admin/role/update/{id}','admin\RoleController@update');//角色添加权限入库
+	Route::any('/admin/per/del/{id}','admin\PermissionController@del');//权限删除
+	Route::any('/admin/per/create','admin\PermissionController@create');//添加权限页面
+	Route::any('/admin/per/store','admin\PermissionController@store');//添加权限入库
+	Route::any('/admin/per/edit/{id}','admin\PermissionController@edit');//修改权限
+	Route::any('/admin/per/update/{id}','admin\PermissionController@update');//修改权限
+	// Route::any('/admin/role/index','admin\RoleController@index');//角色列表
+	// Route::any('/admin/per/index','admin\PermissionController@index');//权限列表
+		//noper
+	Route::any('/admin/noper','admin\FistUserController@noper');
 
 });
 
@@ -116,15 +127,7 @@ Route::group(['middleware'=>'adminlogin'],function(){
 	Route::any('/user/login','home\UserController@login');
 	Route::any('/user/dologin','home\UserController@dologin');
 	Route::any('/user/logout','home\UserController@logout');
-
-
-//前台
-Route::group([],function(){
-
-
-
-
-	//商品管理 hou
+		//商品管理 hou
 	Route::any('/home/goodslist/{id}','home\GoodsController@index');//商品列表页
 	Route::any('/home/goodslistxiao/{id}','home\GoodsController@xiaoliang');//商品列表按销量查
 	Route::any('/home/goodslistzhong/{id}','home\GoodsController@zhonghe');//商品列表按综合查
@@ -135,11 +138,17 @@ Route::group([],function(){
 	Route::any('/home/goods/wherejia/{id}','home\GoodsController@wherejia');//搜索商品按价格查
 	Route::any('/home/goods/wherezhong/{id}','home\GoodsController@wherezhong');//搜索商品按综合查
 	Route::any('/home/goodsshow/{id}','home\GoodsController@show');//商品详情页
+		//  促销商品  zhang
+	Route::any('/home/sales', 'home\SalesController@index');
+	Route::any('/home/show/{id}', 'home\SalesController@show');
+
+//前台
+Route::group(['middleware'=>'home'],function(){
+
 	//个人中心邮箱验证hou
 	Route::any('/home/goods/email','home\GoodsController@email');//换绑email页面
 	Route::any('/home/goods/useremail','home\GoodsController@useremail');//验证email
 	Route::any('/home/goods/emailjihuo','home\GoodsController@emailjihuo');//激活新的email
-
 
 	//加入购物车 
 	Route::any('/home/cartc','home\CartController@store');
@@ -147,24 +156,17 @@ Route::group([],function(){
 	Route::any('/home/cartinfo','home\GoodsController@cartinfo');
 
 
-	//  促销商品  zhang
-	Route::any('/home/sales', 'home\SalesController@index');
-	Route::any('/home/show/{id}', 'home\SalesController@show');
 	//  促销商品添加购物车
 	Route::any('/home/cartadd','home\CartController@cartadd');
 
 	//购物车 
 	Route::any('/home/cartc','home\CartController@store');
-	
-
 
 	//  购物车页面  zhang
 	Route::any('/home/cart','home\CartController@index');    // 购物车页面
 	Route::any('/home/cart/del','home\CartController@del');//购物车商品删除
 	Route::any('/home/ajaxcart','home\CartController@ajaxcart');
 	
-
-
 	//  个人中心页面
 	Route::any('/home/self','home\SelfController@index');                            //  个人中心页面
 	//用户
@@ -178,8 +180,6 @@ Route::group([],function(){
 	Route::any('/home/self/rcheckcode','home\UserinfoController@rcheckcode');        	 //  换绑手机检验验证码
 	Route::any('/home/self/utelupdate','home\UserinfoController@utelupdate');        //  修改手机
 
-
-
 	//我的小窝hou
 	Route::any('/home/eval/make','admin\EvalController@make');  //待评价页面
 	Route::any('/home/eval/store','admin\EvalController@store');  //评价内容入库
@@ -191,12 +191,6 @@ Route::group([],function(){
 	Route::any('/home/tel/newcode','home\CollController@newcode');  //new手机号验证
 
 	Route::any('/home/zuji','home\CollController@zuji');//我的足迹  zhang
-
-
-
-
-
-
 
 	// 个人中心 之 我的交易
 	Route::any('/home/order/index','home\MydealController@index');//订单管理
@@ -219,7 +213,6 @@ Route::group([],function(){
 	Route::any('/home/balance_updateone/{id}','home\BalanceController@updateone');
 	Route::any('/home/balance_delone','home\BalanceController@delete');//收货信息删除
 
-
 	// 结算页
 	Route::any('/home/balance','home\BalanceController@index');//结算主页面
 	Route::any('/home/balance_create','home\BalanceController@create');//收货信息添加页
@@ -233,20 +226,6 @@ Route::group([],function(){
 
 	// 支付成功页
 	Route::any('/home/pay_ok','home\BalanceController@payok');//收货信息删除
-
-
-	
-
-	
-
-
-
-
-
-
-
-
-
 
 });
 

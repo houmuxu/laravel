@@ -14,6 +14,7 @@ use Cookie;
 use App\Model\home\Cartsinfo;
 use App\Model\home\Coll;
 use App\Model\Admin\Sales;
+use App\Model\Admin\Eva;
 
     class GoodsController extends Controller
     {
@@ -58,7 +59,8 @@ use App\Model\Admin\Sales;
             $cate = Cate::where('cid',$data->cid)->first();
             $allgoods = Goods::where('gid','>',0)->inRandomOrder()->paginate(12);
             // 评价
-            $evals = $data->evals;
+            // $evals = $data->evals;
+            $evals = Eva::where('gid',$id)->paginate(10);
             $all = 0; $hao = 0; $zhong = 0; $cha = 0;
             foreach ($evals as $k => $v) {
                 $all += 1;
@@ -120,65 +122,8 @@ use App\Model\Admin\Sales;
             }
             $jingdian = Goods::where('gname','like','%'.$gname.'%')->inRandomOrder()->limit(3)->get();
             
-            return view('home/goods/shoulist',['title'=>'商品列表','goods'=>$goods,'gname'=>$gname,'links'=>$links,'shu'=>$shu,'jingdian'=>$jingdian]);
+            return view('home/goods/shoulist',['title'=>'商品列表','goods'=>$goods,'gname'=>$gname,'links'=>$links,'shu'=>$shu,'jingdian'=>$jingdian,'request'=>$request]);
         }
-
-        public function wherexiao($id)
-        {
-            $gname = $id;
-            $goods = Goods::where('gname','like','%'.$gname.'%')->orderBy('num','desc')->paginate(12);
-                $links = DB::table('friendlink')->get();
-                $shu = 0;
-            foreach ($goods as $key => $value) {
-                $shu += 1;
-            }
-            $jingdian = Goods::where('gname','like','%'.$gname.'%')->inRandomOrder()->limit(3)->get();
-            
-            return view('home/goods/shoulist',['title'=>'商品列表','goods'=>$goods,'links'=>$links,'shu'=>$shu,'jingdian'=>$jingdian,'gname'=>$gname]);
-        }
-
-        public function wherejia($id)
-        {
-            $gname = $id;
-            $goods = Goods::where('gname','like','%'.$gname.'%')->orderBy('price')->paginate(12);
-                $links = DB::table('friendlink')->get();
-                $shu = 0;
-            foreach ($goods as $key => $value) {
-                $shu += 1;
-            }
-            $jingdian = Goods::where('gname','like','%'.$gname.'%')->inRandomOrder()->limit(3)->get();
-            
-            return view('home/goods/shoulist',['title'=>'商品列表','goods'=>$goods,'links'=>$links,'shu'=>$shu,'jingdian'=>$jingdian,'gname'=>$gname]);
-        }
-
-        public function wherezhong($id)
-        {
-            $gname = $id;
-            $goods = Goods::where('gname','like','%'.$gname.'%')->inRandomOrder()->paginate(12);
-                $links = DB::table('friendlink')->get();
-                $shu = 0;
-            foreach ($goods as $key => $value) {
-                $shu += 1;
-            }
-            $jingdian = Goods::where('gname','like','%'.$gname.'%')->inRandomOrder()->limit(3)->get();
-            
-            return view('home/goods/shoulist',['title'=>'商品列表','goods'=>$goods,'links'=>$links,'shu'=>$shu,'jingdian'=>$jingdian,'gname'=>$gname]);
-        }
-
-        public function whereping($id) 
-        {
-            $gname = $id;
-            $goods = Goods::where('gname','like','%'.$gname.'%')->inRandomOrder()->paginate(12);
-                $links = DB::table('friendlink')->get();
-                $shu = 0;
-            foreach ($goods as $key => $value) {
-                $shu += 1;
-            }
-            $jingdian = Goods::where('gname','like','%'.$gname.'%')->inRandomOrder()->limit(3)->get();
-            
-            return view('home/goods/shoulist',['title'=>'商品列表','goods'=>$goods,'links'=>$links,'shu'=>$shu,'jingdian'=>$jingdian,'gname'=>$gname]);
-        }
-
 
         public function email()
         {
@@ -188,7 +133,7 @@ use App\Model\Admin\Sales;
 
         public function useremail(Request $request)
         {
-            $uid = 1;
+            $uid = session('uid');
              $res = Mail::send('home/goods/emailcode', ['uid' => $uid,'email'=>$request->input('emails')], function ($m) use ($request) {
                 $m->from(env('MAIL_USERNAME'), '三只松鼠旗舰店');
 
@@ -218,7 +163,7 @@ use App\Model\Admin\Sales;
         //立即购买
         public function cartinfo(Request $request)
         {   
-            $uid = '1';
+            $uid = session('uid');
             $arr = $_GET['res'];
             $gid = $arr[0];
             $num = $arr[1];

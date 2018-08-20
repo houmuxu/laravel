@@ -28,6 +28,7 @@ class BalanceController extends Controller
         $uid = session('uid');
         $data = DB::table('address')->orderBy('id','desc')->where('uid',$uid)->get();
         $res = DB::table('cartinfoone')->where('uid',$uid)->get();
+        // dd($res);
         $links = DB::table('friendlink')->get();
               
         return view('home/balance/balanceone',['data'=>$data,'res'=>$res,'links'=>$links,'title'=>'结算页面']);

@@ -100,10 +100,19 @@
 													<a href="/home/goodsshow/{{$v->gid}}" class="J_MakePoint">
 														<!-- <img src="/home/images/kouhong.jpg_80x80.jpg" class="itempic J_ItemImg"> -->
 														<img src="
+														@if($v->gid >=30)
 															@php
 															$gid = App\Model\Admin\Goodspic::where('gid',$v->gid)->first();
 			            									echo $gpic = $gid->gpic;
 															@endphp
+														@else
+
+															@php
+															$sid = App\Model\Admin\Salespic::where('sid',$v->gid)->first();
+			            									echo $salespic = $sid->salespic;
+															@endphp
+
+														@endif
 														" class="itempic J_ItemImg" width="78px">
 													</a>
 												</div>

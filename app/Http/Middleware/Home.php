@@ -16,7 +16,7 @@ class Home
     public function handle($request, Closure $next)
     {
 
-        if(session('uid') == null){
+        if(session('uid') == null || session('uemail') == null){
             session(['userurl'=>$request->path()]);
             return redirect('/user/login');
         }

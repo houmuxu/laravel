@@ -217,6 +217,7 @@ class UserController extends Controller
 {
     //清空session
     session(['uname'=>null]);
+    session(['uemail'=>null]);
     session(['uid'=>null]);
     session(['userurl'=>null]);
     return redirect('/');
@@ -249,6 +250,7 @@ class UserController extends Controller
                 $m->from(env('MAIL_USERNAME'), '三只松鼠商城人力资源部');
                 $m->to($res['uemail'], $res['uname'])->subject('诚邀加入三只松鼠集团');
             });
+
           return view('home.user.tixing',['title'=>'新用户激活的提醒信息']);
         } else {
             return back();
@@ -259,7 +261,13 @@ class UserController extends Controller
     public function jihuo()
     {
         
-         echo "<script>alert('激活成功');window.location.href='/'</script>";
+         echo "<script>alert('激活成功');window.location.href='/user/login'</script>";
+    }
+
+
+    public function tixing()
+    {
+      return view('home.user.tixing',['title'=>'新用户激活的提醒信息']);
     }
 
 }

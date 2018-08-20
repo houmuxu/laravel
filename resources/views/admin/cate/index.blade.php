@@ -17,7 +17,7 @@
  
 @if(session('success'))
   
-  <div class="haha" style="height:40px;background:orange;font-size: 20px;color:blue;line-height:40px;text-align:center;">
+  <div class="haha" style="height:40px;background:gold;font-size: 20px;color:gray;line-height:40px;text-align:center;">
     {{session('success')}}
   </div>
 

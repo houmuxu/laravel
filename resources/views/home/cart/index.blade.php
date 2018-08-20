@@ -78,7 +78,7 @@
 								<a href="/user/zhuce" target="_top">免费注册</a>
 							@else
 								您好
-								<b> {{$res->uname}} </b> | 
+								<b> {{session('uname')}} </b> | 
 								<a href="/user/logout" target="_top">退出</a>
 
 							@endif

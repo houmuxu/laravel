@@ -26,7 +26,7 @@ class SalesController extends Controller
 
         // 我的足迹
            
-            Cookie::queue('uid',1,7*24*60);
+            Cookie::queue('uid',session('uid'),7*24*60);
             Cookie::queue('gid',$id,7*24*60);
             Cookie::queue('uptime',time(),7*24*60);
 

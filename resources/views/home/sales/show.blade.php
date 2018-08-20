@@ -522,7 +522,7 @@
                                         arr[2] = goodsattr;
                                         $.get('/home/shop_now',{res:arr},function(data){
                                             if(data){
-                                                location.replace('/home/balance');
+                                                location.replace('/home/balance_one');
                                             }
                                             // console.log(data);
                                         });

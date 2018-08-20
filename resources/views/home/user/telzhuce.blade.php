@@ -305,9 +305,9 @@
 										// console.log(arr);
 										$.post('/doemail',{email:email,pass:pass},function(data){
 
-											/*if(data == 1){
-												return confirm('请激活你的邮箱才能登录');
-											}*/
+											if(data){
+												location.replace('/tixing');
+											}
 										})
 									})
 

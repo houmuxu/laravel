@@ -35,5 +35,36 @@ class SalesController extends Controller
     	return view('home.sales.show',['title'=>'促销商品详情页','links'=>$links,'data'=>$data,'res'=>$res]);
     }
 
+    //   立即购买
+    public function shop_now(Request $request)
+    {
+        // $arr = $request->input('res');
+
+        // dd($arr);
+        $uid = session('uid');
+        $arr = $_GET['res'];
+        $sid = $arr[0];
+        $num = $arr[1];
+        $goodsattr = $arr[2];
+        $goods = Sales::where('sid',$sid)->get();
+        $gname = $goods[0]->gname;
+        $newprice = $goods[0]->newprice;
+        $prs = $newprice * $num;
+         $data = array('uid'=>$uid,'gid'=>$sid,'gname'=>$gname,'num'=>$num,'price'=>$newprice,'goodsattr'=>$goodsattr,'prs'=>$prs);
+        // $res = Cartinfo::create($data);
+        var_dump($data);
+
+         try{
+            $rs = DB::table('cartinfoone')->insert($data);
+            if($rs){
+                echo 1;
+            }
+        } catch(\Exception $e){
+            echo 0;
+        }
+        echo $rs;
+
+    }
+
     
 }

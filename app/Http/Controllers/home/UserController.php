@@ -201,7 +201,7 @@ class UserController extends Controller
 
         //存储session信息  给中间件使用
         session(['uname'=>$data['user']->uname]);
-
+        
         session(['uid'=>$data['user']->uid]);
         // dd(session('userurl'));
         if(empty(session('userurl'))){
@@ -232,7 +232,7 @@ class UserController extends Controller
         $pass = $request->input('pass');
         
         $res['uemail'] = $email;
-        $res['upwd'] = $pass;
+        $res['upwd'] = Hash::make($pass);
         $res['utime'] = time();
         $res['upic'] = '/home/images/getAvatar.do.jpg';
         $res['uname'] = date('Ymd',time()).str_random(4);

@@ -504,6 +504,36 @@
                                     </a>
                                 </div>
                             </li>
+
+                            <script type="text/javascript">
+                                
+                                 var goodsattr = $('.sku-line,.selected').attr('attr')
+                                       $('.sku-line,.selected').click(function(){
+                                             goodsattr = $(this).attr('attr');
+                                           
+                                        })
+                                    $('#LikBuy').click(function(){
+                                        var sid = $('#sid').val();
+                                        var num = $('#text_box').val();
+                                        var arr = [];
+
+                                        arr[0] = sid;
+                                        arr[1] = num;
+                                        arr[2] = goodsattr;
+                                        $.get('/home/shop_now',{res:arr},function(data){
+                                            if(data){
+                                                location.replace('/home/balance');
+                                            }
+                                            // console.log(data);
+                                        });
+
+                                        return false;
+                                    });
+
+
+                            </script>
+
+
                             <li>
                                 <div class="clearfix tb-btn tb-btn-basket theme-login">
                                     <a id="LikBasket" title="加入购物车" href="">

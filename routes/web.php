@@ -158,6 +158,8 @@ Route::group(['middleware'=>'home'],function(){
 
 	//  促销商品添加购物车
 	Route::any('/home/cartadd','home\CartController@cartadd');
+	//  促销商品立即购买
+	Route::any('/home/shop_now','home\SalesController@shop_now');
 
 	//购物车 
 	Route::any('/home/cartc','home\CartController@store');

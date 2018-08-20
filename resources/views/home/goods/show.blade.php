@@ -567,6 +567,7 @@ type="text/css" />
                                         arr[0] = gid;
                                         arr[1] = num;
                                         arr[2] = goodsattr;
+
                                         $.get('/home/cartinfo',{res:arr},function(data){
                                             if(data){
                                                 location.replace('/home/balance_one');

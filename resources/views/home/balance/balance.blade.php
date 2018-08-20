@@ -230,6 +230,7 @@
 
 								<div id="holyshit269" class="submitOrder">
 									<div class="go-btn-wrap">
+										<a id="J_Go2" href="/home/notpay_ok" class="btn-go" style="margin-left:10px;background:green;" tabindex="0" title="点击此按钮，取消订单">取消订单</a>
 										<a id="J_Go" href="javascript:void(0);" class="btn-go" tabindex="0" title="点击此按钮，提交订单">提交订单</a>
 									</div>
 								</div>
@@ -409,6 +410,13 @@
 			
 
 
+		})
+
+		$('#J_Go2').click(function(){
+			var str = confirm('确定取消订单么？')
+			if(!str){
+			  	return false;
+			}
 		})
 
 	</script>

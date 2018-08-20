@@ -82,7 +82,7 @@ use App\Model\Admin\Eva;
             }
             // 评价结束
             // 收藏
-            $uid = 1;
+            $uid = session('uid');
             $coll = Coll::where(function($query) use($uid,$id){
                 $query->where('uid',$uid);
                 $query->where('gid',$id);

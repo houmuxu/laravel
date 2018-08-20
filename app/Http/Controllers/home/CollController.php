@@ -12,7 +12,7 @@ use App\Model\Admin\Goods;
 use App\Model\Admin\Sales;
 use App\Model\Admin\Salespic;
 
-// use Mrgoon\AliSms\AliSms;
+use Mrgoon\AliSms\AliSms;
 
 
 class CollController extends Controller
@@ -147,4 +147,5 @@ class CollController extends Controller
             }
        }
     }
+
 }

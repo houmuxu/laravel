@@ -51,7 +51,7 @@ class CartController extends Controller
     public function index()
     {
         //  获取数据
-        $data = DB::table('cart')->where('uid',1)->get();
+        $data = DB::table('cart')->where('uid',session('uid'))->get();
        
         $links = DB::table('friendlink')->get();
        

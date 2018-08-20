@@ -15,7 +15,7 @@ class BalanceController extends Controller
     
     public function index()
     {
-        $uid = 1;
+        $uid = session('uid');
     	$data = DB::table('address')->orderBy('id','desc')->where('uid',$uid)->get();
         $res = DB::table('cartinfo')->where('uid',$uid)->get();
         $links = DB::table('friendlink')->get();
@@ -25,7 +25,7 @@ class BalanceController extends Controller
 
     public function indexone()
     {
-        $uid = 1;
+        $uid = session('uid');
         $data = DB::table('address')->orderBy('id','desc')->where('uid',$uid)->get();
         $res = DB::table('cartinfoone')->where('uid',$uid)->get();
         $links = DB::table('friendlink')->get();
@@ -49,14 +49,14 @@ class BalanceController extends Controller
     {
 
     	//自定义uid
-    	session(['uid'=>'1']);
+    	$uid = session('uid');
 
     	$data = $request->except('_token');
 
     	//城市三级联动拼接
     	$data['addr'] = $data['area1'].' '.$data['area2'].' '.$data['area3'].' '.$data['addr'];
     	array_splice($data,2,3);
-    	$data['uid'] = session('uid');
+    	$data['uid'] = $uid;
 
     	$res = DB::table('address')->insert($data);
 
@@ -72,14 +72,14 @@ class BalanceController extends Controller
     {
  
         //自定义uid
-        session(['uid'=>'1']);
+        $uid = session('uid');
 
         $data = $request->except('_token');
 
         //城市三级联动拼接
         $data['addr'] = $data['area1'].' '.$data['area2'].' '.$data['area3'].' '.$data['addr'];
         array_splice($data,2,3);
-        $data['uid'] = session('uid');
+        $data['uid'] = $uid;
 
         $res = DB::table('address')->insert($data);
 
@@ -150,7 +150,7 @@ class BalanceController extends Controller
         //接收订单信息,保存到数据库
         $arr = $request->input('arr');
 
-        $uid = 1;
+        $uid = session('uid');
         $oname = $arr[0][0];
         $tel = $arr[0][1];
         $addr = $arr[0][2];
@@ -192,7 +192,7 @@ class BalanceController extends Controller
         $data = DB::table('orders')->where('oid','=',$oid)->first();
         //dd ($data);
         
-        $uid = 1;
+        $uid = session('uid');
         //清空购物车catinfo
         $res = DB::table('cartinfo')->where('uid','=',$uid)->delete();
         //清空购物车cartinfoone
@@ -212,6 +212,22 @@ class BalanceController extends Controller
         }
 
         return view('home/balance/payok',['data'=>$data,'links'=>$links,'title'=>'付款成功页面','advert'=>$advert,'advert2'=>$advert2]);
+    }
+
+    public function notpayok(Request $request)
+    {
+                
+        $uid = session('uid');
+        //清空购物车catinfo
+        $res1 = DB::table('cartinfo')->where('uid','=',$uid)->delete();
+        //清空购物车cartinfoone
+        $res2 = DB::table('cartinfoone')->where('uid','=',$uid)->delete();
+
+        if($res1||$res2){
+            return redirect('/');
+        } else {
+            return back();
+        }
     }
 
 

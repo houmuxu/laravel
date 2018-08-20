@@ -17,7 +17,7 @@ class Home
     {
 
         if(session('uid') == null){
-            session('userurl',$request->path());
+            session(['userurl'=>$request->path()]);
             return redirect('/user/login');
         }
 

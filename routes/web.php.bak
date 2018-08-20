@@ -219,6 +219,7 @@ Route::group([],function(){
 
 	// 支付成功页
 	Route::any('/home/pay_ok','home\BalanceController@payok');//收货信息删除
+	Route::any('/home/notpay_ok','home\BalanceController@notpayok');//取消订单
 
 
 	

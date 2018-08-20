@@ -13,7 +13,7 @@ class MydealController extends Controller
     //订单管理首页
     public function index()
     {
-    	$uid = 1;
+    	$uid = session('uid');
 
     	$orders = Orders::orderBy('id','desc')->where('uid',$uid)->where('status','!=',5)->get();
 
@@ -70,7 +70,7 @@ class MydealController extends Controller
     //地址管理主页
     public function address()
     {
-        $uid = 1;
+        $uid = session('uid');
         $res = DB::table('address')->orderBy('id','desc')->where('uid',$uid)->get();
         
         $links = DB::table('friendlink')->get();
@@ -81,7 +81,7 @@ class MydealController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        $uid = 1;
+        $uid = session('uid');
 
         $data = $request->except('_token');
         

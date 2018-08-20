@@ -69,8 +69,13 @@
 						</div>
 
 
-															<div class="am-tab-panel">
+								<div class="am-tab-panel">
 									<form action="/user/zhuce" method="post">
+							@if(session('error')) 
+           					 <div  style='font-size:16px;color:red' >                
+                    		{{session('error')}}
+           					 </div>
+           				 @endif
                  <div class="user-phone">
 								    <label for="phone"><i class="am-icon-mobile-phone am-icon-md"></i></label>
 								    <input type="tel" name="utel" id="phone" placeholder="请输入手机号">

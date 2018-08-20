@@ -40,23 +40,11 @@
                             <p>
                                 购物车
                             </p>
-                            <p class="cart_num">
-                                0
-                            </p>
+                          
                         </div>
-                        <div id="asset" class="item">
-                            <a href="#">
-                                <span class="view">
-                                </span>
-                            </a>
-                            <div class="mp_tooltip">
-                                我的资产
-                                <i class="icon_arrow_right_black">
-                                </i>
-                            </div>
-                        </div>
+                
                         <div id="foot" class="item">
-                            <a href="#">
+                            <a href="/home/zuji">
                                 <span class="zuji">
                                 </span>
                             </a>
@@ -67,7 +55,7 @@
                             </div>
                         </div>
                         <div id="brand" class="item">
-                            <a href="#">
+                            <a href="/home/coll/index">
                                 <span class="wdsc">
                                     <img src="/home/images/wdsc.png" />
                                 </span>
@@ -78,30 +66,9 @@
                                 </i>
                             </div>
                         </div>
-                        <div id="broadcast" class="item">
-                            <a href="#">
-                                <span class="chongzhi">
-                                    <img src="/home/images/chongzhi.png" />
-                                </span>
-                            </a>
-                            <div class="mp_tooltip">
-                                我要充值
-                                <i class="icon_arrow_right_black">
-                                </i>
-                            </div>
-                        </div>
+                  
                         <div class="quick_toggle">
-                            <li class="qtitem">
-                                <a href="#">
-                                    <span class="kfzx">
-                                    </span>
-                                </a>
-                                <div class="mp_tooltip">
-                                    客服中心
-                                    <i class="icon_arrow_right_black">
-                                    </i>
-                                </div>
-                            </li>
+                            
                             <!--二维码 -->
                             <li class="qtitem">
                                 <a href="#none">
@@ -109,7 +76,7 @@
                                     </span>
                                 </a>
                                 <div class="mp_qrcode" style="display:none;">
-                                    <img src="/home/images/weixin_code_145.png" />
+                                    <img src="/home/images/wx.jpg" />
                                     <i class="icon_arrow_white">
                                     </i>
                                 </div>

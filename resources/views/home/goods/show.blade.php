@@ -1,9 +1,5 @@
 @extends('common.home')
-
-
 @section('title', $title)
- 
-
 @section('content')
 <link href="/home/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet"
 type="text/css" />
@@ -123,27 +119,10 @@ type="text/css" />
                     </div>
                     <div class="nav-cont">
                         <ul>
-                            <li class="index">
-                                <a href="/">
-                                    首页
-                                </a>
-                            </li>
-                            <li class="qc">
-                                <a href="#">
-                                    闪购
-                                </a>
-                            </li>
-                            <li class="qc">
-                                <a href="#">
-                                    限时抢
-                                </a>
-                            </li>
-                            <li class="qc">
-                                <a href="#">
-                                    团购
-                                </a>
-                            </li>
-                           <li class="qc last"><a href="/home/zhi/index">松鼠知</a></li>
+                                <li class="index"><a href="/">首页</a></li>
+                                <li class="qc"><a href="/home/sales">活动商品</a></li>
+                                <li class="qc"><a href="/home/sales">活动</a></li>
+                                <li class="qc last"><a href="/home/zhi/index">松鼠知</a></li>
                         </ul>
                     </div>
                 </div>
@@ -237,8 +216,10 @@ type="text/css" />
                     <div class="clearfixRight">
                         <!--规格属性-->
                         <!--名称-->
-
-                        <div class="tb-detail-hd" style="width: 500px">
+                        @php
+                            $uid = session('uid');
+                        @endphp
+                        <div class="tb-detail-hd" style="width: 500px" uid="{{$uid}}">
                     <!-- 收藏按钮 -->
                 <div style="float: right;margin-top:-25px ">
                     <ol class="grid">
@@ -258,6 +239,11 @@ type="text/css" />
                             }
            
                     $('.fa-heart').click(function(){
+                        
+                        if($('.tb-detail-hd').attr('uid') == ''){
+                            
+                            return false;
+                        }
                         var gid = $(this).attr('gid');
                         var str = $(this).next().html().trim();
 

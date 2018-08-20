@@ -15,11 +15,14 @@ class EvalController extends Controller
 {
     public function make()
     {
-    	$uid = 1;
+    	$uid = session('uid');
     	$user = User::find($uid);
     	$orders = $user->orders;
     	$usergoods = [];
     	foreach ($orders as $k => $v) {
+            if($v->status == 1 || $v->status == 2){
+                continue;
+            }
     		foreach ($v->detailss as $kk => $vv) {
     			$usergoods[] = $vv;
     		}
@@ -30,7 +33,7 @@ class EvalController extends Controller
 
     public function store(Request $request)
     {
-    	$uid = 1;
+    	$uid = session('uid');
     	$data = $request->input('arr');
     	$data[] = time();
     	$eval = array('uid'=>$uid,'gid'=>$data[0],'msg'=>$data[2],'rank'=>$data[1],'uptime'=>$data[3]);
@@ -46,7 +49,7 @@ class EvalController extends Controller
 
     public function index()
     {
-        $uid = 1;
+        $uid = session('uid');
         $evals = Eva::where('uid',$uid)->get();
         $links = DB::table('friendlink')->get();
         return view('home/eval/index',['title'=>'我的已评价商品','links'=>$links,'evals'=>$evals]);

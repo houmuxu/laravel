@@ -11,10 +11,10 @@
 |
 */
 //后台登录页面
-Route::any('/admin/login','admin\AdminController@login');
-Route::any('/admin/dologin', 'Admin\AdminController@dologin');
-Route::any('/admin/captcha', 'Admin\AdminController@captcha');
-Route::any('/admin/logout', 'Admin\AdminController@logout');
+Route::any('/admin/login','admin\AdminController@login');//登录页面
+Route::any('/admin/dologin', 'Admin\AdminController@dologin');//登录判断
+Route::any('/admin/captcha', 'Admin\AdminController@captcha');//验证码
+Route::any('/admin/logout', 'Admin\AdminController@logout');//退出登录
 
 //后台管理权限	'middleware'=>'hasper'
 Route::group(['middleware'=>['adminlogin','hasper']],function(){   
@@ -226,6 +226,7 @@ Route::group(['middleware'=>'home'],function(){
 
 	// 支付成功页
 	Route::any('/home/pay_ok','home\BalanceController@payok');//收货信息删除
+	Route::any('/home/notpay_ok','home\BalanceController@notpayok');//订单取消
 
 });
 

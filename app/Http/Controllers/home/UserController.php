@@ -47,6 +47,15 @@ class UserController extends Controller
         $res['upic']= '/home/images/getAvatar.do.jpg';
         $res['uname']= date('Ymd',time()).rand(11111,99999);
         $res['upwd'] = Hash::make($request->input('upwd'));
+        //判断用户名是否存在
+        $nname=$request->input('utel');
+        $dname=User::where('utel',$nname)->first();
+       
+
+        if($dname){
+
+            return back()->with('error','手机号码已存在');
+        }
         User::insert($res);
 
         $uname=($res['uname']);
@@ -156,8 +165,9 @@ class UserController extends Controller
         // echo $code;
     }
 
-    public function login()
+    public function login(Request $request)
     {
+        // session(['userurl'=>$request->path()]);
         return view('home.user.login');
     }
 
@@ -193,7 +203,10 @@ class UserController extends Controller
         session(['uname'=>$data['user']->uname]);
 
         session(['uid'=>$data['user']->uid]);
-        
+        // dd(session('userurl'));
+        if(empty(session('userurl'))){
+          return redirect('/');
+        }
         return redirect(session('userurl'));
     }  
         
@@ -205,6 +218,7 @@ class UserController extends Controller
     //清空session
     session(['uname'=>null]);
     session(['uid'=>null]);
+    session(['userurl'=>null]);
     return redirect('/');
 }
 

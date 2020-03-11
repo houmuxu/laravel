@@ -12,6 +12,7 @@ class AdvertajaxController extends Controller
     public function destroy(Request $request)
     {
         $id = $request->input('id');
+        //可爱
         // echo $id;
         // 删除服务器上照片
         $res = DB::table('advert')->where('adid',$id)->first();
@@ -26,7 +27,7 @@ class AdvertajaxController extends Controller
 
 
        echo $data;
-           
+        return ;
     }
 
     //广告批量删除

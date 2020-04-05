@@ -18,9 +18,8 @@ use App\Model\Admin\Eva;
 
     class GoodsController extends Controller
     {
-        public function index($id,Request $request)
+        public function index($id)
         {
-
             // $id = 100;
             $panduan = Cate::where('path','like',"%,$id,%")->pluck('cid');
             // dd($panduan);
@@ -46,7 +45,7 @@ use App\Model\Admin\Eva;
                foreach ($good as $key => $value) {
                    $shu += 1;
                }
-               $sub = Cate::getTreeCates([],$cate->cid);
+               $sub = Cate::getTreeCates([],$cate->cid);          
 
            return view('home/goods/list',['title'=>$cate->cname.'-三只松鼠旗舰店','goods'=>$goods,'links'=>$links,'shu'=>$shu,'cate'=>$cate,'sub'=>$sub,'jingdian'=>$jingdian]);
         }
@@ -79,7 +78,7 @@ use App\Model\Admin\Eva;
                 $haopinglv = $hao/$all*100;
             }else{
                 $haopinglv = 0;$hao = 0;$all = 0;$zhong = 0;$cha = 0;
-
+                
             }
             // 评价结束
             // 收藏
@@ -88,7 +87,7 @@ use App\Model\Admin\Eva;
                 $query->where('uid',$uid);
                 $query->where('gid',$id);
             })->first();
-
+           
 
             if($coll != NULL){
                  $collstatus = $coll->status;
@@ -99,13 +98,13 @@ use App\Model\Admin\Eva;
 
 
             // 我的足迹
-
+           
             Cookie::queue('uid',1,7*24*60);
             Cookie::queue('gid',$id,7*24*60);
             Cookie::queue('uptime',time(),7*24*60);
 
             //  我的足迹结束
-
+            
             $sales = Sales::inRandomOrder()->limit(4)->get();
 
             return view('home/goods/show',['data'=>$data,'title'=>$data->gname,'links'=>$links,'goods'=>$goods,'cate'=>$cate,'allgoods'=>$allgoods,'evals'=>$evals,'hao'=>$hao,'zhong'=>$zhong,'cha'=>$cha,'all'=>$all,'haopinglv'=>$haopinglv,'collstatus'=>$collstatus,'sales'=>$sales]);
@@ -122,7 +121,7 @@ use App\Model\Admin\Eva;
                 $shu += 1;
             }
             $jingdian = Goods::where('gname','like','%'.$gname.'%')->inRandomOrder()->limit(3)->get();
-
+            
             return view('home/goods/shoulist',['title'=>'商品列表','goods'=>$goods,'gname'=>$gname,'links'=>$links,'shu'=>$shu,'jingdian'=>$jingdian,'request'=>$request]);
         }
 
@@ -148,11 +147,11 @@ use App\Model\Admin\Eva;
             $uid = $request->input('id');
             $email = $request->input('email');
             $res = User::where('uid',$uid)->update(['uemail'=>$email]);
-
+           
 
                 $links = DB::table('friendlink')->get();
                 return view('home/goods/emailyes',['title'=>'邮箱更换成功','links'=>$links]);
-
+            
 
         }
 
@@ -163,7 +162,7 @@ use App\Model\Admin\Eva;
 
         //立即购买
         public function cartinfo(Request $request)
-        {
+        {   
             $uid = session('uid');
             $arr = $_GET['res'];
             $gid = $arr[0];
@@ -204,7 +203,7 @@ use App\Model\Admin\Eva;
                foreach ($good as $key => $value) {
                    $shu += 1;
                }
-               $sub = Cate::getTreeCates([],$cate->cid);
+               $sub = Cate::getTreeCates([],$cate->cid);          
 
            return view('home/goods/list',['title'=>$cate->cname.'-三只松鼠旗舰店','goods'=>$goods,'links'=>$links,'shu'=>$shu,'cate'=>$cate,'sub'=>$sub,'jingdian'=>$jingdian]);
         }
@@ -235,7 +234,7 @@ use App\Model\Admin\Eva;
                foreach ($good as $key => $value) {
                    $shu += 1;
                }
-               $sub = Cate::getTreeCates([],$cate->cid);
+               $sub = Cate::getTreeCates([],$cate->cid);          
 
            return view('home/goods/list',['title'=>$cate->cname.'-三只松鼠旗舰店','goods'=>$goods,'links'=>$links,'shu'=>$shu,'cate'=>$cate,'sub'=>$sub,'jingdian'=>$jingdian]);
         }
@@ -266,7 +265,7 @@ use App\Model\Admin\Eva;
                foreach ($good as $key => $value) {
                    $shu += 1;
                }
-               $sub = Cate::getTreeCates([],$cate->cid);
+               $sub = Cate::getTreeCates([],$cate->cid);          
 
            return view('home/goods/list',['title'=>$cate->cname.'-三只松鼠旗舰店','goods'=>$goods,'links'=>$links,'shu'=>$shu,'cate'=>$cate,'sub'=>$sub,'jingdian'=>$jingdian]);
         }
@@ -296,7 +295,7 @@ use App\Model\Admin\Eva;
                foreach ($good as $key => $value) {
                    $shu += 1;
                }
-               $sub = Cate::getTreeCates([],$cate->cid);
+               $sub = Cate::getTreeCates([],$cate->cid);          
 
            return view('home/goods/list',['title'=>$cate->cname.'-三只松鼠旗舰店','goods'=>$goods,'links'=>$links,'shu'=>$shu,'cate'=>$cate,'sub'=>$sub,'jingdian'=>$jingdian]);
         }

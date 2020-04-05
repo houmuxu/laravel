@@ -1,0 +1,10 @@
+diff a/app/User.php b/app/User.php	(rejected hunks)
+@@ -10,7 +10,7 @@
+     use Notifiable;
+ 
+     /**
+-     * The attributes that are mass assignable.侯牧序徐徐徐uuuuuuu
++     * The attributes that are mass assignable.侯牧序
+      *
+      * @var array
+      */

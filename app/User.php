@@ -11,6 +11,7 @@ class User extends Authenticatable
 
     /**
      * 1
+     * 2
      * The attributes that are mass assignable.侯牧序nnnnnnnnnnnnnnnnnnnnnnnnnnn
      *
      * @var array  houmuxu

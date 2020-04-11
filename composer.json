@@ -12,8 +12,7 @@
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "mrgoon/aliyun-sms": "dev-master",
-        "predis/predis": "^1.1",
-        "yansongda/pay": "2.4.*"
+        "predis/predis": "^1.1"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
